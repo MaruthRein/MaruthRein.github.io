@@ -13,13 +13,13 @@
     font-family: 'Dancing Script', cursive !important;
 
     /* 2. FORZA la rimozione del maiuscolo */
-    text-transform: none !important;
+    text-transform: none, !important;
 
     /* 3. DIMENSIONE AUMENTATA */
-    font-size: 6em; /* Ho messo 2.3em per essere sicuri */
+    font-size: 6em, !important;/* Ho messo 2.3em per essere sicuri */
 
     /* 4. Applica il grassetto */
-    font-weight: 700 !important;
+    font-weight: 700, !important;
 
     /* 5. Resetta lo stile */
     font-style: normal;
