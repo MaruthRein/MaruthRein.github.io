@@ -3287,7 +3287,7 @@ input, select, textarea {
 		}
 
 			#wrapper > section > header:before {
-				background: #b6b7b7;
+				background: #ffffff;
 				content: '';
 				display: block;
 				margin-top: 1rem;
