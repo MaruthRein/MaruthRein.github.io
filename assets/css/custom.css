@@ -16,7 +16,7 @@
     text-transform: none !important;
 
     /* 3. Aumenta la dimensione */
-    font-size: 1.9em; /* Puoi provare anche 2.0em o 2.2em */
+    font-size: 3em; /* Puoi provare anche 2.0em o 2.2em */
 
     /* 4. FINALMENTE: Applica il grassetto (che ora esiste) */
     font-weight: 700 !important;
