@@ -3288,14 +3288,13 @@ input, select, textarea {
 
 			#wrapper > section > header:before {
 				background: #000000;
-				border-radius: 0.5rem;
-				top: -1.5rem;
+				border-radius: 0.2rem;
 				content: '';
 				display: block;
 				height: 0.5rem;
 				position: absolute;
 				width: 0.5rem;
-				z-index: 1;
+				top: 1rem;
 			}
 
 			#wrapper > section > header h1, #wrapper > section > header h2 {
