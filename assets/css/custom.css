@@ -1,0 +1,30 @@
+/* --- PASSO 1: IMPORTAZIONE FONT --- */
+/* Importa il font "Caveat" da Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+
+
+/* =======================================
+   STILE SEZIONE INTRO
+   ======================================= */
+
+/* --- Stile Sottotitolo "Handwritten" --- */
+.intro header p {
+    /* 1. Applica il nuovo font */
+    font-family: 'Caveat', cursive;
+
+    /* 2. Rimuove il "TUTTO MAIUSCOLO" */
+    text-transform: none;
+
+    /* 3. Aumenta la dimensione */
+    font-size: 1.6em; 
+
+    /* 4. Imposta il grassetto che abbiamo importato */
+    font-weight: 500;
+
+    /* 5. Resetta lo stile (togliamo il corsivo finto) */
+    font-style: normal;
+    
+    /* 6. Aggiusta l'interlinea e la spaziatura */
+    line-height: 1.6em;
+    letter-spacing: 0.01em;
+}
