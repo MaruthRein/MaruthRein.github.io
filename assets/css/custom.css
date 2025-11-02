@@ -28,3 +28,12 @@
     line-height: 1.6em;
     letter-spacing: 0.01em;
 }
+/* =======================================
+   SPAZIATURA ICONE SOCIAL NELL'INTRO
+   ======================================= */
+
+.intro header ul.icons {
+    /* Aggiunge un po' di spazio sotto le icone, 
+       prima che inizi il titolo H1 */
+    margin-bottom: 2rem; 
+}
