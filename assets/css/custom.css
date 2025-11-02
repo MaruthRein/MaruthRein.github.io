@@ -10,7 +10,7 @@
 /* --- Stile Sottotitolo "Handwritten" --- */
 .intro header p {
     /* 1. Applica il nuovo font */
-    font-family: 'Caveat', cursive;
+    font-family: 'Caveat', cursive !important;
 
     /* 2. Rimuove il "TUTTO MAIUSCOLO" */
     text-transform: none;
@@ -36,4 +36,49 @@
     /* Aggiunge un po' di spazio sotto le icone, 
        prima che inizi il titolo H1 */
     margin-bottom: 3rem; 
+}
+/* =======================================
+   PALLINO INIZIALE IN CIMA ALLA LINEA
+   (Elemento nuovo, non previsto dal template)
+   ======================================= */
+
+/* Usiamo lo pseudo-elemento :after dell'header della
+   sezione "intro", che al momento è libero.
+*/
+#wrapper > section.intro > header:after {
+    /* Copiamo lo stile del pallino finale */
+    background: #000000; /* Colore nero, come la linea */
+    border-radius: 0.5rem;
+    content: '';
+    display: block;
+    height: 0.5rem;
+    position: absolute;
+    width: 0.5rem;
+    z-index: 1;
+
+    /* Posizione Orizzontale: 
+       allineato con la linea verticale
+    */
+    left: calc(50vw - 5rem - 0.25rem + 1px); 
+
+    /* Posizione Verticale: 
+       centrato all'inizio della linea (che ha margin-top: 1rem)
+    */
+    top: 0.75rem;
+}
+
+/* ----- Gestione Responsive ----- */
+
+/* Adattiamo la posizione orizzontale per schermi medi */
+@media screen and (max-width: 1280px) {
+    #wrapper > section.intro > header:after {
+        left: calc(50vw - 4rem - 0.25rem + 1px);
+    }
+}
+
+/* Nascondiamo il pallino su mobile (dove sparisce la linea) */
+@media screen and (max-width: 1152px) {
+    #wrapper > section.intro > header:after {
+        display: none;
+    }
 }
