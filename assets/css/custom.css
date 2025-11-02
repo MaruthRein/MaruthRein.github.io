@@ -1,33 +1,38 @@
-/* --- PASSO 1: IMPORTAZIONE FONT --- */
-/* Importa il font "Caveat" da Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&display=swap');
+/* --- PASSO 1: IMPORTAZIONE FONT (Parisienne) --- */
+/* Importa il font "Parisienne" da Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
 
 
 /* =======================================
    STILE SEZIONE INTRO
    ======================================= */
 
-/* --- Stile Sottotitolo "Handwritten" --- */
+/* --- Stile Sottotitolo "Handwritten" (Parisienne) --- */
 .intro header p {
-    /* 1. Applica il nuovo font */
-    font-family: 'Caveat', cursive !important;
+    /* 1. Applica il font "Parisienne" */
+    /* (con la sintassi !important CORRETTA) */
+    font-family: 'Parisienne', cursive !important;
 
     /* 2. Rimuove il "TUTTO MAIUSCOLO" */
     text-transform: none;
 
-    /* 3. Aumenta la dimensione */
-    font-size: 1.6em; 
+    /* 3. Aumenta la dimensione (è un font fine) */
+    font-size: 2em; /* Prova anche 1.9em o 2em se è troppo piccolo */
 
-    /* 4. Imposta il grassetto che abbiamo importato */
-    font-weight: 500;
+    /* 4. Imposta il grassetto (Parisienne ha solo "regular 400") */
+    font-weight: 400;
 
-    /* 5. Resetta lo stile (togliamo il corsivo finto) */
+    /* 5. Resetta lo stile */
     font-style: normal;
     
-    /* 6. Aggiusta l'interlinea e la spaziatura */
-    line-height: 1.6em;
-    letter-spacing: 0.01em;
+    /* 6. Aggiusta l'interlinea (serve più spazio) */
+    line-height: 1.7em;
+    letter-spacing: 0.02em;
 }
+
+/* ...da qui in poi inizia il resto del tuo 
+   codice custom.css (icone, pallini, ecc...)
+*/
 /* =======================================
    SPAZIATURA ICONE SOCIAL NELL'INTRO
    ======================================= */
@@ -38,16 +43,14 @@
     margin-bottom: 3rem; 
 }
 /* =======================================
-   PALLINO INIZIALE IN CIMA ALLA LINEA
-   (Elemento nuovo, non previsto dal template)
+   PALLINO "TESTA" IN CIMA ALLA LINEA
    ======================================= */
 
-/* Usiamo lo pseudo-elemento :after dell'header della
-   sezione "intro", che al momento è libero.
-*/
+/* 1. CREIAMO IL PALLINO IN CIMA */
+/* Selezioniamo l'header della prima sezione (.intro) */
 #wrapper > section.intro > header:after {
     /* Copiamo lo stile del pallino finale */
-    background: #000000; /* Colore nero, come la linea */
+    background: #000000; /* Colore nero */
     border-radius: 0.5rem;
     content: '';
     display: block;
@@ -57,28 +60,49 @@
     z-index: 1;
 
     /* Posizione Orizzontale: 
-       allineato con la linea verticale
+       la stessa formula del pallino finale
     */
-    left: calc(50vw - 5rem - 0.25rem + 1px); 
-
+    left: calc(50vw - 5rem - 0.25rem + 1px);
+    
     /* Posizione Verticale: 
-       centrato all'inizio della linea (che ha margin-top: 1rem)
+       attaccato in cima all'header
     */
-    top: 0.75rem;
+    top: 0; 
 }
+
+/* 2. SPOSTIAMO LA LINEA SOTTO IL PALLINO */
+/* Selezioniamo la linea verticale (:before) della prima sezione */
+#wrapper > section.intro > header:before {
+    /* Il pallino è alto 0.5rem. Facciamo partire
+       la linea 0.5rem più in basso.
+    */
+    margin-top: 0.5rem;
+    
+    /* La linea ora è più corta di 0.5rem, 
+       quindi togliamo 0.5rem dalla sua altezza
+    */
+    height: calc(100% + 10rem - 0.5rem); 
+}
+
 
 /* ----- Gestione Responsive ----- */
 
-/* Adattiamo la posizione orizzontale per schermi medi */
 @media screen and (max-width: 1280px) {
+    /* Allinea il pallino su schermi medi */
     #wrapper > section.intro > header:after {
         left: calc(50vw - 4rem - 0.25rem + 1px);
     }
 }
 
-/* Nascondiamo il pallino su mobile (dove sparisce la linea) */
 @media screen and (max-width: 1152px) {
+    /* Nasconde il pallino su mobile */
     #wrapper > section.intro > header:after {
         display: none;
+    }
+
+    /* Resetta la linea su mobile */
+    #wrapper > section.intro > header:before {
+        margin-top: 0;
+        height: auto;
     }
 }
