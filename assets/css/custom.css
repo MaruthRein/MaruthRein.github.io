@@ -1,37 +1,4 @@
-/* --- PASSO 1: IMPORTAZIONE FONT (Dancing Script con Grassetto) --- */
-/* Importa "Dancing Script" da Google Fonts, includendo il peso 700 (Bold) */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
 
-
-/* =======================================
-   STILE SEZIONE INTRO
-   ======================================= */
-
-/* --- Stile Sottotitolo "Handwritten" (SINTASSI CORRETTA E PIÙ GRANDE) --- */
-.intro header p {
-    /* 1. Applica il font "Dancing Script" */
-    font-family: 'Dancing Script', cursive !important;
-
-    /* 2. FORZA la rimozione del maiuscolo */
-    text-transform: none, !important;
-
-    /* 3. DIMENSIONE AUMENTATA */
-    font-size: 6em, !important;/* Ho messo 2.3em per essere sicuri */
-
-    /* 4. Applica il grassetto */
-    font-weight: 700, !important;
-
-    /* 5. Resetta lo stile */
-    font-style: normal;
-    
-    /* 6. Aggiusta l'interlinea */
-    line-height: 1.7em;
-    letter-spacing: 0.02em;
-}
-
-/* ...da qui in poi inizia il resto del tuo 
-   codice custom.css (icone, pallini, ecc...)
-*/
 /* =======================================
    SPAZIATURA ICONE SOCIAL NELL'INTRO
    ======================================= */
