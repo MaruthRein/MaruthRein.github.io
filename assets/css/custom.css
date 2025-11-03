@@ -13,28 +13,3 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&display=swap');
 
 
-/* =======================================
-   STILE SEZIONE INTRO
-   ======================================= */
-
-/* --- Stile Sottotitolo "Autore" (Cormorant Garamond) --- */
-.intro header p {
-    /* 1. Applica il nuovo font "Serif" */
-    font-family: 'Cormorant Garamond', serif !important;
-
-    /* 2. FORZA la rimozione del maiuscolo */
-    text-transform: none !important;
-
-    /* 3. Dimensione (questo font è più leggibile) */
-    font-size: 1.6em; /* Gioca con 1.7em o 1.8em se vuoi */
-
-    /* 4. Applica il peso "semibold" (600) che abbiamo importato */
-    font-weight: 600 !important;
-
-    /* 5. Applica lo stile corsivo "da autore" */
-    font-style: italic !important;
-    
-    /* 6. Aggiusta l'interlinea */
-    line-height: 1.7em;
-    letter-spacing: 0.02em;
-}
