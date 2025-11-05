@@ -1,0 +1,440 @@
+/* ==================================
+   SETUP INIZIALE E VARIABILI
+=================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+:root {
+    --colore-sfondo: #1a1a1a;
+    --colore-sfondo-sezione: #2E382E;
+    --colore-testo: #A9ACA9;
+    --colore-titoli: #CBA135;
+    --colore-accento: #d84b27;
+    --colore-bordi: #333;
+    --font-titoli: 'Playfair Display', serif;
+    --font-testo: 'Lato', sans-serif;
+}
+
+/* ==================================
+   STILI GLOBALI (Body e Link)
+=================================== */
+
+body {
+    font-family: var(--font-testo);
+    line-height: 1.6;
+    background-color: var(--colore-sfondo);
+    color: var(--colore-testo);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-titoli);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: var(--colore-titoli);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+p { margin-bottom: 1rem; }
+
+a {
+    color: var(--colore-accento);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover { color: var(--colore-titoli); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ==================================
+   HEADER E NAVIGAZIONE
+=================================== */
+.main-header {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--colore-bordi);
+    background-color: var(--colore-sfondo);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-family: var(--font-titoli);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--colore-titoli);
+    text-decoration: none;
+}
+.logo:hover { color: var(--colore-accento); }
+
+/* Navigazione */
+.main-nav { display: none; }
+.nav-toggle {
+    display: block;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+.hamburger {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--colore-titoli);
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: var(--colore-titoli);
+    left: 0;
+    transition: transform 0.3s ease;
+}
+.hamburger::before { top: -8px; }
+.hamburger::after { bottom: -8px; }
+
+
+/* ==================================
+   STILI MOBILE-FIRST (Sezioni)
+=================================== */
+
+/* ====== HERO (Mobile) ====== */
+.hero {
+    padding: 4rem 0;
+    background-color: var(--colore-sfondo-sezione);
+}
+
+/* 1. Usiamo Flex per riordinare gli elementi su mobile */
+.hero .container {
+    display: flex;
+    flex-direction: column; /* Impila verticalmente */
+    align-items: center; /* Centra orizzontalmente */
+}
+
+/* 2. Il wrapper dell'immagine va per primo */
+.hero-image-wrapper {
+    display: block; /* Mostra su mobile */
+    order: 1; /* 1. Appare per primo */
+    margin-bottom: 2.5rem; /* Spazio sotto l'immagine */
+}
+
+.hero-image {
+    width: 180px; 
+    height: 180px;
+    border-radius: 50%;
+    margin: 0 auto;
+    object-fit: cover;
+    filter: grayscale(100%);
+    opacity: 0.8;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* 3. Le icone social vanno per seconde */
+.hero-socials {
+    display: flex;
+    justify-content: center; /* Centrate */
+    gap: 2rem;
+    order: 2; /* 2. Appaiono dopo l'immagine */
+    margin-bottom: 1.5rem;
+}
+.hero-socials a {
+    font-size: 1.8rem;
+    color: var(--colore-testo);
+    transition: all 0.3s ease;
+}
+.hero-socials a:hover {
+    color: var(--colore-accento);
+    transform: scale(1.1);
+}
+
+/* 4. Il blocco di testo va per ultimo */
+.hero-content {
+    width: 100%; 
+    order: 3; /* 3. Appare per ultimo */
+    text-align: center; 
+}
+
+.hero h1 { font-size: 2.8rem; }
+.hero p {
+    font-size: 1.1rem;
+    color: var(--colore-testo);
+    margin-bottom: 2rem;
+}
+.cta-button {
+    display: inline-block;
+    background-color: var(--colore-titoli);
+    color: var(--colore-sfondo);
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+.cta-button:hover {
+    background-color: var(--colore-accento);
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ====== PORTFOLIO GRID (Mobile) ====== */
+/* ==================================
+   PORTFOLIO GRID
+   (Blocco corretto e aggiornato)
+=================================== */
+
+.portfolio { 
+    padding: 3rem 0; 
+}
+
+.portfolio h2 { 
+    text-align: center; 
+    margin-bottom: 2rem; 
+}
+
+/* 1. La card (il "box") */
+.portfolio-item {
+    background: var(--colore-sfondo-sezione);
+    
+    /* MODIFICATO: Bordo arancione sempre visibile */
+    border: 2px solid var(--colore-accento); 
+    
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    overflow: hidden; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    
+    /* Transizione per tutti gli effetti */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* 2. Effetto Hover sulla card */
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    
+    /* MODIFICATO: Il bordo diventa oro */
+    border-color: var(--colore-titoli); 
+}
+
+/* 3. Il contenitore dell'immagine (Wrapper) */
+.portfolio-image-wrapper {
+    /* MODIFICATO: Aspect ratio verticale (3 larghezza, 4 altezza) */
+    aspect-ratio: 3 / 4; 
+    
+    width: 100%;
+    overflow: hidden;
+    background-color: #000; 
+}
+
+/* 4. L'immagine stessa */
+.portfolio-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    
+    /* Riempi il box (tagliando i bordi se serve per adattarsi) */
+    object-fit: cover; 
+}
+
+/* 5. Testo sotto l'immagine */
+.portfolio-item h3 {
+    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+}
+
+.portfolio-item p {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    color: var(--colore-testo);
+}
+* 6. Wrapper per il pulsante (per spaziatura) */
+.portfolio-button-wrapper {
+    padding: 0 1.5rem 1.5rem 1.5rem; /* Allineato con il padding del testo */
+    margin-top: 1rem; /* Spazio tra testo e pulsante */
+}
+
+/* 7. Stile del pulsante arancione */
+.portfolio-button {
+    display: block; /* Occupa tutta la larghezza */
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--colore-accento); /* ARANCIONE */
+    color: #fff; /* Testo bianco */
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.portfolio-button:hover {
+    background-color: var(--colore-titoli); /* Diventa ORO */
+    color: var(--colore-sfondo); /* Testo scuro */
+    transform: scale(1.02);
+}
+
+/* ====== FOOTER (Mobile) ====== */
+.main-footer {
+    padding: 3rem 0 2rem 0;
+    text-align: center;
+    background-color: var(--colore-sfondo-sezione);
+}
+.email-link {
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 1.5rem;
+    color: var(--colore-titoli);
+}
+.email-link:hover { color: var(--colore-accento); }
+.social-links a {
+    margin: 0 0.75rem;
+    font-weight: 700;
+    display: inline-block;
+    padding: 0.5rem;
+    color: var(--colore-testo);
+}
+.social-links a:hover { color: var(--colore-accento); }
+.copyright {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--colore-testo);
+    opacity: 0.7;
+}
+
+
+/* ==================================
+   STEP 3: MEDIA QUERIES (Tablet e Desktop)
+=================================== */
+
+@media (min-width: 768px) {
+    
+    /* --- Globale --- */
+    h1 { font-size: 3.5rem; }
+    h2 { font-size: 2.5rem; }
+    .container { width: 85%; }
+
+    /* --- Header e Navigazione (Hamburger potenziato) --- */
+    .nav-toggle { padding: 0.8rem; }
+    .hamburger { width: 30px; height: 4px; }
+    .hamburger::before,
+    .hamburger::after { height: 4px; }
+    .hamburger::before { top: -10px; }
+    .hamburger::after { bottom: -10px; }
+
+    /* --- Hero (Desktop) --- */
+    .hero {
+        padding: 4rem 0; /* Altezza ridotta */
+        overflow: hidden;
+    }
+    
+    /* 1. Il container torna orizzontale */
+    .hero .container {
+        flex-direction: row; /* Layout orizzontale */
+        align-items: center;
+        gap: 3rem;
+    }
+    
+    /* 2. Il wrapper immagine torna normale */
+    .hero-image-wrapper {
+        order: 0; /* Resetta l'ordine */
+        margin-bottom: 0;
+        width: 45%;
+        max-width: 450px; /* Limite per il cerchio */
+    }
+
+    .hero-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1; /* Mantiene il cerchio perfetto */
+        box-shadow: none; /* Rimuove l'ombra mobile */
+    }
+
+    /* 3. I social tornano normali */
+    .hero-socials {
+        order: 0; /* Resetta l'ordine */
+        justify-content: flex-start; /* Allinea a sinistra */
+        margin-bottom: 1.5rem; /* Mantiene lo spazio prima del titolo */
+    }
+    
+    /* 4. Il testo torna normale */
+    .hero-content {
+        order: 0; /* Resetta l'ordine */
+        text-align: left; /* Allinea a sinistra */
+    }
+
+    .hero h1 { font-size: 4rem; }
+    
+    /* --- Portfolio Grid (CSS GRID) --- */
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 2rem; 
+    }
+    .portfolio-item { margin-bottom: 0; }
+
+    /* --- About (FLEXBOX) --- */
+    .about { padding: 3rem 0; }
+    .about .container {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        text-align: left;
+    }
+    .profile-pic {
+        flex-shrink: 0;
+        width: 200px;
+        height: 200px;
+        margin: 0;
+    }
+    .about p { max-width: none; }
+    
+} /* --- Fine media query 768px --- */
+
+
+/* ====== 2. STILI PER DESKTOP (min-width: 1024px) ====== */
+
+@media (min-width: 1024px) {
+    
+    /* --- Hero --- */
+    .hero {
+        padding: 5rem 0; /* Altezza leggermente aumentata */
+    }
+    .hero-image-wrapper {
+        max-width: 500px; /* Cerchio più grande su desktop */
+    }
+    
+    /* --- Portfolio Grid (3 colonne) --- */
+    .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* --- About --- */
+    .profile-pic {
+        width: 250px;
+        height: 250px;
+    }
+} /* --- Fine media query 1024px --- */
