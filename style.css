@@ -89,6 +89,17 @@ img {
     max-width: 1100px;
     margin: 0 auto;
 }
+/* === [NUOVO] Fix per lo scroll con Header Sticky === */
+html {
+    /* 1. (Opzionale ma consigliato) Rende lo scroll morbido */
+    scroll-behavior: smooth; 
+    
+    /* * 2. QUESTA È LA SOLUZIONE:
+     * Dice al browser di fermare lo scroll 60px PRIMA 
+     * del bordo superiore, lasciando spazio per l'header sticky.
+    */
+    scroll-padding-top: 60px; 
+}
 
 /* --- Pulsante hero home (Rosso di default) --- */
 .cta-button {
@@ -1040,25 +1051,27 @@ body.no-scroll {
 }
 
 .feature-image {
-    /* Il contenitore che sarà tondo */
-    width: 250px; /* Imposta una dimensione fissa per il cerchio */
-    height: 250px;
-    border-radius: 50%; /* Rende l'elemento completamente circolare */
-    border: 3px solid var(--colore-accento); /* Bordo rosso più spesso */
-    overflow: hidden; /* Nasconde ciò che esce dal cerchio */
-    flex-shrink: 0; /* Evita che si rimpicciolisca troppo su mobile */
+    /* [MODIFICATO] Rimuoviamo gli stili per il cerchio */
+    width: auto; /* Torna alla larghezza automatica */
+    height: auto; /* Torna all'altezza automatica */
+    border-radius: 0; /* Rimuove l'arrotondamento */
+    overflow: visible; /* Rende visibile ciò che esce, anche se ora non serve */
+    flex-shrink: 0; 
+    
+    /* Il bordo rosso rimane intorno all'immagine */
+    border: 3px solid var(--colore-accento); 
 
     /* Centra il contenitore su mobile */
     margin: 0 auto 2rem auto; 
 }
 
 .feature-image img {
-    /* L'immagine ora si adatta al contenitore tondo */
+    /* L'immagine ora si adatta al contenitore rettangolare */
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Assicura che l'immagine copra il cerchio senza deformarsi */
-    border: none; /* Rimuovi qualsiasi bordo dall'immagine stessa */
-    border-radius: 0; /* Rimuovi qualsiasi arrotondamento dall'immagine stessa */
+    height: auto; /* Altezza automatica per mantenere le proporzioni */
+    object-fit: contain; /* Assicura che l'immagine sia completamente visibile */
+    border: none; 
+    border-radius: 0; 
 }
 
 .feature-content h3 {
@@ -1097,12 +1110,13 @@ body.no-scroll {
     }
     
     .feature-image {
-        flex-basis: 250px; /* Su desktop, il contenitore mantiene la sua dimensione fissa */
-        margin: 0; /* Rimuovi il margine auto su desktop per allinearlo */
+        flex-basis: auto; /* [MODIFICATO] La base si adatta all'immagine */
+        max-width: 350px; /* Imposta una larghezza massima per non farla troppo grande */
+        margin: 0; 
     }
     
     .feature-content {
-        flex-grow: 1; /* Il contenuto prende lo spazio rimanente */
+        flex-grow: 1; 
     }
 }
 /* === [NUOVO] Stile per il box di testo === */
