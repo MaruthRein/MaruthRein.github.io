@@ -1,6 +1,36 @@
-/* ==================================
-   SETUP INIZIALE E VARIABILI
-=================================== */
+/* =========================================
+   INDICE
+   1. Setup Iniziale e Variabili
+   2. Stili Globali (Body, Titoli, Link)
+   3. Layout (Header, Navigazione, Footer)
+   4. Sezioni Homepage (Mobile-First)
+      - Hero
+      - Portfolio
+   5. Pagine Specifiche (Mobile-First)
+      - Pagina Libro
+      - Stili Testo Sinossi
+   6. Classi Utility
+      - Badge "Prossima Uscita"
+   7. Media Queries (Tablet e Desktop)
+      - Tablet (min-width: 768px)
+      - Desktop (min-width: 1024px)
+========================================= */
+
+
+/* =========================================
+   1. SETUP INIZIALE E VARIABILI
+========================================= */
+
+:root {
+    --colore-sfondo: #1a1a1a;
+    --colore-sfondo-sezione: #2E382E;
+    --colore-testo: #A9ACA9;
+    --colore-titoli: #CBA135;
+    --colore-accento: #ab4427;
+    --colore-bordi: #333;
+    --font-titoli: 'Playfair Display', serif;
+    --font-testo: 'Lato', sans-serif;
+}
 
 * {
     margin: 0;
@@ -9,20 +39,10 @@
     font-family: 'Lato', sans-serif;
 }
 
-:root {
-    --colore-sfondo: #1a1a1a;
-    --colore-sfondo-sezione: #2E382E;
-    --colore-testo: #A9ACA9;
-    --colore-titoli: #CBA135;
-    --colore-accento: #d84b27;
-    --colore-bordi: #333;
-    --font-titoli: 'Playfair Display', serif;
-    --font-testo: 'Lato', sans-serif;
-}
 
-/* ==================================
-   STILI GLOBALI (Body e Link)
-=================================== */
+/* =========================================
+   2. STILI GLOBALI (Body, Titoli, Link)
+========================================= */
 
 body {
     font-family: var(--font-testo);
@@ -43,16 +63,25 @@ h1 { font-size: 2.5rem; }
 h2 { font-size: 2rem; }
 h3 { font-size: 1.5rem; }
 
-p { margin-bottom: 1rem; }
+p { 
+    margin-bottom: 1rem; 
+}
 
 a {
     color: var(--colore-accento);
     text-decoration: none;
     transition: color 0.3s ease;
 }
-a:hover { color: var(--colore-titoli); }
 
-img { max-width: 100%; height: auto; display: block; }
+a:hover { 
+    color: var(--colore-titoli); 
+}
+
+img { 
+    max-width: 100%; 
+    height: auto; 
+    display: block; 
+}
 
 .container {
     width: 90%;
@@ -60,128 +89,6 @@ img { max-width: 100%; height: auto; display: block; }
     margin: 0 auto;
 }
 
-/* ==================================
-   HEADER E NAVIGAZIONE
-=================================== */
-.main-header {
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--colore-bordi);
-    background-color: var(--colore-sfondo);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-.main-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.logo {
-    font-family: var(--font-titoli);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--colore-titoli);
-    text-decoration: none;
-}
-.logo:hover { color: var(--colore-accento); }
-
-/* Navigazione */
-.main-nav { display: none; }
-.nav-toggle {
-    display: block;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-}
-.hamburger {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: var(--colore-titoli);
-    position: relative;
-    transition: background-color 0.3s ease;
-}
-.hamburger::before,
-.hamburger::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    background-color: var(--colore-titoli);
-    left: 0;
-    transition: transform 0.3s ease;
-}
-.hamburger::before { top: -8px; }
-.hamburger::after { bottom: -8px; }
-
-
-/* ==================================
-   STILI MOBILE-FIRST (Sezioni)
-=================================== */
-
-/* ====== HERO (Mobile) ====== */
-.hero {
-    padding: 4rem 0;
-    background-color: var(--colore-sfondo-sezione);
-}
-
-/* 1. Usiamo Flex per riordinare gli elementi su mobile */
-.hero .container {
-    display: flex;
-    flex-direction: column; /* Impila verticalmente */
-    align-items: center; /* Centra orizzontalmente */
-}
-
-/* 2. Il wrapper dell'immagine va per primo */
-.hero-image-wrapper {
-    display: block; /* Mostra su mobile */
-    order: 1; /* 1. Appare per primo */
-    margin-bottom: 2.5rem; /* Spazio sotto l'immagine */
-}
-
-.hero-image {
-    width: 180px; 
-    height: 180px;
-    border-radius: 50%;
-    margin: 0 auto;
-    object-fit: cover;
-    filter: grayscale(100%);
-    opacity: 0.8;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-/* 3. Le icone social vanno per seconde */
-.hero-socials {
-    display: flex;
-    justify-content: center; /* Centrate */
-    gap: 2rem;
-    order: 2; /* 2. Appaiono dopo l'immagine */
-    margin-bottom: 1.5rem;
-}
-.hero-socials a {
-    font-size: 1.8rem;
-    color: var(--colore-testo);
-    transition: all 0.3s ease;
-}
-.hero-socials a:hover {
-    color: var(--colore-accento);
-    transform: scale(1.1);
-}
-
-/* 4. Il blocco di testo va per ultimo */
-.hero-content {
-    width: 100%; 
-    order: 3; /* 3. Appare per ultimo */
-    text-align: center; 
-}
-
-.hero h1 { font-size: 2.8rem; }
-.hero p {
-    font-size: 1.1rem;
-    color: var(--colore-testo);
-    margin-bottom: 2rem;
-}
 .cta-button {
     display: inline-block;
     background-color: var(--colore-titoli);
@@ -193,6 +100,7 @@ img { max-width: 100%; height: auto; display: block; }
     letter-spacing: 1px;
     transition: all 0.3s ease;
 }
+
 .cta-button:hover {
     background-color: var(--colore-accento);
     color: #fff;
@@ -200,12 +108,212 @@ img { max-width: 100%; height: auto; display: block; }
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* ====== PORTFOLIO GRID (Mobile) ====== */
-/* ==================================
-   PORTFOLIO GRID
-   (Blocco corretto e aggiornato)
-=================================== */
 
+/* =========================================
+   3. LAYOUT (Header, Navigazione, Footer)
+========================================= */
+
+/* === Header === */
+.main-header {
+    padding: 1rem 0;
+    background-color: var(--colore-sfondo);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    /* --- [MODIFICATO] Bordi superiore e inferiore --- */
+    border-top: 1px solid var(--colore-accento);    /* Bordo superiore rosso */
+    border-bottom: 1px solid var(--colore-accento); /* Bordo inferiore rosso */
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-titoli);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--colore-titoli);
+    text-decoration: none;
+}
+
+.logo:hover { 
+    color: var(--colore-accento); 
+}
+/* === [NUOVO] Stili Icone Social (Più Specifico) === */
+
+/* * Applichiamo il colore sia al link <a>
+ * SIA all'icona <i> al suo interno.
+*/
+.hero-socials a,
+.hero-socials a i {
+    font-size: 2rem;
+    color: var(--colore-testo); /* <-- Colore ACCENTO */
+    transition: all 0.3s ease;
+}
+
+/* * Applichiamo l'hover a entrambi
+*/
+.hero-socials a:hover,
+.hero-socials a:hover i {
+    color: var(--colore-accento); /* <-- Colore TITOLI in hover */
+    transform: scale(1.1);
+}
+
+/* === Navigazione Mobile (Hamburger) === */
+.main-nav { 
+    display: none; /* Gestito via JS o in media query */
+}
+
+.nav-toggle {
+    display: block;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.hamburger {
+    display: block;
+    width: 45px;
+    height: 4px;
+    background-color: var(--colore-titoli);
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: var(--colore-titoli);
+    left: 0;
+    transition: transform 0.3s ease;
+}
+
+.hamburger::before { top: -8px; }
+.hamburger::after { bottom: -8px; }
+
+/* === Footer === */
+.main-footer {
+    padding: 3rem 0 2rem 0;
+    text-align: center;
+    background-color: var(--colore-sfondo-sezione);
+}
+
+.email-link {
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 1.5rem;
+    color: var(--colore-titoli);
+}
+
+.email-link:hover { 
+    color: var(--colore-accento); 
+}
+
+.social-links a {
+    margin: 0 0.75rem;
+    font-weight: 700;
+    display: inline-block;
+    padding: 0.5rem;
+    color: var(--colore-testo);
+}
+
+.social-links a:hover { 
+    color: var(--colore-accento); 
+}
+
+.copyright {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--colore-testo);
+    opacity: 0.7;
+}
+
+.footer-bottom {
+    /* Stili mobile (default impilato) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+/* =========================================
+   4. SEZIONI HOMEPAGE (Mobile-First)
+========================================= */
+
+/* === Hero (Mobile) === */
+.hero {
+    padding: 4rem 0;
+    background-color: var(--colore-sfondo-sezione);
+}
+
+.hero .container {
+    display: flex;
+    flex-direction: column; /* Impila verticalmente */
+    align-items: center; /* Centra orizzontalmente */
+}
+
+.hero-image-wrapper {
+    display: block; 
+    order: 1; /* 1. Appare per primo */
+    margin-bottom: 2.5rem; 
+}
+
+.hero-image {
+    width: 180px; 
+    height: 180px;
+    border-radius: 50%;
+    margin: 0 auto;
+    object-fit: cover;
+    opacity: 0.8;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.hero-socials {
+    display: flex;
+    justify-content: center; /* Centrate */
+    gap: 2rem;
+    order: 2; /* 2. Appaiono dopo l'immagine */
+    margin-bottom: 1.5rem;
+}
+
+.hero-socials a {
+    font-size: 1.8rem;
+    color: var(--colore-testo);
+    transition: all 0.3s ease;
+}
+
+.hero-socials a:hover {
+    color: var(--colore-accento);
+    transform: scale(1.1);
+}
+
+.hero-content {
+    width: 100%; 
+    order: 3; /* 3. Appare per ultimo */
+    text-align: center; 
+}
+
+.hero h1 { 
+    font-size: 2.8rem; 
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: var(--colore-testo);
+    margin-bottom: 2rem;
+}
+
+/* === Portfolio (Mobile) === */
 .portfolio { 
     padding: 3rem 0; 
 }
@@ -215,51 +323,37 @@ img { max-width: 100%; height: auto; display: block; }
     margin-bottom: 2rem; 
 }
 
-/* 1. La card (il "box") */
+/* Su mobile, la griglia è 1 colonna di default (nessun display: grid) */
+
 .portfolio-item {
     background: var(--colore-sfondo-sezione);
-    
-    /* MODIFICATO: Bordo arancione sempre visibile */
     border: 2px solid var(--colore-accento); 
-    
     border-radius: 8px;
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; /* Spazio tra le card su mobile */
     overflow: hidden; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    
-    /* Transizione per tutti gli effetti */
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* 2. Effetto Hover sulla card */
 .portfolio-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    
-    /* MODIFICATO: Il bordo diventa oro */
     border-color: var(--colore-titoli); 
 }
 
-/* 3. Il contenitore dell'immagine (Wrapper) */
 .portfolio-image-wrapper {
-    /* MODIFICATO: Aspect ratio verticale (3 larghezza, 4 altezza) */
     aspect-ratio: 3 / 4; 
-    
     width: 100%;
     overflow: hidden;
     background-color: #000; 
 }
 
-/* 4. L'immagine stessa */
 .portfolio-image-wrapper img {
     width: 100%;
     height: 100%;
-    
-    /* Riempi il box (tagliando i bordi se serve per adattarsi) */
     object-fit: cover; 
 }
 
-/* 5. Testo sotto l'immagine */
 .portfolio-item h3 {
     padding: 1.5rem 1.5rem 0.5rem 1.5rem;
 }
@@ -268,19 +362,18 @@ img { max-width: 100%; height: auto; display: block; }
     padding: 0 1.5rem 1.5rem 1.5rem;
     color: var(--colore-testo);
 }
-* 6. Wrapper per il pulsante (per spaziatura) */
+
 .portfolio-button-wrapper {
-    padding: 0 1.5rem 1.5rem 1.5rem; /* Allineato con il padding del testo */
-    margin-top: 1rem; /* Spazio tra testo e pulsante */
+    padding: 0 1.5rem 1.5rem 1.5rem; 
+    margin-top: 1rem; 
 }
 
-/* 7. Stile del pulsante arancione */
 .portfolio-button {
-    display: block; /* Occupa tutta la larghezza */
+    display: block; 
     width: 100%;
     padding: 0.75rem 1rem;
-    background-color: var(--colore-accento); /* ARANCIONE */
-    color: #fff; /* Testo bianco */
+    background-color: var(--colore-accento);
+    color: #fff; 
     text-align: center;
     text-transform: uppercase;
     font-weight: 700;
@@ -291,45 +384,195 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .portfolio-button:hover {
-    background-color: var(--colore-titoli); /* Diventa ORO */
-    color: var(--colore-sfondo); /* Testo scuro */
+    background-color: var(--colore-titoli); 
+    color: var(--colore-sfondo); 
     transform: scale(1.02);
 }
 
-/* ====== FOOTER (Mobile) ====== */
-.main-footer {
-    padding: 3rem 0 2rem 0;
-    text-align: center;
-    background-color: var(--colore-sfondo-sezione);
+/* === About Section (Mobile) === */
+/* Nota: gli stili per .about sono definiti solo in media query */
+
+
+/* =========================================
+   5. PAGINE SPECIFICHE (Mobile-First)
+========================================= */
+
+/* === Pagina Libro (Mobile) === */
+.book-page-section {
+    padding: 3rem 0;
+    background-color: var(--colore-sfondo); 
 }
-.email-link {
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--colore-testo);
+    font-weight: 700;
+}
+
+.back-link:hover {
+    color: var(--colore-titoli); 
+}
+
+/* Su mobile, tutto è impilato */
+.book-cover {
+    width: 100%;
+    max-width: 400px; 
+    margin: 0 auto 2rem auto; /* Centrato */
+}
+
+.book-cover img {
+    width: 100%;
+    height: auto;
+    border: 3px solid var(--colore-accento); 
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.book-details h1 {
+    font-size: 2.8rem;
+}
+
+.book-details .subtitle {
+    font-size: 1.2rem;
+    font-family: var(--font-titoli);
+    color: var(--colore-testo);
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.buy-buttons {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column; /* Impilati su mobile */
+    gap: 1rem;
+}
+
+.buy-button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.buy-button.primary {
+    background-color: var(--colore-titoli); 
+    color: var(--colore-sfondo); 
+}
+
+.buy-button.primary:hover {
+    background-color: var(--colore-accento); 
+    color: #fff;
+}
+
+.buy-button.secondary {
+    background-color: transparent;
+    color: var(--colore-accento); 
+    border: 2px solid var(--colore-accento);
+}
+
+.buy-button.secondary:hover {
+    background-color: var(--colore-accento);
+    color: #fff;
+}
+
+/* === Stili Testo Sinossi (Pagina Libro) === */
+
+.intro-quote {
     font-size: 1.2rem;
     font-weight: 700;
-    display: block;
-    margin-bottom: 1.5rem;
-    color: var(--colore-titoli);
+    text-transform: uppercase;
+    color: var(--colore-accento); 
+    line-height: 1.5;
+    margin-bottom: 2rem !important; 
 }
-.email-link:hover { color: var(--colore-accento); }
-.social-links a {
-    margin: 0 0.75rem;
+
+.highlight-gold {
+    color: var(--colore-titoli); 
     font-weight: 700;
-    display: inline-block;
-    padding: 0.5rem;
-    color: var(--colore-testo);
 }
-.social-links a:hover { color: var(--colore-accento); }
-.copyright {
+
+.outro-quote {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--colore-titoli); 
+    line-height: 1.6;
     margin-top: 2rem;
-    font-size: 0.9rem;
-    color: var(--colore-testo);
-    opacity: 0.7;
+}
+
+.book-details p {
+    margin-bottom: 1.5rem;
 }
 
 
-/* ==================================
-   STEP 3: MEDIA QUERIES (Tablet e Desktop)
-=================================== */
+/* =========================================
+   6. CLASSI UTILITY
+========================================= */
 
+/* === Badge "Prossima Uscita" === */
+
+.portfolio-image-wrapper.coming-soon,
+.book-cover.coming-soon {
+    position: relative; 
+    overflow: visible; 
+}
+
+/* Badge per Card Portfolio */
+.portfolio-image-wrapper.coming-soon::before {
+    content: "PROSSIMA USCITA";
+    position: absolute;
+    top: 10px;
+    right: -20px; 
+    background-color: var(--colore-accento);
+    color: #fff;
+    padding: 5px 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transform: rotate(45deg); 
+    transform-origin: 0% 100%; 
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Badge per Pagina Libro (leggermente più grande) */
+.book-cover.coming-soon::before {
+    content: "PROSSIMA USCITA";
+    position: absolute;
+    top: 20px; 
+    right: -20px; 
+    background-color: var(--colore-accento);
+    color: #fff;
+    padding: 7px 25px; 
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transform: rotate(45deg);
+    transform-origin: 0% 100%;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Disabilita pulsanti acquisto per "coming-soon" */
+.book-cover.coming-soon + .book-details .buy-buttons .buy-button.primary {
+    opacity: 0.5; 
+    cursor: not-allowed; 
+    pointer-events: none; 
+}
+
+
+/* =========================================
+   7. MEDIA QUERIES (Tablet e Desktop)
+========================================= */
+
+/* === Tablet (min-width: 768px) === */
 @media (min-width: 768px) {
     
     /* --- Globale --- */
@@ -337,7 +580,7 @@ img { max-width: 100%; height: auto; display: block; }
     h2 { font-size: 2.5rem; }
     .container { width: 85%; }
 
-    /* --- Header e Navigazione (Hamburger potenziato) --- */
+    /* --- Header e Navigazione --- */
     .nav-toggle { padding: 0.8rem; }
     .hamburger { width: 30px; height: 4px; }
     .hamburger::before,
@@ -345,59 +588,61 @@ img { max-width: 100%; height: auto; display: block; }
     .hamburger::before { top: -10px; }
     .hamburger::after { bottom: -10px; }
 
-    /* --- Hero (Desktop) --- */
+    /* --- Hero (Layout Orizzontale) --- */
     .hero {
-        padding: 4rem 0; /* Altezza ridotta */
+        padding: 4rem 0; 
         overflow: hidden;
     }
     
-    /* 1. Il container torna orizzontale */
     .hero .container {
-        flex-direction: row; /* Layout orizzontale */
+        flex-direction: row; 
         align-items: center;
         gap: 3rem;
     }
     
-    /* 2. Il wrapper immagine torna normale */
     .hero-image-wrapper {
-        order: 0; /* Resetta l'ordine */
+        order: 0; 
         margin-bottom: 0;
         width: 45%;
-        max-width: 450px; /* Limite per il cerchio */
+        max-width: 450px; 
     }
 
     .hero-image {
         width: 100%;
         height: auto;
-        aspect-ratio: 1 / 1; /* Mantiene il cerchio perfetto */
-        box-shadow: none; /* Rimuove l'ombra mobile */
+        aspect-ratio: 1 / 1; 
+        box-shadow: none; 
     }
 
-    /* 3. I social tornano normali */
     .hero-socials {
-        order: 0; /* Resetta l'ordine */
-        justify-content: flex-start; /* Allinea a sinistra */
-        margin-bottom: 1.5rem; /* Mantiene lo spazio prima del titolo */
+        order: 0; 
+        justify-content: flex-start; 
+        margin-bottom: 1.5rem; 
     }
     
-    /* 4. Il testo torna normale */
     .hero-content {
-        order: 0; /* Resetta l'ordine */
-        text-align: left; /* Allinea a sinistra */
+        order: 0; 
+        text-align: left; 
     }
 
-    .hero h1 { font-size: 4rem; }
+    .hero h1 { 
+        font-size: 4rem; 
+    }
     
-    /* --- Portfolio Grid (CSS GRID) --- */
+    /* --- Portfolio Grid (2 colonne) --- */
     .portfolio-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr); 
         gap: 2rem; 
     }
-    .portfolio-item { margin-bottom: 0; }
+    .portfolio-item { 
+        margin-bottom: 0; /* Rimuove il margin mobile */
+    }
 
-    /* --- About (FLEXBOX) --- */
-    .about { padding: 3rem 0; }
+    /* --- About (Layout Orizzontale) --- */
+    .about { 
+        padding: 3rem 0; 
+    }
     .about .container {
         display: flex;
         align-items: center;
@@ -410,26 +655,65 @@ img { max-width: 100%; height: auto; display: block; }
         height: 200px;
         margin: 0;
     }
-    .about p { max-width: none; }
+    .about p { 
+        max-width: none; 
+    }
+
+    /* --- Footer --- */
+    .footer-bottom {
+        flex-direction: row; 
+        justify-content: center; 
+        gap: 2rem; 
+    }
     
+    /* --- Pagina Libro (Layout 2 colonne) --- */
+    .book-page-wrapper {
+        display: flex;
+        gap: 3rem;
+        align-items: flex-start; 
+    }
+
+    .book-cover {
+        flex-basis: 40%; 
+        flex-shrink: 0;
+        margin: 0; 
+        position: sticky; /* Effetto "Sticky" per la copertina */
+        top: 100px; /* Distanza dall'header */
+    }
+
+    .book-details {
+        flex-basis: 60%; 
+    }
+
+    .book-details h1 {
+        font-size: 3.5rem;
+    }
+    
+    .buy-buttons {
+        flex-direction: row; /* Affiancati */
+    }
+
 } /* --- Fine media query 768px --- */
 
 
-/* ====== 2. STILI PER DESKTOP (min-width: 1024px) ====== */
-
+/* === Desktop (min-width: 1024px) === */
 @media (min-width: 1024px) {
     
     /* --- Hero --- */
     .hero {
-        padding: 5rem 0; /* Altezza leggermente aumentata */
+        padding: 5rem 0; 
     }
     .hero-image-wrapper {
-        max-width: 500px; /* Cerchio più grande su desktop */
+        max-width: 500px; /* Cerchio più grande */
     }
     
-    /* --- Portfolio Grid (3 colonne) --- */
+    /* --- Portfolio Grid (4 colonne) --- */
     .portfolio-grid {
-        grid-template-columns: repeat(3, 1fr);
+        /* * MODIFICA RICHIESTA: 
+         * Passaggio da 3 a 4 colonne su desktop.
+         */
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem; /* Ridotto il gap per far stare 4 colonne */
     }
     
     /* --- About --- */
@@ -437,4 +721,5 @@ img { max-width: 100%; height: auto; display: block; }
         width: 250px;
         height: 250px;
     }
+
 } /* --- Fine media query 1024px --- */
