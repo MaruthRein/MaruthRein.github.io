@@ -89,10 +89,11 @@ img {
     margin: 0 auto;
 }
 
+/* --- Pulsante hero home (Rosso di default) --- */
 .cta-button {
     display: inline-block;
-    background-color: var(--colore-titoli);
-    color: var(--colore-sfondo);
+    background-color: var(--colore-accento); /* <-- Modificato in rosso */
+    color: #fff; /* <-- Testo bianco per contrasto */
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
     font-weight: 700;
@@ -102,8 +103,8 @@ img {
 }
 
 .cta-button:hover {
-    background-color: var(--colore-accento);
-    color: #fff;
+    background-color: var(--colore-titoli); /* <-- Modificato in giallo al hover */
+    color: var(--colore-sfondo); /* <-- Testo scuro */
     transform: translateY(-3px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
@@ -254,6 +255,7 @@ img {
 .hero {
     padding: 4rem 0;
     background-color: var(--colore-sfondo-sezione);
+    border-bottom: 1px solid var(--colore-accento);
 }
 
 .hero .container {
@@ -723,3 +725,110 @@ img {
     }
 
 } /* --- Fine media query 1024px --- */
+/* =========================================
+   8. PAGINA ESTRATTO (Nuova Sezione)
+========================================= */
+
+.estratto-section {
+    padding: 3rem 0 5rem 0; /* Più spazio sotto */
+    background-color: var(--colore-sfondo);
+}
+
+.estratto-titolo {
+    text-align: center;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--colore-bordi);
+    padding-bottom: 2rem;
+}
+
+.estratto-titolo h1 {
+    font-size: 3.5rem;
+    color: var(--colore-titoli);
+    margin-bottom: 0.5rem;
+}
+
+.estratto-titolo h2 {
+    font-size: 1.5rem;
+    color: var(--colore-testo);
+    font-family: var(--font-testo);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0;
+}
+
+/* === Stile colonna di lettura === */
+.estratto-testo {
+    max-width: 750px; /* Larghezza ottimale per la lettura */
+    margin: 0 auto; /* Centra la colonna */
+}
+
+/* === Stile per la citazione iniziale === */
+.intro-estratto {
+    font-family: var(--font-titoli);
+    font-size: 1.6rem;
+    font-style: italic;
+    color: var(--colore-teso); /* Rosso */
+    line-height: 1.6;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-bottom: 3rem;
+    border-top: 1px solid var(--colore-accento);
+    border-bottom: 1px solid var(--colore-accento);
+}
+
+/* === Stile Paragrafi (leggibilità) === */
+.estratto-testo p {
+    font-size: 1rem; /* Testo leggermente più grande */
+    line-height: 1.8; /* Maggiore interlinea */
+    color: var(--colore-testo); /* Grigio chiaro */
+    margin-bottom: 2rem; /* Spazio tra paragrafi */
+}
+
+/* === Drop Cap (Capolettera) === */
+.estratto-testo p:first-of-type::first-letter {
+    color: var(--colore-titoli); /* Oro */
+    font-size: 2rem;
+    font-family: var(--font-titoli);
+    float: left;
+    line-height: 0.5;
+    margin-right: 0.3rem;
+    padding-top: 0.0rem;
+}
+
+/* Media Query per Mobile */
+@media (max-width: 768px) {
+    .estratto-titolo h1 {
+        font-size: 2.5rem;
+    }
+    .estratto-titolo h2 {
+        font-size: 1rem;
+    }
+    .intro-estratto {
+        font-size: 1.3rem;
+    }
+}
+/* === [NUOVO] Stile per i pulsanti a fondo pagina === */
+.estratto-cta-buttons {
+    display: flex;
+    flex-direction: column; /* Impilati su mobile */
+    gap: 1rem;
+    align-items: center;  /* Centrati */
+    margin-top: 4rem;     /* Spazio sopra i pulsanti */
+    padding-top: 2rem;    /* Spazio tra loro e il bordo */
+    border-top: 1px solid var(--colore-bordi); /* Separatore pulito */
+}
+
+/* Su schermi più grandi, li mettiamo affiancati */
+@media (min-width: 768px) {
+    .estratto-cta-buttons {
+        flex-direction: row; /* Affiancati su desktop */
+        justify-content: center;
+    }
+    
+    /* Diamo una larghezza fissa per coerenza */
+    .estratto-cta-buttons .buy-button {
+        min-width: 200px;
+    }
+}
+
