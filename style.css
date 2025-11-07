@@ -14,6 +14,7 @@
    7. Media Queries (Tablet e Desktop)
       - Tablet (min-width: 768px)
       - Desktop (min-width: 1024px)
+   8. Pagina Estratto
 ========================================= */
 
 
@@ -92,8 +93,8 @@ img {
 /* --- Pulsante hero home (Rosso di default) --- */
 .cta-button {
     display: inline-block;
-    background-color: var(--colore-accento); /* <-- Modificato in rosso */
-    color: #fff; /* <-- Testo bianco per contrasto */
+    background-color: var(--colore-accento);
+    color: #fff;
     padding: 0.8rem 1.5rem;
     border-radius: 5px;
     font-weight: 700;
@@ -103,8 +104,8 @@ img {
 }
 
 .cta-button:hover {
-    background-color: var(--colore-titoli); /* <-- Modificato in giallo al hover */
-    color: var(--colore-sfondo); /* <-- Testo scuro */
+    background-color: var(--colore-titoli);
+    color: var(--colore-sfondo);
     transform: translateY(-3px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
@@ -121,10 +122,8 @@ img {
     position: sticky;
     top: 0;
     z-index: 100;
-
-    /* --- [MODIFICATO] Bordi superiore e inferiore --- */
-    border-top: 1px solid var(--colore-accento);    /* Bordo superiore rosso */
-    border-bottom: 1px solid var(--colore-accento); /* Bordo inferiore rosso */
+    border-top: 1px solid var(--colore-accento);
+    border-bottom: 1px solid var(--colore-accento);
 }
 
 .main-header .container {
@@ -144,29 +143,10 @@ img {
 .logo:hover { 
     color: var(--colore-accento); 
 }
-/* === [NUOVO] Stili Icone Social (Più Specifico) === */
-
-/* * Applichiamo il colore sia al link <a>
- * SIA all'icona <i> al suo interno.
-*/
-.hero-socials a,
-.hero-socials a i {
-    font-size: 2rem;
-    color: var(--colore-testo); /* <-- Colore ACCENTO */
-    transition: all 0.3s ease;
-}
-
-/* * Applichiamo l'hover a entrambi
-*/
-.hero-socials a:hover,
-.hero-socials a:hover i {
-    color: var(--colore-accento); /* <-- Colore TITOLI in hover */
-    transform: scale(1.1);
-}
 
 /* === Navigazione Mobile (Hamburger) === */
 .main-nav { 
-    display: none; /* Gestito via JS o in media query */
+    display: none; 
 }
 
 .nav-toggle {
@@ -200,50 +180,88 @@ img {
 .hamburger::before { top: -8px; }
 .hamburger::after { bottom: -8px; }
 
-/* === Footer === */
+/* =========================================
+   FOOTER - Versione sempre centrata in colonna
+========================================= */
+
 .main-footer {
-    padding: 3rem 0 2rem 0;
-    text-align: center;
-    background-color: var(--colore-sfondo-sezione);
+  background-color: var(--colore-sfondo-sezione);
+  padding: 3rem 0 2rem 0;
+  color: var(--colore-testo);
+  text-align: center;
+}
+
+/* --- Email --- */
+.footer-contact {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
 .email-link {
-    font-size: 1.2rem;
-    font-weight: 700;
-    display: block;
-    margin-bottom: 1.5rem;
-    color: var(--colore-titoli);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--colore-titoli); /* Oro */
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.email-link:hover { 
-    color: var(--colore-accento); 
+.email-link:hover {
+  color: var(--colore-accento); /* Rosso */
+}
+
+/* --- Social links --- */
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
 .social-links a {
-    margin: 0 0.75rem;
-    font-weight: 700;
-    display: inline-block;
-    padding: 0.5rem;
-    color: var(--colore-testo);
+  font-size: 1.3rem;
+  color: var(--colore-testo);
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
-.social-links a:hover { 
-    color: var(--colore-accento); 
+.social-links a:hover {
+  color: var(--colore-accento);
+  transform: scale(1.1);
 }
 
+/* --- Copyright --- */
 .copyright {
-    margin-top: 2rem;
-    font-size: 0.9rem;
-    color: var(--colore-testo);
-    opacity: 0.7;
+  font-size: 0.9rem;
+  color: var(--colore-testo);
+  opacity: 0.7;
+  margin-top: 1rem;
 }
 
+/* --- Contenitore generale (sempre colonna) --- */
 .footer-bottom {
-    /* Stili mobile (default impilato) */
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* --- Nessun cambio layout su desktop --- */
+@media (min-width: 768px) {
+  .footer-bottom {
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
+  }
+
+  .footer-contact {
+    margin-bottom: 1.5rem;
+  }
+
+  .social-links {
+    margin-bottom: 1.5rem;
+  }
 }
 
 
@@ -260,13 +278,13 @@ img {
 
 .hero .container {
     display: flex;
-    flex-direction: column; /* Impila verticalmente */
-    align-items: center; /* Centra orizzontalmente */
+    flex-direction: column; 
+    align-items: center; 
 }
 
 .hero-image-wrapper {
     display: block; 
-    order: 1; /* 1. Appare per primo */
+    order: 1;
     margin-bottom: 2.5rem; 
 }
 
@@ -282,26 +300,29 @@ img {
 
 .hero-socials {
     display: flex;
-    justify-content: center; /* Centrate */
+    justify-content: center;
     gap: 2rem;
-    order: 2; /* 2. Appaiono dopo l'immagine */
+    order: 2;
     margin-bottom: 1.5rem;
 }
 
-.hero-socials a {
+/* === [CORRETTO] Colori icone Hero === */
+.hero-socials a,
+.hero-socials a i {
     font-size: 1.8rem;
-    color: var(--colore-testo);
+    color: var(--colore-accento); /* Colore Accento */
     transition: all 0.3s ease;
 }
 
-.hero-socials a:hover {
-    color: var(--colore-accento);
+.hero-socials a:hover,
+.hero-socials a:hover i {
+    color: var(--colore-titoli); /* Colore Titoli in hover */
     transform: scale(1.1);
 }
 
 .hero-content {
     width: 100%; 
-    order: 3; /* 3. Appare per ultimo */
+    order: 3; 
     text-align: center; 
 }
 
@@ -325,13 +346,11 @@ img {
     margin-bottom: 2rem; 
 }
 
-/* Su mobile, la griglia è 1 colonna di default (nessun display: grid) */
-
 .portfolio-item {
     background: var(--colore-sfondo-sezione);
     border: 2px solid var(--colore-accento); 
     border-radius: 8px;
-    margin-bottom: 2rem; /* Spazio tra le card su mobile */
+    margin-bottom: 2rem; 
     overflow: hidden; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -391,9 +410,6 @@ img {
     transform: scale(1.02);
 }
 
-/* === About Section (Mobile) === */
-/* Nota: gli stili per .about sono definiti solo in media query */
-
 
 /* =========================================
    5. PAGINE SPECIFICHE (Mobile-First)
@@ -416,11 +432,10 @@ img {
     color: var(--colore-titoli); 
 }
 
-/* Su mobile, tutto è impilato */
 .book-cover {
     width: 100%;
     max-width: 400px; 
-    margin: 0 auto 2rem auto; /* Centrato */
+    margin: 0 auto 2rem auto; 
 }
 
 .book-cover img {
@@ -447,7 +462,7 @@ img {
 .buy-buttons {
     margin-top: 2rem;
     display: flex;
-    flex-direction: column; /* Impilati su mobile */
+    flex-direction: column; 
     gap: 1rem;
 }
 
@@ -524,7 +539,6 @@ img {
     overflow: visible; 
 }
 
-/* Badge per Card Portfolio */
 .portfolio-image-wrapper.coming-soon::before {
     content: "PROSSIMA USCITA";
     position: absolute;
@@ -543,7 +557,6 @@ img {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* Badge per Pagina Libro (leggermente più grande) */
 .book-cover.coming-soon::before {
     content: "PROSSIMA USCITA";
     position: absolute;
@@ -562,7 +575,6 @@ img {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* Disabilita pulsanti acquisto per "coming-soon" */
 .book-cover.coming-soon + .book-details .buy-buttons .buy-button.primary {
     opacity: 0.5; 
     cursor: not-allowed; 
@@ -638,7 +650,7 @@ img {
         gap: 2rem; 
     }
     .portfolio-item { 
-        margin-bottom: 0; /* Rimuove il margin mobile */
+        margin-bottom: 0; 
     }
 
     /* --- About (Layout Orizzontale) --- */
@@ -661,11 +673,16 @@ img {
         max-width: none; 
     }
 
-    /* --- Footer --- */
+    /* === [CORRETTO] Stili DESKTOP per Footer === */
     .footer-bottom {
-        flex-direction: row; 
+        flex-direction: row;     /* Orizzontale */
         justify-content: center; 
-        gap: 2rem; 
+        align-items: center;     /* Allinea verticalmente */
+        gap: 2rem;
+    }
+
+    .copyright {
+        margin-top: 0; /* Azzera il margine mobile */
     }
     
     /* --- Pagina Libro (Layout 2 colonne) --- */
@@ -679,8 +696,8 @@ img {
         flex-basis: 40%; 
         flex-shrink: 0;
         margin: 0; 
-        position: sticky; /* Effetto "Sticky" per la copertina */
-        top: 100px; /* Distanza dall'header */
+        position: sticky;
+        top: 100px;
     }
 
     .book-details {
@@ -692,7 +709,17 @@ img {
     }
     
     .buy-buttons {
-        flex-direction: row; /* Affiancati */
+        flex-direction: row; 
+    }
+
+    /* === [CORRETTO] Stili DESKTOP per Estratto Pulsanti === */
+    .estratto-cta-buttons {
+        flex-direction: row; 
+        justify-content: center;
+    }
+    
+    .estratto-cta-buttons .buy-button {
+        min-width: 200px;
     }
 
 } /* --- Fine media query 768px --- */
@@ -706,16 +733,13 @@ img {
         padding: 5rem 0; 
     }
     .hero-image-wrapper {
-        max-width: 500px; /* Cerchio più grande */
+        max-width: 500px; 
     }
     
     /* --- Portfolio Grid (4 colonne) --- */
     .portfolio-grid {
-        /* * MODIFICA RICHIESTA: 
-         * Passaggio da 3 a 4 colonne su desktop.
-         */
         grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem; /* Ridotto il gap per far stare 4 colonne */
+        gap: 1.5rem; 
     }
     
     /* --- About --- */
@@ -725,12 +749,14 @@ img {
     }
 
 } /* --- Fine media query 1024px --- */
+
+
 /* =========================================
    8. PAGINA ESTRATTO (Nuova Sezione)
 ========================================= */
 
 .estratto-section {
-    padding: 3rem 0 5rem 0; /* Più spazio sotto */
+    padding: 3rem 0 5rem 0;
     background-color: var(--colore-sfondo);
 }
 
@@ -757,18 +783,17 @@ img {
     margin-bottom: 0;
 }
 
-/* === Stile colonna di lettura === */
 .estratto-testo {
-    max-width: 750px; /* Larghezza ottimale per la lettura */
-    margin: 0 auto; /* Centra la colonna */
+    max-width: 750px; 
+    margin: 0 auto; 
 }
 
-/* === Stile per la citazione iniziale === */
+/* === [CORRETTO] Stile per la citazione (colore) === */
 .intro-estratto {
     font-family: var(--font-titoli);
     font-size: 1.6rem;
     font-style: italic;
-    color: var(--colore-teso); /* Rosso */
+    color: var(--colore-accento); /* Era --colore-teso (typo) */
     line-height: 1.6;
     text-align: center;
     padding: 1.5rem 0;
@@ -777,26 +802,54 @@ img {
     border-bottom: 1px solid var(--colore-accento);
 }
 
+/* === Stili Citazioni (Blockquote) === */
+.estratto-testo blockquote {
+    margin-bottom: 2rem; 
+    padding: 0.5rem 0;
+    font-family: var(--font-titoli);
+    font-style: italic;
+}
+
+.estratto-testo blockquote p {
+    color: var(--colore-titoli);
+    font-size: 1.25rem;
+    line-height: 1.5; /* Interlinea ridotta */
+    margin-bottom: 0.75rem;
+}
+
+.estratto-testo blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.estratto-testo blockquote footer {
+    font-family: var(--font-titoli);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--colore-titoli);
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
 /* === Stile Paragrafi (leggibilità) === */
 .estratto-testo p {
-    font-size: 1rem; /* Testo leggermente più grande */
-    line-height: 1.8; /* Maggiore interlinea */
-    color: var(--colore-testo); /* Grigio chiaro */
-    margin-bottom: 2rem; /* Spazio tra paragrafi */
+    font-size: 1.15rem; /* Aumentato per leggibilità */
+    line-height: 1.8;
+    color: var(--colore-testo);
+    margin-bottom: 2rem;
 }
 
 /* === Drop Cap (Capolettera) === */
 .estratto-testo p:first-of-type::first-letter {
-    color: var(--colore-titoli); /* Oro */
-    font-size: 2rem;
+    color: var(--colore-titoli);
+    font-size: 4.5rem; /* Aumentato per estetica */
     font-family: var(--font-titoli);
     float: left;
-    line-height: 0.5;
-    margin-right: 0.3rem;
-    padding-top: 0.0rem;
+    line-height: 0.9;
+    margin-right: 0.75rem;
+    padding-top: 0.5rem;
 }
 
-/* Media Query per Mobile */
+/* Media Query per Mobile (Estratto) */
 @media (max-width: 768px) {
     .estratto-titolo h1 {
         font-size: 2.5rem;
@@ -808,27 +861,34 @@ img {
         font-size: 1.3rem;
     }
 }
-/* === [NUOVO] Stile per i pulsanti a fondo pagina === */
+
+/* === Stile MOBILE per i pulsanti a fondo pagina === */
 .estratto-cta-buttons {
     display: flex;
-    flex-direction: column; /* Impilati su mobile */
+    flex-direction: column; 
     gap: 1rem;
-    align-items: center;  /* Centrati */
-    margin-top: 4rem;     /* Spazio sopra i pulsanti */
-    padding-top: 2rem;    /* Spazio tra loro e il bordo */
-    border-top: 1px solid var(--colore-bordi); /* Separatore pulito */
+    align-items: center;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--colore-bordi);
 }
 
-/* Su schermi più grandi, li mettiamo affiancati */
-@media (min-width: 768px) {
-    .estratto-cta-buttons {
-        flex-direction: row; /* Affiancati su desktop */
-        justify-content: center;
-    }
-    
-    /* Diamo una larghezza fissa per coerenza */
-    .estratto-cta-buttons .buy-button {
-        min-width: 200px;
-    }
+/* Nota: la versione DESKTOP di .estratto-cta-buttons
+   è corretta e si trova nella media query (Sezione 7) */
+   .social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
 }
 
+.social-links a {
+  font-size: 1.3rem;
+  color: var(--colore-testo);
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-links a:hover {
+  color: var(--colore-accento);
+  transform: scale(1.1);
+}
