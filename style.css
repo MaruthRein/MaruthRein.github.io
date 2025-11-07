@@ -144,24 +144,83 @@ img {
     color: var(--colore-accento); 
 }
 
-/* === Navigazione Mobile (Hamburger) === */
-.main-nav { 
-    display: none; 
+/* =========================================
+   Sezione Navigazione Mobile (in Sezione 3)
+========================================= */
+
+/* === 1. Stile del Menu Overlay (Nascosto) === */
+.main-nav {
+    position: fixed; /* Si sovrappone a tutto */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Alto come lo schermo */
+    background-color: rgba(26, 26, 26, 0.6); /* Sfondo scuro trasparente*/
+    /* === (Opzionale) Effetto "Vetro Sfocato" === */
+    /* Sfoca tutto ciò che sta sotto il menu */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); /* Per Safari */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* === NASCONDILO (per animazione) === */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%); /* Scompare verso l'alto */
+    transition: all 0.5s ease;
+    z-index: 900; /* Sotto l'header ma sopra il resto */
 }
 
+/* === 2. Stile per il MENU APERTO (Visibile) === */
+.main-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* === 3. Stile dei link nel menu === */
+.main-nav ul {
+    list-style: none;
+    text-align: center;
+    padding: 0; 
+}
+.main-nav li {
+    margin: 2rem 0;
+}
+.main-nav a {
+    color: var(--colore-titoli); /* Giallo */
+    font-size: 2rem;
+    font-family: var(--font-titoli);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+.main-nav a:hover {
+    color: var(--colore-accento); /* Rosso */
+}
+
+/* === 4. Stile del Pulsante Hamburger (Fix Sfondo Bianco) === */
 .nav-toggle {
     display: block;
-    background: transparent;
-    border: none;
+    background: transparent; /* Rimuove lo sfondo bianco */
+    border: none;            /* Rimuove il bordo */
     cursor: pointer;
     padding: 0.5rem;
+    
+    /* Per l'animazione */
+    position: relative;
+    z-index: 999; 
 }
 
+/* === 5. Disegna le 3 linee dell'Hamburger === */
 .hamburger {
     display: block;
     width: 45px;
     height: 4px;
-    background-color: var(--colore-titoli);
+    background-color: var(--colore-titoli); /* Giallo */
     position: relative;
     transition: background-color 0.3s ease;
 }
@@ -172,14 +231,36 @@ img {
     position: absolute;
     width: 100%;
     height: 3px;
-    background-color: var(--colore-titoli);
+    background-color: var(--colore-titoli); /* Giallo */
     left: 0;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.hamburger::before { top: -8px; }
-.hamburger::after { bottom: -8px; }
+.hamburger::before { 
+    top: -8px; 
+}
+.hamburger::after { 
+    bottom: -8px; 
+}
 
+/* === 6. Animazione da Hamburger a "X" === */
+
+/* Ruota la linea superiore */
+.nav-toggle.is-active .hamburger::before {
+    transform: translateY(8px) rotate(45deg); 
+    background-color: var(--colore-accento); /* Rosso */
+}
+
+/* Nasconde la linea centrale */
+.nav-toggle.is-active .hamburger {
+    background-color: transparent; /* Nasconde */
+}
+
+/* Ruota la linea inferiore */
+.nav-toggle.is-active .hamburger::after {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: var(--colore-accento); /* Rosso */
+}
 /* =========================================
    FOOTER - Versione sempre centrata in colonna
 ========================================= */
@@ -594,14 +675,6 @@ img {
     h2 { font-size: 2.5rem; }
     .container { width: 85%; }
 
-    /* --- Header e Navigazione --- */
-    .nav-toggle { padding: 0.8rem; }
-    .hamburger { width: 30px; height: 4px; }
-    .hamburger::before,
-    .hamburger::after { height: 4px; }
-    .hamburger::before { top: -10px; }
-    .hamburger::after { bottom: -10px; }
-
     /* --- Hero (Layout Orizzontale) --- */
     .hero {
         padding: 4rem 0; 
@@ -891,4 +964,156 @@ img {
 .social-links a:hover {
   color: var(--colore-accento);
   transform: scale(1.1);
+}
+/* === Blocca lo scroll quando il menu è aperto === */
+body.no-scroll {
+    overflow: hidden;
+}
+/* =========================================
+   9. SEZIONE PROMO FACEBOOK (Nuova)
+========================================= */
+
+.facebook-promo {
+    /* Usiamo lo stesso stile del footer e della hero */
+    background-color: var(--colore-sfondo-sezione); 
+    padding: 5rem 0;
+    text-align: center;
+    
+    /* Aggiungiamo un bordo rosso per separarla */
+    border-top: 1px solid var(--colore-accento);
+}
+
+.facebook-promo h2 {
+    font-size: 2.8rem; /* Titolo grande e d'impatto */
+    margin-bottom: 1.5rem;
+}
+
+.facebook-promo p {
+    font-size: 1.15rem; /* Stessa dimensione del testo hero */
+    color: var(--colore-testo);
+    max-width: 700px; /* Non troppo largo */
+    margin: 0 auto 2.5rem auto; /* Centrato e con spazio sotto */
+    line-height: 1.7;
+}
+
+/* Riusiamo lo stile .cta-button che abbiamo già */
+.facebook-promo .cta-button {
+    /* Possiamo renderlo leggermente più grande */
+    padding: 1rem 2rem;
+    font-size: 1rem;
+}
+
+/* Adattiamo per il mobile */
+@media (max-width: 768px) {
+    .facebook-promo {
+        padding: 4rem 0;
+    }
+    .facebook-promo h2 {
+        font-size: 2.2rem;
+    }
+}
+/* =========================================
+   10. SEZIONE CHARACTER FEATURE (Nuova)
+========================================= */
+
+.character-feature {
+    padding: 5rem 0;
+    /* [MODIFICATO] Usiamo lo sfondo verde */
+    background-color: var(--colore-sfondo-sezione); /* <-- VERDE */
+    border-top: 1px solid var(--colore-accento);
+}
+
+.character-feature h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 3rem;
+    color: var(--colore-titoli); /* Giallo */
+}
+
+/* === Layout a 2 Colonne (Mobile-First) === */
+
+.feature-wrapper {
+    /* Su mobile è tutto impilato */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.feature-image {
+    /* Il contenitore che sarà tondo */
+    width: 250px; /* Imposta una dimensione fissa per il cerchio */
+    height: 250px;
+    border-radius: 50%; /* Rende l'elemento completamente circolare */
+    border: 3px solid var(--colore-accento); /* Bordo rosso più spesso */
+    overflow: hidden; /* Nasconde ciò che esce dal cerchio */
+    flex-shrink: 0; /* Evita che si rimpicciolisca troppo su mobile */
+
+    /* Centra il contenitore su mobile */
+    margin: 0 auto 2rem auto; 
+}
+
+.feature-image img {
+    /* L'immagine ora si adatta al contenitore tondo */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Assicura che l'immagine copra il cerchio senza deformarsi */
+    border: none; /* Rimuovi qualsiasi bordo dall'immagine stessa */
+    border-radius: 0; /* Rimuovi qualsiasi arrotondamento dall'immagine stessa */
+}
+
+.feature-content h3 {
+    font-size: 1.8rem;
+    color: var(--colore-titoli); /* Giallo */
+    margin-bottom: 1rem;
+}
+
+.feature-content p {
+    font-size: 1.1rem;
+    color: var(--colore-testo); /* Grigio */
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+/* Pulsante (usa lo stile .secondary che già esiste) */
+.feature-content .cta-button.secondary {
+    display: inline-block; /* Assicura che sia un blocco */
+    background-color: transparent;
+    color: var(--colore-accento);
+    border: 2px solid var(--colore-accento);
+}
+.feature-content .cta-button.secondary:hover {
+    background-color: var(--colore-accento);
+    color: #fff;
+}
+
+
+/* === Layout Desktop (min-width: 768px) === */
+@media (min-width: 768px) {
+    
+    .feature-wrapper {
+        flex-direction: row; 
+        align-items: center; 
+        gap: 3rem;
+    }
+    
+    .feature-image {
+        flex-basis: 250px; /* Su desktop, il contenitore mantiene la sua dimensione fissa */
+        margin: 0; /* Rimuovi il margine auto su desktop per allinearlo */
+    }
+    
+    .feature-content {
+        flex-grow: 1; /* Il contenuto prende lo spazio rimanente */
+    }
+}
+/* === [NUOVO] Stile per il box di testo === */
+.feature-content {
+    /* Usiamo lo sfondo nero base per il box */
+    background-color: var(--colore-sfondo);
+    
+    /* Spaziatura interna per non far toccare il testo ai bordi */
+    padding: 2.5rem; 
+    
+    /* Angoli stondati */
+    border-radius: 8px;
+    border: 1px solid var(--colore-accento);
 }
