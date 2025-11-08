@@ -1131,3 +1131,56 @@ body.no-scroll {
     border-radius: 8px;
     border: 1px solid var(--colore-accento);
 }
+/* --- NUOVO EFFETTO SCINTILLE (Sotto l'immagine) --- */
+
+/* 1. Il blocco di testo (non è il palco, non ha z-index specifico per scintille) */
+.hero-content {
+    z-index: 1; /* Mantieni per l'ordine generale del contenuto */
+}
+
+/* 2. Il contenitore del testo (non ha bisogno di z-index speciale) */
+.hero-text-wrapper {
+    position: relative;
+    /* Rimosso z-index: 2 */
+}
+
+/* 3. IL CONTENITORE DELLA FOTO (il "palco" per le scintille) */
+.hero-image-wrapper {
+    position: relative; /* FONDAMENTALE per posizionare le scintille all'interno */
+    overflow: hidden;  /* Nasconde le scintille se escono dai bordi */
+    border-radius: 50%; /* Se vuoi gli angoli arrotondati, altrimenti rimuovi */
+    z-index: 1; /* Ordine di profondità: è il livello sotto l'immagine ma sopra lo sfondo */
+}
+
+/* 4. LA TUA IMMAGINE all'interno del wrapper */
+.hero-image-wrapper img {
+    position: relative; /* FONDAMENTALE per applicare z-index */
+    z-index: 2; /* L'immagine sta SOPRA le scintille (che avranno z-index 1) */
+}
+
+/* 5. La singola scintilla (creata da JS) */
+.sparkle {
+    position: absolute; /* Permette di usare top/left */
+    z-index: 0; /* <<< MODIFICA QUI: Sta SOTTO l'immagine (z-index 2) e il wrapper (z-index 1) */
+    pointer-events: none; /* Non blocca i click sul testo */
+    
+    /* L'animazione */
+    animation: twinkle 1000ms ease-out forwards;
+}
+
+/* 6. L'animazione @keyframes (NESSUNA MODIFICA) */
+@keyframes twinkle {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(1) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(90deg);
+        opacity: 0;
+    }
+}
+/* --- FINE EFFETTO SCINTILLE --- */
