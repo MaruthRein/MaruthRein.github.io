@@ -1131,56 +1131,453 @@ body.no-scroll {
     border-radius: 8px;
     border: 1px solid var(--colore-accento);
 }
-/* --- NUOVO EFFETTO SCINTILLE (Sotto l'immagine) --- */
+/* --- STILI PER LA SEZIONE "THE GURU" (ACCORDION + SEZ. FISSA) --- */
 
-/* 1. Il blocco di testo (non è il palco, non ha z-index specifico per scintille) */
-.hero-content {
-    z-index: 1; /* Mantieni per l'ordine generale del contenuto */
+/* Stile per i bottoni (i titoli cliccabili) */
+.accordion-button {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; /* Leggermente più piccolo per bilanciare */
+    font-weight: 700;
+    color: #e0b467;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    padding: 18px 0;
+    width: 100%;
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
-/* 2. Il contenitore del testo (non ha bisogno di z-index speciale) */
-.hero-text-wrapper {
-    position: relative;
-    /* Rimosso z-index: 2 */
+/* Applica l'effetto hover SOLO su dispositivi con un mouse (non-touch) */
+@media (hover: hover) {
+    .accordion-button:hover {
+        color: #ab4427;
+    }
 }
 
-/* 3. IL CONTENITORE DELLA FOTO (il "palco" per le scintille) */
-.hero-image-wrapper {
-    position: relative; /* FONDAMENTALE per posizionare le scintille all'interno */
-    overflow: hidden;  /* Nasconde le scintille se escono dai bordi */
-    border-radius: 50%; /* Se vuoi gli angoli arrotondati, altrimenti rimuovi */
-    z-index: 1; /* Ordine di profondità: è il livello sotto l'immagine ma sopra lo sfondo */
+/* Stile per il pannello con il contenuto */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
 }
 
-/* 4. LA TUA IMMAGINE all'interno del wrapper */
-.hero-image-wrapper img {
-    position: relative; /* FONDAMENTALE per applicare z-index */
-    z-index: 2; /* L'immagine sta SOPRA le scintille (che avranno z-index 1) */
+.accordion-content p {
+    font-family: 'Lato', sans-serif;
+    color: #f0f0f0;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 15px;
 }
 
-/* 5. La singola scintilla (creata da JS) */
-.sparkle {
-    position: absolute; /* Permette di usare top/left */
-    z-index: 0; /* <<< MODIFICA QUI: Sta SOTTO l'immagine (z-index 2) e il wrapper (z-index 1) */
-    pointer-events: none; /* Non blocca i click sul testo */
+/* Stile per quando il pannello è ATTIVO (aperto) */
+.accordion-button.active + .accordion-content {
+    max-height: 500px; /* Un valore alto per farci stare il testo */
+    padding-bottom: 10px; 
+}
+
+/* --- MODIFICA FRECCE --- */
+/* Stile per l'icona a freccia (chiusa) */
+.accordion-button::after {
+    content: '\203A'; /* Codice per il simbolo '›' (chevron) */
+    color: #e0b467;
+    font-weight: bold;
+    font-size: 2rem;
+    float: right;
+    margin-left: 5px;
+    transform: rotate(90deg); /* Punta in basso */
+    transition: transform 0.3s ease-out;
+}
+
+/* Stile per l'icona a freccia (aperta) */
+.accordion-button.active::after {
+    transform: rotate(-90deg); /* Punta in alto */
+}
+/* --- FINE MODIFICA FRECCE --- */
+
+
+/* --- STILI PER LA SEZIONE FISSA FACEBOOK --- */
+
+/* Stile per il separatore */
+.guru-divider {
+    border: none;
+    height: 1px;
+    background-color: rgba(224, 180, 103, 0.2); /* Oro traslucido */
+    margin: 15px 0;
+}
+
+/* Stile per il titolo fisso */
+.guru-facebook-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #e0b467;
+    margin-bottom: 15px;
+}
+
+/* Stile per il paragrafo fisso */
+.guru-facebook-section p {
+    font-family: 'Lato', sans-serif;
+    color: #f0f0f0;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+/* --- RESPONSIVE FIX PER LE OPERE (MOBILE) --- */
+
+/* Applica queste regole solo su schermi piccoli (fino a 768px) */
+@media (max-width: 768px) {
+
+    /* 1. Crea una griglia a 2 colonne per i libri */
+    .portfolio-grid {
+        /* Invece di una colonna (default), ne usiamo due */
+        grid-template-columns: repeat(2, 1fr);
+        
+        /* Riduciamo lo spazio tra le card */
+        gap: 15px;
+    }
+
+    /* 2. Riduci il testo all'interno delle card */
+    .portfolio-item h3 {
+        /* Dimensione del titolo del libro (es. L'Ombra) */
+        font-size: 1.1rem; 
+    }
+
+    .portfolio-item p {
+        /* Dimensione del sottotitolo */
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+        line-height: 1.4; /* Migliora la leggibilità */
+    }
+
+    /* 3. Riduci il bottone "Scopri di più" */
+    .portfolio-item .portfolio-button {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}
+/* --- RESPONSIVE FIX V2 PER LE OPERE (MOBILE) --- */
+/* Questo sostituisce il blocco di prima */
+
+@media (max-width: 768px) {
+
+    /* 1. Forza la griglia a 2 colonne (con selettore più specifico) */
+    section.portfolio .portfolio-grid {
+        display: grid; /* Assicura che sia in modalità griglia */
+        grid-template-columns: repeat(2, 1fr); /* Forza le 2 colonne */
+        gap: 15px;
+    }
+
+    /* 2. Riduci il testo (con selettore più specifico) */
+    section.portfolio .portfolio-item h3 {
+        font-size: 1.1rem; 
+    }
+
+    section.portfolio .portfolio-item p {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+        line-height: 1.4;
+    }
+
+    /* 3. Riduci il bottone (con selettore più specifico) */
+    section.portfolio .portfolio-item .portfolio-button {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}
+/*
+================================================
+SEZIONE "THE GURU" - CODICE CSS PULITO E FINALE
+================================================
+*/
+
+/* 1. Layout a 2 Colonne (Contenitore Principale) */
+.feature-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Allinea in alto */
+    gap: 40px; /* Spazio tra immagine e testo */
+    flex-wrap: wrap; /* Per andare a capo su mobile */
+}
+
+/* 2. Colonna Sinistra (Immagine Statica) */
+.feature-wrapper .feature-image {
+    width: 45%; /* Occupa il 45% */
+    min-width: 300px; /* Larghezza minima */
+    border-radius: 20px;
+}
+
+/* 3. Stile dell'Immagine Statica */
+.feature-wrapper .feature-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px; /* Angoli stondati */
+    /* Aggiungo un bordo come da screenshot */
+    border: 1px solid rgba(224, 180, 103, 0.3);
+}
+
+/* 4. Colonna Destra (Accordion Box) */
+.feature-wrapper .feature-content {
+    width: 50%;
+    /* Stili del box (probabilmente già presenti, ma li rimetto per sicurezza) */
+    background-color: #1a1a1a; 
+    padding: 30px;
+    border-radius: 20px;
+}
+
+/* 5. Logica Accordion: Bottoni */
+.accordion-button {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #e0b467;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+    padding: 18px 0;
+    width: 100%;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+/* 6. Fix hover per non-touch */
+@media (hover: hover) {
+    .accordion-button:hover {
+        color: #ffffff;
+    }
+}
+
+/* 7. Logica Accordion: Frecce */
+.accordion-button::after {
+    content: '\203A'; /* Chevron */
+    color: #e0b467;
+    font-weight: bold;
+    font-size: 2rem;
+    float: right;
+    margin-left: 5px;
+    transform: rotate(90deg); /* Punta in basso */
+    transition: transform 0.3s ease-out;
+}
+
+.accordion-button.active::after {
+    transform: rotate(-90deg); /* Punta in alto */
+}
+
+/* 8. Logica Accordion: Contenuto */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+
+.accordion-content p {
+    font-family: 'Lato', sans-serif;
+    color: #f0f0f0;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.accordion-button.active + .accordion-content {
+    max-height: 500px; /* Valore ampio */
+    padding-bottom: 10px; 
+}
+
+/* 9. Sezione Fissa Facebook */
+.guru-divider {
+    border: none;
+    height: 1px;
+    background-color: rgba(224, 180, 103, 0.2);
+    margin: 15px 0;
+}
+
+.guru-facebook-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #e0b467;
+    margin-bottom: 15px;
+}
+
+.guru-facebook-section p {
+    font-family: 'Lato', sans-serif;
+    color: #f0f0f0;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* 10. Responsività (Mobile) */
+@media (max-width: 768px) {
+    .feature-wrapper {
+        flex-direction: column; /* Impila le colonne */
+        gap: 30px;
+    }
+
+    /* Su mobile, entrambe le colonne occupano il 100% */
+    .feature-wrapper .feature-image,
+    .feature-wrapper .feature-content {
+        width: 100%;
+        min-width: auto;
+    }
+}
+/* --- FINE SEZIONE GURU --- */
+
+/* --- Stile per il Titolo Box "The Guru" --- */
+
+.character-feature h2 {
+    /* Dimensiona il box sul testo */
+    width: max-content; 
+    max-width: 100%;
     
-    /* L'animazione */
-    animation: twinkle 1000ms ease-out forwards;
+    /* Centra il box */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    
+    /* Aggiunge spazio interno */
+    padding: 10px 30px;
+    
+    /* Colore di sfondo */
+    background-color: #1a1a1a; 
+    
+    /* MODIFICA: Bordo arancio solido (simile ai bottoni) */
+    border: 2px solid #cb5f31; 
+    
+    border-radius: 12px;
+    
+    /* Spazio sotto, prima del contenuto */
+    margin-bottom: 40px; 
+}
+/*
+================================================
+SEZIONE "COSA FACCIO" (Servizi)
+================================================
+*/
+
+.services {
+    padding: 60px 0;
+    background-color: #1a1a1a;
+    border-top: 1px solid #cb5f31;
+    border-bottom: 1px solid #cb5f31;
 }
 
-/* 6. L'animazione @keyframes (NESSUNA MODIFICA) */
-@keyframes twinkle {
-    0% {
-        transform: scale(0) rotate(0deg);
-        opacity: 0.5;
-    }
-    50% {
-        transform: scale(1) rotate(45deg);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(0) rotate(90deg);
-        opacity: 0;
+.services h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #CBA135;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    align-items: center; /* Allinea le card al centro verticalmente */
+}
+
+/* Stile per la card */
+.services-grid .service-card {
+    background-color: #2e382e;
+    border-radius: 12px;
+    text-align: center;
+    border: 2px solid #ab4427;
+    
+    /* === MODIFICATO: Padding verticale ridotto === */
+    padding: 20px 20px; 
+
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.services-grid .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-color: #f5bf36;
+    cursor: pointer;
+}
+
+/* Icona */
+.services-grid .service-card i:not(.read-more-arrow i) {
+    font-size: 2rem;
+    color: #ab4427;
+    /* === MODIFICATO: Margine inferiore ridotto === */
+    margin-bottom: 10px; 
+}
+
+/* Titolo h3 */
+.services-grid .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #f5bf36;
+    margin-bottom: 10px;
+}
+
+/* Paragrafo p */
+.services-grid .service-card p {
+    font-family: 'Lato', sans-serif;
+    color: #f0f0f0;
+    font-weight: 300;
+    line-height: 1.5;
+    font-size: 0.85rem;
+    /* === MODIFICATO: Margine inferiore ridotto === */
+    margin-bottom: 15px; 
+}
+
+/* Freccia "Scopri di più" */
+.read-more-arrow {
+    display: block;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #CBA135;
+    transition: color 0.3s;
+    /* === MODIFICATO: Margine superiore ridotto === */
+    margin-top: 5px; 
+}
+
+.service-card:hover .read-more-arrow {
+    color: #ab4427;
+}
+
+
+/* --- RESPONSIVITÀ PER SERVIZI --- */
+
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        align-items: start; /* Allinea in alto su mobile */
     }
 }
-/* --- FINE EFFETTO SCINTILLE --- */
+
+@media (max-width: 576px) {
+    .service-card {
+        padding: 20px 15px;
+    }
+
+    .services-grid .service-card i:not(.read-more-arrow i) {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .service-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .service-card p {
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .read-more-arrow {
+        font-size: 1rem;
+        margin-top: 5px;
+    }
+    
+    .services-grid {
+        gap: 20px;
+    }
+}
