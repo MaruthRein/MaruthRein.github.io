@@ -264,7 +264,7 @@ html {
 
 /* Nasconde la linea centrale */
 .nav-toggle.is-active .hamburger {
-    background-color: transparent; /* Nasconde */
+   background-color: transparent !important; /* Forza la trasparenza */
 }
 
 /* Ruota la linea inferiore */
@@ -272,6 +272,38 @@ html {
     transform: translateY(-8px) rotate(-45deg);
     background-color: var(--colore-accento); /* Rosso */
 }
+/*
+================================================
+FIX HOVER ASTERISCO MENU HAMBURGER
+(Sostituisce il blocco hover precedente)
+================================================
+*/
+
+@media (hover: hover) {
+
+    /* 1. QUANDO CHIUSO (hover su hamburger) */
+    /* Si applica solo se il bottone NON ha la classe .active */
+    .nav-toggle:not(.active):hover .hamburger,
+    .nav-toggle:not(.active):hover .hamburger::before,
+    .nav-toggle:not(.active):hover .hamburger::after {
+        background-color: #cb5f31; /* Diventa arancio */
+    }
+
+    /* 2. QUANDO APERTO (hover su "X") */
+    
+    /* Le due linee della X diventano arancio */
+    .nav-toggle.active:hover .hamburger::before,
+    .nav-toggle.active:hover .hamburger::after {
+        background-color: #cb5f31; 
+    }
+    
+    /* La linea centrale (quella che crea l'asterisco) 
+       DEVE rimanere trasparente anche in hover! */
+    .nav-toggle.active:hover .hamburger {
+        background-color: transparent; 
+    }
+}
+
 /* =========================================
    FOOTER - Versione sempre centrata in colonna
 ========================================= */
