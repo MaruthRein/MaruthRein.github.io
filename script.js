@@ -73,3 +73,72 @@ document.addEventListener('DOMContentLoaded', () => {
         accordionButtons[0].click(); // Simula un clic sul primo bottone
     }
 });
+/* --- LOGICA PER LIGHTBOX PORTFOLIO (PAGINE INTERNE) --- */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // (Il tuo codice per Hamburger e Accordion è già qui sopra...)
+    
+   /* --- LOGICA PER LIGHTBOX PORTFOLIO (PAGINA GRAFICO) --- */
+
+// (Il tuo codice per Hamburger e Accordion Guru è già qui sopra...)
+    
+// --- Inizia il nuovo codice per il Lightbox ---
+    
+const openBtn = document.getElementById('open-portfolio-btn');
+const lightbox = document.getElementById('portfolioLightbox');
+const lightboxClose = document.getElementById('lightboxClose');
+const body = document.body;
+
+// Controlla se gli elementi del modal esistono (così funziona solo su questa pagina)
+if (openBtn && lightbox && lightboxClose) {
+
+    // APRI il modal
+    openBtn.addEventListener('click', () => {
+        lightbox.classList.add('open');
+        body.classList.add('no-scroll'); // Blocca lo scroll della pagina
+    });
+
+    // CHIUDI il modal
+    const closeLightbox = () => {
+        lightbox.classList.remove('open');
+        body.classList.remove('no-scroll'); // Sblocca lo scroll
+    };
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    
+    // Chiudi cliccando sullo sfondo satinato
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    // LOGICA PER ACCORDION INTERNO AL MODAL
+    const portfolioAccordionBtns = document.querySelectorAll('.portfolio-accordion-button');
+    
+    portfolioAccordionBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            const isAlreadyOpen = button.classList.contains('active');
+
+            // Chiudi tutti gli altri
+            portfolioAccordionBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.nextElementSibling) {
+                    btn.nextElementSibling.style.maxHeight = null;
+                }
+            });
+
+            // Apri quello cliccato (se non era già aperto)
+            if (!isAlreadyOpen) {
+                button.classList.add('active');
+                const content = button.nextElementSibling;
+                if (content) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            }
+        });
+    });
+}
+
+}); // <-- Assicurati che questo codice sia DENTRO la graffa di chiusura del DOMContentLoaded
