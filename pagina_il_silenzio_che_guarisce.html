@@ -11,30 +11,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
     <header class="main-header">
         <div class="container">
             <a href="index.html" class="logo">Maruth Rein</a>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#opere">Book</a></li>
-                    <li><a href="#guru">The Guru</a></li>
-                    <li><a href="#chisiamo">Chi Sono</a></li>
-                    <li><a href="#contatti-footer">Contatti</a></li>
+            
+            <nav class="main-nav" role="navigation" aria-label="Navigazione principale">
+                <ul id="primary-menu">
+                    <li><a href="index.html#hero">Home</a></li>
+                    <li><a href="index.html#opere">Book</a></li>
+                    <li><a href="index.html#guru">The Guru</a></li>
+                    <li><a href="index.html#chisiamo">Chi Sono</a></li>
+                    <li><a href="index.html#contatti-footer">Contatti</a></li>
                 </ul>
             </nav>
-            <button class="nav-toggle" aria-label="Apri navigazione">
+            <button class="nav-toggle" aria-label="Apri navigazione" aria-controls="primary-menu" aria-expanded="false">
                 <span class="hamburger"></span>
             </button>
         </div>
     </header>
 
-    
-    <section class="book-page-section">
+    <main>
+        <section class="book-page-section">
             <div class="container">
 
                 <a href="index.html#opere" class="back-link">&larr; Torna alle opere</a>
@@ -46,7 +47,7 @@
                     </div>
 
                     <div class="book-details">
-                        <h1>Dal Sonno alla Presenza</h1>
+                        <h1>Il Silenzio che Guarisce</h1>
                         
                         <p class="subtitle">C'è un silenzio che non è assenza, né vuoto. È il grembo invisibile da cui tutto nasce e a cui tutto ritorna.</p>
                         
@@ -84,34 +85,32 @@
     </main>
 
 
-   <footer class="main-footer" id="contatti">
-  <div class="container">
+    <footer class="main-footer" id="contatti">
+        <div class="container">
 
-    <div class="footer-bottom">
-      <div class="footer-contact">
-        <a href="mailto:maruth.rein@gmail.com" class="email-link">
-          maruth.rein@gmail.com
-        </a>
-      </div>
+            <div class="footer-bottom">
+                <div class="footer-contact">
+                    <a href="mailto:maruth.rein@gmail.com" class="email-link">
+                        maruth.rein@gmail.com
+                    </a>
+                </div>
 
-      <div class="social-links">
-        <a href="https://www.facebook.com/yogimao/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/maruth.rein/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://t.me/yogimao" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-        <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="https://maruthrein.github.io/" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-      </div>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/yogimao/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/maruth.rein/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://t.me/yogimao" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://maruthrein.github.io/" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                </div>
 
-      <p class="copyright">
-        &copy; <span id="current-year"></span> Maruth Rein. Tutti i diritti riservati.
-      </p>
-    </div>
+                <p class="copyright">
+                    &copy; <span id="current-year"></span> Maruth Rein. Tutti i diritti riservati.
+                </p>
+            </div>
 
-  </div>
+        </div>
+    </footer>
 
-   <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-    </script>
-    <script src="script.js"></script> 
+    <script src="script.js" defer></script> 
 </body>
 </html>
