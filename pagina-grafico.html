@@ -5,24 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grafico & Illustratore - Maruth Rein</title>
 
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="apple-touch-icon" href="assets/images/Maruth_Rein.png">
-
-    <meta property="og:title" content="Grafico & Illustratore - Maruth Rein">
-    <meta property="og:description" content="Scopri i servizi di graphic design, branding e illustrazione.">
-    <meta property="og:image" content="https://maruthrein.github.io/assets/images/Maruth_Rein.png">
-    <meta property="og:url" content="https://maruthrein.github.io/pagina-grafico.html">
-    <meta property="og:type" content="website">
-
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?..." rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-thumbnail.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
 
 </head>
 <body>
-
     <header class="main-header">
         <div class="container">
             <a href="index.html" class="logo">Maruth Rein</a>
@@ -43,7 +35,6 @@
     </header>
 
     <main>
-        
         <section class="page-hero">
             <div class="container">
                 <h1>Grafico & Illustratore</h1>
@@ -56,19 +47,15 @@
                 <div class="text-content">
                     <h2>L'Immagine come Linguaggio</h2>
                     <p>Il design grafico non è solo estetica, è un linguaggio. È il ponte più rapido tra un'idea e la sua comprensione. Il mio approccio unisce la tecnica dell'illustratore alla strategia del designer: creo identità visive che hanno un'anima e che parlano direttamente al pubblico di riferimento.</p>
-                    <p>Ogni colore, ogni linea e ogni tipografia sono scelti per costruire un'identità solida, memorabile e coerente, dal logo al materiale promozionale.</p>
-                
-                   <button type="button" class="cta-button" id="open-portfolio-btn">
-    Vedi il mio Portfolio <i class="fa-solid fa-arrow-right"></i>
-</button>
+                    <p>Ogni colore, ogni linea e ogni tipografia sono scelti per costruire un'identità solida, memorabile e coerente.</p>
+                    <button type="button" class="cta-button" id="open-portfolio-btn">
+                        Vedi il mio Portfolio <i class="fa-solid fa-arrow-right"></i>
+                    </button>
                 </div>
-                
-                
-                <div class="image-content-wrapper"> 
+                <div class="image-content-wrapper">
                     <div class="image-content">
                         <img src="assets/images/grafica_pro.png" alt="Esempi di graphic design">
                     </div>
-                   
                 </div>
             </div>
         </section>
@@ -77,30 +64,10 @@
             <div class="container">
                 <h2>Ambiti di Specializzazione</h2>
                 <div class="services-list">
-                    
-                    <div class="service-item">
-                        <i class="fa-solid fa-star"></i>
-                        <h3>Brand Identity & Logo</h3>
-                        <p>Studio e creazione di loghi, palette colori, tipografia e guide di stile complete per dare un'identità unica e riconoscibile al tuo brand.</p>
-                    </div>
-                    
-                    <div class="service-item">
-                        <i class="fa-solid fa-pen-ruler"></i>
-                        <h3>Illustrazione Digitale</h3>
-                        <p>Illustrazioni personalizzate per l'editoria, il web, app o campagne pubblicitarie. Stili versatili per adattarsi perfettamente al tuo messaggio.</p>
-                    </div>
-
-                    <div class="service-item">
-                        <i class="fa-solid fa-book-skull"></i>
-                        <h3>Copertine & Packaging</h3>
-                        <p>Design di copertine per libri (come quelle che vedi sul sito), album musicali e packaging di prodotti che catturano l'attenzione e raccontano una storia.</p>
-                    </div>
-
-                    <div class="service-item">
-                        <i class="fa-solid fa-file-image"></i>
-                        <h3>Materiali di Marketing</h3>
-                        <p>Progettazione di brochure, poster, kit per social media, banner pubblicitari e qualsiasi materiale coordinato per la tua comunicazione online e offline.</p>
-                    </div>
+                    <div class="service-item"><i class="fa-solid fa-star"></i><h3>Brand Identity & Logo</h3><p>Studio e creazione di loghi e identità visive complete.</p></div>
+                    <div class="service-item"><i class="fa-solid fa-pen-ruler"></i><h3>Illustrazione Digitale</h3><p>Illustrazioni personalizzate per editoria e campagne pubblicitarie.</p></div>
+                    <div class="service-item"><i class="fa-solid fa-book-skull"></i><h3>Copertine & Packaging</h3><p>Design di copertine e packaging creativi e coinvolgenti.</p></div>
+                    <div class="service-item"><i class="fa-solid fa-file-image"></i><h3>Materiali di Marketing</h3><p>Progettazione di brochure, poster e materiale promozionale.</p></div>
                 </div>
             </div>
         </section>
@@ -112,77 +79,221 @@
                 <a href="index.html#contatti-footer" class="cta-button">Contattami Ora</a>
             </div>
         </section>
-
     </main>
-<div class="lightbox-modal" id="portfolioLightbox">
+
+    <div class="lightbox-overlay" id="portfolioOverlay"></div>
+    <div class="lightbox-container" id="portfolioLightbox">
         
-        <button class="lightbox-close" id="lightboxClose" aria-label="Chiudi finestra">&times;</button>
+        <button class="lightbox-close-btn" id="closePortfolioBtn" aria-label="Chiudi finestra">&times;</button>
         
-        <div class="lightbox-portfolio-content">
-            <h2>Portfolio Completo</h2>
+        <div class="lightbox-tabs">
+            <button class="tab-link active" data-tab="tab-1">Brand Identity & Logo</button>
+            <button class="tab-link" data-tab="tab-2">Illustrazione Digitale</button>
+            <button class="tab-link" data-tab="tab-3">Copertine & Packaging</button>
+            <button class="tab-link" data-tab="tab-4">Materiali di Marketing</button>
+        </div>
+
+        <div class="lightbox-content">
             
-            <div class="portfolio-accordion">
-
-                <button type="button" class="portfolio-accordion-button">Brand Identity & Logo</button>
-                <div class="portfolio-accordion-content">
-                    <div class="portfolio-gallery-grid">
-                        <img src="assets/images/portfolio/brand/img1.jpg" alt="Progetto Brand 1">
-                        <img src="assets/images/portfolio/brand/img2.jpg" alt="Progetto Brand 2">
-                        <img src="assets/images/portfolio/brand/img3.jpg" alt="Progetto Brand 3">
-                    </div>
+            <div class="tab-pane active" id="tab-1">
+                <h3>Brand Identity & Logo</h3>
+                <div class="portfolio-gallery-grid" id="gallery-brand">
+                    <a href="assets/images/portfolio/brand/Acciaio brand.png">
+                        <img src="assets/images/portfolio/brand/Acciaio brand.png" alt="Progetto Brand 1">
+                    </a>
+                    <a href="assets/images/portfolio/brand/caffè chicco.png">
+                        <img src="assets/images/portfolio/brand/caffè chicco.png" alt="Progetto Brand Caffè Chicco">
+                    </a>
+                     <a href="assets/images/portfolio/brand/caffè chicco 2.png">
+                        <img src="assets/images/portfolio/brand/caffè chicco 2.png" alt="Progetto Brand Caffè Chicco">
+                    </a>
+                     <a href="assets/images/portfolio/brand/creatività-italiana.png">
+                        <img src="assets/images/portfolio/brand/creatività-italiana.png" alt="Progetto Brand 2">
+                    </a>
+                    <a href="assets/images/portfolio/brand/Antico.png">
+                        <img src="assets/images/portfolio/brand/Antico.png" alt="Progetto Brand 3">
+                    </a>
+                     <a href="assets/images/portfolio/brand/Innova.png">
+                        <img src="assets/images/portfolio/brand/Innova.png" alt="Progetto Brand 4">
+                    </a>
+                    <a href="assets/images/portfolio/brand/nvistiblo.png">
+                        <img src="assets/images/portfolio/brand/nvistiblo.png" alt="Progetto Brand 5">
+                    </a>
+                    <a href="assets/images/portfolio/brand/nvistiblo 2.png">
+                        <img src="assets/images/portfolio/brand/nvistiblo 2.png" alt="Progetto Brand 6">
+                    </a>
                 </div>
+            </div>
 
-                <button type="button" class="portfolio-accordion-button">Illustrazione Digitale</button>
-                <div class="portfolio-accordion-content">
-                    <div class="portfolio-gallery-grid">
-                        <img src="assets/images/portfolio/illustrazioni/img1.jpg" alt="Illustrazione 1">
-                    </div>
+            <div class="tab-pane" id="tab-2">
+                <h3>Illustrazione Digitale</h3>
+                <div class="portfolio-gallery-grid" id="gallery-illustrazione"> 
+                    <a href="assets/images/portfolio/illustrazione-grande-1.jpg">
+                        <img src="assets/images/portfolio/illustrazione-thumb-1.jpg" alt="Progetto Illustrazione 1">
+                    </a>
                 </div>
-                
-                <button type="button" class="portfolio-accordion-button">Copertine & Packaging</button>
-                <div class="portfolio-accordion-content">
-                    <div class="portfolio-gallery-grid">
-                        <img src="assets/images/portfolio/copertine/img1.jpg" alt="Copertina 1">
-                        <img src="assets/images/portfolio/copertine/img2.jpg" alt="Copertina 2">
-                    </div>
-                </div>
+            </div>
 
-                <button type="button" class="portfolio-accordion-button">Materiali di Marketing</button>
-                <div class="portfolio-accordion-content">
-                    <div class="portfolio-gallery-grid">
-                        <img src="assets/images/portfolio/marketing/img1.jpg" alt="Marketing 1">
-                    </div>
+            <div class="tab-pane" id="tab-3">
+                <h3>Copertine & Packaging</h3>
+                 <div class="portfolio-gallery-grid" id="gallery-copertine">
+                    <a href="assets/images/portfolio/illustrazione-grande-1.jpg">
+                        <img src="assets/images/portfolio/illustrazione-thumb-1.jpg" alt="Progetto Copertina 1">
+                    </a>
                 </div>
+            </div>
 
-            </div> </div>
+            <div class="tab-pane" id="tab-4">
+                <h3>Materiali di Marketing</h3>
+                 <div class="portfolio-gallery-grid" id="gallery-marketing">
+                    <a href="assets/images/portfolio/illustrazione-grande-1.jpg">
+                        <img src="assets/images/portfolio/illustrazione-thumb-1.jpg" alt="Progetto Marketing 1">
+                    </a>
+                </div>
+            </div>
+
+        </div>
     </div>
+    
     <footer class="main-footer" id="contatti-footer"> 
         <div class="container">
             <div class="footer-bottom">
                 <div class="footer-contact">
-                    <a href="mailto:maruth.rein@gmail.com" class="email-link">
-                        maruth.rein@gmail.com
-                    </a>
+                    <a href="mailto:maruth.rein@gmail.com" class="email-link">maruth.rein@gmail.com</a>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/yogimao/" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/maruth.rein/" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://t.me/yogimao" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-                    <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="https://maruthrein.github.io/" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.facebook.com/yogimao/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/maruth.rein/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://t.me/yogimao" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://maruthrein.github.io/" target="_blank"><i class="fa-brands fa-github"></i></a>
                 </div>
-                <p class="copyright">
-                    &copy; <span id="current-year-page"></span> Maruth Rein. Tutti i diritti riservati.
-                </p>
+                <p class="copyright">&copy; <span id="current-year-page"></span> Maruth Rein. Tutti i diritti riservati.</p>
             </div>
         </div>
     </footer>
-    
-    <script>
-        // Aggiorna l'anno nel footer
-        document.getElementById('current-year-page').textContent = new Date().getFullYear();
-    </script>
-    <script src="script.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
 
-</body>
-</html>
+<script>
+  // Imposta l'anno nel footer
+  document.getElementById('current-year-page').textContent = new Date().getFullYear();
+
+  document.addEventListener('DOMContentLoaded', () => {
+
+    /* =================================== */
+    /* === 1. MENU HAMBURGER MOBILE ====== */
+    /* =================================== */
+    const navToggle = document.querySelector('.nav-toggle');
+    const mainNav = document.querySelector('.main-nav');
+    const body = document.body;
+
+    if (navToggle && mainNav) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('is-active');
+        mainNav.classList.toggle('is-open');
+        body.classList.toggle('no-scroll');
+      });
+
+      document.querySelectorAll('.main-nav a').forEach(link => {
+        link.addEventListener('click', () => {
+          navToggle.classList.remove('is-active');
+          mainNav.classList.remove('is-open');
+          body.classList.remove('no-scroll');
+        });
+      });
+    }
+
+    /* =========================================
+       2. LIGHTBOX PORTFOLIO (MODALE SATINATO)
+    ========================================= */
+    const openBtn = document.getElementById('open-portfolio-btn'); 
+    const lightbox = document.getElementById('portfolioLightbox');
+    const overlay = document.getElementById('portfolioOverlay');
+    const closeBtn = document.getElementById('closePortfolioBtn');
+    const tabLinks = document.querySelectorAll('.tab-link');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    let lightGalleryInstances = {};
+
+    // Inizializza LightGallery per una data galleria
+    function initLightGallery(galleryId) {
+      if (lightGalleryInstances[galleryId]) {
+        lightGalleryInstances[galleryId].destroy();
+      }
+
+      const galleryElement = document.getElementById(galleryId);
+      if (galleryElement) {
+        const instance = lightGallery(galleryElement, {
+          plugins: [lgThumbnail, lgZoom],
+          selector: 'a',
+          speed: 500,
+          download: false,
+          licenseKey: 'GPLv3' // chiave demo ufficiale
+        });
+
+        lightGalleryInstances[galleryId] = instance;
+      }
+    }
+
+    // Apertura modale portfolio
+    function openLightbox() {
+      if (lightbox) lightbox.classList.add('is-open');
+      if (overlay) overlay.classList.add('is-open');
+      document.body.classList.add('no-scroll');
+
+      const firstActiveGallery = document.querySelector('.tab-pane.active .portfolio-gallery-grid');
+      if (firstActiveGallery && firstActiveGallery.id) {
+        initLightGallery(firstActiveGallery.id);
+      }
+    }
+
+    // Chiusura modale portfolio
+    function closeLightbox() {
+      if (lightbox) lightbox.classList.remove('is-open');
+      if (overlay) overlay.classList.remove('is-open');
+      document.body.classList.remove('no-scroll');
+
+      // Distrugge eventuali istanze LightGallery
+      for (const key in lightGalleryInstances) {
+        if (lightGalleryInstances[key]) {
+          lightGalleryInstances[key].destroy();
+        }
+      }
+      lightGalleryInstances = {};
+    }
+
+    // Eventi
+    if (openBtn) openBtn.addEventListener('click', e => {
+      e.preventDefault();
+      openLightbox();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+    if (overlay) overlay.addEventListener('click', closeLightbox);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) {
+        closeLightbox();
+      }
+    });
+
+    // Gestione Tab (categorie portfolio)
+    if (tabLinks.length > 0) {
+      tabLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          const tabId = link.getAttribute('data-tab');
+          const activePane = document.getElementById(tabId);
+          const galleryGridId = activePane?.querySelector('.portfolio-gallery-grid')?.id;
+
+          tabLinks.forEach(item => item.classList.remove('active'));
+          tabPanes.forEach(pane => pane.classList.remove('active'));
+
+          link.classList.add('active');
+          if (activePane) activePane.classList.add('active');
+
+          if (galleryGridId) initLightGallery(galleryGridId);
+        });
+      });
+    }
+
+  }); // Fine DOMContentLoaded
+</script>

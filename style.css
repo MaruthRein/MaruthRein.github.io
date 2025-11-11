@@ -1,22 +1,14 @@
 /* =========================================
    INDICE
    1. Setup Iniziale e Variabili
-   2. Stili Globali (Body, Titoli, Link)
+   2. Stili Globali (Body, Titoli, Link, Pulsanti)
    3. Layout (Header, Navigazione, Footer)
-   4. Sezioni Homepage (Mobile-First)
-      - Hero
-      - Portfolio
-   5. Pagine Specifiche (Mobile-First)
-      - Pagina Libro
-      - Stili Testo Sinossi
-   6. Classi Utility
-      - Badge "Prossima Uscita"
+   4. Sezioni Comuni (Hero, Portfolio, Servizi, Promo, Guru)
+   5. Stili Pagine Specifiche (Libro, Estratto, Scrittore)
+   6. Classi Utility (Es. "Prossima Uscita")
    7. Media Queries (Tablet e Desktop)
-      - Tablet (min-width: 768px)
-      - Desktop (min-width: 1024px)
-   8. Pagina Estratto
+   8. LIGHTBOX PERSONALIZZATO
 ========================================= */
-
 
 /* =========================================
    1. SETUP INIZIALE E VARIABILI
@@ -34,54 +26,55 @@
 }
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: 'Lato', sans-serif;
 }
-
 
 /* =========================================
    2. STILI GLOBALI (Body, Titoli, Link)
 ========================================= */
 
-body {
-    font-family: var(--font-testo);
-    line-height: 1.6;
-    background-color: var(--colore-sfondo);
-    color: var(--colore-testo);
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 60px; /* spazio per header sticky */
 }
 
+body {
+    background-color: var(--colore-sfondo);
+    color: var(--colore-testo);
+    font-family: var(--font-testo);
+    line-height: 1.6;
+}
+
+body.no-scroll { overflow: hidden; }
+
 h1, h2, h3, h4, h5, h6 {
+    color: var(--colore-titoli);
     font-family: var(--font-titoli);
     font-weight: 700;
-    margin-bottom: 1rem;
     line-height: 1.2;
-    color: var(--colore-titoli);
+    margin-bottom: 1rem;
 }
 
 h1 { font-size: 2.5rem; }
 h2 { font-size: 2rem; }
 h3 { font-size: 1.5rem; }
 
-p { 
-    margin-bottom: 1rem; 
-}
+p { margin-bottom: 1rem; }
 
 a {
     color: var(--colore-accento);
     text-decoration: none;
     transition: color 0.3s ease;
 }
+a:hover { color: var(--colore-titoli); }
 
-a:hover { 
-    color: var(--colore-titoli); 
-}
-
-img { 
-    max-width: 100%; 
-    height: auto; 
-    display: block; 
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
 .container {
@@ -89,31 +82,19 @@ img {
     max-width: 1100px;
     margin: 0 auto;
 }
-/* === [NUOVO] Fix per lo scroll con Header Sticky === */
-html {
-    /* 1. (Opzionale ma consigliato) Rende lo scroll morbido */
-    scroll-behavior: smooth; 
-    
-    /* * 2. QUESTA È LA SOLUZIONE:
-     * Dice al browser di fermare lo scroll 60px PRIMA 
-     * del bordo superiore, lasciando spazio per l'header sticky.
-    */
-    scroll-padding-top: 60px; 
-}
 
-/* --- Pulsante hero home (Rosso di default) --- */
+/* Pulsante Call-to-Action Globale */
 .cta-button {
     display: inline-block;
+    padding: 0.8rem 1.5rem;
     background-color: var(--colore-accento);
     color: #fff;
-    padding: 0.8rem 1.5rem;
     border-radius: 5px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s ease;
 }
-
 .cta-button:hover {
     background-color: var(--colore-titoli);
     color: var(--colore-sfondo);
@@ -121,307 +102,209 @@ html {
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-
 /* =========================================
    3. LAYOUT (Header, Navigazione, Footer)
 ========================================= */
 
-/* === Header === */
+/* Header */
 .main-header {
-    padding: 1rem 0;
-    background-color: var(--colore-sfondo);
     position: sticky;
     top: 0;
     z-index: 100;
+    padding: 1rem 0;
+    background-color: var(--colore-sfondo);
     border-top: 1px solid var(--colore-accento);
     border-bottom: 1px solid var(--colore-accento);
 }
-
 .main-header .container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
+    color: var(--colore-titoli);
     font-family: var(--font-titoli);
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--colore-titoli);
-    text-decoration: none;
 }
+.logo:hover { color: var(--colore-accento); }
 
-.logo:hover { 
-    color: var(--colore-accento); 
-}
-
-/* =========================================
-   Sezione Navigazione Mobile (in Sezione 3)
-========================================= */
-
-/* === 1. Stile del Menu Overlay (Nascosto) === */
+/* Navigazione Mobile (Overlay) */
 .main-nav {
-    position: fixed; /* Si sovrappone a tutto */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh; /* Alto come lo schermo */
-    background-color: rgba(26, 26, 26, 0.6); /* Sfondo scuro trasparente*/
-    /* === (Opzionale) Effetto "Vetro Sfocato" === */
-    /* Sfoca tutto ciò che sta sotto il menu */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px); /* Per Safari */
-    
+    position: fixed;
+    inset: 0;
+    z-index: 900;
     display: flex;
-    justify-content: center;
     align-items: center;
-    
-    /* === NASCONDILO (per animazione) === */
+    justify-content: center;
+    background-color: rgba(26, 26, 26, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-100%); /* Scompare verso l'alto */
+    transform: translateY(-100%);
     transition: all 0.5s ease;
-    z-index: 900; /* Sotto l'header ma sopra il resto */
 }
-
-/* === 2. Stile per il MENU APERTO (Visibile) === */
 .main-nav.is-open {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
-
-/* === 3. Stile dei link nel menu === */
 .main-nav ul {
     list-style: none;
     text-align: center;
-    padding: 0; 
 }
-.main-nav li {
-    margin: 2rem 0;
-}
+.main-nav li { margin: 2rem 0; }
 .main-nav a {
-    color: var(--colore-titoli); /* Giallo */
-    font-size: 2rem;
+    color: var(--colore-titoli);
     font-family: var(--font-titoli);
+    font-size: 2rem;
     font-weight: 700;
-    text-decoration: none;
     padding: 0.5rem 1rem;
     transition: color 0.3s ease;
 }
-.main-nav a:hover {
-    color: var(--colore-accento); /* Rosso */
+.main-nav a:hover { color: var(--colore-accento); }
+.main-nav .current-page {
+    color: #cb5f31;
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
-/* === 4. Stile del Pulsante Hamburger (Fix Sfondo Bianco) === */
+/* Pulsante Hamburger */
 .nav-toggle {
-    display: block;
-    background: transparent; /* Rimuove lo sfondo bianco */
-    border: none;            /* Rimuove il bordo */
-    cursor: pointer;
-    padding: 0.5rem;
-    
-    /* Per l'animazione */
     position: relative;
-    z-index: 999; 
+    z-index: 999;
+    display: block;
+    padding: 0.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
-
-/* === 5. Disegna le 3 linee dell'Hamburger === */
 .hamburger {
+    position: relative;
     display: block;
     width: 45px;
     height: 4px;
-    background-color: var(--colore-titoli); /* Giallo */
-    position: relative;
+    background-color: var(--colore-titoli);
     transition: background-color 0.3s ease;
 }
-
 .hamburger::before,
 .hamburger::after {
     content: '';
     position: absolute;
+    left: 0;
     width: 100%;
     height: 3px;
-    background-color: var(--colore-titoli); /* Giallo */
-    left: 0;
+    background-color: var(--colore-titoli);
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
+.hamburger::before { top: -8px; }
+.hamburger::after { bottom: -8px; }
 
-.hamburger::before { 
-    top: -8px; 
-}
-.hamburger::after { 
-    bottom: -8px; 
-}
-
-/* === 6. Animazione da Hamburger a "X" === */
-
-/* Ruota la linea superiore */
+/* Animazione Hamburger -> "X" */
+.nav-toggle.is-active .hamburger { background-color: transparent; }
 .nav-toggle.is-active .hamburger::before {
-    transform: translateY(8px) rotate(45deg); 
-    background-color: var(--colore-accento); /* Rosso */
+    transform: translateY(8px) rotate(45deg);
+    background-color: var(--colore-accento);
 }
-
-/* Nasconde la linea centrale */
-.nav-toggle.is-active .hamburger {
-   background-color: transparent !important; /* Forza la trasparenza */
-}
-
-/* Ruota la linea inferiore */
 .nav-toggle.is-active .hamburger::after {
     transform: translateY(-8px) rotate(-45deg);
-    background-color: var(--colore-accento); /* Rosso */
+    background-color: var(--colore-accento);
 }
-/*
-================================================
-FIX HOVER ASTERISCO MENU HAMBURGER
-(Sostituisce il blocco hover precedente)
-================================================
-*/
 
+/* Effetto Hover su Hamburger (solo per dispositivi con hover) */
 @media (hover: hover) {
-
-    /* 1. QUANDO CHIUSO (hover su hamburger) */
-    /* Si applica solo se il bottone NON ha la classe .active */
-    .nav-toggle:not(.active):hover .hamburger,
-    .nav-toggle:not(.active):hover .hamburger::before,
-    .nav-toggle:not(.active):hover .hamburger::after {
-        background-color: #cb5f31; /* Diventa arancio */
+    .nav-toggle:not(.is-active):hover .hamburger,
+    .nav-toggle:not(.is-active):hover .hamburger::before,
+    .nav-toggle:not(.is-active):hover .hamburger::after {
+        background-color: #cb5f31;
     }
-
-    /* 2. QUANDO APERTO (hover su "X") */
-    
-    /* Le due linee della X diventano arancio */
-    .nav-toggle.active:hover .hamburger::before,
-    .nav-toggle.active:hover .hamburger::after {
-        background-color: #cb5f31; 
-    }
-    
-    /* La linea centrale (quella che crea l'asterisco) 
-       DEVE rimanere trasparente anche in hover! */
-    .nav-toggle.active:hover .hamburger {
-        background-color: transparent; 
+    .nav-toggle.is-active:hover .hamburger::before,
+    .nav-toggle.is-active:hover .hamburger::after {
+        background-color: #cb5f31;
     }
 }
 
-/* =========================================
-   FOOTER - Versione sempre centrata in colonna
-========================================= */
-
+/* Footer */
 .main-footer {
-  background-color: var(--colore-sfondo-sezione);
-  padding: 3rem 0 2rem 0;
-  color: var(--colore-testo);
-  text-align: center;
+    padding: 3rem 0 2rem;
+    text-align: center;
+    color: var(--colore-testo);
+    background-color: var(--colore-sfondo-sezione);
 }
-
-/* --- Email --- */
-.footer-contact {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-}
-
-.email-link {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--colore-titoli); /* Oro */
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.email-link:hover {
-  color: var(--colore-accento); /* Rosso */
-}
-
-/* --- Social links --- */
-.social-links {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 1.5rem;
-}
-
-.social-links a {
-  font-size: 1.3rem;
-  color: var(--colore-testo);
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.social-links a:hover {
-  color: var(--colore-accento);
-  transform: scale(1.1);
-}
-
-/* --- Copyright --- */
-.copyright {
-  font-size: 0.9rem;
-  color: var(--colore-testo);
-  opacity: 0.7;
-  margin-top: 1rem;
-}
-
-/* --- Contenitore generale (sempre colonna) --- */
 .footer-bottom {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-/* --- Nessun cambio layout su desktop --- */
-@media (min-width: 768px) {
-  .footer-bottom {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  .footer-contact {
+    gap: 1rem;
+}
+.footer-contact {
+    display: flex;
+    justify-content: center;
     margin-bottom: 1.5rem;
-  }
+}
+.email-link {
+    color: var(--colore-titoli);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.email-link:hover { color: var(--colore-accento); }
 
-  .social-links {
+.social-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
     margin-bottom: 1.5rem;
-  }
+}
+.social-links a {
+    color: var(--colore-testo);
+    font-size: 1.3rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+.social-links a:hover {
+    color: var(--colore-accento);
+    transform: scale(1.1);
 }
 
+.copyright {
+    margin-top: 1rem;
+    color: var(--colore-testo);
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
 
 /* =========================================
-   4. SEZIONI HOMEPAGE (Mobile-First)
+   4. SEZIONI COMUNI (Hero, Portfolio, Servizi, Promo, Guru)
 ========================================= */
 
-/* === Hero (Mobile) === */
+/* Hero (Homepage) */
 .hero {
     padding: 4rem 0;
     background-color: var(--colore-sfondo-sezione);
     border-bottom: 1px solid var(--colore-accento);
 }
-
 .hero .container {
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
+    flex-direction: column;
+    align-items: center;
 }
-
 .hero-image-wrapper {
-    display: block; 
+    display: block;
     order: 1;
-    margin-bottom: 2.5rem; 
+    margin-bottom: 2.5rem;
 }
-
 .hero-image {
-    width: 180px; 
+    width: 180px;
     height: 180px;
-    border-radius: 50%;
     margin: 0 auto;
+    border-radius: 50%;
     object-fit: cover;
     opacity: 0.8;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
-
 .hero-socials {
     display: flex;
     justify-content: center;
@@ -429,96 +312,75 @@ FIX HOVER ASTERISCO MENU HAMBURGER
     order: 2;
     margin-bottom: 1.5rem;
 }
-
-/* === [CORRETTO] Colori icone Hero === */
 .hero-socials a,
 .hero-socials a i {
+    color: var(--colore-accento);
     font-size: 1.8rem;
-    color: var(--colore-accento); /* Colore Accento */
     transition: all 0.3s ease;
 }
-
 .hero-socials a:hover,
 .hero-socials a:hover i {
-    color: var(--colore-titoli); /* Colore Titoli in hover */
+    color: var(--colore-titoli);
     transform: scale(1.1);
 }
-
 .hero-content {
-    width: 100%; 
-    order: 3; 
-    text-align: center; 
+    width: 100%;
+    order: 3;
+    text-align: center;
 }
-
-.hero h1 { 
-    font-size: 2.8rem; 
-}
-
+.hero h1 { font-size: 2.8rem; }
 .hero p {
-    font-size: 1.1rem;
+    margin-bottom: 2rem;
     color: var(--colore-testo);
+    font-size: 1.1rem;
+}
+
+/* Portfolio (Homepage) */
+.portfolio { padding: 3rem 0; }
+.portfolio h2 {
+    text-align: center;
     margin-bottom: 2rem;
 }
-
-/* === Portfolio (Mobile) === */
-.portfolio { 
-    padding: 3rem 0; 
-}
-
-.portfolio h2 { 
-    text-align: center; 
-    margin-bottom: 2rem; 
-}
-
 .portfolio-item {
-    background: var(--colore-sfondo-sezione);
-    border: 2px solid var(--colore-accento); 
+    margin-bottom: 2rem;
+    border: 2px solid var(--colore-accento);
     border-radius: 8px;
-    margin-bottom: 2rem; 
-    overflow: hidden; 
+    background: var(--colore-sfondo-sezione);
+    overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
-
 .portfolio-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    border-color: var(--colore-titoli); 
+    border-color: var(--colore-titoli);
 }
-
 .portfolio-image-wrapper {
-    aspect-ratio: 3 / 4; 
     width: 100%;
+    aspect-ratio: 3 / 4;
     overflow: hidden;
-    background-color: #000; 
+    background-color: #000;
 }
-
 .portfolio-image-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
 }
-
-.portfolio-item h3 {
-    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
-}
-
+.portfolio-item h3 { padding: 1.5rem 1.5rem 0.5rem; }
 .portfolio-item p {
-    padding: 0 1.5rem 1.5rem 1.5rem;
+    padding: 0 1.5rem 1.5rem;
     color: var(--colore-testo);
 }
-
 .portfolio-button-wrapper {
-    padding: 0 1.5rem 1.5rem 1.5rem; 
-    margin-top: 1rem; 
+    padding: 0 1.5rem 1.5rem;
+    margin-top: 1rem;
 }
-
 .portfolio-button {
-    display: block; 
+    display: block;
     width: 100%;
     padding: 0.75rem 1rem;
     background-color: var(--colore-accento);
-    color: #fff; 
+    color: #fff;
     text-align: center;
     text-transform: uppercase;
     font-weight: 700;
@@ -527,69 +389,411 @@ FIX HOVER ASTERISCO MENU HAMBURGER
     border-radius: 5px;
     transition: all 0.3s ease;
 }
-
 .portfolio-button:hover {
-    background-color: var(--colore-titoli); 
-    color: var(--colore-sfondo); 
+    background-color: var(--colore-titoli);
+    color: var(--colore-sfondo);
     transform: scale(1.02);
 }
 
+/* Sezione "Cosa Faccio" (Homepage) */
+.services {
+    padding: 60px 0;
+    background-color: #1a1a1a;
+    border-top: 1px solid #cb5f31;
+    border-bottom: 1px solid #cb5f31;
+}
+.services h2 {
+    margin-bottom: 50px;
+    color: #CBA135;
+    font-size: 2.5rem;
+    text-align: center;
+}
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    align-items: center;
+}
+.services-grid .service-card {
+    padding: 20px;
+    text-align: center;
+    background-color: #2e382e;
+    border: 2px solid #ab4427;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.services-grid .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-color: #f5bf36;
+    cursor: pointer;
+}
+.services-grid .service-card i:not(.read-more-arrow i) {
+    margin-bottom: 10px;
+    color: #ab4427;
+    font-size: 2rem;
+}
+.services-grid .service-card h3 {
+    margin-bottom: 10px;
+    color: #f5bf36;
+    font-size: 1.3rem;
+}
+.services-grid .service-card p {
+    margin-bottom: 15px;
+    color: #f0f0f0;
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.5;
+}
+.read-more-arrow {
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    color: #CBA135;
+    font-size: 1.3rem;
+    transition: color 0.3s;
+}
+.service-card:hover .read-more-arrow { color: #ab4427; }
 
-/* =========================================
-   5. PAGINE SPECIFICHE (Mobile-First)
-========================================= */
-
-/* === Pagina Libro (Mobile) === */
-.book-page-section {
-    padding: 3rem 0;
-    background-color: var(--colore-sfondo); 
+/* Sezione Promo Facebook (Homepage) */
+.facebook-promo {
+    padding: 5rem 0;
+    text-align: center;
+    background-color: var(--colore-sfondo-sezione);
+    border-top: 1px solid var(--colore-accento);
+}
+.facebook-promo h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2.8rem;
+}
+.facebook-promo p {
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    color: var(--colore-testo);
+    font-size: 1.15rem;
+    line-height: 1.7;
+}
+.facebook-promo .cta-button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
 }
 
+/* Sezione "The Guru" (Homepage) */
+.character-feature {
+    padding: 5rem 0;
+    background-color: var(--colore-sfondo-sezione);
+    border-top: 1px solid var(--colore-accento);
+}
+/* Titolo in un box */
+.character-feature h2 {
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto 40px;
+    padding: 10px 30px;
+    background-color: #1a1a1a;
+    border: 2px solid #ab4427;
+    border-radius: 12px;
+}
+/* Layout 2 colonne per Guru */
+.feature-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+}
+.feature-wrapper .feature-image {
+    width: 45%;
+    min-width: 300px;
+    border-radius: 20px;
+}
+.feature-wrapper .feature-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    border: 3px solid var(--colore-accento);
+}
+.feature-wrapper .feature-content {
+    width: 50%;
+    padding: 30px;
+    background-color: #1a1a1a;
+    border: 2px solid var(--colore-accento);
+    border-radius: 20px;
+}
+
+/* Accordion */
+.accordion-button {
+    width: 100%;
+    padding: 18px 0;
+    text-align: left;
+    color: #e0b467;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+.accordion-button::after {
+    content: '\203A';
+    float: right;
+    margin-left: 5px;
+    color: #e0b467;
+    font-weight: bold;
+    font-size: 2rem;
+    transform: rotate(90deg);
+    transition: transform 0.3s ease-out;
+}
+.accordion-button.active::after { transform: rotate(-90deg); }
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+}
+.accordion-button.active + .accordion-content {
+    max-height: 500px;
+    padding-bottom: 10px;
+}
+.accordion-content p {
+    margin-bottom: 15px;
+    color: #f0f0f0;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+/* Sezione fissa Facebook (dentro Guru) */
+.guru-divider {
+    height: 1px;
+    margin: 15px 0;
+    border: none;
+    background-color: rgba(224, 180, 103, 0.2);
+}
+.guru-facebook-section h3 {
+    margin-bottom: 15px;
+    color: #e0b467;
+    font-size: 1.8rem;
+}
+.guru-facebook-section p {
+    margin-bottom: 20px;
+    color: #f0f0f0;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+/* =========================================
+   5. STILI PAGINE SPECIFICHE
+========================================= */
+
+/* Stili Generali Pagina Interna (es. "Cosa Faccio") */
+.page-hero {
+    padding: 80px 0 60px;
+    text-align: center;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #cb5f31;
+}
+.page-hero h1 {
+    margin-bottom: 15px;
+    color: #e0b467;
+    font-size: 3.5rem;
+}
+.page-hero .subtitle {
+    max-width: 800px;
+    margin: 0 auto;
+    color: #f0f0f0;
+    font-size: 1.3rem;
+}
+
+.content-section {
+    padding: 60px 0;
+    background-color: #3b3f3a;
+    border-bottom: 1px solid rgba(224, 180, 103, 0.2);
+}
+.content-section:last-of-type { border-bottom: none; }
+.content-section h2 {
+    margin-bottom: 40px;
+    color: #e0b467;
+    font-size: 2.2rem;
+    text-align: center;
+}
+.content-section p {
+    margin-bottom: 20px;
+    color: #f0f0f0;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Layout Pagina "Scrittore" / "Cosa Faccio" */
+.text-image-layout {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #cb5f31;
+}
+.text-image-layout .container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.text-image-layout .text-content {
+    flex: 1;
+    max-width: 60%;
+}
+.text-image-layout .text-content h2 {
+    margin-bottom: 25px;
+    font-size: 2rem;
+    text-align: left;
+}
+.text-image-layout .image-content {
+    flex: 0 0 35%;
+    max-width: 350px;
+}
+.text-image-layout .image-content img {
+    border: 2px solid #cb5f31;
+    border-radius: 12px;
+}
+
+/* Link Amazon (Pagina Scrittore) */
+.image-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+.image-content-wrapper > a {
+    display: block;
+    border: 2px solid #cb5f31;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+.image-content-wrapper > a:hover { border-color: #f5bf36; }
+.image-content-wrapper > a:hover .image-content img { transform: scale(1.03); }
+.image-content-wrapper .image-content img { transition: transform 0.3s ease; }
+
+.amazon-text-link {
+    display: inline-flex;
+    align-items: center;
+    color: #cb5f31;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+.amazon-text-link i {
+    margin-right: 8px;
+    color: #cb5f31;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+.amazon-text-link:hover,
+.amazon-text-link:hover i { color: #f5bf36; }
+
+/* Lista Servizi (Pagina "Cosa Faccio") */
+.services-offered {
+    background-color: #3b3f3a;
+    border-bottom: 1px solid #cb5f31;
+}
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.service-item {
+    padding: 30px;
+    text-align: center;
+    background-color: #1a1a1a;
+    border: 1px solid #cb5f31;
+    border-radius: 12px;
+}
+.service-item i {
+    margin-bottom: 20px;
+    color: #ab4427;
+    font-size: 2.5rem;
+}
+.service-item h3 {
+    margin-bottom: 15px;
+    color: #f5bf36;
+    font-size: 1.5rem;
+}
+.service-item p {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* CTA Finale (Pagina "Cosa Faccio") */
+.cta-section {
+    padding: 80px 0;
+    text-align: center;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #cb5f31;
+}
+.cta-section h2 {
+    margin-bottom: 20px;
+    color: #e0b467;
+    font-size: 2.8rem;
+}
+.cta-section p {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    color: #f0f0f0;
+    font-size: 1.1rem;
+}
+.cta-section .cta-button {
+    padding: 15px 30px;
+    background-color: #cb5f31;
+    color: #ffffff;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+.cta-section .cta-button:hover {
+    background-color: #f5bf36;
+    color: #1a1a1a;
+}
+
+/* Pagina Libro (Dettaglio) */
+.book-page-section {
+    padding: 3rem 0;
+    background-color: var(--colore-sfondo);
+}
 .back-link {
     display: inline-block;
     margin-bottom: 2rem;
     color: var(--colore-testo);
     font-weight: 700;
 }
-
-.back-link:hover {
-    color: var(--colore-titoli); 
-}
+.back-link:hover { color: var(--colore-titoli); }
 
 .book-cover {
     width: 100%;
-    max-width: 400px; 
-    margin: 0 auto 2rem auto; 
+    max-width: 400px;
+    margin: 0 auto 2rem;
 }
-
 .book-cover img {
-    width: 100%;
-    height: auto;
-    border: 3px solid var(--colore-accento); 
+    border: 3px solid var(--colore-accento);
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-.book-details h1 {
-    font-size: 2.8rem;
-}
-
+.book-details h1 { font-size: 2.8rem; }
 .book-details .subtitle {
-    font-size: 1.2rem;
-    font-family: var(--font-titoli);
-    color: var(--colore-testo);
     margin-top: -0.5rem;
     margin-bottom: 1.5rem;
+    color: var(--colore-testo);
+    font-family: var(--font-titoli);
+    font-size: 1.2rem;
     font-style: italic;
 }
-
 .buy-buttons {
     margin-top: 2rem;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     gap: 1rem;
 }
-
 .buy-button {
     display: inline-block;
     padding: 0.8rem 1.5rem;
@@ -600,1284 +804,411 @@ FIX HOVER ASTERISCO MENU HAMBURGER
     text-align: center;
     transition: all 0.3s ease;
 }
-
 .buy-button.primary {
-    background-color: var(--colore-titoli); 
-    color: var(--colore-sfondo); 
+    background-color: var(--colore-titoli);
+    color: var(--colore-sfondo);
 }
-
 .buy-button.primary:hover {
-    background-color: var(--colore-accento); 
+    background-color: var(--colore-accento);
     color: #fff;
 }
-
 .buy-button.secondary {
     background-color: transparent;
-    color: var(--colore-accento); 
+    color: var(--colore-accento);
     border: 2px solid var(--colore-accento);
 }
-
 .buy-button.secondary:hover {
     background-color: var(--colore-accento);
     color: #fff;
 }
 
-/* === Stili Testo Sinossi (Pagina Libro) === */
-
+/* Sinossi (Pagina Libro) */
 .intro-quote {
+    margin-bottom: 2rem !important;
+    color: var(--colore-accento);
     font-size: 1.2rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: var(--colore-accento); 
     line-height: 1.5;
-    margin-bottom: 2rem !important; 
 }
-
 .highlight-gold {
-    color: var(--colore-titoli); 
+    color: var(--colore-titoli);
     font-weight: 700;
 }
-
 .outro-quote {
+    margin-top: 2rem;
+    color: var(--colore-titoli);
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--colore-titoli); 
     line-height: 1.6;
-    margin-top: 2rem;
 }
+.book-details p { margin-bottom: 1.5rem; }
 
-.book-details p {
-    margin-bottom: 1.5rem;
+/* Pagina Estratto */
+.estratto-section {
+    padding: 3rem 0 5rem;
+    background-color: var(--colore-sfondo);
 }
-
+.estratto-titolo {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--colore-bordi);
+}
+.estratto-titolo h1 {
+    margin-bottom: 0.5rem;
+    font-size: 3.5rem;
+}
+.estratto-titolo h2 {
+    margin-bottom: 0;
+    color: var(--colore-testo);
+    font-family: var(--font-testo);
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.estratto-testo {
+    max-width: 750px;
+    margin: 0 auto;
+}
+.intro-estratto {
+    margin-bottom: 3rem;
+    padding: 1.5rem 0;
+    text-align: center;
+    color: var(--colore-accento);
+    font-family: var(--font-titoli);
+    font-size: 1.6rem;
+    font-style: italic;
+    line-height: 1.6;
+    border-top: 1px solid var(--colore-accento);
+    border-bottom: 1px solid var(--colore-accento);
+}
+.estratto-testo blockquote {
+    margin-bottom: 2rem;
+    padding: 0.5rem 0;
+    font-family: var(--font-titoli);
+    font-style: italic;
+}
+.estratto-testo blockquote p {
+    margin-bottom: 0.75rem;
+    color: var(--colore-titoli);
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+.estratto-testo blockquote p:last-child { margin-bottom: 0; }
+.estratto-testo blockquote footer {
+    margin-top: 0.5rem;
+    color: var(--colore-titoli);
+    font-family: var(--font-titoli);
+    font-size: 1.1rem;
+    font-style: italic;
+    text-align: right;
+}
+.estratto-testo p {
+    margin-bottom: 2rem;
+    color: var(--colore-testo);
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+/* Capolettera */
+.estratto-testo p:first-of-type::first-letter {
+    float: left;
+    margin-right: 0.75rem;
+    padding-top: 0.5rem;
+    color: var(--colore-titoli);
+    font-family: var(--font-titoli);
+    font-size: 4.5rem;
+    line-height: 0.9;
+}
+.estratto-cta-buttons {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid var(--colore-bordi);
+}
 
 /* =========================================
    6. CLASSI UTILITY
 ========================================= */
 
-/* === Badge "Prossima Uscita" === */
-
 .portfolio-image-wrapper.coming-soon,
 .book-cover.coming-soon {
-    position: relative; 
-    overflow: visible; 
+    position: relative;
+    overflow: visible;
 }
-
 .portfolio-image-wrapper.coming-soon::before {
     content: "PROSSIMA USCITA";
     position: absolute;
     top: 10px;
-    right: -20px; 
-    background-color: var(--colore-accento);
-    color: #fff;
+    right: -20px;
+    z-index: 10;
     padding: 5px 20px;
+    color: #fff;
+    background-color: var(--colore-accento);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    transform: rotate(45deg); 
-    transform-origin: 0% 100%; 
-    z-index: 10;
+    transform: rotate(45deg);
+    transform-origin: 0% 100%;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
-
 .book-cover.coming-soon::before {
     content: "PROSSIMA USCITA";
     position: absolute;
-    top: 20px; 
-    right: -20px; 
-    background-color: var(--colore-accento);
+    top: 20px;
+    right: -20px;
+    z-index: 10;
+    padding: 7px 25px;
     color: #fff;
-    padding: 7px 25px; 
+    background-color: var(--colore-accento);
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
     transform: rotate(45deg);
     transform-origin: 0% 100%;
-    z-index: 10;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
-
 .book-cover.coming-soon + .book-details .buy-buttons .buy-button.primary {
-    opacity: 0.5; 
-    cursor: not-allowed; 
-    pointer-events: none; 
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+/* =========================================
+   LINK PER SALTARE IL CONTENUTO (ACCESSIBILITÀ)
+========================================= */
+
+.skip-to-content {
+    position: absolute;
+    top: -999px; /* Lo sposta fuori dallo schermo */
+    left: 10px;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    
+    /* Stili per quando è visibile (in focus) */
+    background-color: var(--colore-accento);
+    color: #fff;
+    padding: 10px 15px;
+    z-index: 9999; /* Assicura che sia sopra tutto */
+    font-weight: 700;
+    border-radius: 0 0 5px 5px;
+    transition: top 0.3s ease;
 }
 
-
+.skip-to-content:focus {
+    position: absolute;
+    top: 0; /* Lo fa apparire in cima */
+    height: auto;
+    width: auto;
+    overflow: visible;
+}
 /* =========================================
    7. MEDIA QUERIES (Tablet e Desktop)
 ========================================= */
 
-/* === Tablet (min-width: 768px) === */
-@media (min-width: 768px) {
-    
-    /* --- Globale --- */
-    h1 { font-size: 3.5rem; }
-    h2 { font-size: 2.5rem; }
-    .container { width: 85%; }
-
-    /* --- Hero (Layout Orizzontale) --- */
-    .hero {
-        padding: 4rem 0; 
-        overflow: hidden;
-    }
-    
-    .hero .container {
-        flex-direction: row; 
-        align-items: center;
-        gap: 3rem;
-    }
-    
-    .hero-image-wrapper {
-        order: 0; 
-        margin-bottom: 0;
-        width: 45%;
-        max-width: 450px; 
-    }
-
-    .hero-image {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1 / 1; 
-        box-shadow: none; 
-    }
-
-    .hero-socials {
-        order: 0; 
-        justify-content: flex-start; 
-        margin-bottom: 1.5rem; 
-    }
-    
-    .hero-content {
-        order: 0; 
-        text-align: left; 
-    }
-
-    .hero h1 { 
-        font-size: 4rem; 
-    }
-    
-    /* --- Portfolio Grid (2 colonne) --- */
-    .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 2rem; 
-    }
-    .portfolio-item { 
-        margin-bottom: 0; 
-    }
-
-    /* --- About (Layout Orizzontale) --- */
-    .about { 
-        padding: 3rem 0; 
-    }
-    .about .container {
-        display: flex;
-        align-items: center;
-        gap: 3rem;
-        text-align: left;
-    }
-    .profile-pic {
-        flex-shrink: 0;
-        width: 200px;
-        height: 200px;
-        margin: 0;
-    }
-    .about p { 
-        max-width: none; 
-    }
-
-    /* === [CORRETTO] Stili DESKTOP per Footer === */
-    .footer-bottom {
-        flex-direction: row;     /* Orizzontale */
-        justify-content: center; 
-        align-items: center;     /* Allinea verticalmente */
-        gap: 2rem;
-    }
-
-    .copyright {
-        margin-top: 0; /* Azzera il margine mobile */
-    }
-    
-    /* --- Pagina Libro (Layout 2 colonne) --- */
-    .book-page-wrapper {
-        display: flex;
-        gap: 3rem;
-        align-items: flex-start; 
-    }
-
-    .book-cover {
-        flex-basis: 40%; 
-        flex-shrink: 0;
-        margin: 0; 
-        position: sticky;
-        top: 100px;
-    }
-
-    .book-details {
-        flex-basis: 60%; 
-    }
-
-    .book-details h1 {
-        font-size: 3.5rem;
-    }
-    
-    .buy-buttons {
-        flex-direction: row; 
-    }
-
-    /* === [CORRETTO] Stili DESKTOP per Estratto Pulsanti === */
-    .estratto-cta-buttons {
-        flex-direction: row; 
-        justify-content: center;
-    }
-    
-    .estratto-cta-buttons .buy-button {
-        min-width: 200px;
-    }
-
-} /* --- Fine media query 768px --- */
-
-
-/* === Desktop (min-width: 1024px) === */
-@media (min-width: 1024px) {
-    
-    /* --- Hero --- */
-    .hero {
-        padding: 5rem 0; 
-    }
-    .hero-image-wrapper {
-        max-width: 500px; 
-    }
-    
-    /* --- Portfolio Grid (4 colonne) --- */
-    .portfolio-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem; 
-    }
-    
-    /* --- About --- */
-    .profile-pic {
-        width: 250px;
-        height: 250px;
-    }
-
-} /* --- Fine media query 1024px --- */
-
-
-/* =========================================
-   8. PAGINA ESTRATTO (Nuova Sezione)
-========================================= */
-
-.estratto-section {
-    padding: 3rem 0 5rem 0;
-    background-color: var(--colore-sfondo);
-}
-
-.estratto-titolo {
-    text-align: center;
-    margin-bottom: 3rem;
-    border-bottom: 1px solid var(--colore-bordi);
-    padding-bottom: 2rem;
-}
-
-.estratto-titolo h1 {
-    font-size: 3.5rem;
-    color: var(--colore-titoli);
-    margin-bottom: 0.5rem;
-}
-
-.estratto-titolo h2 {
-    font-size: 1.5rem;
-    color: var(--colore-testo);
-    font-family: var(--font-testo);
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 0;
-}
-
-.estratto-testo {
-    max-width: 750px; 
-    margin: 0 auto; 
-}
-
-/* === [CORRETTO] Stile per la citazione (colore) === */
-.intro-estratto {
-    font-family: var(--font-titoli);
-    font-size: 1.6rem;
-    font-style: italic;
-    color: var(--colore-accento); /* Era --colore-teso (typo) */
-    line-height: 1.6;
-    text-align: center;
-    padding: 1.5rem 0;
-    margin-bottom: 3rem;
-    border-top: 1px solid var(--colore-accento);
-    border-bottom: 1px solid var(--colore-accento);
-}
-
-/* === Stili Citazioni (Blockquote) === */
-.estratto-testo blockquote {
-    margin-bottom: 2rem; 
-    padding: 0.5rem 0;
-    font-family: var(--font-titoli);
-    font-style: italic;
-}
-
-.estratto-testo blockquote p {
-    color: var(--colore-titoli);
-    font-size: 1.25rem;
-    line-height: 1.5; /* Interlinea ridotta */
-    margin-bottom: 0.75rem;
-}
-
-.estratto-testo blockquote p:last-child {
-    margin-bottom: 0;
-}
-
-.estratto-testo blockquote footer {
-    font-family: var(--font-titoli);
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--colore-titoli);
-    text-align: right;
-    margin-top: 0.5rem;
-}
-
-/* === Stile Paragrafi (leggibilità) === */
-.estratto-testo p {
-    font-size: 1.15rem; /* Aumentato per leggibilità */
-    line-height: 1.8;
-    color: var(--colore-testo);
-    margin-bottom: 2rem;
-}
-
-/* === Drop Cap (Capolettera) === */
-.estratto-testo p:first-of-type::first-letter {
-    color: var(--colore-titoli);
-    font-size: 4.5rem; /* Aumentato per estetica */
-    font-family: var(--font-titoli);
-    float: left;
-    line-height: 0.9;
-    margin-right: 0.75rem;
-    padding-top: 0.5rem;
-}
-
-/* Media Query per Mobile (Estratto) */
-@media (max-width: 768px) {
-    .estratto-titolo h1 {
-        font-size: 2.5rem;
-    }
-    .estratto-titolo h2 {
-        font-size: 1rem;
-    }
-    .intro-estratto {
-        font-size: 1.3rem;
-    }
-}
-
-/* === Stile MOBILE per i pulsanti a fondo pagina === */
-.estratto-cta-buttons {
-    display: flex;
-    flex-direction: column; 
-    gap: 1rem;
-    align-items: center;
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--colore-bordi);
-}
-
-/* Nota: la versione DESKTOP di .estratto-cta-buttons
-   è corretta e si trova nella media query (Sezione 7) */
-   .social-links {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.2rem;
-}
-
-.social-links a {
-  font-size: 1.3rem;
-  color: var(--colore-testo);
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.social-links a:hover {
-  color: var(--colore-accento);
-  transform: scale(1.1);
-}
-/* === Blocca lo scroll quando il menu è aperto === */
-body.no-scroll {
-    overflow: hidden;
-}
-/* =========================================
-   9. SEZIONE PROMO FACEBOOK (Nuova)
-========================================= */
-
-.facebook-promo {
-    /* Usiamo lo stesso stile del footer e della hero */
-    background-color: var(--colore-sfondo-sezione); 
-    padding: 5rem 0;
-    text-align: center;
-    
-    /* Aggiungiamo un bordo rosso per separarla */
-    border-top: 1px solid var(--colore-accento);
-}
-
-.facebook-promo h2 {
-    font-size: 2.8rem; /* Titolo grande e d'impatto */
-    margin-bottom: 1.5rem;
-}
-
-.facebook-promo p {
-    font-size: 1.15rem; /* Stessa dimensione del testo hero */
-    color: var(--colore-testo);
-    max-width: 700px; /* Non troppo largo */
-    margin: 0 auto 2.5rem auto; /* Centrato e con spazio sotto */
-    line-height: 1.7;
-}
-
-/* Riusiamo lo stile .cta-button che abbiamo già */
-.facebook-promo .cta-button {
-    /* Possiamo renderlo leggermente più grande */
-    padding: 1rem 2rem;
-    font-size: 1rem;
-}
-
-/* Adattiamo per il mobile */
-@media (max-width: 768px) {
-    .facebook-promo {
-        padding: 4rem 0;
-    }
-    .facebook-promo h2 {
-        font-size: 2.2rem;
-    }
-}
-/* =========================================
-   10. SEZIONE CHARACTER FEATURE (Nuova)
-========================================= */
-
-.character-feature {
-    padding: 5rem 0;
-    /* [MODIFICATO] Usiamo lo sfondo verde */
-    background-color: var(--colore-sfondo-sezione); /* <-- VERDE */
-    border-top: 1px solid var(--colore-accento);
-}
-
-.character-feature h2 {
-    text-align: center;
-    font-size: 2.8rem;
-    margin-bottom: 3rem;
-    color: var(--colore-titoli); /* Giallo */
-}
-
-/* === Layout a 2 Colonne (Mobile-First) === */
-
-.feature-wrapper {
-    /* Su mobile è tutto impilato */
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.feature-image {
-    /* [MODIFICATO] Rimuoviamo gli stili per il cerchio */
-    width: auto; /* Torna alla larghezza automatica */
-    height: auto; /* Torna all'altezza automatica */
-    border-radius: 0; /* Rimuove l'arrotondamento */
-    overflow: visible; /* Rende visibile ciò che esce, anche se ora non serve */
-    flex-shrink: 0; 
-    
-    /* Il bordo rosso rimane intorno all'immagine */
-    border: 3px solid var(--colore-accento); 
-
-    /* Centra il contenitore su mobile */
-    margin: 0 auto 2rem auto; 
-}
-
-.feature-image img {
-    /* L'immagine ora si adatta al contenitore rettangolare */
-    width: 100%;
-    height: auto; /* Altezza automatica per mantenere le proporzioni */
-    object-fit: contain; /* Assicura che l'immagine sia completamente visibile */
-    border: none; 
-    border-radius: 0; 
-}
-
-.feature-content h3 {
-    font-size: 1.8rem;
-    color: var(--colore-titoli); /* Giallo */
-    margin-bottom: 1rem;
-}
-
-.feature-content p {
-    font-size: 1.1rem;
-    color: var(--colore-testo); /* Grigio */
-    line-height: 1.7;
-    margin-bottom: 2rem;
-}
-
-/* Pulsante (usa lo stile .secondary che già esiste) */
-.feature-content .cta-button.secondary {
-    display: inline-block; /* Assicura che sia un blocco */
-    background-color: transparent;
-    color: var(--colore-accento);
-    border: 2px solid var(--colore-accento);
-}
-.feature-content .cta-button.secondary:hover {
-    background-color: var(--colore-accento);
-    color: #fff;
-}
-
-
-/* === Layout Desktop (min-width: 768px) === */
-@media (min-width: 768px) {
-    
-    .feature-wrapper {
-        flex-direction: row; 
-        align-items: center; 
-        gap: 3rem;
-    }
-    
-    .feature-image {
-        flex-basis: auto; /* [MODIFICATO] La base si adatta all'immagine */
-        max-width: 350px; /* Imposta una larghezza massima per non farla troppo grande */
-        margin: 0; 
-    }
-    
-    .feature-content {
-        flex-grow: 1; 
-    }
-}
-/* === [NUOVO] Stile per il box di testo === */
-.feature-content {
-    /* Usiamo lo sfondo nero base per il box */
-    background-color: var(--colore-sfondo);
-    
-    /* Spaziatura interna per non far toccare il testo ai bordi */
-    padding: 2.5rem; 
-    
-    /* Angoli stondati */
-    border-radius: 8px;
-    border: 1px solid var(--colore-accento);
-}
-/* --- STILI PER LA SEZIONE "THE GURU" (ACCORDION + SEZ. FISSA) --- */
-
-/* Stile per i bottoni (i titoli cliccabili) */
-.accordion-button {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem; /* Leggermente più piccolo per bilanciare */
-    font-weight: 700;
-    color: #e0b467;
-    text-align: left;
-    background-color: transparent;
-    border: none;
-    padding: 18px 0;
-    width: 100%;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-/* Applica l'effetto hover SOLO su dispositivi con un mouse (non-touch) */
-@media (hover: hover) {
-    .accordion-button:hover {
-        color: #ab4427;
-    }
-}
-
-/* Stile per il pannello con il contenuto */
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-}
-
-.accordion-content p {
-    font-family: 'Lato', sans-serif;
-    color: #f0f0f0;
-    font-weight: 300;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-/* Stile per quando il pannello è ATTIVO (aperto) */
-.accordion-button.active + .accordion-content {
-    max-height: 500px; /* Un valore alto per farci stare il testo */
-    padding-bottom: 10px; 
-}
-
-/* --- MODIFICA FRECCE --- */
-/* Stile per l'icona a freccia (chiusa) */
-.accordion-button::after {
-    content: '\203A'; /* Codice per il simbolo '›' (chevron) */
-    color: #e0b467;
-    font-weight: bold;
-    font-size: 2rem;
-    float: right;
-    margin-left: 5px;
-    transform: rotate(90deg); /* Punta in basso */
-    transition: transform 0.3s ease-out;
-}
-
-/* Stile per l'icona a freccia (aperta) */
-.accordion-button.active::after {
-    transform: rotate(-90deg); /* Punta in alto */
-}
-/* --- FINE MODIFICA FRECCE --- */
-
-
-/* --- STILI PER LA SEZIONE FISSA FACEBOOK --- */
-
-/* Stile per il separatore */
-.guru-divider {
-    border: none;
-    height: 1px;
-    background-color: rgba(224, 180, 103, 0.2); /* Oro traslucido */
-    margin: 15px 0;
-}
-
-/* Stile per il titolo fisso */
-.guru-facebook-section h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #e0b467;
-    margin-bottom: 15px;
-}
-
-/* Stile per il paragrafo fisso */
-.guru-facebook-section p {
-    font-family: 'Lato', sans-serif;
-    color: #f0f0f0;
-    font-weight: 300;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-/* --- RESPONSIVE FIX PER LE OPERE (MOBILE) --- */
-
-/* Applica queste regole solo su schermi piccoli (fino a 768px) */
+/* Mobile (max-width: 768px) */
 @media (max-width: 768px) {
 
-    /* 1. Crea una griglia a 2 colonne per i libri */
-    .portfolio-grid {
-        /* Invece di una colonna (default), ne usiamo due */
-        grid-template-columns: repeat(2, 1fr);
-        
-        /* Riduciamo lo spazio tra le card */
-        gap: 15px;
-    }
-
-    /* 2. Riduci il testo all'interno delle card */
-    .portfolio-item h3 {
-        /* Dimensione del titolo del libro (es. L'Ombra) */
-        font-size: 1.1rem; 
-    }
-
-    .portfolio-item p {
-        /* Dimensione del sottotitolo */
-        font-size: 0.85rem;
-        margin-bottom: 10px;
-        line-height: 1.4; /* Migliora la leggibilità */
-    }
-
-    /* 3. Riduci il bottone "Scopri di più" */
-    .portfolio-item .portfolio-button {
-        padding: 8px 12px;
-        font-size: 0.8rem;
-    }
-}
-/* --- RESPONSIVE FIX V2 PER LE OPERE (MOBILE) --- */
-/* Questo sostituisce il blocco di prima */
-
-@media (max-width: 768px) {
-
-    /* 1. Forza la griglia a 2 colonne (con selettore più specifico) */
+    /* Portfolio Homepage (2 colonne) */
     section.portfolio .portfolio-grid {
-        display: grid; /* Assicura che sia in modalità griglia */
-        grid-template-columns: repeat(2, 1fr); /* Forza le 2 colonne */
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
-
-    /* 2. Riduci il testo (con selettore più specifico) */
-    section.portfolio .portfolio-item h3 {
-        font-size: 1.1rem; 
-    }
-
+    section.portfolio .portfolio-item h3 { font-size: 1.1rem; }
     section.portfolio .portfolio-item p {
-        font-size: 0.85rem;
         margin-bottom: 10px;
+        font-size: 0.85rem;
         line-height: 1.4;
     }
-
-    /* 3. Riduci il bottone (con selettore più specifico) */
     section.portfolio .portfolio-item .portfolio-button {
         padding: 8px 12px;
         font-size: 0.8rem;
     }
-}
-/*
-================================================
-SEZIONE "THE GURU" - CODICE CSS PULITO E FINALE
-================================================
-*/
 
-/* 1. Layout a 2 Colonne (Contenitore Principale) */
-.feature-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* Allinea in alto */
-    gap: 40px; /* Spazio tra immagine e testo */
-    flex-wrap: wrap; /* Per andare a capo su mobile */
-}
+    /* Estratto (Mobile) */
+    .estratto-titolo h1 { font-size: 2.5rem; }
+    .estratto-titolo h2 { font-size: 1rem; }
+    .intro-estratto { font-size: 1.3rem; }
 
-/* 2. Colonna Sinistra (Immagine Statica) */
-.feature-wrapper .feature-image {
-    width: 45%; /* Occupa il 45% */
-    min-width: 300px; /* Larghezza minima */
-    border-radius: 20px;
-}
+    /* Promo Facebook (Mobile) */
+    .facebook-promo { padding: 4rem 0; }
+    .facebook-promo h2 { font-size: 2.2rem; }
 
-/* 3. Stile dell'Immagine Statica */
-.feature-wrapper .feature-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 20px; /* Angoli stondati */
-    /* Aggiungo un bordo come da screenshot */
-    border: 1px solid rgba(224, 180, 103, 0.3);
-}
-
-/* 4. Colonna Destra (Accordion Box) */
-.feature-wrapper .feature-content {
-    width: 50%;
-    /* Stili del box (probabilmente già presenti, ma li rimetto per sicurezza) */
-    background-color: #1a1a1a; 
-    padding: 30px;
-    border-radius: 20px;
-}
-
-/* 5. Logica Accordion: Bottoni */
-.accordion-button {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #e0b467;
-    text-align: left;
-    background-color: transparent;
-    border: none;
-    padding: 18px 0;
-    width: 100%;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-/* 6. Fix hover per non-touch */
-@media (hover: hover) {
-    .accordion-button:hover {
-        color: #ffffff;
-    }
-}
-
-/* 7. Logica Accordion: Frecce */
-.accordion-button::after {
-    content: '\203A'; /* Chevron */
-    color: #e0b467;
-    font-weight: bold;
-    font-size: 2rem;
-    float: right;
-    margin-left: 5px;
-    transform: rotate(90deg); /* Punta in basso */
-    transition: transform 0.3s ease-out;
-}
-
-.accordion-button.active::after {
-    transform: rotate(-90deg); /* Punta in alto */
-}
-
-/* 8. Logica Accordion: Contenuto */
-.accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out;
-}
-
-.accordion-content p {
-    font-family: 'Lato', sans-serif;
-    color: #f0f0f0;
-    font-weight: 300;
-    line-height: 1.6;
-    margin-bottom: 15px;
-}
-
-.accordion-button.active + .accordion-content {
-    max-height: 500px; /* Valore ampio */
-    padding-bottom: 10px; 
-}
-
-/* 9. Sezione Fissa Facebook */
-.guru-divider {
-    border: none;
-    height: 1px;
-    background-color: rgba(224, 180, 103, 0.2);
-    margin: 15px 0;
-}
-
-.guru-facebook-section h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #e0b467;
-    margin-bottom: 15px;
-}
-
-.guru-facebook-section p {
-    font-family: 'Lato', sans-serif;
-    color: #f0f0f0;
-    font-weight: 300;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-/* 10. Responsività (Mobile) */
-@media (max-width: 768px) {
+    /* Sezione Guru (Mobile) */
     .feature-wrapper {
-        flex-direction: column; /* Impila le colonne */
+        flex-direction: column;
         gap: 30px;
     }
-
-    /* Su mobile, entrambe le colonne occupano il 100% */
     .feature-wrapper .feature-image,
     .feature-wrapper .feature-content {
         width: 100%;
         min-width: auto;
     }
 }
-/* --- FINE SEZIONE GURU --- */
 
-/* --- Stile per il Titolo Box "The Guru" --- */
+/* Tablet (min-width: 768px) */
+@media (min-width: 768px) {
 
-.character-feature h2 {
-    /* Dimensiona il box sul testo */
-    width: max-content; 
-    max-width: 100%;
-    
-    /* Centra il box */
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
-    
-    /* Aggiunge spazio interno */
-    padding: 10px 30px;
-    
-    /* Colore di sfondo */
-    background-color: #1a1a1a; 
-    
-    /* MODIFICA: Bordo arancio solido (simile ai bottoni) */
-    border: 2px solid #cb5f31; 
-    
-    border-radius: 12px;
-    
-    /* Spazio sotto, prima del contenuto */
-    margin-bottom: 40px; 
-}
-/*
-================================================
-SEZIONE "COSA FACCIO" (Servizi)
-================================================
-*/
+    /* Globale */
+    h1 { font-size: 3.5rem; }
+    h2 { font-size: 2.5rem; }
+    .container { width: 85%; }
 
-.services {
-    padding: 60px 0;
-    background-color: #1a1a1a;
-    border-top: 1px solid #cb5f31;
-    border-bottom: 1px solid #cb5f31;
-}
+    /* Footer */
+    .footer-bottom {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+    .copyright { margin-top: 0; }
 
-.services h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #CBA135;
-    text-align: center;
-    margin-bottom: 50px;
-}
+    /* Hero (Homepage) */
+    .hero {
+        padding: 4rem 0;
+        overflow: hidden;
+    }
+    .hero .container {
+        flex-direction: row;
+        align-items: center;
+        gap: 3rem;
+    }
+    .hero-image-wrapper {
+        order: 0;
+        margin-bottom: 0;
+        width: 45%;
+        max-width: 450px;
+    }
+    .hero-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        box-shadow: none;
+    }
+    .hero-socials {
+        order: 0;
+        justify-content: flex-start;
+        margin-bottom: 1.5rem;
+    }
+    .hero-content {
+        order: 0;
+        text-align: left;
+    }
+    .hero h1 { font-size: 4rem; }
 
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    align-items: center; /* Allinea le card al centro verticalmente */
-}
-
-/* Stile per la card */
-.services-grid .service-card {
-    background-color: #2e382e;
-    border-radius: 12px;
-    text-align: center;
-    border: 2px solid #ab4427;
-    
-    /* === MODIFICATO: Padding verticale ridotto === */
-    padding: 20px 20px; 
-
-    text-decoration: none;
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-}
-
-.services-grid .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    border-color: #f5bf36;
-    cursor: pointer;
-}
-
-/* Icona */
-.services-grid .service-card i:not(.read-more-arrow i) {
-    font-size: 2rem;
-    color: #ab4427;
-    /* === MODIFICATO: Margine inferiore ridotto === */
-    margin-bottom: 10px; 
-}
-
-/* Titolo h3 */
-.services-grid .service-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #f5bf36;
-    margin-bottom: 10px;
-}
-
-/* Paragrafo p */
-.services-grid .service-card p {
-    font-family: 'Lato', sans-serif;
-    color: #f0f0f0;
-    font-weight: 300;
-    line-height: 1.5;
-    font-size: 0.85rem;
-    /* === MODIFICATO: Margine inferiore ridotto === */
-    margin-bottom: 15px; 
-}
-
-/* Freccia "Scopri di più" */
-.read-more-arrow {
-    display: block;
-    text-align: center;
-    font-size: 1.3rem;
-    color: #CBA135;
-    transition: color 0.3s;
-    /* === MODIFICATO: Margine superiore ridotto === */
-    margin-top: 5px; 
-}
-
-.service-card:hover .read-more-arrow {
-    color: #ab4427;
-}
-
-
-/* --- RESPONSIVITÀ PER SERVIZI --- */
-
-@media (max-width: 992px) {
-    .services-grid {
+    /* Portfolio Grid (Homepage) */
+    .portfolio-grid {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-        align-items: start; /* Allinea in alto su mobile */
+        gap: 2rem;
     }
-}
+    .portfolio-item { margin-bottom: 0; }
 
-@media (max-width: 576px) {
-    .service-card {
-        padding: 20px 15px;
+    .page-hero h1 { font-size: 2rem; }
+
+    /* Pagina Libro (Dettaglio) */
+    .book-page-wrapper {
+        display: flex;
+        align-items: flex-start;
+        gap: 3rem;
     }
-
-    .services-grid .service-card i:not(.read-more-arrow i) {
-        font-size: 1.8rem;
-        margin-bottom: 10px;
+    .book-cover {
+        flex-basis: 100%;
+        flex-shrink: 0;
+        margin: 0;
+        position: sticky;
+        top: 100px;
     }
+    .book-details { flex-basis: 50%; }
+    .book-details h1 { font-size: 3.5rem; }
 
-    .service-card h3 {
-        font-size: 1.1rem;
-    }
-
-    .service-card p {
-        font-size: 0.8rem;
-        margin-bottom: 15px;
-    }
-    
-    .read-more-arrow {
-        font-size: 1rem;
-        margin-top: 5px;
-    }
-    
-    .services-grid {
-        gap: 20px;
-    }
-}
-/*
-================================================
-STILI GENERALI PER LE PAGINE INTERNE
-================================================
-*/
-
-/* Link "Cosa faccio" attivo nell'header */
-.main-nav .current-page {
-    color: #cb5f31; /* Colore arancio per il link attivo */
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
-
-/* Hero Section generica per le pagine interne */
-.page-hero {
-    background-color: #1a1a1a; /* Sfondo scuro */
-    padding: 80px 0 60px; /* Più spazio in alto */
-    text-align: center;
-    border-bottom: 1px solid #cb5f31; /* Bordo arancio sotto */
-}
-
-.page-hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    color: #e0b467; /* Oro */
-    margin-bottom: 15px;
-    line-height: 1.2;
-}
-
-.page-hero .subtitle {
-    font-family: 'Lato', sans-serif;
-    font-size: 1.3rem;
-    color: #f0f0f0;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-/* Sezione generale di contenuto */
-.content-section {
-    padding: 60px 0;
-    background-color: #3b3f3a; /* Sfondo verde scuro */
-    border-bottom: 1px solid rgba(224, 180, 103, 0.2); /* Sottile separatore */
-}
-
-.content-section:last-of-type {
-    border-bottom: none; /* Rimuove il bordo inferiore all'ultima sezione di contenuto */
-}
-
-.content-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    color: #e0b467; /* Oro */
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.content-section p {
-    font-family: 'Lato', sans-serif;
-    font-size: 1rem;
-    color: #f0f0f0;
-    line-height: 1.7;
-    margin-bottom: 20px;
-}
-
-/* Layout Testo + Immagine (sezione "L'Arte della Parola") */
-.text-image-layout {
-    background-color: #1a1a1a; /* Sfondo nero per questa sezione */
-    border-bottom: 1px solid #cb5f31; /* Bordo arancio sotto */
-}
-
-.text-image-layout .container {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-}
-
-.text-image-layout .text-content {
-    flex: 1; /* Prende lo spazio disponibile */
-    max-width: 60%;
-}
-
-.text-image-layout .text-content h2 {
-    text-align: left;
-    margin-bottom: 25px;
-    font-size: 2rem;
-}
-
-.text-image-layout .image-content {
-    flex: 0 0 35%; /* L'immagine occupa una larghezza fissa */
-    max-width: 350px;
-}
-
-.text-image-layout .image-content img {
-    width: 100%;
+    .book-cover img {
+    width: 100%; /* Fa sì che l'immagine riempia il suo contenitore */
     height: auto;
-    border-radius: 12px;
-    /* === MODIFICATO: Bordo arancio più evidente === */
-    border: 2px solid #cb5f31; 
 }
 
-/* Sezione Servizi Offerti (4 colonne) */
-.services-offered {
-    background-color: #3b3f3a;
-    border-bottom: 1px solid #cb5f31; /* Bordo arancio sotto */
-}
+    .buy-buttons { flex-direction: row; }
 
-.services-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 colonne su desktop */
-    gap: 30px;
-    max-width: 900px; /* Limita la larghezza della griglia */
-    margin: 0 auto; /* Centra la griglia */
-}
-
-.service-item {
-    background-color: #1a1a1a; /* Colore simile alle card della home */
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid #cb5f31;
-    text-align: center;
-}
-
-.service-item i {
-    font-size: 2.5rem;
-    color: #ab4427; /* Arancio per le icone */
-    margin-bottom: 20px;
-}
-
-.service-item h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: #f5bf36; /* Oro per i titoli */
-    margin-bottom: 15px;
-}
-
-.service-item p {
-    font-size: 0.95rem;
-    color: #e0e0e0;
-    line-height: 1.6;
-    margin-bottom: 0;
-}
-
-/* Sezione Call-to-Action */
-.cta-section {
-    background-color: #1a1a1a; /* Sfondo scuro */
-    padding: 80px 0;
-    text-align: center;
-    border-bottom: 1px solid #cb5f31; /* Bordo arancio sotto */
-}
-
-.cta-section h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    color: #e0b467;
-    margin-bottom: 20px;
-}
-
-.cta-section p {
-    font-family: 'Lato', sans-serif;
-    font-size: 1.1rem;
-    color: #f0f0f0;
-    max-width: 700px;
-    margin: 0 auto 40px;
-}
-
-.cta-section .cta-button {
-    background-color: #cb5f31;
-    color: #ffffff;
-    padding: 15px 30px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-family: 'Lato', sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    transition: background-color 0.3s ease;
-}
-
-.cta-section .cta-button:hover {
-    background-color: #f5bf36;
-    color: #1a1a1a;
-}
-
-
-/*
-================================================
-RESPONSIVITÀ PER LE PAGINE INTERNE
-================================================
-*/
-
-@media (max-width: 1200px) {
-    .page-hero h1 {
-        font-size: 3rem;
+    /* Estratto (Pulsanti) */
+    .estratto-cta-buttons {
+        flex-direction: row;
+        justify-content: center;
     }
-    .page-hero .subtitle {
-        font-size: 1.2rem;
-    }
-    .cta-section h2 {
-        font-size: 2.5rem;
-    }
-}
+    .estratto-cta-buttons .buy-button { min-width: 200px; }
 
+    /* Sezione Servizi (Homepage): resta 4 colonne */
+
+    /* Sezione Servizi (Pagina "Cosa Faccio"): resta 2 colonne */
+} /* Fine media query 768px */
+
+/* Desktop (min-width: 992px) */
+@media (min-width: 992px) {
+    /* Servizi (Homepage): resta 4 colonne */
+    /* Servizi (Pagina "Cosa Faccio"): resta 2 colonne */
+    /* Pagine interne per schermi più piccoli: non applicabile qui */
+} /* Fine media query 992px */
+
+/* Desktop (min-width: 1024px) */
+@media (min-width: 1024px) {
+    .hero { padding: 5rem 0; }
+    .hero-image-wrapper { max-width: 500px; }
+
+    /* Portfolio Grid (4 colonne) */
+    .portfolio-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+} /* Fine media query 1024px */
+
+/* Media Query Specifiche (PAGINE INTERNE) */
 @media (max-width: 992px) {
-    .page-hero {
-        padding: 60px 0 40px;
-    }
-    .page-hero h1 {
-        font-size: 2.5rem;
-    }
-    .page-hero .subtitle {
-        font-size: 1.1rem;
-    }
+    .page-hero { padding: 60px 0 40px; }
+    .page-hero h1 { font-size: 2.5rem; }
+    .page-hero .subtitle { font-size: 1.1rem; }
 
-    .content-section {
-        padding: 40px 0;
-    }
+    .content-section { padding: 40px 0; }
     .content-section h2 {
-        font-size: 1.8rem;
         margin-bottom: 30px;
+        font-size: 1.8rem;
     }
-    .content-section p {
-        font-size: 0.95rem;
-    }
+    .content-section p { font-size: 0.95rem; }
 
     .text-image-layout .container {
-        flex-direction: column; /* Impila testo e immagine su tablet */
+        flex-direction: column;
         gap: 30px;
     }
     .text-image-layout .text-content,
     .text-image-layout .image-content {
-        flex: none; /* Rimuovi la flessibilità */
-        max-width: 100%; /* Occupano tutta la larghezza */
+        flex: none;
+        max-width: 100%;
     }
-    .text-image-layout .text-content h2 {
-        text-align: center;
-    }
+    .text-image-layout .text-content h2 { text-align: center; }
 
     .services-list {
-        grid-template-columns: repeat(1, 1fr); /* Una colonna su tablet/mobile */
+        grid-template-columns: 1fr;
         max-width: 500px;
     }
-
-    .service-item {
-        padding: 25px;
-    }
+    .service-item { padding: 25px; }
     .service-item i {
-        font-size: 2rem;
         margin-bottom: 15px;
+        font-size: 2rem;
     }
     .service-item h3 {
-        font-size: 1.3rem;
         margin-bottom: 10px;
+        font-size: 1.3rem;
     }
-    .service-item p {
-        font-size: 0.9rem;
-    }
+    .service-item p { font-size: 0.9rem; }
 
-    .cta-section {
-        padding: 60px 0;
-    }
-    .cta-section h2 {
-        font-size: 2rem;
-    }
-    .cta-section p {
-        font-size: 1rem;
-    }
+    .cta-section { padding: 60px 0; }
+    .cta-section h2 { font-size: 2rem; }
+    .cta-section p { font-size: 1rem; }
     .cta-section .cta-button {
         padding: 12px 25px;
         font-size: 1rem;
@@ -1885,289 +1216,199 @@ RESPONSIVITÀ PER LE PAGINE INTERNE
 }
 
 @media (max-width: 576px) {
-    .page-hero h1 {
-        font-size: 2rem;
-    }
-    .page-hero .subtitle {
-        font-size: 1rem;
-    }
-    .content-section h2 {
-        font-size: 1.6rem;
-    }
-    .content-section p {
-        font-size: 0.9rem;
-    }
-    .service-item h3 {
-        font-size: 1.2rem;
-    }
-    .service-item p {
-        font-size: 0.85rem;
-    }
-    .cta-section h2 {
-        font-size: 1.8rem;
-    }
-    .cta-section p {
-        font-size: 0.9rem;
-    }
-}
-/*
-================================================
-STILE LINK IMMAGINE + TESTO AMAZON (pagina-scrittore.html)
-================================================
-*/
+    .page-hero h1 { font-size: 2rem; }
+    .page-hero .subtitle { font-size: 1rem; }
 
-/* Il wrapper che contiene immagine cliccabile e link sotto */
-.image-content-wrapper {
-    display: flex;
-    flex-direction: column; /* Impila immagine e link verticalmente */
-    align-items: center; /* Centra orizzontalmente */
-    gap: 15px; /* Spazio tra immagine e link testuale */
-    text-align: center; /* Per centrare il testo del link */
+    .content-section h2 { font-size: 1.6rem; }
+    .content-section p { font-size: 0.9rem; }
+
+    .service-item h3 { font-size: 1.2rem; }
+    .service-item p { font-size: 0.85rem; }
+
+    .cta-section h2 { font-size: 1.8rem; }
+    .cta-section p { font-size: 0.9rem; }
 }
 
-/* Stile per l'immagine cliccabile */
-.image-content-wrapper > a { /* Seleziona il link che avvolge l'immagine */
-    display: block; /* Per assicurare che il bordo e il contenitore si comportino bene */
-    border-radius: 12px;
-    overflow: hidden; /* Assicura che l'immagine segua il border-radius */
-    border: 2px solid #cb5f31; /* Bordo arancio */
-    transition: border-color 0.3s ease;
-}
+/* =========================================
+   8. LIGHTBOX PERSONALIZZATO (SATINATO)
+========================================= */
 
-.image-content-wrapper > a:hover {
-    border-color: #f5bf36; /* Oro in hover */
-}
-
-.image-content-wrapper .image-content { /* Contenitore dell'immagine */
-    /* Nessun flex, si comporta come un blocco normale all'interno del link */
-    width: 100%; /* L'immagine riempie il suo contenitore */
-    height: auto;
-}
-
-.image-content-wrapper .image-content img {
-    display: block; /* Rimuove lo spazio extra sotto l'immagine */
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    transition: transform 0.3s ease; /* Effetto zoom on hover */
-}
-
-.image-content-wrapper > a:hover .image-content img {
-    transform: scale(1.03); /* Lieve zoom sull'immagine in hover */
-}
-
-
-/* Stile per il link testuale "Scopri i miei libri su Amazon" */
-.amazon-text-link {
-    display: inline-flex; /* Per allineare icona e testo */
-    align-items: center;
-    color: #cb5f31; /* Arancio per il testo del link */
-    text-decoration: none;
-    font-family: 'Lato', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-}
-
-.amazon-text-link i {
-    margin-right: 8px; /* Spazio tra icona e testo */
-    font-size: 1.1rem;
-    color: #cb5f31; /* Arancio per l'icona */
-    transition: color 0.3s ease;
-}
-
-.amazon-text-link:hover {
-    color: #f5bf36; /* Oro in hover per il testo */
-}
-
-.amazon-text-link:hover i {
-    color: #f5bf36; /* Oro in hover per l'icona */
-}
-
-
-/* Responsività (solo piccoli ritocchi se necessario) */
-@media (max-width: 992px) {
-    .image-content-wrapper {
-        gap: 10px; /* Riduce lo spazio su tablet */
-    }
-    .amazon-text-link {
-        font-size: 0.95rem;
-    }
-    .amazon-text-link i {
-        font-size: 1rem;
-    }
-}
-
-
-
-/*STILI PORTFOLIO LIGHTBOX PAGINE INTERNE
-
-/* 1. Il Modal (Nascosto) */
-.lightbox-modal {
+/* Overlay Sfondo */
+.lightbox-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: 1000;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-
-    /* --- L'EFFETTO SATINATO "FROSTED GLASS" --- */
-    background-color: rgba(26, 26, 26, 0.5); /* Sfondo scuro semi-trasparente */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    
+    background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s, visibility 0.4s;
-    overflow-y: auto; /* Permette di scrollare il modal se il contenuto è lungo */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.lightbox-modal.open {
+/* Contenitore Principale (Satinato) */
+.lightbox-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 900px;
+    max-height: 85vh;
+    transform: translate(-50%, -50%) scale(0.9);
+    background-color: rgba(46, 56, 46, 0.7);
+    backdrop-filter: blur(15px) saturate(120%);
+    -webkit-backdrop-filter: blur(15px) saturate(120%);
+    border: 2px solid var(--colore-accento);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+/* Stato visibile */
+.lightbox-overlay.is-open,
+.lightbox-container.is-open {
     opacity: 1;
     visibility: visible;
 }
-
-/* 2. Il Contenitore Interno del Portfolio */
-.lightbox-portfolio-content {
-    background-color: #2c2c2c;
-    border-radius: 12px;
-    border: 1px solid #cb5f31;
-    padding: 30px 40px;
-    width: 100%;
-    max-width: 1100px; /* Larghezza massima del modal */
-    margin: auto; /* Per centrarlo */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    
-    transform: scale(0.95);
-    transition: transform 0.4s ease;
-}
-.lightbox-modal.open .lightbox-portfolio-content {
-    transform: scale(1);
+.lightbox-container.is-open {
+    transform: translate(-50%, -50%) scale(1);
 }
 
-.lightbox-portfolio-content h2 {
-    font-family: 'Playfair Display', serif;
-    color: #e0b467; /* Oro */
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-    border-bottom: 1px solid rgba(224, 180, 103, 0.2);
-    padding-bottom: 20px;
-}
-
-/* 3. Bottone di Chiusura (la "X") */
-.lightbox-close {
+/* Pulsante di chiusura */
+.lightbox-close-btn {
     position: absolute;
-    top: 20px;
-    right: 30px;
-    z-index: 1010; /* Sopra il contenuto */
-    font-size: 3rem;
-    color: #ffffff;
+    top: 10px;
+    right: 15px;
+    z-index: 10;
     background: none;
     border: none;
+    color: #fff;
+    font-size: 2.2rem;
+    font-weight: bold;
     cursor: pointer;
-    line-height: 1;
-    opacity: 0.8;
-    transition: opacity 0.3s, transform 0.3s;
+    transition: color 0.2s, transform 0.2s;
 }
-.lightbox-close:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-/* 4. Accordion INTERNO al Portfolio */
-.portfolio-accordion .portfolio-accordion-button {
-    /* Simile al tuo accordion, ma con i colori invertiti */
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #f5bf36; /* Oro/Giallo */
-    text-align: left;
-    background-color: rgba(0, 0, 0, 0.2);
-    border: none;
-    padding: 15px 20px;
-    width: 100%;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
-.portfolio-accordion .portfolio-accordion-button:hover {
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.portfolio-accordion .portfolio-accordion-button::after {
-    content: '\203A'; /* Chevron */
-    color: #f5bf36;
-    font-size: 2rem;
-    float: right;
+.lightbox-close-btn:hover {
+    color: var(--colore-accento);
     transform: rotate(90deg);
-    transition: transform 0.3s ease-out;
 }
 
-.portfolio-accordion .portfolio-accordion-button.active::after {
-    transform: rotate(-90deg);
+/* Navigazione schede (Tab) */
+.lightbox-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+.tab-link {
+    flex-grow: 1;
+    flex-basis: 0;
+    min-width: 150px;
+    padding: 12px 10px;
+    background-color: transparent;
+    color: var(--colore-titoli);
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.tab-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-bottom-color: var(--colore-accento);
+}
+.tab-link.active {
+    color: #000;
+    background-color: var(--colore-titoli);
+    border-bottom-color: var(--colore-titoli);
 }
 
-.portfolio-accordion .portfolio-accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
-    padding: 0 10px;
+/* Area contenuto schede */
+.lightbox-content {
+    padding: 25px;
+    overflow-y: auto;
+    color: var(--colore-testo);
+}
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+.tab-pane h3 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    color: var(--colore-titoli);
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--colore-accento);
 }
 
-.portfolio-accordion-button.active + .portfolio-accordion-content {
-    max-height: 2000px; /* Valore alto per contenere le gallerie */
-    padding: 20px 10px;
-}
-
-/* 5. Griglia Immagini INTERNA al modal */
+/* Griglia della galleria interna */
 .portfolio-gallery-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colonne */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 15px;
+    margin-top: 20px;
+    justify-content: center;
+}
+/*
+ * Questo è il tuo codice esistente
+ */
+.portfolio-gallery-grid {
+    display: grid;
+    /* Ho cambiato minmax a 180px, 140px è molto piccolo */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem; /* 15px va bene, 1.25rem è simile */
+    margin-top: 20px;
+    justify-content: center;
 }
 
-.portfolio-gallery-grid img {
+/* * 1. QUI INIZIA IL CODICE MANCANTE
+ * (Stile per i "box" delle thumbnail)
+ */
+.portfolio-gallery-grid a {
+    display: block;
+    
+    /* Forza un box quadrato (risolve proporzioni) */
+    aspect-ratio: 1 / 1; 
+    
+    overflow: hidden;     /* Nasconde l'immagine in eccesso */
+    border-radius: 8px;   /* Angoli smussati (li rende "meno brutti") */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    
+    /* Transizione per l'effetto hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/*
+ * 2. Stile per le IMMAGINI dentro i box
+ */
+.portfolio-gallery-grid a img {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
-    border: 1px solid rgba(224, 180, 103, 0.3);
-    transition: transform 0.3s;
-}
-.portfolio-gallery-grid img:hover {
-    transform: scale(1.03);
+    height: 100%;
+    
+    /* QUESTA È LA MAGIA:
+       Riempie il box (aspect-ratio 1/1),
+       mantenendo le proporzioni e tagliando l'eccesso.
+       Risolve il problema delle immagini verticali.
+    */
+    object-fit: cover; 
+    
+    object-position: center; /* Centra l'immagine prima di tagliarla */
+    transition: opacity 0.3s ease;
 }
 
-/* --- RESPONSIVITÀ MODAL --- */
-@media (max-width: 992px) {
-    .lightbox-portfolio-content {
-        padding: 20px 25px;
-        max-height: 90vh;
-        overflow-y: auto; /* Abilita scroll nel box su mobile */
-    }
-    .lightbox-portfolio-content h2 {
-        font-size: 2rem;
-    }
-    .portfolio-gallery-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colonne */
-    }
+/*
+ * 3. L'EFFETTO HOVER (CHE MANCAVA)
+ */
+.portfolio-gallery-grid a:hover {
+    transform: scale(1.05); /* Leggero zoom */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Ombra più pronunciata */
 }
-@media (max-width: 576px) {
-    .lightbox-portfolio-content {
-        padding: 15px;
-    }
-    .portfolio-accordion .portfolio-accordion-button {
-        font-size: 1.2rem;
-        padding: 12px 15px;
-    }
-    .portfolio-gallery-grid {
-        grid-template-columns: repeat(1, 1fr); /* 1 colonna */
-    }
+
+.portfolio-gallery-grid a:hover img {
+    opacity: 0.9; /* Leggera trasparenza */
 }

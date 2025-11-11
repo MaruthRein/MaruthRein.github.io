@@ -1,144 +1,162 @@
-/* === LOGICA DEL MENU HAMBURGER === */
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Seleziona gli elementi
+    /* =================================== */
+    /* === 1. GESTIONE COPYRIGHT DINAMICO === */
+    /* =================================== */
+    const currentYearEl = document.getElementById('current-year');
+    if (currentYearEl) {
+        currentYearEl.textContent = new Date().getFullYear();
+    }
+
+    /* =================================== */
+    /* === 2. LOGICA DEL MENU HAMBURGER === */
+    /* =================================== */
+    
     const navToggle = document.querySelector('.nav-toggle');
     const mainNav = document.querySelector('.main-nav');
     const body = document.body;
 
-    // 2. Controlla se esistono
     if (navToggle && mainNav) {
         
         // --- LOGICA DI APERTURA/CHIUSURA (Pulsante) ---
         navToggle.addEventListener('click', () => {
+            // Legge lo stato di accessibilità
+            const expanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
+            navToggle.setAttribute('aria-expanded', String(!expanded));
+            
+            // Aggiunge/rimuove le classi per l'animazione e il blocco dello scorrimento
             navToggle.classList.toggle('is-active');
             mainNav.classList.toggle('is-open');
             body.classList.toggle('no-scroll');
         });
 
-        // === [NUOVO] Chiudi il menu quando si clicca un link ===
-        
-        // 1. Seleziona TUTTI i link dentro il menu
+        // --- Chiudi il menu quando si clicca un link ---
         const navLinks = document.querySelectorAll('.main-nav a');
-
-        // 2. Aggiungi un evento 'click' a ciascun link
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                
-                // 3. Quando un link è cliccato, FORZA la chiusura del menu
-                // (Usiamo .remove() invece di .toggle() perché vogliamo 
-                // essere sicuri che si chiuda sempre)
+                // Forza la chiusura
+                navToggle.setAttribute('aria-expanded', 'false');
                 navToggle.classList.remove('is-active');
                 mainNav.classList.remove('is-open');
                 body.classList.remove('no-scroll');
             });
         });
-        // === Fine nuova sezione ===
     }
-});
-/* --- LOGICA PER ACCORDION "THE GURU" --- */
 
-// Aspetta che il documento sia caricato
-document.addEventListener('DOMContentLoaded', () => {
+   /* ======================================= */
+    /* === 3. LOGICA PER ACCORDION "THE GURU" === */
+    /* ======================================= */
     
-    // 1. Trova tutti i bottoni dell'accordion
     const accordionButtons = document.querySelectorAll('.accordion-button');
 
-    // 2. Aggiungi un "ascoltatore" di clic a ciascun bottone
-    accordionButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            
-            // 3. Controlla se il pannello cliccato è già aperto
-            const isAlreadyOpen = button.classList.contains('active');
-
-            // 4. Chiudi tutti i pannelli
-            accordionButtons.forEach(btn => {
-                btn.classList.remove('active');
-                btn.nextElementSibling.style.maxHeight = null;
-            });
-
-            // 5. Se NON era già aperto, aprilo
-            if (!isAlreadyOpen) {
-                button.classList.add('active');
-                const content = button.nextElementSibling;
-                // 'scrollHeight' calcola l'altezza esatta del contenuto
-                content.style.maxHeight = content.scrollHeight + 'px';
-            }
-        });
-    });
-
-    // Bonus: Apri il primo pannello di default all'avvio
+    // Esegui questo blocco solo se ci sono bottoni accordion nella pagina
     if (accordionButtons.length > 0) {
-        accordionButtons[0].click(); // Simula un clic sul primo bottone
+        
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const expanded = button.getAttribute('aria-expanded') === 'true' || false;
+                
+                // === Logica Migliorata ===
+                // Trova il pannello di contenuto usando 'aria-controls'
+                const panelId = button.getAttribute('aria-controls');
+                const panel = document.getElementById(panelId);
+
+                // Se non trova un pannello, non fare nulla
+                if (!panel) return;
+
+                // Chiudi tutti gli altri pannelli
+                accordionButtons.forEach(btn => {
+                    if (btn !== button) {
+                        btn.setAttribute('aria-expanded', 'false');
+                        btn.classList.remove('active');
+                        
+                        // Nascondi gli altri pannelli
+                        const otherPanelId = btn.getAttribute('aria-controls');
+                        const otherPanel = document.getElementById(otherPanelId);
+                        if (otherPanel) {
+                            otherPanel.hidden = true;
+                        }
+                    }
+                });
+
+                // Apri/Chiudi il pannello corrente
+                button.setAttribute('aria-expanded', String(!expanded));
+                button.classList.toggle('active');
+                
+                // Mostra/nascondi il pannello corrente
+                // (Questo è il pezzo chiave che mancava)
+                panel.hidden = !panel.hidden; 
+            });
+        });
+
+        // Apri il primo pannello di default
+        // (Logica aggiornata per rimuovere 'hidden')
+        const firstButton = accordionButtons[0];
+        const firstPanelId = firstButton.getAttribute('aria-controls');
+        const firstPanel = document.getElementById(firstPanelId);
+
+        if (firstButton && firstPanel) {
+             firstButton.setAttribute('aria-expanded', 'true');
+             firstButton.classList.add('active');
+             firstPanel.hidden = false; // Rimuove 'hidden' dal primo pannello
+        }
     }
-});
-/* --- LOGICA PER LIGHTBOX PORTFOLIO (PAGINE INTERNE) --- */
 
-document.addEventListener('DOMContentLoaded', () => {
+    /* =========================================
+     4. LOGICA LIGHTBOX (Se presente)
+    ========================================= */
+    // (Questo codice ora è sicuro e funziona solo se trova gli ID)
 
-    // (Il tuo codice per Hamburger e Accordion è già qui sopra...)
-    
-   /* --- LOGICA PER LIGHTBOX PORTFOLIO (PAGINA GRAFICO) --- */
+    const openBtn = document.getElementById('open-portfolio-btn');
+    const lightbox = document.getElementById('portfolioLightbox');
+    const overlay = document.getElementById('portfolioOverlay');
+    const closeBtn = document.getElementById('closePortfolioBtn');
+    const tabLinks = document.querySelectorAll('.tab-link');
+    const tabPanes = document.querySelectorAll('.tab-pane');
 
-// (Il tuo codice per Hamburger e Accordion Guru è già qui sopra...)
-    
-// --- Inizia il nuovo codice per il Lightbox ---
-    
-const openBtn = document.getElementById('open-portfolio-btn');
-const lightbox = document.getElementById('portfolioLightbox');
-const lightboxClose = document.getElementById('lightboxClose');
-const body = document.body;
+    function openLightbox() {
+        if (lightbox) lightbox.classList.add('is-open');
+        if (overlay) overlay.classList.add('is-open');
+        if (body) body.classList.add('no-scroll'); 
+    }
 
-// Controlla se gli elementi del modal esistono (così funziona solo su questa pagina)
-if (openBtn && lightbox && lightboxClose) {
+    function closeLightbox() {
+        if (lightbox) lightbox.classList.remove('is-open');
+        if (overlay) overlay.classList.remove('is-open');
+        if (body) body.classList.remove('no-scroll');
+    }
 
-    // APRI il modal
-    openBtn.addEventListener('click', () => {
-        lightbox.classList.add('open');
-        body.classList.add('no-scroll'); // Blocca lo scroll della pagina
-    });
-
-    // CHIUDI il modal
-    const closeLightbox = () => {
-        lightbox.classList.remove('open');
-        body.classList.remove('no-scroll'); // Sblocca lo scroll
-    };
-
-    lightboxClose.addEventListener('click', closeLightbox);
-    
-    // Chiudi cliccando sullo sfondo satinato
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
+    if (openBtn) {
+        openBtn.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            openLightbox();
+        });
+    }
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeLightbox);
+    }
+    if (overlay) {
+        overlay.addEventListener('click', closeLightbox);
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox && lightbox.classList.contains('is-open')) {
             closeLightbox();
         }
     });
 
-    // LOGICA PER ACCORDION INTERNO AL MODAL
-    const portfolioAccordionBtns = document.querySelectorAll('.portfolio-accordion-button');
-    
-    portfolioAccordionBtns.forEach(button => {
-        button.addEventListener('click', () => {
-            const isAlreadyOpen = button.classList.contains('active');
-
-            // Chiudi tutti gli altri
-            portfolioAccordionBtns.forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.nextElementSibling) {
-                    btn.nextElementSibling.style.maxHeight = null;
+    if (tabLinks.length > 0) {
+        tabLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const tabId = link.getAttribute('data-tab');
+                tabLinks.forEach(item => item.classList.remove('active'));
+                tabPanes.forEach(pane => pane.classList.remove('active'));
+                link.classList.add('active');
+                const activePane = document.getElementById(tabId);
+                if (activePane) {
+                    activePane.classList.add('active');
                 }
             });
-
-            // Apri quello cliccato (se non era già aperto)
-            if (!isAlreadyOpen) {
-                button.classList.add('active');
-                const content = button.nextElementSibling;
-                if (content) {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                }
-            }
         });
-    });
-}
+    }
 
-}); // <-- Assicurati che questo codice sia DENTRO la graffa di chiusura del DOMContentLoaded
+}); // <-- Fine del DOMContentLoaded
