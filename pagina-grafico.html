@@ -49,7 +49,7 @@
                     <p>Il design grafico non è solo estetica, è un linguaggio. È il ponte più rapido tra un'idea e la sua comprensione. Il mio approccio unisce la tecnica dell'illustratore alla strategia del designer: creo identità visive che hanno un'anima e che parlano direttamente al pubblico di riferimento.</p>
                     <p>Ogni colore, ogni linea e ogni tipografia sono scelti per costruire un'identità solida, memorabile e coerente.</p>
                     <button type="button" class="cta-button" id="open-portfolio-btn">
-                        Vedi il mio Portfolio <i class="fa-solid fa-arrow-right"></i>
+                        Vedi alcuni esempi dei miei lavori <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </div>
                 <div class="image-content-wrapper">
@@ -65,7 +65,7 @@
                 <h2>Ambiti di Specializzazione</h2>
                 <div class="services-list">
                     <div class="service-item"><i class="fa-solid fa-star"></i><h3>Brand Identity & Logo</h3><p>Studio e creazione di loghi e identità visive complete.</p></div>
-                    <div class="service-item"><i class="fa-solid fa-pen-ruler"></i><h3>Illustrazione Digitale</h3><p>Illustrazioni personalizzate per editoria e campagne pubblicitarie.</p></div>
+                    <div class="service-item"><i class="fa-solid fa-pen-ruler"></i><h3>Illustrazione</h3><p>Illustrazioni personalizzate per editoria e campagne pubblicitarie.</p></div>
                     <div class="service-item"><i class="fa-solid fa-book-skull"></i><h3>Copertine & Packaging</h3><p>Design di copertine e packaging creativi e coinvolgenti.</p></div>
                     <div class="service-item"><i class="fa-solid fa-file-image"></i><h3>Materiali di Marketing</h3><p>Progettazione di brochure, poster e materiale promozionale.</p></div>
                 </div>
@@ -75,7 +75,7 @@
         <section class="cta-section">
             <div class="container">
                 <h2>Hai un Progetto Visivo?</h2>
-                <p>Che tu debba lanciare un nuovo brand o rinnovare la tua immagine, sono pronto a dare forma visiva alla tua visione.</p>
+                <p>Che tu debba lanciare un nuovo brand o rinnovare la tua immagine, sono pronto a dare forma visiva alle tue idee.</p>
                 <a href="index.html#contatti-footer" class="cta-button">Contattami Ora</a>
             </div>
         </section>
@@ -126,10 +126,52 @@
             </div>
 
             <div class="tab-pane" id="tab-2">
-                <h3>Illustrazione Digitale</h3>
+                <h3>Illustrazione</h3>
                 <div class="portfolio-gallery-grid" id="gallery-illustrazione"> 
-                    <a href="assets/images/portfolio/illustrazione-grande-1.jpg">
-                        <img src="assets/images/portfolio/illustrazione-thumb-1.jpg" alt="Progetto Illustrazione 1">
+                    <a href="assets/images/portfolio/illustrazioni/2.png">
+                        <img src="assets/images/portfolio/illustrazioni/2.png" alt="Child">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/Obsession.png">
+                        <img src="assets/images/portfolio/illustrazioni/Obsession.png" alt="Obsession">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/FINALE.png">
+                        <img src="assets/images/portfolio/illustrazioni/FINALE.png" alt="Progetto In Te">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/1.png">
+                        <img src="assets/images/portfolio/illustrazioni/1.png" alt="Fragile">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/LA RESA.png">
+                        <img src="assets/images/portfolio/illustrazioni/LA RESA.png" alt="Progetto In Te">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/abstract.png">
+                        <img src="assets/images/portfolio/illustrazioni/abstract.png" alt="Astratto">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/NOTTE.png">
+                        <img src="assets/images/portfolio/illustrazioni/NOTTE.png" alt="Progetto In Te">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/child.png">
+                        <img src="assets/images/portfolio/illustrazioni/child.png" alt="Bambina">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/guitar.png">
+                        <img src="assets/images/portfolio/illustrazioni/guitar.png" alt="Guitar">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/PELLE.png">
+                        <img src="assets/images/portfolio/illustrazioni/PELLE.png" alt="Progetto In Te">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/Love.png">
+                        <img src="assets/images/portfolio/illustrazioni/Love.png" alt="Love is Love">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/sunflower.png">
+                        <img src="assets/images/portfolio/illustrazioni/sunflower.png" alt="Sunflower">
+                 
+                     <a href="assets/images/portfolio/illustrazioni/UNO.png">
+                        <img src="assets/images/portfolio/illustrazioni/UNO.png" alt="Progetto In Te">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/7.png">
+                        <img src="assets/images/portfolio/illustrazioni/7.png" alt="Moonlight">
+                    </a>
+                     <a href="assets/images/portfolio/illustrazioni/Think.png">
+                        <img src="assets/images/portfolio/illustrazioni/Think.png" alt="Think to much">
                     </a>
                 </div>
             </div>
@@ -294,6 +336,38 @@
         });
       });
     }
+    /* =========================================
+   3. CLICK SU CARD → APRE LIGHTBOX + TAB GIUSTA
+========================================= */
+const serviceItems = document.querySelectorAll('.service-item');
+
+if (serviceItems.length > 0) {
+  serviceItems.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      // Apri il lightbox
+      openLightbox();
+
+      // Identifica tab corrispondente
+      const targetTab = document.querySelector(`.tab-link[data-tab="tab-${index + 1}"]`);
+      const targetPane = document.getElementById(`tab-${index + 1}`);
+
+      // Resetta tab attivi
+      tabLinks.forEach(link => link.classList.remove('active'));
+      tabPanes.forEach(pane => pane.classList.remove('active'));
+
+      // Attiva la tab corretta
+      if (targetTab && targetPane) {
+        targetTab.classList.add('active');
+        targetPane.classList.add('active');
+
+        // Inizializza la galleria corretta
+        const galleryGridId = targetPane.querySelector('.portfolio-gallery-grid')?.id;
+        if (galleryGridId) initLightGallery(galleryGridId);
+      }
+    });
+  });
+}
+
 
   }); // Fine DOMContentLoaded
 </script>
