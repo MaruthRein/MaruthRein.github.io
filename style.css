@@ -1288,8 +1288,8 @@ section.services .service-card {
   }
 }
 
-/* 1 colonna solo su telefoni molto piccoli (<420px) */
-@media (max-width: 420px) {
+/* 1 colonna solo su telefoni molto piccoli (<400px) */
+@media (max-width: 400px) {
   section.portfolio .portfolio-grid,
   section.services .services-grid {
     grid-template-columns: 1fr !important;
