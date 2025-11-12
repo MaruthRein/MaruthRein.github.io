@@ -353,7 +353,7 @@ img {
     order: 2;
     margin-bottom: 0;
     flex: 0 0 45%;
-    max-width: 480px;
+    max-width: 400px;
   }
 
   .hero-image {
