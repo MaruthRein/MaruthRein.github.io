@@ -1154,115 +1154,19 @@ section.services-offered .service-item p {
     overflow: visible;
 }
 /* =========================================
-   7. MEDIA QUERIES (Tablet e Desktop)
+   7. MEDIA QUERIES (Responsive pulito e coerente)
 ========================================= */
 
-/* Mobile (max-width: 768px) */
-@media (max-width: 768px) {
+/* ========== BASE (default per tutti gli schermi) ========== */
 
-    /* Portfolio Homepage (2 colonne) */
-    section.portfolio .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-
-    section.portfolio .portfolio-item h3 { font-size: 1.1rem; }
-    section.portfolio .portfolio-item p {
-        margin-bottom: 10px;
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-    section.portfolio .portfolio-item .portfolio-button {
-        padding: 8px 12px;
-        font-size: 0.8rem;
-    }
-
-    /* Estratto (Mobile) */
-    .estratto-titolo h1 { font-size: 2.5rem; }
-    .estratto-titolo h2 { font-size: 1rem; }
-    .intro-estratto { font-size: 1.3rem; }
-
-    /* Promo Facebook (Mobile) */
-    .facebook-promo { padding: 4rem 0; }
-    .facebook-promo h2 { font-size: 2.2rem; }
-
-    /* Sezione Guru (Mobile) */
-    .feature-wrapper {
-        flex-direction: column;
-        gap: 30px;
-    }
-    .feature-wrapper .feature-image,
-    .feature-wrapper .feature-content {
-        width: 100%;
-        min-width: auto;
-    }
-
-    /* Servizi (2 colonne su mobile medio) */
-    section.services .services-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        align-items: stretch;
-    }
-}
-
-/* Tablet (min-width: 768px) */
-@media (min-width: 768px) {
-    h1 { font-size: 3.5rem; }
-    h2 { font-size: 2.5rem; }
-    .container { width: 85%; }
-
-    .footer-bottom {
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-    }
-
-    /* Portfolio 2 colonne */
-    .portfolio-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-    }
-
-    /* Servizi 2 colonne */
-    section.services .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Desktop (min-width: 1024px) */
-@media (min-width: 1024px) {
-    .hero { padding: 5rem 0; }
-    .hero-image-wrapper { max-width: 500px; }
-
-    /* Portfolio 4 colonne */
-    .portfolio-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem;
-    }
-
-    /* Servizi 4 colonne */
-    section.services .services-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* =========================================
-   FIX RESPONSIVE DEFINITIVO - SERVIZI + PORTFOLIO
-   Mantiene 2 colonne su mobile e 1 su schermi piccolissimi
-========================================= */
-
-/* Imposta sempre la griglia base */
 section.portfolio .portfolio-grid,
 section.services .services-grid {
-  display: grid !important;
+  display: grid;
   gap: 20px;
   justify-items: stretch;
   align-items: stretch;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  /* Adattivo automatico: varia da 1 a 4 colonne in base allo spazio */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 /* Card interne */
@@ -1272,29 +1176,103 @@ section.services .service-card {
   box-sizing: border-box;
 }
 
-/* 4 colonne su desktop grandi */
+/* Testi generali */
+h1 { font-size: 3rem; }
+h2 { font-size: 2rem; }
+
+/* =========================================
+   MOBILE (max-width: 768px)
+========================================= */
+@media (max-width: 768px) {
+
+  /* Portfolio e Servizi – due colonne anche su mobile medio */
+  section.portfolio .portfolio-grid,
+  section.services .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  section.portfolio .portfolio-item h3 { font-size: 1.1rem; }
+  section.portfolio .portfolio-item p {
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  section.portfolio .portfolio-item .portfolio-button {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  /* Estratto (Mobile) */
+  .estratto-titolo h1 { font-size: 2.5rem; }
+  .estratto-titolo h2 { font-size: 1rem; }
+  .intro-estratto { font-size: 1.3rem; }
+
+  /* Promo Facebook (Mobile) */
+  .facebook-promo { padding: 4rem 0; }
+  .facebook-promo h2 { font-size: 2.2rem; }
+
+  /* Sezione Guru (Mobile) */
+  .feature-wrapper {
+    flex-direction: column;
+    gap: 30px;
+  }
+  .feature-wrapper .feature-image,
+  .feature-wrapper .feature-content {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+/* =========================================
+   TABLET (min-width: 768px)
+========================================= */
+@media (min-width: 768px) {
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 2.5rem; }
+  .container { width: 85%; }
+
+  .footer-bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  /* Portfolio e Servizi – due colonne */
+  section.portfolio .portfolio-grid,
+  section.services .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* =========================================
+   DESKTOP (min-width: 1024px)
+========================================= */
 @media (min-width: 1024px) {
+  .hero { padding: 5rem 0; }
+  .hero-image-wrapper { max-width: 500px; }
+
+  /* Portfolio e Servizi – quattro colonne */
   section.portfolio .portfolio-grid,
   section.services .services-grid {
-    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
   }
 }
 
-/* 2 colonne su tablet e telefoni medi */
-@media (max-width: 1023px) {
-  section.portfolio .portfolio-grid,
-  section.services .services-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-
-/* 1 colonna solo su telefoni molto piccoli (<400px) */
+/* =========================================
+   EXTRA SMALL (max-width: 400px)
+   1 colonna solo su schermi piccolissimi
+========================================= */
 @media (max-width: 400px) {
   section.portfolio .portfolio-grid,
   section.services .services-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: 1fr;
   }
 }
+
 
 /* =========================================
    8. LIGHTBOX PERSONALIZZATO (SATINATO)
