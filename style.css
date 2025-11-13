@@ -1504,3 +1504,329 @@ h2 { font-size: 2rem; }
   }
 }
 
+/* =========================================
+   PAGINA CHI-SONO
+========================================= */
+
+/* --- Sezione Hero della pagina "Chi Sono" (se non già coperta dal tuo CSS) --- */
+.hero-page-section.chi-sono-hero {
+    /* Sfondo: un degradé profondo, magari con una sottile texture noise */
+    background: linear-gradient(135deg, #1A1A1A 0%, #2E3A3A 100%);
+    padding: 150px 0 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* Importante per effetti di sfondo o animazioni */
+}
+
+.chi-sono-hero h1 {
+    font-size: 4.5em; /* Grandezza d'impatto */
+    color: var(--color-light); /* Presupponendo una variabile per il tuo bianco/grigio chiaro */
+    text-shadow: 0 0 20px rgba(var(--color-accent-rgb), 0.5); /* Effetto bagliore arancione */
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease-out; /* Esempio di animazione */
+}
+
+.chi-sono-hero .tagline {
+    font-size: 1.6em;
+    color: var(--color-grey-light); /* Colore più morbido per il sottotitolo */
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.5;
+    animation: fadeInUp 1s ease-out 0.3s backwards; /* Appare dopo il titolo */
+}
+
+/* --- Sezione Introduzione con Griglia Immagine/Testo --- */
+.about-overview {
+    padding: 100px 0;
+    background-color: var(--color-dark-alt); /* Un colore di sfondo leggermente diverso */
+}
+
+.profile-intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Immagine a sinistra, testo più ampio a destra */
+    gap: 80px; /* Spazio generoso */
+    align-items: center; /* Allineamento verticale */
+}
+
+@media (max-width: 992px) {
+    .profile-intro-grid {
+        grid-template-columns: 1fr; /* Una colonna su tablet e mobile */
+        text-align: center;
+    }
+}
+
+.profile-image-wrapper {
+    position: relative;
+    padding: 20px; /* Spazio per bordi/effetti */
+}
+
+.profile-image-wrapper img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px; /* Angoli leggermente più arrotondati */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Ombra profonda */
+    transition: transform 0.5s ease-out; /* Animazione smooth */
+}
+
+.profile-image-wrapper:hover img {
+    transform: scale(1.03); /* Zoom leggero all'hover */
+}
+
+.profile-image-wrapper .image-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* Crea un effetto geometrico o un degradé che si sovrappone leggermente */
+    background: linear-gradient(180deg, rgba(var(--color-accent-rgb), 0.1) 0%, transparent 50%, rgba(var(--color-accent-rgb), 0.05) 100%);
+    clip-path: polygon(5% 0, 100% 8%, 95% 100%, 0% 92%); /* Forma angolare creativa */
+    z-index: 1;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.profile-image-wrapper:hover .image-overlay {
+    opacity: 0.9;
+}
+
+.profile-text-content .intro-paragraph {
+    font-size: 1.3em;
+    line-height: 1.9;
+    margin-bottom: 30px;
+    color: var(--color-light);
+}
+
+.profile-text-content strong {
+    color: var(--color-accent); /* Colore arancione/oro per enfatizzare */
+    font-weight: 700;
+}
+
+/* --- Sezione Timeline del Viaggio Creativo --- */
+.journey-timeline {
+    padding: 120px 0;
+    background-color: var(--color-dark); /* Il tuo nero profondo */
+    position: relative;
+    overflow: hidden;
+}
+
+.journey-timeline::before { /* Linea verticale centrale per la timeline */
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px; /* Linea più spessa */
+    background: linear-gradient(to bottom, rgba(var(--color-accent-rgb), 0.3), rgba(var(--color-accent-rgb), 0.8), rgba(var(--color-accent-rgb), 0.3)); /* Degradé sulla linea */
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+@media (max-width: 768px) {
+    .journey-timeline::before {
+        left: 30px; /* Sposta la linea a sinistra su mobile */
+        transform: translateX(0);
+    }
+}
+
+.timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 60px 40px; /* Spazio verticale e orizzontale */
+    position: relative;
+    z-index: 1; /* Assicura che gli item siano sopra la linea */
+}
+
+.timeline-item {
+    background-color: var(--color-dark-alt); /* Sfondo leggermente più chiaro per l'item */
+    padding: 35px;
+    border-radius: 15px; /* Bordi più arrotondati */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease, border-color 0.4s ease;
+    border: 2px solid transparent;
+    position: relative;
+    /* Per posizionare il pallino della timeline */
+}
+
+.timeline-item:nth-child(even) { /* Potresti alternare l'allineamento del testo */
+    /* text-align: right; */
+}
+
+.timeline-item:hover {
+    transform: translateY(-15px) scale(1.02); /* Sollevamento e leggero zoom */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    border-color: var(--color-accent); /* Bordo accentuato all'hover */
+}
+
+.timeline-item .icon-box {
+    width: 80px;
+    height: 80px;
+    background: var(--color-accent); /* Sfondo accento per l'icona */
+    color: var(--color-dark); /* Icona scura su sfondo accento */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5em; /* Icone più grandi */
+    margin: 0 auto 25px; /* Centrata */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 0 15px rgba(var(--color-accent-rgb), 0.7); /* Bagliore icona */
+}
+
+@media (max-width: 768px) {
+    .timeline-item .icon-box {
+        margin: 0 0 25px; /* Allineata a sinistra su mobile */
+    }
+}
+
+.timeline-item:hover .icon-box {
+    transform: rotateY(180deg) scale(1.1); /* Rotazione e leggero zoom all'hover */
+    background-color: var(--color-light); /* L'icona cambia colore di sfondo */
+    color: var(--color-accent); /* E il colore dell'icona */
+}
+
+.timeline-item h3 {
+    color: var(--color-light);
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.timeline-item p {
+    color: var(--color-grey-light);
+    line-height: 1.7;
+    font-size: 1.05em;
+}
+
+.timeline-item .inline-cta {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: 15px;
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-item .inline-cta:hover {
+    color: var(--color-light);
+    transform: translateX(5px);
+}
+
+/* Punto decorativo sulla timeline (CSS generato) */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-accent);
+    border: 3px solid var(--color-dark);
+    border-radius: 50%;
+    z-index: 2;
+    top: 30px; /* Allineato all'icona */
+    left: -50px; /* Posizione rispetto all'elemento */
+    transform: translateX(50%);
+    box-shadow: 0 0 10px rgba(var(--color-accent-rgb), 0.8);
+}
+
+@media (max-width: 768px) {
+    .timeline-item::after {
+        left: -10px; /* Allineato alla linea su mobile */
+    }
+}
+
+
+/* --- Sezione Showcase delle Competenze --- */
+.skills-showcase {
+    background-color: var(--color-dark-gradient); /* Un background con un leggero gradiente */
+    padding: 120px 0;
+    text-align: center;
+}
+
+.skills-showcase .section-title.inverted {
+    color: var(--color-light);
+    margin-bottom: 80px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+}
+
+.skill-card {
+    background-color: var(--color-dark-card); /* Colore di sfondo per le card */
+    padding: 40px;
+    border-radius: 18px; /* Bordi molto arrotondati */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+    border: 1px solid rgba(var(--color-accent-rgb), 0.3);
+    position: relative;
+    overflow: hidden; /* Per effetti overlay */
+}
+
+.skill-card::before { /* Effetto di sfondo animato */
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.1) 0%, transparent 70%);
+    transform: scale(0);
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    opacity: 0;
+    z-index: 0;
+}
+
+.skill-card:hover::before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.skill-card:hover {
+    transform: translateY(-20px) scale(1.03); /* Sollevamento più pronunciato */
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    background-color: var(--color-dark-hover); /* Sfondo leggermente più chiaro all'hover */
+}
+
+.skill-card .icon-extra-large {
+    font-size: 4.5em; /* Icone molto grandi */
+    color: var(--color-accent);
+    margin-bottom: 25px;
+    transition: transform 0.4s ease, color 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.skill-card:hover .icon-extra-large {
+    transform: rotateY(360deg) scale(1.1); /* Rotazione 3D e zoom */
+    color: var(--color-light); /* Cambia colore icona */
+}
+
+.skill-card h3 {
+    color: var(--color-light);
+    margin-bottom: 15px;
+    font-size: 1.7em;
+    position: relative;
+    z-index: 1;
+}
+
+.skill-card p {
+    color: var(--color-grey-light);
+    font-size: 1.05em;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Call to Action Finale --- */
+.cta-banner {
+    background: linear-gradient(45deg, var(--color-accent) 0%, #a8834d 100%); /* Degradé arancione */
+    padding: 100px 0;
+    text-align: center;
+    color: var(--color-dark); /* Testo scuro su sfondo chiaro */
+}
+
+.cta-banner p {
+    font-size: 2.2em; /* Testo più grande */
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 40px;
+    color: var(--color-dark);
+    text-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
