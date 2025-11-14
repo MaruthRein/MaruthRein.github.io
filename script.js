@@ -159,8 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-}); // <-- Fine del DOMContentLoaded
-document.querySelectorAll('.circle').forEach(circle => {
-    const value = circle.getAttribute("data-progress");
-    circle.style.setProperty("--progress", value);
+document.querySelectorAll(".tool-circle").forEach(circle => {
+    let percent = circle.getAttribute("data-percent");
+    circle.style.setProperty("--percent", percent);
 });

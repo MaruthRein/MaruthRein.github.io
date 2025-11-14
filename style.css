@@ -2044,3 +2044,137 @@ h2 { font-size: 2rem; }
 
 }
 
+/* =========================================
+  I MIEI STRUMENTI – SEZIONE COMPLETA
+========================================= */
+
+/* Reset delle icone per evitare interferenze da stili globali */
+#i-miei-strumenti img {
+    all: unset;
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+/* SEZIONE */
+#i-miei-strumenti {
+    padding: 80px 0;
+    background: #132c28;
+    text-align: center;
+    border-bottom: 2px solid var(--colore-accento);
+}
+
+#i-miei-strumenti h2 {
+    color: #f2b544;
+    font-size: 2.8rem;
+    margin-bottom: 50px;
+}
+
+/* LAYOUT CONTENITORE */
+.tools-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* WRAPPER DEGLI ELEMENTI */
+.tool-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* CERCHIO ESTERNO (progress ring) */
+.tool-circle {
+    --percent: 0;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: conic-gradient(
+        #e0b467 calc(var(--percent) * 1%),
+        rgba(255,255,255,0.05) 0
+    );
+
+    padding: 5px; /* spessore dell’anello */
+    transition: background 1.4s ease-out;
+}
+
+/* CERCHIO INTERNO */
+.inner-circle {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background: #0c0c0c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ICONA */
+.inner-circle img {
+    width: 38px;
+    height: 38px;
+}
+
+/* TESTO DELLA PERCENTUALE */
+.tool-percent {
+    color: #e0b467;
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* ================================
+   TOOLTIP – Nome dei software
+================================ */
+.tooltip {
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.85);
+    color: #000000;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, bottom 0.3s ease;
+    z-index: 10;
+}
+
+/* tooltip al passaggio */
+.tool-wrapper:hover .tooltip {
+    opacity: 1;
+    bottom: 120%;
+}
+
+/* FRECCIA DEL TOOLTIP */
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.85) transparent transparent transparent;
+}
+#i-miei-strumenti {
+    padding: 80px 0;
+    background: radial-gradient(
+        circle at center,
+        #11312d 0%,
+        #0a1a18 50%,
+        #0f2824 100%
+    );
+    text-align: center;
+    border-bottom: 2px solid var(--colore-accento);
+}
