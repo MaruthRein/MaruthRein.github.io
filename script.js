@@ -160,3 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 }); // <-- Fine del DOMContentLoaded
+document.querySelectorAll('.circle').forEach(circle => {
+    const value = circle.getAttribute("data-progress");
+    circle.style.setProperty("--progress", value);
+});
