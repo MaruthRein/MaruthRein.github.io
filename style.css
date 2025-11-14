@@ -2178,3 +2178,28 @@ h2 { font-size: 2rem; }
     text-align: center;
     border-bottom: 2px solid var(--colore-accento);
 }
+
+/* ================================
+FISSATO MOBILE DUE COLONNE
+================================ */
+
+/* DEFAULT → auto-fit, ma va bene */
+section.portfolio .portfolio-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+/* MOBILE MEDIO (400px - 768px) → DUE COLONNE */
+@media (max-width: 768px) and (min-width: 400px) {
+    section.portfolio .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* MOBILE PICCOLO (sotto 400px) → UNA COLONNA */
+@media (max-width: 399px) {
+    section.portfolio .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+}
