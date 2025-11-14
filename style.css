@@ -301,7 +301,37 @@ img {
     color: var(--colore-testo);
     font-size: 0.9rem;
     opacity: 0.7;
+
 }
+/* FOOTER DESKTOP */
+@media (min-width: 768px) {
+
+    .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+    }
+
+    .footer-contact {
+        margin-bottom: 0;
+        flex: 1;
+        justify-content: flex-start;
+    }
+
+    .social-links {
+        margin-bottom: 0;
+        flex: 1;
+        justify-content: center;
+    }
+
+    .copyright {
+        margin-top: 0;
+        flex: 1;
+        text-align: right;
+    }
+}
+
 
 /* =========================================
    4. SEZIONI COMUNI (Hero, Portfolio, Servizi, Promo, Guru)
@@ -2191,15 +2221,16 @@ section.portfolio .portfolio-grid {
 }
 
 /* MOBILE MEDIO (400px - 768px) → DUE COLONNE */
-@media (max-width: 768px) and (min-width: 400px) {
+@media (max-width: 768px) and (min-width: 350px) {
     section.portfolio .portfolio-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* MOBILE PICCOLO (sotto 400px) → UNA COLONNA */
-@media (max-width: 399px) {
+/* MOBILE PICCOLO (sotto 350px) → UNA COLONNA */
+@media (max-width: 350px) {
     section.portfolio .portfolio-grid {
         grid-template-columns: 1fr;
     }
 }
+
