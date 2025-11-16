@@ -12,21 +12,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery.min.css" integrity="sha512-F2EADdfA1BZYROeIcSgKweoRYRpeKyMdaALMUPcnMvBnbxxF_AmtKZyLHLSRWEEFUU5NUYhQ2FRCZUqcs2kHhw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lg-thumbnail.min.css" integrity="sha512-GRxDLAED5INTERA/IN3QXO3LA/s/KjS1fCXfSzoUkchR1jYgp3GL3E3MKSs/kvK1F3J0K/J/8U/FEbU9K/c/9Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lg-zoom.min.css" integrity="sha512-9A2fWeL3TtJk2r1IeQ/tL1JlgwHwI+lzzaS/kG4Yp/v2Cdx1P5lY111P/l1Sqz/t9rkLUd512fptnNn10jT/wQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
 
-    <header class="main-header">
+     <header class="main-header">
         <div class="container">
             <a href="index.html" class="logo">Maruth Rein</a>
             <nav class="main-nav">
                 <ul>
-                  <li><a href="index.html#hero">Home</a></li>
+                    <li><a href="index.html#hero">Home</a></li>
                     <li><a href="index.html#opere">Libri</a></li>
                     <li><a href="index.html#guru">The Guru</a></li>
-                     <li><a href="chi-sono.html">Chi Sono</a></li>
-                     <li><a href="index.html#cosa-faccio">Cosa Faccio</a></li>
-                      <li><a href="index.html#cosa-faccio">I miei strumenti</a></li>
-                         <li><a href="index.html#contatti">Contatti</a></li>
+                    <li><a href="chi-sono.html">Chi Sono</a></li>
+                    <li><a href="index.html#cosa-faccio">Cosa Faccio</a></li>
+                    
+                    <li><a href="index.html#i-miei-strumenti">I miei strumenti</a></li>
+                    
+                    <li><a href="#" id="open-contact-popup">Contatti</a></li>
                 </ul>
             </nav>
             <button class="nav-toggle" aria-label="Apri navigazione">
@@ -34,7 +41,6 @@
             </button>
         </div>
     </header>
-
     
     <main class="estratto-section">
         <div class="container">
@@ -95,32 +101,53 @@
 
         </div> </main>
         
-       <footer class="premium-footer">
-    <div class="footer-container">
-
-        <div class="footer-contact">
-            <a href="mailto:maruth.rein@gmail.com" class="footer-mail">
-                maruth.rein@gmail.com
-            </a>
-        </div>
-
-        <div class="footer-socials">
+    <div class="popup-overlay" id="contact-overlay"></div>
+    <div class="contact-popup" id="contact-popup">
+        
+        <button class="popup-close" id="close-contact-popup" aria-label="Chiudi finestra">&times;</button>
+        
+        <h3>Contattami</h3>
+        <p>Per collaborazioni, progetti o un semplice saluto, puoi scrivermi qui. Ti risponderò il prima possibile.</p>
+        
+        <a href="mailto:maruth.rein@gmail.com" class="lightbox-mail">
+            maruth.rein@gmail.com
+        </a>
+        
+        <div class="lightbox-socials">
             <a href="https://www.facebook.com/yogimao/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="https://www.instagram.com/maruth.rein/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://t.me/yogimao" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
             <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
             <a href="https://maruthrein.github.io/" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
         </div>
-
-        <div class="footer-divider"></div>
-
-        <p class="footer-copy">
-            © <span id="current-year"></span> Maruth Rein – Tutti i diritti riservati
-        </p>
-
     </div>
-</footer>
 
-    <script src="script.js"></script> 
+    <footer class="premium-footer">
+        <div class="footer-container">
+            <div class="footer-contact">
+                <a href="mailto:maruth.rein@gmail.com" class="footer-mail">
+                    maruth.rein@gmail.com
+                </a>
+            </div>
+            <div class="footer-socials">
+                <a href="https://www.facebook.com/yogimao/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/maruth.rein/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://t.me/yogimao" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://maruthrein.github.io/" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <div class="footer-divider"></div>
+            <p class="footer-copy">
+                © <span id="current-year"></span> Maruth Rein – Tutti i diritti riservati
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.min.js" integrity="sha512-jEJ0OAIdYNTx0S+8Lh1FzUtGImsHnhMrOBeT0jBCsYA52I+3hRaaU/D/0C7eCLvUvLMIy2oKqLbnAopzhIEVig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/thumbnail/lg-thumbnail.min.js" integrity="sha512-VRbePoLpLsdOjwDupKvbGUBsQ1F+LVKdS2KDsMvJTv/WcBEpDkrmJ/vPpeU/3Oefdn1F2iWJzU/Cg17Sif1x+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/zoom/lg-zoom.min.js" integrity="sha512-8pPDGHpMLs8TiH8sO8jVAY3+m/LgM4IEnSKhSgIv2hSQD3oVvNfD7A+sWStSjHInA7vFp0U/t3DkInP0Psqx9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="script.js" defer></script> 
 </body>
 </html>

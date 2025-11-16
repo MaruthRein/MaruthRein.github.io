@@ -9,6 +9,7 @@
    7. Classi Utility
    8. Media Queries
    9. Lightbox Personalizzato
+   10.   SEPARATORE DESCRIZIONE:LIGHTBOX CONTATTI
 ========================================= */
 
 
@@ -719,7 +720,7 @@ section.services-offered {
 
 /* Hero Pagine Interne */
 .page-hero {
-    padding: 80px 0 60px;
+    padding: 350px 0 25px;
     text-align: center;
     background-color: #132c28;
     border-bottom: 1px solid #cb5f31;
@@ -2059,17 +2060,28 @@ h2 { font-size: 2rem; }
 ========================================= */
 
 .page-hero {
-    padding: 120px 0;
+    padding: 90px 0 40px; /* → riduce drasticamente il vuoto */
     text-align: center;
 
-    /* gradiente petrolio → scuro centrale */
     background: radial-gradient(
         circle at center,
-        #1a1a1a 0%,          /* centro molto scuro */
-        #0f1a19 60%,         /* transizione */
-        #132c28 100%         /* petrolio ai bordi */
+        #1a1a1a 0%,
+        #0f1a19 60%,
+        #132c28 100%
     );
+}
 
+.page-hero h1 {
+    margin-bottom: 12px;
+    color: #e0b467;
+    font-size: 3.1rem; /* leggermente ridotto ma ancora importante */
+}
+
+.page-hero .subtitle {
+    max-width: 700px;
+    margin: 0 auto;
+    color: #f0f0f0;
+    font-size: 1.25rem;
 }
 
 /* =========================================
@@ -2253,3 +2265,173 @@ section.portfolio .portfolio-grid {
 }
 
 
+/* Pulsante unico evidenziato */
+.highlight-btn {
+    background: #d88a2e !important;
+    color: #111 !important;
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 15px 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(216, 138, 46, 0.45);
+    transition: all 0.25s ease !important;
+}
+
+.highlight-btn:hover {
+    background: #f4a645 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(244, 166, 69, 0.55);
+}
+
+.highlight-btn i {
+    transition: transform 0.2s ease;
+}
+
+.highlight-btn:hover i {
+    transform: translateX(5px);
+}
+
+/* Contenitore icona */
+.service-item {
+    text-align: center;
+    padding-top: 25px;
+}
+
+/* SVG o IMG */
+.service-item .service-svg {
+    width: 150px;          /* cambia qui la grandezza */
+    height: 150px;         
+    margin: 0 auto 10px;
+    display: block;
+    object-fit: contain;
+}
+
+/* Hover (opzionale) */
+.service-item:hover .service-svg {
+    transform: scale(1.10);
+    transition: 0.3s ease;
+}
+/* --- FORZA IL MENU A RESTARE FISSO NELLA PAGINA UX --- */
+.main-header {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
+/* ==============================================
+   SEPARATORE DESCRIZIONE: 10. POPUP CONTATTI (CUSTOM)
+   ============================================== */
+
+/* Overlay (sfondo scuro) */
+.popup-overlay {
+    display: none; /* Nascosto di default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+/* Contenitore del popup */
+.contact-popup {
+    display: none; /* Nascosto di default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+
+    /* AGGIORNAMENTI QUI */
+    background-color: rgba(19, 37, 37, 0.7); /* Reso trasparente con alpha */
+    border: 2px solid #ab4427; /* Bordo aggiunto */
+    
+    color: #e6e6e6;
+    padding: 3rem 2rem;
+    max-width: 500px;
+    width: 90%; /* Per il mobile */
+    text-align: center;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Stato aperto (attivato da JS) */
+.popup-overlay.is-open,
+.contact-popup.is-open {
+    display: block;
+}
+
+/* Bottone di chiusura */
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: #fff; /* Colore bianco per mantenere visibile */
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.3s ease; /* Aggiunto effetto hover */
+}
+
+.popup-close:hover {
+    color: #cba135; /* Colore giallo per l'hover */
+}
+
+
+/* Stili interni (questi sono i tuoi) */
+.contact-popup h3 {
+    font-family: 'Playfair Display', serif;
+    color: #d4b256;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.contact-popup p {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* Pulsante Mail */
+.contact-popup .lightbox-mail {
+    display: inline-block;
+    /* AGGIORNAMENTI QUI */
+    background-color: #d87042; /* Pulsante più acceso */
+    
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.contact-popup .lightbox-mail:hover {
+    background-color: #ab4427; /* Colore hover del bordo */
+}
+
+/* Social media links */
+.contact-popup .lightbox-socials {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    font-size: 1.6rem;
+}
+
+.contact-popup .lightbox-socials a {
+    /* AGGIORNAMENTI QUI */
+    color: #cba135; /* Colore giallo per i social */
+    transition: color 0.3s ease;
+}
+
+.contact-popup .lightbox-socials a:hover {
+    color: #fff; /* Bianco per l'hover, o il colore che preferisci */
+}
