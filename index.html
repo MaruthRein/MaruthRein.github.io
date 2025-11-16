@@ -28,12 +28,14 @@
 
     <link rel="preload" as="image" href="assets/images/Maruth_Rein.png">
 
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery.min.css" integrity="sha512-F2EADdfA1BZYROeIcSgKweoRYRpeKyMdaALMUPcnMvBnbxxF_AmtKZyLHLSRWEEFUU5NUYhQ2FRCZUqcs2kHhw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
@@ -46,10 +48,10 @@
                     <li><a href="index.html" class="current-page">Home</a></li>
                     <li><a href="#opere">Libri</a></li>
                     <li><a href="#guru">The Guru</a></li>
-                     <li><a href="chi-sono.html">Chi Sono</a></li>
+                     <li><a href="chisono.html">Chi Sono</a></li>
                      <li><a href="#cosa-faccio">Cosa Faccio</a></li>
                       <li><a href="#i-miei-strumenti">I miei strumenti</a></li>
-                    <li><a href="#contatti-footer">Contatti</a></li>
+                  <li><a href="#" id="open-contact-popup">Contatti</a></li>
                 </ul>
             </nav>
             <button class="nav-toggle" aria-label="Apri navigazione">
@@ -57,7 +59,9 @@
             </button>
         </div>
     </header>
+
     <main id="main-content">
+        
         <section class="hero" id="hero">
             <div class="container">
                 <div class="hero-content">
@@ -129,40 +133,81 @@
             </div>
         </section>
 
-        <section class="character-feature" id="guru">
-            <div class="container">
-                <h2>The Guru</h2>
-                <div class="feature-wrapper">
-                    <div class="feature-image">
-                        <img src="assets/images/The Guru.png" alt="Illustrazione del personaggio The Guru" width="600" height="600" loading="lazy" decoding="async">
+     <section class="character-feature" id="guru">
+    <div class="container">
+        <h2>The Guru</h2>
+        <div class="feature-wrapper">
+            <div class="feature-image">
+                <img src="assets/images/The Guru.png" 
+                     alt="Illustrazione del personaggio The Guru" 
+                     width="600" height="600" loading="lazy" decoding="async">
+            </div>
+
+            <div class="feature-content">
+                <div class="accordion" role="region" aria-label="Informazioni su The Guru">
+                    
+                    <button 
+                        type="button" 
+                        class="accordion-button active" 
+                        aria-expanded="true" 
+                        aria-controls="guru-info-1" 
+                        id="guru-button-1">
+                        Chi è The Guru?
+                    </button>
+
+                    <div 
+                        class="accordion-content" 
+                        id="guru-info-1" 
+                        role="region" 
+                        aria-labelledby="guru-button-1">
+                        
+                        <p>Non è un maestro che offre comode verità o frasi da "biscotto della fortuna".</p>
+                        <p><strong style="color: #e0b467;">The Guru è uno specchio.</strong> 
+                           È un provocatore irriverente nato per smascherare le illusioni della mente
+                           e i luoghi comuni della "spiritualità" moderna. La sua funzione non è darti la pace,
+                           ma costringerti a mettere in discussione <em>tutto</em> ciò che credi di sapere,
+                           spesso con una risata amara.</p>
                     </div>
 
-                    <div class="feature-content">
-                        <div class="accordion" role="region" aria-label="Informazioni su The Guru">
-                            <button type="button" class="accordion-button" aria-expanded="false" aria-controls="guru-info-1" id="guru-button-1">Chi è The Guru?</button>
-                            <div class="accordion-content" id="guru-info-1" role="region" aria-labelledby="guru-button-1" hidden>
-                                <p>Non è un maestro che offre comode verità o frasi da "biscotto della fortuna".</p>
-                                <p><strong style="color: #e0b467;">The Guru è uno specchio.</strong> È un provocatore irriverente nato per smascherare le illusioni della mente e i luoghi comuni della "spiritualità" moderna. La sua funzione non è darti la pace, ma costringerti a mettere in discussione <em>tutto</em> ciò che credi di sapere, spesso con una risata amara.</p>
-                            </div>
+                    <button 
+                        type="button" 
+                        class="accordion-button" 
+                        aria-expanded="false" 
+                        aria-controls="guru-info-2" 
+                        id="guru-button-2">
+                        Come è nato
+                    </button>
 
-                            <button type="button" class="accordion-button" aria-expanded="false" aria-controls="guru-info-2" id="guru-button-2">Come è nato</button>
-                            <div class="accordion-content" id="guru-info-2" role="region" aria-labelledby="guru-button-2" hidden>
-                                <p>The Guru è nato da un'esigenza: dare un volto e una voce a quel pensiero laterale che osserva il mondo senza filtri.</p>
-                                <p><strong style="color: #e0b467;">È uno dei "mondi" che ho creato,</strong> emerso quasi per gioco da uno schizzo su un taccuino. È diventato l'antidoto personale (e ora pubblico) a ogni forma di dogma, un personaggio che usa l'ironia per rivelare l'assurdità che si nasconde dietro le nostre convinzioni più serie.</p>
-                            </div>
-                        </div>
-
-                        <hr class="guru-divider" aria-hidden="true">
-
-                        <div class="guru-facebook-section">
-                            <h3>Seguimi su Facebook</h3>
-                            <p>Unisciti ad una <strong style="color: #e0b467;">Community di 40.000</strong> persone, per la tua dose quotidiana di riflessioni "scomode" e per non prenderti troppo sul serio.</p>
-                            <a href="https://www.facebook.com/yogimao/" class="cta-button" target="_blank" rel="noopener noreferrer">Vai alla Pagina The Guru</a>
-                        </div>
+                    <div 
+                        class="accordion-content" 
+                        id="guru-info-2" 
+                        role="region" 
+                        aria-labelledby="guru-button-2">
+                        
+                        <p>The Guru è nato da un'esigenza: dare un volto e una voce a quel pensiero laterale
+                           che osserva il mondo senza filtri.</p>
+                        <p><strong style="color: #e0b467;">È uno dei "mondi" che ho creato,</strong>
+                           emerso quasi per gioco da uno schizzo su un taccuino.
+                           È diventato l'antidoto personale (e ora pubblico) a ogni forma di dogma,
+                           un personaggio che usa l'ironia per rivelare l'assurdità dietro le nostre convinzioni.</p>
                     </div>
                 </div>
+
+                <hr class="guru-divider" aria-hidden="true">
+
+                <div class="guru-facebook-section">
+                    <h3>Seguimi su Facebook</h3>
+                    <p>Unisciti ad una <strong style="color: #e0b441;">Community di 40.000</strong> persone,
+                       per la tua dose quotidiana di riflessioni "scomode" e per non prenderti troppo sul serio.</p>
+                    <a href="https://www.facebook.com/yogimao/" class="cta-button" target="_blank" rel="noopener noreferrer">
+                        Vai alla Pagina The Guru
+                    </a>
+                </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+
 
         <section class="services" id="cosa-faccio">
             <div class="container">
@@ -187,7 +232,7 @@
                         </span>
                     </a>
 
-                    <a href="pagina-web-design.html" class="service-card">
+                    <a href="web-designer.html" class="service-card">
                         <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
                         <h3>Web Design UI/UX</h3>
                         <p>Progetto e costruisco siti web ed esperienze digitali intuitive...</p>
@@ -244,362 +289,241 @@
             </div>
         </section>
 
-  <section class="about" id="i-miei-strumenti">
-    <div class="container">
-        <h2>I Miei Strumenti</h2>
+        <section class="about" id="i-miei-strumenti">
+            <div class="container">
+                <h2>I Miei Strumenti</h2>
 
-        <div class="tools-row">
+                <div class="tools-row">
+                    <div class="tool-wrapper">
+                        <span class="tooltip">Photoshop</span>
+                        <div class="tool-circle" data-percent="90">
+                            <div class="inner-circle">
+                                <img src="assets/icons/photoshop.svg" alt="Photoshop">
+                            </div>
+                        </div>
+                        <span class="tool-percent">90%</span>
+                    </div>
 
-            <div class="tool-wrapper">
-                <span class="tooltip">Photoshop</span>
-                <div class="tool-circle" data-percent="90">
-                    <div class="inner-circle">
-                        <img src="assets/icons/photoshop.svg" alt="Photoshop">
+                    <div class="tool-wrapper">
+                        <span class="tooltip">Illustrator</span>
+                        <div class="tool-circle" data-percent="80">
+                            <div class="inner-circle">
+                                <img src="assets/icons/illustrator.svg" alt="Illustrator">
+                            </div>
+                        </div>
+                        <span class="tool-percent">80%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">InDesign</span>
+                        <div class="tool-circle" data-percent="70">
+                            <div class="inner-circle">
+                                <img src="assets/icons/indesign.svg" alt="InDesign">
+                            </div>
+                        </div>
+                        <span class="tool-percent">70%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">Premiere Pro</span>
+                        <div class="tool-circle" data-percent="85">
+                            <div class="inner-circle">
+                                <img src="assets/icons/premiere.svg" alt="Premiere Pro">
+                            </div>
+                        </div>
+                        <span class="tool-percent">85%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">After Effects</span>
+                        <div class="tool-circle" data-percent="75">
+                            <div class="inner-circle">
+                                <img src="assets/icons/aftereffects.svg" alt="After Effects">
+                            </div>
+                        </div>
+                        <span class="tool-percent">75%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">Final Cut</span>
+                        <div class="tool-circle" data-percent="85">
+                            <div class="inner-circle">
+                                <img src="assets/icons/finalcut.svg" alt="Final Cut Pro">
+                            </div>
+                        </div>
+                        <span class="tool-percent">85%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">Figma</span>
+                        <div class="tool-circle" data-percent="85">
+                            <div class="inner-circle">
+                                <img src="assets/icons/figma.svg" alt="Figma">
+                            </div>
+                        </div>
+                        <span class="tool-percent">85%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">VS Code</span>
+                        <div class="tool-circle" data-percent="70">
+                            <div class="inner-circle">
+                                <img src="assets/icons/visualcode.svg" alt="VS Code">
+                            </div>
+                        </div>
+                        <span class="tool-percent">70%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">GitHub</span>
+                        <div class="tool-circle" data-percent="65">
+                            <div class="inner-circle">
+                                <img src="assets/icons/github-mark-white.svg" alt="GitHub">
+                            </div>
+                        </div>
+                        <span class="tool-percent">65%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">OBS</span>
+                        <div class="tool-circle" data-percent="95">
+                            <div class="inner-circle">
+                                <img src="assets/icons/Obs.svg" alt="OBS">
+                            </div>
+                        </div>
+                        <span class="tool-percent">95%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">HTML5</span>
+                        <div class="tool-circle" data-percent="70">
+                            <div class="inner-circle">
+                                <img src="assets/icons/html.svg" alt="HTML5">
+                            </div>
+                        </div>
+                        <span class="tool-percent">70%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">CSS3</span>
+                        <div class="tool-circle" data-percent="70">
+                            <div class="inner-circle">
+                                <img src="assets/icons/css.svg" alt="CSS3">
+                            </div>
+                        </div>
+                        <span class="tool-percent">70%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">JavaScript</span>
+                        <div class="tool-circle" data-percent="35">
+                            <div class="inner-circle">
+                                <img src="assets/icons/java.svg" alt="JavaScript">
+                            </div>
+                        </div>
+                        <span class="tool-percent">35%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">WordPress</span>
+                        <div class="tool-circle" data-percent="95">
+                            <div class="inner-circle">
+                                <img src="assets/icons/wordpress.svg" alt="WordPress">
+                            </div>
+                        </div>
+                        <span class="tool-percent">95%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">macOS</span>
+                        <div class="tool-circle" data-percent="95">
+                            <div class="inner-circle">
+                                <img src="assets/icons/apple.svg" alt="macOS">
+                            </div>
+                        </div>
+                        <span class="tool-percent">95%</span>
+                    </div>
+
+                    <div class="tool-wrapper">
+                        <span class="tooltip">Windows</span>
+                        <div class="tool-circle" data-percent="95">
+                            <div class="inner-circle">
+                                <img src="assets/icons/windows.svg" alt="Windows">
+                            </div>
+                        </div>
+                        <span class="tool-percent">95%</span>
                     </div>
                 </div>
-                <span class="tool-percent">90%</span>
             </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">Illustrator</span>
-                <div class="tool-circle" data-percent="80">
-                    <div class="inner-circle">
-                        <img src="assets/icons/illustrator.svg" alt="Illustrator">
-                    </div>
-                </div>
-                <span class="tool-percent">80%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">InDesign</span>
-                <div class="tool-circle" data-percent="70">
-                    <div class="inner-circle">
-                        <img src="assets/icons/indesign.svg" alt="InDesign">
-                    </div>
-                </div>
-                <span class="tool-percent">70%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">Premiere Pro</span>
-                <div class="tool-circle" data-percent="85">
-                    <div class="inner-circle">
-                        <img src="assets/icons/premiere.svg" alt="Premiere Pro">
-                    </div>
-                </div>
-                <span class="tool-percent">85%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">After Effects</span>
-                <div class="tool-circle" data-percent="75">
-                    <div class="inner-circle">
-                        <img src="assets/icons/aftereffects.svg" alt="After Effects">
-                    </div>
-                </div>
-                <span class="tool-percent">75%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">Final Cut</span>
-                <div class="tool-circle" data-percent="85">
-                    <div class="inner-circle">
-                        <img src="assets/icons/finalcut.svg" alt="Final Cut Pro">
-                    </div>
-                </div>
-                <span class="tool-percent">85%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">Figma</span>
-                <div class="tool-circle" data-percent="85">
-                    <div class="inner-circle">
-                        <img src="assets/icons/figma.svg" alt="Figma">
-                    </div>
-                </div>
-                <span class="tool-percent">85%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">VS Code</span>
-                <div class="tool-circle" data-percent="70">
-                    <div class="inner-circle">
-                        <img src="assets/icons/visualcode.svg" alt="VS Code">
-                    </div>
-                </div>
-                <span class="tool-percent">70%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">GitHub</span>
-                <div class="tool-circle" data-percent="65">
-                    <div class="inner-circle">
-                        <img src="assets/icons/github-mark-white.svg" alt="GitHub">
-                    </div>
-                </div>
-                <span class="tool-percent">65%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">OBS</span>
-                <div class="tool-circle" data-percent="95">
-                    <div class="inner-circle">
-                        <img src="assets/icons/Obs.svg" alt="OBS">
-                    </div>
-                </div>
-                <span class="tool-percent">95%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">HTML5</span>
-                <div class="tool-circle" data-percent="70">
-                    <div class="inner-circle">
-                        <img src="assets/icons/html.svg" alt="HTML5">
-                    </div>
-                </div>
-                <span class="tool-percent">70%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">CSS3</span>
-                <div class="tool-circle" data-percent="70">
-                    <div class="inner-circle">
-                        <img src="assets/icons/css.svg" alt="CSS3">
-                    </div>
-                </div>
-                <span class="tool-percent">70%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">JavaScript</span>
-                <div class="tool-circle" data-percent="35">
-                    <div class="inner-circle">
-                        <img src="assets/icons/java.svg" alt="JavaScript">
-                    </div>
-                </div>
-                <span class="tool-percent">35%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">WordPress</span>
-                <div class="tool-circle" data-percent="95">
-                    <div class="inner-circle">
-                        <img src="assets/icons/wordpress.svg" alt="WordPress">
-                    </div>
-                </div>
-                <span class="tool-percent">95%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">macOS</span>
-                <div class="tool-circle" data-percent="95">
-                    <div class="inner-circle">
-                        <img src="assets/icons/apple.svg" alt="macOS">
-                    </div>
-                </div>
-                <span class="tool-percent">95%</span>
-            </div>
-
-            <div class="tool-wrapper">
-                <span class="tooltip">Windows</span>
-                <div class="tool-circle" data-percent="95">
-                    <div class="inner-circle">
-                        <img src="assets/icons/windows.svg" alt="Windows">
-                    </div>
-                </div>
-                <span class="tool-percent">95%</span>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
-
-
+        </section>
 
     </main>
 
-  <footer class="premium-footer">
-    <div class="footer-container">
+    <div class="popup-overlay" id="contact-overlay"></div>
 
-        <div class="footer-contact">
-            <a href="mailto:maruth.rein@gmail.com" class="footer-mail">
-                maruth.rein@gmail.com
-            </a>
-        </div>
-
-        <div class="footer-socials">
-            <a href="https://www.facebook.com/yogimao/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/maruth.rein/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://t.me/yogimao" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-            <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://maruthrein.github.io/" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-        </div>
-
-        <div class="footer-divider"></div>
-
-        <p class="footer-copy">
-            © <span id="current-year"></span> Maruth Rein – Tutti i diritti riservati
-        </p>
-
+<div class="contact-popup" id="contact-popup">
+    
+    <button class="popup-close" id="close-contact-popup" aria-label="Chiudi finestra">&times;</button>
+    
+    <h3>Contattami</h3>
+    <p>Per collaborazioni, progetti o un semplice saluto, puoi scrivermi qui. Ti risponderò il prima possibile.</p>
+    
+    <a href="mailto:maruth.rein@gmail.com" class="lightbox-mail">
+        maruth.rein@gmail.com
+    </a>
+    
+    <div class="lightbox-socials">
+        <a href="https://www.facebook.com/yogimao/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/maruth.rein/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://t.me/yogimao" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://maruthrein.github.io/" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
     </div>
-</footer>
+</div>
+
+    <footer class="premium-footer">
+        <div class="footer-container">
+            <div class="footer-contact">
+                <a href="mailto:maruth.rein@gmail.com" class="footer-mail">
+                    maruth.rein@gmail.com
+                </a>
+            </div>
+
+            <div class="footer-socials">
+                <a href="https://www.facebook.com/yogimao/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/maruth.rein/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://t.me/yogimao" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://maruthrein.github.io/" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <p class="footer-copy">
+                © <span id="current-year"></span> Maruth Rein – Tutti i diritti riservati
+            </p>
+        </div>
+    </footer>
 
 
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Person",
-          "@id": "https://maruthrein.github.io/#person",
-          "name": "Maruth Rein",
-          "url": "https://maruthrein.github.io/",
-          "image": "https://maruthrein.github.io/assets/images/Maruth_Rein.png",
-          "description": "Autore e creativo. Crea mondi e racconta storie attraverso romanzi, fumetti, design e grafica.",
-          "sameAs": [
-            "https://www.facebook.com/yogimao/",
-            "https://www.instagram.com/maruth.rein/",
-            "https://t.me/yogimao",
-            "https://www.linkedin.com/in/maruth-rein-29402b268/",
-            "https://maruthrein.github.io/"
-          ],
-          "jobTitle": "Autore & Creativo"
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://maruthrein.github.io/#website",
-          "url": "https://maruthrein.github.io/",
-          "name": "Maruth Rein - Autore & Creativo",
-          "publisher": {
-            "@id": "https://maruthrein.github.io/#person"
-          },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://maruthrein.github.io/?s={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        },
-        {
-          "@type": "ItemList",
-          "@id": "https://maruthrein.github.io/#books",
-          "name": "Opere di Maruth Rein",
-          "itemListElement": [
-            {
-              "@type": "Book",
-              "position": 1,
-              "name": "L'Ombra",
-              "author": { "@id": "https://maruthrein.github.io/#person" },
-              "url": "https://maruthrein.github.io/pagina-ombra.html",
-              "image": "https://maruthrein.github.io/assets/images/ombra.png",
-              "description": "Un viaggio dal buio alla luce."
-            },
-            {
-              "@type": "Book",
-              "position": 2,
-              "name": "Il Fuoco Fresco",
-              "author": { "@id": "https://maruthrein.github.io/#person" },
-              "url": "https://maruthrein.github.io/pagina-il-fuoco-fresco.html",
-              "image": "https://maruthrein.github.io/assets/images/fuoco_fresco.png",
-              "description": "Kundalini, il ‘Soffio Vitale’."
-            },
-            {
-              "@type": "Book",
-              "position": 3,
-              "name": "Dal Sonno alla...",
-              "author": { "@id": "https://maruthrein.github.io/#person" },
-              "url": "https://maruthrein.github.io/pagina-dal-sonno-alla-presenza.html",
-              "image": "https://maruthrein.github.io/assets/images/Sonno.png",
-              "description": "Manuale di disidentificazione."
-            },
-            {
-              "@type": "Book",
-              "position": 4,
-              "name": "Il Silenzio che...",
-              "author": { "@id": "https://maruthrein.github.io/#person" },
-              "url": "https://maruthrein.github.io/pagina-il-silenzio-che-guarisce.html",
-              "image": "https://maruthrein.github.io/assets/images/silenzio.png",
-              "description": "C'è un silenzio che non è..."
-            }
-          ]
-        }
-      ]
-    }
-    </script>
-
-
-<script src="script.js" defer></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-    const circles = document.querySelectorAll(".tool-circle");
-
-    // Funzione che imposta il cerchio a 0%
-    function resetCircle(circle) {
-        circle.style.background = `conic-gradient(
-            #e0b467 0deg,
-            rgba(255,255,255,0.05) 0deg
-        )`;
-    }
-
-    // Animazione fluida
-    function animateCircle(circle, finalPercent) {
-        let startTime = null;
-
-        function update(timestamp) {
-            if (!startTime) startTime = timestamp;
-
-            const progress = Math.min((timestamp - startTime) / 1500, 1);
-            const value = progress * finalPercent;
-            const degrees = (value * 360) / 100;
-
-            circle.style.background = `conic-gradient(
-                #e0b467 ${degrees}deg,
-                rgba(255,255,255,0.05) 0deg
-            )`;
-
-            if (progress < 1) {
-                requestAnimationFrame(update);
-            }
-        }
-
-        requestAnimationFrame(update);
-    }
-
-    // Observer che attiva e disattiva animazione
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            const circle = entry.target;
-            const percent = parseInt(circle.getAttribute("data-percent"));
-
-            if (entry.isIntersecting) {
-                // Quando entra nel viewport → ANIMA
-                animateCircle(circle, percent);
-            } else {
-                // Quando esce → RESET
-                resetCircle(circle);
-            }
-        });
-    }, {
-        threshold: 0.5
-    });
-
-    // Applico l’observer a tutti i cerchi
-    circles.forEach(circle => {
-        resetCircle(circle); // reset iniziale
-        observer.observe(circle);
-    });
-
-});
+{
+  "@context": "https://schema.org",
+  "@graph": []
+}
 </script>
 
 
 
+  </script>
 
+   
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/inline/lg-inline.min.js" integrity="sha512-T/XNf/m+M/M-N4B1/uAS/bT/sT+mG/YF3N2/T/a/2g42/2/221f/w/33m/l/2A1/" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/thumbnail/lg-thumbnail.min.js" integrity="sha512-VRbePoLpLsdOjwDupKvbGUBsQ1F+LVKdS2KDsMvJTv/WcBEpDkrmJ/vPpeU/3Oefdn1F2iWJzU/Cg17Sif1x+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/zoom/lg-zoom.min.js" integrity="sha512-8pPDGHpMLs8TiH8sO8jVAY3+m/LgM4IEnSKhSgIv2hSQD3oVvNfD7A+sWStSjHInA7vFp0U/t3DkInP0Psqx9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script src="script.js" defer></script>
 
 </body>
 </html>

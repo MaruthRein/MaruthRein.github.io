@@ -9,24 +9,24 @@
     <link href="https://fonts.googleapis.com/css2?..." rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-thumbnail.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lg-thumbnail.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lg-zoom.min.css">
 
 </head>
 <body>
-    <header class="main-header">
+   <header class="main-header">
         <div class="container">
             <a href="index.html" class="logo">Maruth Rein</a>
             <nav class="main-nav">
                 <ul>
-                   <li><a href="index.html#hero">Home</a></li>
-                    <li><a href="index.html#opere">Libri</a></li>
-                    <li><a href="index.html#guru">The Guru</a></li>
-                     <li><a href="chi-sono.html">Chi Sono</a></li>
-                     <li><a href="index.html#cosa-faccio">Cosa Faccio</a></li>
-                      <li><a href="index.html#cosa-faccio">I miei strumenti</a></li>
-                         <li><a href="index.html#contatti">Contatti</a></li>
+                    <li><a href="index.html" class="current-page">Home</a></li>
+                    <li><a href="#opere">Libri</a></li>
+                    <li><a href="#guru">The Guru</a></li>
+                     <li><a href="chisono.html">Chi Sono</a></li>
+                     <li><a href="#cosa-faccio">Cosa Faccio</a></li>
+                      <li><a href="#i-miei-strumenti">I miei strumenti</a></li>
+                  <li><a href="#" id="open-contact-popup">Contatti</a></li>
                 </ul>
             </nav>
             <button class="nav-toggle" aria-label="Apri navigazione">
@@ -49,9 +49,9 @@
                     <h2>L'Immagine come Linguaggio</h2>
                     <p>Il design grafico non è solo estetica, è un linguaggio. È il ponte più rapido tra un'idea e la sua comprensione. Il mio approccio unisce la tecnica dell'illustratore alla strategia del designer: creo identità visive che hanno un'anima e che parlano direttamente al pubblico di riferimento.</p>
                     <p>Ogni colore, ogni linea e ogni tipografia sono scelti per costruire un'identità solida, memorabile e coerente.</p>
-                    <button type="button" class="cta-button" id="open-portfolio-btn">
-                        Vedi alcuni esempi dei miei lavori <i class="fa-solid fa-arrow-right"></i>
-                    </button>
+                   <button type="button" class="cta-button highlight-btn" id="open-portfolio-btn">
+    Vedi alcuni esempi dei miei lavori <i class="fa-solid fa-arrow-right"></i>
+</button>
                 </div>
                 <div class="image-content-wrapper">
                     <div class="image-content">
@@ -64,11 +64,28 @@
         <section class="content-section services-offered">
             <div class="container">
                 <h2>Ambiti di Specializzazione</h2>
+                  <h3>Clicca per vedere alcuni miei lavori</h3>
                 <div class="services-list">
-                    <div class="service-item"><i class="fa-solid fa-star"></i><h3>Brand Identity & Logo</h3><p>Studio e creazione di loghi e identità visive complete.</p></div>
-                    <div class="service-item"><i class="fa-solid fa-pen-ruler"></i><h3>Illustrazione</h3><p>Illustrazioni personalizzate per editoria e campagne pubblicitarie.</p></div>
-                    <div class="service-item"><i class="fa-solid fa-book-skull"></i><h3>Copertine & Packaging</h3><p>Design di copertine e packaging creativi e coinvolgenti.</p></div>
-                    <div class="service-item"><i class="fa-solid fa-file-image"></i><h3>Materiali di Marketing</h3><p>Progettazione di brochure, poster e materiale promozionale.</p></div>
+                   <div class="service-item">
+    <img src="assets/icons/Logo brand.svg" class="service-svg" alt="Brand Identity Icon">
+    <h3>Brand Identity & Logo</h3>
+    <p>Studio e creazione di loghi e identità visive complete.</p>
+</div>
+                  <div class="service-item">
+    <img src="assets/icons/Illustrazione.svg" class="service-svg" alt="Illustrazione Icon">
+    <h3>Illustrazione</h3>
+    <p>Illustrazioni personalizzate per editoria e campagne pubblicitarie.</p>
+</div>
+                   <div class="service-item">
+    <img src="assets/icons/Packaging.svg" class="service-svg" alt="Packaging Icon">
+    <h3>Copertine & Packaging</h3>
+    <p>Design di copertine e packaging creativi e coinvolgenti.</p>
+</div>
+                    <div class="service-item">
+    <img src="assets/icons/marketing.svg" class="service-svg" alt="Marketing Icon">
+    <h3>Materiali di Marketing</h3>
+    <p>Progettazione di brochure, poster e materiale promozionale.</p>
+</div>
                 </div>
             </div>
         </section>
@@ -339,6 +356,26 @@
 
         </div>
     </div>
+    <div class="popup-overlay" id="contact-overlay"></div>
+<div class="contact-popup" id="contact-popup">
+    
+    <button class="popup-close" id="close-contact-popup" aria-label="Chiudi finestra">&times;</button>
+    
+    <h3>Contattami</h3>
+    <p>Per collaborazioni, progetti o un semplice saluto, puoi scrivermi qui. Ti risponderò il prima possibile.</p>
+    
+    <a href="mailto:maruth.rein@gmail.com" class="lightbox-mail">
+        maruth.rein@gmail.com
+    </a>
+    
+    <div class="lightbox-socials">
+        <a href="https://www.facebook.com/yogimao/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/maruth.rein/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://t.me/yogimao" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://maruthrein.github.io/" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+    </div>
+</div>
     
    <footer class="premium-footer">
     <div class="footer-container">
@@ -516,6 +553,5 @@ if (serviceItems.length > 0) {
   });
 }
 
-
-  }); // Fine DOMContentLoaded
 </script>
+<script src="script.js" defer></script>
