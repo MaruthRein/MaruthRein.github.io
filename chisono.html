@@ -1,125 +1,175 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sito in Costruzione</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chi Sono - Maruth Rein</title>
+
+    <link rel="canonical" href="https://maruthrein.github.io/chisono.html">
+    <meta name="description" content="La storia di Maruth Rein: da artigiano del mosaico a stratega finanziario, fino a diventare autore e graphic designer.">
+    <meta name="author" content="Maruth Rein">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <style>
-        /* * SEPARATORE DESCRIZIONE: STILI GLOBALI
-         * Ricalchiamo lo stile della tua immagine.
-        */
-        body, html {
-            height: 100%;
-            margin: 0;
-            background-color: #1f3c3c; 
-            font-family: 'Lato', sans-serif;
-            color: #e6e6e6;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+    <link rel="stylesheet" href="style.css">
 
-        /* * SEPARATORE DESCRIZIONE: CONTENITORE PRINCIPALE
-        */
-        .container {
-            max-width: 600px;
-            padding: 2rem;
-        }
-
-        /* * SEPARATORE DESCRIZIONE: ICONA
-        */
-        .icon {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 1.5rem;
-            stroke: #d4b256; 
-            stroke-width: 1.5;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        /* * SEPARATORE DESCRIZIONE: TESTI
-        */
-        h2 {
-            font-family: 'Playfair Display', serif;
-            color: #d4b256;
-            font-size: 3rem;
-            font-weight: 700;
-            margin: 0 0 1rem 0;
-        }
-
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            font-weight: 300;
-            margin-bottom: 2rem;
-        }
-
-        /* * SEPARATORE DESCRIZIONE: SEPARATORE
-        */
-        hr {
-            border: 0;
-            height: 3px;
-            width: 80px;
-            background-color: #c06b4a; 
-            margin: 2rem auto;
-        }
-        
-        /* * SEPARATORE DESCRIZIONE: NUOVO PULSANTE HOME
-         * Stile che riprende il colore arancione/ruggine
-        */
-        .home-button {
-            display: inline-block;
-            background-color: #c06b4a; /* Stesso colore della <hr> */
-            color: #ffffff;
-            padding: 12px 24px;
-            text-decoration: none;
-            font-family: 'Lato', sans-serif;
-            font-weight: 400;
-            border-radius: 5px; /* Angoli arrotondati */
-            margin-top: 1rem;
-            transition: background-color 0.3s ease;
-        }
-        
-        .home-button:hover {
-            background-color: #a05a3c; /* Un po' più scuro al passaggio */
-        }
-        
-    </style>
 </head>
 <body>
 
-    <div class="container">
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">Maruth Rein</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#opere">Libri</a></li>
+                    <li><a href="index.html#guru">The Guru</a></li>
+                    <li><a href="chisono.html" class="current-page">Chi Sono</a></li>
+                    <li><a href="index.html#cosa-faccio">Cosa Faccio</a></li>
+                    <li><a href="index.html#i-miei-strumenti">I miei strumenti</a></li>
+                    <li><a href="#" id="open-contact-popup">Contatti</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" aria-label="Apri navigazione">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
 
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <g>
-                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.7-3.7a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0l-3.7 3.7z"/>
-                <path d="M18.7 3.3l-1.6 1.6M12 10l-1.6 1.6a1 1 0 0 0 0 1.4l7 7a1 1 0 0 0 1.4 0l1.6-1.6a1 1 0 0 0 0-1.4l-7-7z"/>
-                <path d="M2 12l5.4 5.4a1 1 0 0 0 1.4 0l1.6-1.6a1 1 0 0 0 0-1.4L5 9z"/>
-                <path d="M7 13l-5 5M2 22l5-5"/>
-            </g>
-        </svg>
+    <main>
+    
+    <section class="story-hero">
+        <div class="container">
+            <h1 class="fade-in-up">Dalla Materia allo Spirito</h1>
+            <p class="subtitle fade-in-up">Il viaggio di Maruth Rein: tra pietra, numeri e parole.</p>
+        </div>
+    </section>
 
-        <h2>Pagina in Costruzione</h2>
+    <div class="bio-container container">
         
-        <p>
-            Stiamo creando qualcosa di speciale.
-            <br>
-          Be Patient...
-        </p>
-        
-        <a href="index.html" class="home-button">Torna alla Home</a>
-        
-        <hr>
+        <aside class="bio-sticky-col">
+            <div class="sticky-wrapper">
+                <img src="assets/images/chisono.png" alt="Maurizio Neri - Maruth Rein" class="bio-portrait">
+                <div class="bio-quote">
+                    <p>"La verità non è una merce. La si affronta."</p>
+                </div>
+            </div>
+        </aside>
 
+        <div class="bio-scroll-col">
+            
+            <article class="bio-card">
+                <span class="timeline-dot"></span>
+                <span class="card-number">01</span>
+                <div class="card-content">
+                    <h2>L'Artigiano della Pietra</h2>
+                    <p><strong>La Materia.</strong> Per oltre dieci anni ho lavorato nel settore dell'Interior Design. Ho collaborato con architetti e laboratori per creare intarsi e mosaici in marmo e pietra.</p>
+                    <p>Ho portato l'arte italiana negli Stati Uniti, Canada ed Europa. Lì ho imparato che la bellezza è disciplina e cura maniacale del dettaglio.</p>
+                    <img src="assets/images/mosaico.jpg" class="card-img-detail" alt="Dettaglio Mosaico">
+                </div>
+            </article>
+
+            <article class="bio-card alt-bg">
+                <span class="timeline-dot"></span>
+                <span class="card-number">02</span>
+                <div class="card-content">
+                    <h2>Lo Stratega dei Numeri</h2>
+                    <p><strong>La Logica.</strong> La curiosità mi ha spinto verso i mercati finanziari. Nel 2016 ho co-fondato BeGain, una start-up di formazione finanziaria, collaborando con CNBC Milano Finanza.</p>
+                    <p>Ho imparato a gestire il rischio e la psicologia delle masse. Il trading mi ha insegnato che la creatività senza strategia rimane solo un sogno.</p>
+                    <img src="assets/images/finanza.jpg" class="card-img-detail" alt="Trading e Strategia">
+                </div>
+            </article>
+
+            <article class="bio-card">
+                <span class="timeline-dot"></span>
+                <span class="card-number">03</span>
+                <div class="card-content">
+                    <h2>Il Narratore dell'Anima</h2>
+                    <p><strong>Lo Spirito.</strong> Parallelamente, insegno meditazione da quasi 30 anni e studio Jung. Questa ricerca è diventata "Yogimao" e il libro "Il Cammino dei Ribelli".</p>
+                    <p>Ho scoperto il potere dello storytelling: saper emozionare e far riflettere usando l'ironia e la profondità.</p>
+                    <img src="assets/images/libro.jpg" class="card-img-detail" alt="Libri e Scrittura">
+                </div>
+            </article>
+
+            <article class="bio-card final-card">
+                <div class="card-content">
+                    <h2>Oggi: Maruth Rein</h2>
+                    <p>Sono un Graphic Designer che pensa come un architetto, uno Stratega che comunica con l'arte e un Narratore digitale.</p>
+                    
+                    <div class="mini-skills">
+                        <span><i class="fa-solid fa-pen-nib"></i> Visual Design</span>
+                        <span><i class="fa-solid fa-code"></i> Web Strategy</span>
+                        <span><i class="fa-solid fa-book-open"></i> Storytelling</span>
+                    </div>
+
+                    <a href="#" id="open-contact-popup-cta" class="cta-button" style="margin-top: 20px;">Lavoriamo Insieme</a>
+                </div>
+            </article>
+
+        </div>
     </div>
+</main>
+
+    <div class="popup-overlay" id="contact-overlay"></div>
+    <div class="contact-popup" id="contact-popup">
+        <button class="popup-close" id="close-contact-popup" aria-label="Chiudi finestra">&times;</button>
+        <h3>Contattami</h3>
+        <p>Per collaborazioni, progetti o un semplice saluto, puoi scrivermi qui. Ti risponderò il prima possibile.</p>
+        <a href="mailto:maruth.rein@gmail.com" class="lightbox-mail">
+            maruth.rein@gmail.com
+        </a>
+        <div class="lightbox-socials">
+            <a href="https://www.facebook.com/yogimao/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/maruth.rein/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://t.me/yogimao" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://maruthrein.github.io/" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+    </div>
+    
+    <footer class="premium-footer">
+        <div class="footer-container">
+            <div class="footer-contact">
+                <a href="mailto:maruth.rein@gmail.com" class="footer-mail">
+                    maruth.rein@gmail.com
+                </a>
+            </div>
+            <div class="footer-socials">
+                <a href="https://www.facebook.com/yogimao/" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/maruth.rein/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://t.me/yogimao" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://maruthrein.github.io/" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <div class="footer-divider"></div>
+            <p class="footer-copy">
+                © <span id="current-year"></span> Maruth Rein – Tutti i diritti riservati
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactBtn = document.getElementById('open-contact-popup-cta');
+            const popup = document.getElementById('contact-popup');
+            const overlay = document.getElementById('contact-overlay');
+            
+            if(contactBtn && popup && overlay) {
+                contactBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    popup.classList.add('is-open');
+                    overlay.classList.add('is-open');
+                    document.body.classList.add('no-scroll');
+                });
+            }
+        });
+    </script>
+
 
 </body>
 </html>
