@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sito in Costruzione</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* * SEPARATORE DESCRIZIONE: STILI GLOBALI
+         * Ricalchiamo lo stile della tua immagine.
+        */
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: #1f3c3c; 
+            font-family: 'Lato', sans-serif;
+            color: #e6e6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* * SEPARATORE DESCRIZIONE: CONTENITORE PRINCIPALE
+        */
+        .container {
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        /* * SEPARATORE DESCRIZIONE: ICONA
+        */
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+            stroke: #d4b256; 
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* * SEPARATORE DESCRIZIONE: TESTI
+        */
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: #d4b256;
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0 0 1rem 0;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        /* * SEPARATORE DESCRIZIONE: SEPARATORE
+        */
+        hr {
+            border: 0;
+            height: 3px;
+            width: 80px;
+            background-color: #c06b4a; 
+            margin: 2rem auto;
+        }
+        
+        /* * SEPARATORE DESCRIZIONE: NUOVO PULSANTE HOME
+         * Stile che riprende il colore arancione/ruggine
+        */
+        .home-button {
+            display: inline-block;
+            background-color: #c06b4a; /* Stesso colore della <hr> */
+            color: #ffffff;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            font-weight: 400;
+            border-radius: 5px; /* Angoli arrotondati */
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .home-button:hover {
+            background-color: #a05a3c; /* Un po' più scuro al passaggio */
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g>
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.7-3.7a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0l-3.7 3.7z"/>
+                <path d="M18.7 3.3l-1.6 1.6M12 10l-1.6 1.6a1 1 0 0 0 0 1.4l7 7a1 1 0 0 0 1.4 0l1.6-1.6a1 1 0 0 0 0-1.4l-7-7z"/>
+                <path d="M2 12l5.4 5.4a1 1 0 0 0 1.4 0l1.6-1.6a1 1 0 0 0 0-1.4L5 9z"/>
+                <path d="M7 13l-5 5M2 22l5-5"/>
+            </g>
+        </svg>
+
+        <h2>Pagina in Costruzione</h2>
+        
+        <p>
+            Stiamo creando qualcosa di speciale.
+            <br>
+          Be Patient...
+        </p>
+        
+        <a href="index.html" class="home-button">Torna alla Home</a>
+        
+        <hr>
+
+    </div>
+
+</body>
+</html>
