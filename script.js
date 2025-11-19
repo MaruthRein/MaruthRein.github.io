@@ -51,10 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==============================================
        3. POPUP CONTATTI (Gestione Multipla)
        ============================================== */
-    // Selezioniamo TUTTI i possibili pulsanti di apertura (Menu + CTA Chi Sono)
+    // Selezioniamo TUTTI i possibili pulsanti di apertura
     const contactTriggers = [
-        document.getElementById('open-contact-popup'),
-        document.getElementById('open-contact-popup-cta')
+        document.getElementById('open-contact-popup'),      // Link nel Menu
+        document.getElementById('open-contact-popup-cta'),  // Eventuali vecchie CTA
+        document.getElementById('open-bio-cta')             // NUOVA CTA (Pagina Chi Sono)
     ];
     
     const contactPopup = document.getElementById('contact-popup');
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('no-scroll');
         }
 
-        // Assegna l'evento click solo ai pulsanti che esistono nella pagina corrente
+        // Ciclo sui trigger: se il bottone esiste nella pagina, gli diamo l'evento click
         contactTriggers.forEach(btn => {
             if (btn) {
                 btn.addEventListener('click', openContact);
@@ -165,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Verifica che l'elemento esista e che la libreria sia caricata
             if (galleryElement && typeof lightGallery !== 'undefined') {
-                // Utilizzo lightGallery (minuscolo) come da standard CDN, ma con licenza GPLv3
+                // LightGallery Setup
                 const instance = lightGallery(galleryElement, {
                     plugins: [lgThumbnail, lgZoom],
                     selector: 'a',
