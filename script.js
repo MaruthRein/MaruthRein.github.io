@@ -1,258 +1,390 @@
-/* ============================================================
-   SCRIPT GLOBALI – Maruth Rein
-   ============================================================ */
+document.querySelector('.nav-toggle').addEventListener('click', function() {
+    document.querySelector('.main-nav').classList.toggle('active');
+    const icon = this.querySelector("i");
+    icon.classList.toggle("fa-bars");
+    icon.classList.toggle("fa-xmark");
+});
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ==============================================
-       1. MENU HAMBURGER
-       ============================================== */
+    /* =========================================
+       1. MENU MOBILE (Hamburger)
+       ========================================= */
     const navToggle = document.querySelector('.nav-toggle');
     const mainNav = document.querySelector('.main-nav');
-    const body = document.body;
-
-    if (navToggle && mainNav) {
-        navToggle.addEventListener('click', () => {
-            navToggle.classList.toggle('is-active');
-            mainNav.classList.toggle('is-open');
-            body.classList.toggle('no-scroll');
-        });
-
-        document.querySelectorAll('.main-nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                navToggle.classList.remove('is-active');
-                mainNav.classList.remove('is-open');
-                body.classList.remove('no-scroll');
-            });
-        });
-    }
-
-
-    /* ==============================================
-       2. ACCORDION (THE GURU)
-       ============================================== */
-    const accordions = document.querySelectorAll(".accordion-button");
-    if (accordions.length > 0) {
-        accordions.forEach(button => {
-            button.addEventListener("click", () => {
-                button.classList.toggle("active");
-                const isExpanded = button.classList.contains("active");
-                button.setAttribute("aria-expanded", isExpanded);
-                
-                const content = document.getElementById(button.getAttribute("aria-controls"));
-                if (content) {
-                    // Opzionale: logica per chiudere gli altri se necessario
-                }
-            });
-        });
-    }
-
-
-    /* ==============================================
-       3. POPUP CONTATTI (Gestione Multipla)
-       ============================================== */
-    // Selezioniamo TUTTI i possibili pulsanti di apertura
-    const contactTriggers = [
-        document.getElementById('open-contact-popup'),      // Link nel Menu
-        document.getElementById('open-contact-popup-cta'),  // Eventuali vecchie CTA
-        document.getElementById('open-bio-cta')             // NUOVA CTA (Pagina Chi Sono)
-    ];
     
+    if (navToggle && mainNav) {
+        navToggle.addEventListener('click', function() {
+            const icon = this.querySelector('i') || this.querySelector('span'); // Gestisce sia <i> che <span>
+            mainNav.classList.toggle('active');
+            
+            // Se usi FontAwesome
+            if(icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else if (icon.classList.contains('fa-xmark')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+            // Se usi hamburger span CSS puro
+            if(icon.classList.contains('hamburger')) {
+                this.classList.toggle('active');
+            }
+        });
+    }
+
+    /* =========================================
+       2. POPUP CONTATTI
+       ========================================= */
     const contactPopup = document.getElementById('contact-popup');
-    const contactOverlay = document.getElementById('contact-overlay');
-    const contactClose = document.getElementById('close-contact-popup');
+    const contactOverlay = document.getElementById('contact-overlay'); // Se usi un overlay separato
+    const closeContactBtn = document.getElementById('close-contact-popup') || document.querySelector('.contact-close');
+    
+    // Funzione per aprire
+    function openContact() {
+        if(contactPopup) contactPopup.classList.add('active');
+        if(contactOverlay) contactOverlay.classList.add('active');
+    }
 
-    if (contactPopup && contactOverlay) {
+    // Funzione per chiudere
+    function closeContact() {
+        if(contactPopup) contactPopup.classList.remove('active');
+        if(contactOverlay) contactOverlay.classList.remove('active');
+    }
 
-        function openContact(e) {
-            if(e) e.preventDefault();
-            contactPopup.classList.add('is-open');
-            contactOverlay.classList.add('is-open');
-            document.body.classList.add('no-scroll');
-        }
-
-        function closeContact() {
-            contactPopup.classList.remove('is-open');
-            contactOverlay.classList.remove('is-open');
-            document.body.classList.remove('no-scroll');
-        }
-
-        // Ciclo sui trigger: se il bottone esiste nella pagina, gli diamo l'evento click
-        contactTriggers.forEach(btn => {
-            if (btn) {
-                btn.addEventListener('click', openContact);
-            }
+    // Attiva su tutti i link che puntano a #contact
+    document.querySelectorAll('a[href="#contact"], #open-contact-popup').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openContact();
         });
+    });
 
-        if (contactClose) contactClose.addEventListener('click', closeContact);
-        contactOverlay.addEventListener('click', closeContact);
+    if(closeContactBtn) closeContactBtn.addEventListener('click', closeContact);
+    if(contactOverlay) contactOverlay.addEventListener('click', closeContact);
+
+
+   /* ============================================================
+       3. SLIDING DOOR (Event Delegation - FIX PER SWIPER LOOP)
+       ============================================================ */
+    const sliderPanel = document.getElementById('book-slider');
+    const sliderOverlay = document.getElementById('slider-overlay');
+    const closeSliderBtn = document.querySelector('.slider-close');
+    const contentArea = document.getElementById('dynamic-content-area');
+    const loader = document.getElementById('slider-loader');
+
+    if (sliderPanel) {
         
-        // Chiudi con ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && contactPopup.classList.contains('is-open')) {
-                closeContact();
+        // MODIFICA: Usiamo "Event Delegation" sul document invece di un loop sui pulsanti.
+        // Questo intercetta i click anche sulle slide clonate da Swiper.
+        document.addEventListener('click', function(e) {
+            
+            // Cerca se l'elemento cliccato (o un suo genitore) ha la classe .open-slider
+            const btn = e.target.closest('.open-slider');
+            const contactBtnFromSlider = e.target.closest('.open-contact-from-slider');
+            const portfolioCard = e.target.closest('.portfolio-card');
+
+            
+            if (btn) {
+                e.preventDefault();
+                
+                // Recupera attributi
+                const fileUrl = btn.getAttribute('data-url');
+                const targetId = btn.getAttribute('data-book');
+                const layoutMode = btn.getAttribute('data-layout'); 
+
+                // --- GESTIONE LARGHEZZA ---
+                if (layoutMode === 'wide') {
+                    sliderPanel.classList.add('wide-mode');
+                } else {
+                    sliderPanel.classList.remove('wide-mode');
+                }
+
+                // 1. APRI PANNELLO
+                sliderPanel.classList.add('active');
+                if(sliderOverlay) sliderOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                // CASO A: FILE ESTERNO (data-url)
+                if (fileUrl) {
+                    if(contentArea) {
+                        contentArea.innerHTML = '';
+                        contentArea.style.opacity = '0';
+                    }
+                    if(loader) loader.style.display = 'block';
+
+                    fetch(fileUrl)
+                        .then(res => {
+                            if(!res.ok) throw new Error("Errore fetch");
+                            return res.text();
+                        })
+                        .then(html => {
+                            if(loader) loader.style.display = 'none';
+                            if(contentArea) {
+                                contentArea.innerHTML = html;
+                                setTimeout(() => {
+                                    contentArea.style.transition = 'opacity 0.5s ease';
+                                    contentArea.style.opacity = '1';
+                                }, 50);
+                            }
+                            // Non serve ri-bindare i bottoni grazie all'Event Delegation!
+                        })
+                        .catch(err => {
+                            console.error(err);
+                            if(loader) loader.style.display = 'none';
+                        });
+                } 
+                
+                // CASO B: CONTENUTO INTERNO (data-book)
+                else if (targetId) {
+                    if(loader) loader.style.display = 'none';
+                    // Nascondi tutti i contenuti interni
+                    document.querySelectorAll('.book-content').forEach(el => el.style.display = 'none');
+                    // Mostra quello giusto
+                    const targetDiv = document.getElementById(targetId);
+                    if(targetDiv) targetDiv.style.display = 'block';
+                }
             }
         });
+
+       
+
+        
+
+        // CHIUSURA
+        function closeSlider() {
+            sliderPanel.classList.remove('active');
+            if(sliderOverlay) sliderOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            // Pulizia opzionale
+            setTimeout(() => {
+                if(contentArea) contentArea.innerHTML = '';
+            }, 500);
+        }
+
+        if(closeSliderBtn) closeSliderBtn.addEventListener('click', closeSlider);
+        if(sliderOverlay) sliderOverlay.addEventListener('click', closeSlider);
+    }
+    /* =========================================
+       4. SCROLL REVEAL (Animazioni Luxury)
+       ========================================= */
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -20% 0px', // Focus centrale
+        threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            } else {
+                entry.target.classList.remove('active');
+            }
+        });
+    }, observerOptions);
+
+    // Elementi da animare: Blocchi Chi Sono, Immagini, ecc.
+    const revealElements = document.querySelectorAll('.chi-block, .reveal-on-scroll');
+    revealElements.forEach(el => observer.observe(el));
+
+});
+
+/* ============================================================
+       6. ANIMAZIONE STRUMENTI (Hybrid: Mobile Scroll + Desktop Hover)
+       ============================================================ */
+    const toolsSection = document.querySelector('#strumenti');
+    const toolCards = document.querySelectorAll('.tool-card');
+
+    // --- 1. FUNZIONE RESET (Svuota cerchio istantaneamente) ---
+    function resetCard(card) {
+        const circle = card.querySelector('.progress-ring__circle');
+        const text = card.querySelector('.tool-percentage-text');
+        
+        if (!circle || !text) return;
+
+        const radius = circle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+
+        // Tolgo la transizione per rendere il reset invisibile e immediato
+        circle.style.transition = 'none'; 
+        
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        circle.style.strokeDashoffset = circumference; // Stato vuoto
+        text.textContent = "0%";
+        
+        // Pulisco il timer del contatore se stava girando
+        if (card.dataset.timer) clearInterval(card.dataset.timer);
     }
 
+    // --- 2. FUNZIONE ANIMA (Riempi cerchio) ---
+    function animateCard(card) {
+        // PROTEZIONE MOBILE: Se è già animata, fermati (evita scatti mentre scorri)
+        // Questa protezione verrà "aggirata" dall'hover desktop
+        if (card.classList.contains('animated')) return;
 
-    /* ==============================================
-       4. ANIMAZIONE CERCHI (SKILLS)
-       ============================================== */
-    const circles = document.querySelectorAll(".tool-circle");
+        const percent = card.getAttribute('data-percent');
+        const circle = card.querySelector('.progress-ring__circle');
+        const text = card.querySelector('.tool-percentage-text');
 
-    if (circles.length > 0 && "IntersectionObserver" in window) {
+        if (!circle || !text) return;
 
-        function resetCircle(circle) {
-            circle.style.background = `conic-gradient(#e0b467 0deg, rgba(255,255,255,0.05) 0deg)`;
-        }
+        // Segno la card come "animata" per bloccare ripetizioni involontarie su mobile
+        card.classList.add('animated'); 
 
-        function animateCircle(circle, finalPercent) {
-            let start = null;
-            function frame(time) {
-                if (!start) start = time;
-                const progress = Math.min((time - start) / 1500, 1);
-                const current = progress * finalPercent;
-                const deg = (current * 360) / 100;
-                circle.style.background = `conic-gradient(#e0b467 ${deg}deg, rgba(255,255,255,0.05) 0deg)`;
-                if (progress < 1) requestAnimationFrame(frame);
+        const radius = circle.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        const offset = circumference - (percent / 100) * circumference;
+
+        // Riattivo la transizione CSS per l'animazione fluida
+        setTimeout(() => {
+            circle.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.22, 1, 0.36, 1)';
+            circle.style.strokeDashoffset = offset;
+        }, 50);
+
+        // Animazione Numero (Counter)
+        let start = 0;
+        const duration = 1500;
+        const stepTime = Math.abs(Math.floor(duration / percent));
+
+        if (card.dataset.timer) clearInterval(card.dataset.timer);
+
+        const timer = setInterval(() => {
+            if (start >= percent) {
+                text.textContent = percent + "%";
+                clearInterval(timer);
+            } else {
+                start++;
+                text.textContent = start + "%";
             }
-            requestAnimationFrame(frame);
-        }
+        }, stepTime);
 
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                const c = entry.target;
-                const p = parseInt(c.dataset.percent);
-                if (entry.isIntersecting) animateCircle(c, p);
-                else resetCircle(c);
+        card.dataset.timer = timer;
+    }
+
+    // --- 3. LOGICA SCROLL (Per tutti i dispositivi) ---
+    const toolsObserverOptions = {
+        root: null,
+        rootMargin: '0px', 
+        threshold: 0.15 // Parte quando il 15% è visibile
+    };
+
+    const toolsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // ENTRA: Anima
+                animateCard(entry.target);
+            } else {
+                // ESCE: Resetta tutto (così al prossimo scroll riparte)
+                entry.target.classList.remove('animated'); // Rimuovo il blocco
+                resetCard(entry.target);
+            }
+        });
+    }, toolsObserverOptions);
+
+    // Osservo ogni card singolarmente
+    toolCards.forEach(card => {
+        toolsObserver.observe(card);
+    });
+
+    // --- 4. LOGICA HOVER (Solo Desktop) ---
+    // Verifica se il dispositivo ha un mouse (evita di attivarsi al tocco su mobile)
+    if (window.matchMedia("(hover: hover)").matches) {
+        toolCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // TRUCCO: Rimuovo la classe 'animated' per forzare l'animazione
+                card.classList.remove('animated'); 
+                
+                resetCard(card); // Resetta a 0
+                
+                // Faccio ripartire l'animazione dopo un micro-ritardo
+                setTimeout(() => animateCard(card), 50);
             });
-        }, { threshold: 0.5 });
-
-        circles.forEach(circle => {
-            resetCircle(circle);
-            observer.observe(circle);
         });
     }
-
 
     /* ============================================================
-       5. MODALE PORTFOLIO + LIGHTGALLERY
+       7. 3D CAROUSEL (Swiper.js)
        ============================================================ */
-    const openPortfolio = document.getElementById('open-portfolio-btn');
-    const portfolioLightbox = document.getElementById('portfolioLightbox');
-    const portfolioOverlay = document.getElementById('portfolioOverlay');
-    const portfolioClose = document.getElementById('closePortfolioBtn');
-    const tabLinks = document.querySelectorAll('.tab-link');
-    const tabPanes = document.querySelectorAll('.tab-pane');
-    let LGinstances = {};
+    var swiper = new Swiper(".mySwiper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true, // La slide attiva è al centro
+        slidesPerView: "auto", // Permette larghezze variabili
+        initialSlide: 2, // Parte dalla terza card (opzionale)
+        loop: true, // Gira all'infinito
+        
+        // CONFIGURAZIONE EFFETTO 3D
+        coverflowEffect: {
+            rotate: 25,       // Rotazione delle card laterali (es. 25 gradi)
+            stretch: 0,       // Spaziatura (0 va bene)
+            depth: 150,       // Profondità (quanto vanno "dietro" le card laterali)
+            modifier: 1,      // Moltiplicatore effetto
+            slideShadows: true, // Ombre scure sulle card laterali
+        },
+        
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        
+        // Autoplay lento per effetto "vetrina"
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+        },
+        
+        // Velocità transizione
+        speed: 800,
+    });
 
-    // Esegui questo blocco solo se il portfolio esiste nella pagina
-    if (portfolioLightbox) {
+    document.addEventListener("DOMContentLoaded", () => {
 
-        function initLG(galleryId) {
-            if (!galleryId) return;
+    // seleziona tutte le card che aprono una gallery
+    const cards = document.querySelectorAll(".portfolio-card");
 
-            // Distruggi istanza precedente se esiste
-            if (LGinstances[galleryId]) {
-                try {
-                    LGinstances[galleryId].destroy(true);
-                } catch (err) {
-                    console.log("LightGallery destroy error", err);
-                }
+    cards.forEach(card => {
+        card.addEventListener("click", () => {
+
+            const galleryDataEl = card.querySelector(".gallery-data");
+            if (!galleryDataEl) return;
+
+            // Legge il JSON contenuto nel div nascosto
+            let galleryItems = [];
+            try {
+                galleryItems = JSON.parse(galleryDataEl.textContent);
+            } catch (e) {
+                console.error("Errore JSON nella gallery:", e);
+                return;
             }
 
-            const galleryElement = document.getElementById(galleryId);
-            
-            // Verifica che l'elemento esista e che la libreria sia caricata
-            if (galleryElement && typeof lightGallery !== 'undefined') {
-                // LightGallery Setup
-                const instance = lightGallery(galleryElement, {
-                    plugins: [lgThumbnail, lgZoom],
-                    selector: 'a',
-                    speed: 500,
-                    download: false,
-                    licenseKey: 'GPLv3'
-                });
-                LGinstances[galleryId] = instance;
-            }
-        }
+            // Crea un container temporaneo
+            const tempGallery = document.createElement("div");
+            document.body.appendChild(tempGallery);
 
-        function openModal() {
-            portfolioLightbox.classList.add('is-open');
-            portfolioOverlay.classList.add('is-open');
-            document.body.classList.add('no-scroll');
-
-            // Inizializza la galleria della tab attiva
-            const activePane = document.querySelector('.tab-pane.active');
-            if (activePane) {
-                const galleryGrid = activePane.querySelector('.portfolio-gallery-grid');
-                if (galleryGrid) initLG(galleryGrid.id);
-            }
-        }
-
-        function closeModal() {
-            portfolioLightbox.classList.remove('is-open');
-            portfolioOverlay.classList.remove('is-open');
-            document.body.classList.remove('no-scroll');
-
-            // Pulisci istanze
-            Object.values(LGinstances).forEach(inst => {
-                try { inst.destroy(true); } catch(e){}
+            // Avvia la gallery
+            const gallery = lightGallery(tempGallery, {
+                dynamic: true,
+                dynamicEl: galleryItems,
+                plugins: [lgZoom, lgThumbnail],
+                closable: true,
+                download: false
             });
-            LGinstances = {};
-        }
 
-        // Event Listeners per il Portfolio
-        if (openPortfolio) {
-            openPortfolio.addEventListener('click', e => {
-                e.preventDefault();
-                openModal();
+            gallery.openGallery();
+
+            // Rimuove il container quando chiudi la gallery
+            gallery.on('lgAfterClose', () => {
+                tempGallery.remove();
             });
-        }
 
-        if (portfolioClose) portfolioClose.addEventListener('click', closeModal);
-        if (portfolioOverlay) portfolioOverlay.addEventListener('click', closeModal);
-
-        // Gestione TAB
-        tabLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                const tab = link.dataset.tab;
-                const pane = document.getElementById(tab);
-
-                if(pane) {
-                    tabLinks.forEach(l => l.classList.remove('active'));
-                    tabPanes.forEach(p => p.classList.remove('active'));
-
-                    link.classList.add('active');
-                    pane.classList.add('active');
-
-                    const gallery = pane.querySelector('.portfolio-gallery-grid');
-                    if (gallery) initLG(gallery.id);
-                }
-            });
         });
+    });
 
-        // Click sulle card dei servizi (Home Page) che aprono tab specifici
-        document.querySelectorAll('.service-item').forEach((item, i) => {
-            item.addEventListener('click', () => {
-                openModal();
-                const tabIndex = i + 1;
-                const tabId = `tab-${tabIndex}`;
-                const link = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
-                const pane = document.getElementById(tabId);
-
-                if (link && pane) {
-                    tabLinks.forEach(l => l.classList.remove('active'));
-                    tabPanes.forEach(p => p.classList.remove('active'));
-
-                    link.classList.add('active');
-                    pane.classList.add('active');
-
-                    const gallery = pane.querySelector('.portfolio-gallery-grid');
-                    if (gallery) initLG(gallery.id);
-                }
-            });
-        });
-    }
 });
+
+
+
+
