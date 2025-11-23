@@ -1,0 +1,318 @@
+/* ===========================================================
+   GURU SECTION – LUXURY STYLE (indipendente)
+   =========================================================== */
+
+/* Container */
+#guru {
+    padding: 3rem 0;
+}
+
+.guru-container {
+    width: 90%;
+    max-width: 1300px;
+    margin: auto;
+}
+
+/* Titolo */
+.guru-title {
+    text-align: center;
+    font-family: var(--font-title);
+    font-size: 3rem;
+    color: var(--gold-mid);
+    margin-bottom: 3rem;
+    letter-spacing: 2px;
+}
+
+/* GRID — ristabiliamo proporzioni normali */
+.guru-grid {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* IMMAGINE – versione desktop */
+.guru-img-box img {
+    width: 65%;
+    max-width: 420px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 6px;
+}
+
+.guru-img-box img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain; /* si adatta senza deformarsi */
+    border-radius: 12px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.6);
+}
+
+
+/* Card Luxury */
+.guru-card {
+    flex: 1;
+    background: rgba(6, 17, 19, 0.7);
+    border: 1px solid rgba(197,160,89,0.25);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Accordion Luxury */
+.accordion-btn {
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-title);
+    font-size: 1.4rem;
+    color: var(--gold-mid);
+    padding: 1.3rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(197,160,89,0.25);
+    position: relative;
+    transition: 0.3s ease;
+}
+
+.accordion-btn::after {
+    content: "\f078";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+}
+
+.accordion-btn.active::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.accordion-panel {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+    padding-right: 1rem;
+}
+
+.accordion-panel p {
+    color: #ccc;
+    padding: 0.7rem 0;
+    line-height: 1.7;
+}
+
+/* Panel aperto */
+.accordion-panel.active {
+    max-height: 600px;
+}
+
+/* Box Facebook */
+.guru-social-box {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.guru-social-box h3 {
+    font-family: var(--font-title);
+    color: var(--gold-mid);
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
+}
+
+.guru-facebook-btn {
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 14px 30px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 1px solid var(--gold-mid);
+    border-radius: 6px;
+    color: var(--gold-mid);
+    transition: 0.3s ease;
+}
+
+.guru-facebook-btn:hover {
+    background: var(--gold-mid);
+    color: #000;
+}
+
+
+/* ===========================================================
+   RESPONSIVE
+   =========================================================== */
+
+/* MOBILE FIX VERO */
+@media (max-width: 900px) {
+
+    .guru-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        justify-items: center; /* centra tutto */
+    }
+
+    .guru-img-box {
+        max-width: 350px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .guru-img-box img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+
+    .guru-card {
+        width: 100%;
+        padding: 1.8rem;
+    }
+}
+
+/* Glow box stile Luxury */
+.guru-card {
+    background: rgba(6, 17, 19, 0.65); /* vetro scuro */
+    border: 1px solid rgba(197, 160, 89, 0.25); /* bordo oro tenue */
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(240, 197, 117, 0.25); /* glow oro morbido */
+    border-radius: 10px;
+    padding: 2rem;
+    backdrop-filter: blur(8px);
+}
+/* Cornice oro ultraleggera + vignetta */
+.guru-img-box {
+    background: rgba(6, 17, 19, 0.4);
+    padding: 2px;
+    border-radius: 12px;
+
+    border: 1px solid rgba(197, 160, 89, 0.35);
+
+    box-shadow:
+        inset 0 0 40px rgba(0, 0, 0, 0.6), /* vignetta morbida */
+        0 10px 30px rgba(0, 0, 0, 0.7),   /* ombra esterna */
+        0 0 30px rgba(197, 160, 89, 0.18); /* glow oro soft */
+}
+
+/* Immagine leggermente rimpicciolita */
+.guru-img-box img {
+    width: 65%;
+    max-width: 420px;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto;
+}
+@guru-section.css
+
+@media (max-width: 768px) {
+
+    /* 1 colonna vera (grid, non flex) */
+    .guru-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    /* Box immagine centrato */
+    .guru-img-box {
+        width: 100%;
+        max-width: 430px;
+        margin: 0 auto;
+    }
+
+    /* Immagine grande e leggibile */
+    .guru-img-box img {
+        width: 100%;
+        max-width: 430px;
+        height: auto;
+    }
+
+    /* Card a larghezza piena */
+    .guru-card {
+        width: 100%;
+        padding: 2rem;
+    }
+}
+/* ===========================================================
+  GURU GALLERY
+   =========================================================== */
+.guru-gallery {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.guru-gallery img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+.guru-arrow {
+    background: rgba(0, 0, 0, 0.45);
+    border: none;
+    color: var(--gold-mid);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.3em 0.55em;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.2s ease;
+}
+
+.guru-arrow:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.guru-arrow-left {
+    left: 10px;
+}
+
+.guru-arrow-right {
+    right: 10px;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+
+    .guru-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem; /* Riduce lo spazio tra immagine e accordion */
+    }
+
+    .guru-img-box {
+        width: 100%;
+        max-width: 320px; /* Evita che diventi gigante */
+        margin: 0 auto;
+    }
+
+    .guru-card {
+        width: 100%;
+        padding: 0 1rem;
+    }
+}
+
+.guru-social-box {
+    text-align: center;
+    padding: 1.8rem 1.2rem 2.4rem; /* aumenta il padding inferiore */
+}
+
+.guru-facebook-btn {
+    display: inline-block;
+    margin-top: 1.2rem;  /* spazio sopra al bottone */
+    margin-bottom: 0.6rem; /* evita l'effetto appiccicato in fondo */
+}
+

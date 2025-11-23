@@ -1,0 +1,470 @@
+/* =============================================================
+   MODULO: BOOKS.CSS
+   Stile Vetrina Luxury per la sezione Libri + Dettaglio Singolo
+   ============================================================= */
+
+/* --- FIX GLOBALE PER STICKY (Messo qui in cima per sicurezza) --- */
+body, html, main {
+    overflow: visible !important;
+}
+
+/* =============================================================
+   SEZIONE VETRINA (LISTA LIBRI)
+   ============================================================= */
+
+.books-section {
+    padding: 3rem 0;
+    position: relative;
+    background: radial-gradient(circle at 50% 50%, rgba(12, 31, 35, 0.4), transparent 70%);
+}
+
+.books-container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* --- Header della Sezione --- */
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-family: var(--font-title);
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.section-subtitle {
+    color: #b5b4a9;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/* --- Griglia dei Libri --- */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 3rem;
+}
+
+/* --- Card Luxury --- */
+.book-card {
+    background: rgba(6, 17, 19, 0.6);
+    border: 1px solid rgba(197, 160, 89, 0.25);
+    padding: 2rem;
+    border-radius: 8px;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(197, 160, 89, 0.2); 
+}
+
+.book-card:hover {
+    transform: translateY(-10px);
+    background: rgba(12, 31, 35, 0.9);
+    border-color: var(--gold-bright);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(197, 160, 89, 0.6),
+        0 0 50px rgba(197, 160, 89, 0.3);
+}
+
+/* --- Immagine Copertina --- */
+.book-image-wrapper {
+    width: 180px;
+    height: 270px;
+    margin-bottom: 2rem;
+    position: relative;
+    transition: 0.4s ease;
+}
+
+.book-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: -5px 5px 15px rgba(0,0,0,0.7);
+}
+
+.book-card:hover .book-image-wrapper img {
+    filter: brightness(1.1);
+}
+
+/* --- Testi e Contenuti --- */
+.book-content h3 {
+    font-family: var(--font-title);
+    color: #e4d8bc;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    transition: 0.3s;
+}
+
+.book-card:hover .book-content h3 {
+    color: var(--gold-bright);
+}
+
+.book-content p {
+    font-family: var(--font-body); 
+    font-size: 1.0rem; 
+    color: #cfcfcf; 
+    line-height: 1.6; 
+    margin-bottom: 1.5rem;
+    font-weight: 300; 
+}
+
+/* --- Link "Scopri di più" (Generico) --- */
+.btn-text-gold {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold-mid);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap; /* Evita che il testo vada a capo male */
+}
+
+.btn-text-gold i {
+    transition: 0.3s;
+}
+
+.btn-text-gold:hover {
+    color: var(--gold-bright);
+}
+
+.btn-text-gold:hover i {
+    transform: translateX(5px);
+}
+
+/* --- Responsive Mobile Lista --- */
+@media (max-width: 768px) {
+    .books-section { padding: 4rem 0; }
+    .section-header h2 { font-size: 2.2rem; }
+    .book-card { padding: 1.5rem; }
+}
+
+
+/* =============================================================
+   STILE PAGINA SINGOLA (DETTAGLIO LIBRO)
+   ============================================================= */
+
+/* Container principale della pagina dettaglio */
+.book-detail-section {
+    padding-top: calc(var(--header-height-desktop) + 10px); /* Spazio ridotto */
+    padding-bottom: 6rem;
+    min-height: 100vh;
+}
+
+/* LINK "TORNA INDIETRO" LUXURY */
+.back-link-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold-mid) !important; 
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid transparent; 
+    padding-bottom: 5px;
+}
+
+.back-link-gold:hover {
+    color: var(--gold-bright) !important;
+    border-bottom-color: var(--gold-bright);
+    transform: translateX(-5px);
+}
+
+.back-link-gold i {
+    font-size: 0.9rem;
+}
+
+/* WRAPPER DELLE DUE COLONNE */
+.book-detail-wrapper {
+    display: flex;
+    gap: 5rem;
+    
+    /* FONDAMENTALE PER STICKY: allinea in alto, non strecciare */
+    align-items: flex-start; 
+    
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- COLONNA SINISTRA (Immagine Sticky) --- */
+.book-detail-cover {
+    flex: 0 0 400px;
+    width: 400px;
+    
+    /* ATTIVAZIONE STICKY */
+    position: sticky;
+    position: -webkit-sticky;
+    
+    /* PUNTO DI FRENATA */
+    top: 130px; 
+    
+    height: fit-content;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+}
+
+/* Immagine */
+.cover-glow-container {
+    /* Assicuriamoci che il contenitore non abbia sfondi o bordi strani */
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    
+    /* Centra l'immagine */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* --- FIX OMBRA REALISTICA (Stile 3D Dark) --- */
+
+.cover-glow-container img {
+    width: 100%;
+    height: auto;
+    max-height: 75vh;
+    object-fit: contain;
+    
+    /* Reset di base */
+    border-radius: 0;
+    box-shadow: none !important;
+    background: transparent !important;
+    border: none !important;
+
+    /* LA MAGIA: DOPPIA OMBRA NERA (DROP-SHADOW) */
+    filter: 
+        /* 1. Ombra vicina e nitida (definisce i contorni) */
+        drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5))
+        
+        /* 2. Ombra lontana, profonda e diffusa (crea l'effetto sospensione) */
+        drop-shadow(0 30px 50px rgba(0, 0, 0, 3.9));
+        
+    transition: transform 0.3s ease;
+}
+
+/* Effetto Hover: Il libro si alza leggermente e l'ombra si allunga */
+.cover-glow-container img:hover {
+    transform: translateY(-5px); /* Si alza fisicamente */
+    filter: 
+        drop-shadow(0 10px 10px rgba(0, 0, 0, 0.6))
+        drop-shadow(0 50px 70px rgba(0, 0, 0, 0.8)); /* L'ombra diventa più distante */
+}
+
+/* Effetto leggero quando passi sopra col mouse (opzionale) */
+.cover-glow-container img:hover {
+    transform: scale(1.02); /* Si ingrandisce appena appena */
+}
+
+/* Badge Calvino */
+.calvino-badge-luxury img {
+    max-width: 100%; /* Si adatta al contenitore */
+    width: 280px;    /* Dimensione controllata */
+    opacity: 0.95;   /* Appena appena meno sparato */
+    
+    /* TRASFORMAZIONE IN CARD */
+    border-radius: 8px; /* Angoli morbidi (fondamentale per l'eleganza) */
+    
+    /* Ombra esterna profonda per staccarlo dal fondo scuro */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+    
+    /* Un sottile bordo dorato per legarlo al resto del sito */
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    
+    transition: all 0.3s ease;
+}
+
+/* Effetto Hover: si solleva ancora di più */
+.calvino-badge-luxury img:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.9);
+    border-color: var(--gold-bright);
+    opacity: 1;
+}
+
+/* --- COLONNA DESTRA (Testo che scorre) --- */
+.book-detail-content {
+    flex: 1;
+    
+    /* Sfondo sempre semitrasparente */
+    background: rgba(6, 17, 19, 0.75); 
+    
+    /* Bordo dorato sottile */
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    
+    padding: 3.5rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px); /* Sfoca quello che c'è dietro per leggibilità */
+    
+    /* LA MAGIA: DOPPIA OMBRA */
+    box-shadow: 
+        /* 1. OMBRA ESTERNA (Molto scura e profonda come chiedevi) */
+        0 30px 60px rgba(0, 0, 0, 0.95);
+        
+        
+}
+
+.book-detail-content h1 {
+    font-family: var(--font-title);
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    color: var(--gold-mid);
+}
+
+.subtitle-luxury {
+    font-size: 1.3rem;
+    color: #e0e0e0;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+    display: block;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+    padding-bottom: 1.5rem;
+}
+
+.text-block p {
+    font-size: 1.1rem;
+    color: #cfcfcf;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+/* Citazione */
+.luxury-quote {
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    color: var(--gold-bright);
+    text-align: center;
+    margin: 3rem 0;
+    padding: 2rem;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    background: rgba(197, 160, 89, 0.05);
+}
+
+/* --- AREA PULSANTI (Il Fix per la sovrapposizione) --- */
+.action-buttons {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;      /* Spazio tra i bottoni */
+    flex-wrap: wrap; /* FONDAMENTALE: permette di andare a capo se non c'è spazio */
+}
+
+/* Pulsante Grande */
+.big-btn {
+    padding: 16px 35px;
+    font-size: 0.9rem;
+    white-space: nowrap; /* Non spezzare il testo */
+    flex-shrink: 0;      /* Non rimpicciolirti troppo */
+}
+
+
+/* ============================================================
+   FIX VERSIONE MOBILE (FINALE)
+============================================================ */
+/* --- MOBILE RESPONSIVE PAGINA SINGOLA --- */
+@media (max-width: 900px) {
+
+    .book-detail-wrapper {
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+    
+    .book-detail-cover {
+        width: 100%;
+        max-width: 300px;
+        position: relative; /* disattiva sticky */
+        top: 0;
+        flex: none;
+        margin-bottom: 2rem;
+    }
+    
+    .calvino-badge-luxury img {
+        max-width: 280px;
+    }
+
+    .book-detail-content {
+        width: 100%;
+        padding: 1.8rem;
+    }
+
+    .book-detail-content h1 {
+        font-size: 2.3rem;
+        text-align: center;
+    }
+
+    .subtitle-luxury {
+        text-align: center;
+    }
+
+    /* --- PULSANTI MOBILE (FIX COMPLETO) --- */
+    .action-buttons {
+        width: 100%;
+        margin-top: 2.5rem;
+
+        display: flex;
+        flex-direction: column;     /* uno sotto l’altro */
+        justify-content: center;
+        align-items: center;
+        gap: 1.4rem;                /* spazio tra i pulsanti */
+    }
+
+    /* Pulsante primo (button oro grande) */
+    .big-btn {
+        width: 100%;
+        max-width: 320px;
+        padding: 16px 25px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    /* Link “Leggi l’estratto” */
+    .btn-text-gold {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        font-size: 1rem;
+        white-space: nowrap;
+    }
+}
+
+
+/* Pulsanti sotto la copertina */
+.cover-buttons {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+}
+
+.cover-buttons .big-btn {
+    width: 100%;
+    text-align: center;
+}
+
+

@@ -1,0 +1,349 @@
+/* =============================================================
+   GLOBAL & BODY
+   ============================================================= */
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    background-image:
+        radial-gradient(ellipse 100% 60% at 50% 0%, rgba(197,160,89,0.35), transparent 80%),
+        linear-gradient(to bottom, transparent 40%, rgba(2,5,6,0.9)),
+        url('assets/images/sfondo-petrolio.webp');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-blend-mode: screen, normal, normal;
+    color: #d0d0d0;
+    line-height: 1.6;
+}
+
+/* =============================================================
+   SEZIONE CHI SONO — LUXURY EDITORIAL (Unboxed)
+   ============================================================= */
+
+.chi-sono-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 6rem; /* Più respiro tra foto e testo */
+    padding: 8rem 6%; /* Spaziatura verticale ampia e lussuosa */
+    position: relative;
+    overflow: visible;
+}
+
+/* ------------------------------------------
+   1. FOTO A SINISTRA (Sfumata e Sticky)
+------------------------------------------ */
+.chi-photo-wrapper {
+    flex: 0 0 32%; 
+    position: -webkit-sticky;
+    position: sticky;
+    top: 120px;
+    height: auto; 
+    display: block;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.chi-photo-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    /* Sfumatura verso il basso per fondersi col nero */
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    filter: saturate(0) contrast(1.15) brightness(0.95);
+    opacity: 0.9; 
+}
+
+/* ------------------------------------------
+   2. CONTENUTO A DESTRA (Timeline)
+------------------------------------------ */
+.chi-content-wrapper {
+    flex: 1;
+    padding-left: 4rem;
+    border-left: 1px solid rgba(197, 160, 89, 0.15);
+}
+
+/* TITOLI */
+.chi-header {
+    margin-bottom: 5rem;
+    position: relative;
+}
+
+/* Pallino timeline inizio */
+.chi-header::before {
+    content: '';
+    position: absolute;
+    left: -4.35rem;
+    top: 22px;
+    width: 11px;
+    height: 11px;
+    background: var(--gold-mid);
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--gold-mid);
+}
+
+.chi-title {
+    font-family: var(--font-title);
+    font-size: 4rem;
+    line-height: 1;
+    color: transparent;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.chi-subtitle {
+    color: rgba(255,255,255,0.5);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/* ------------------------------------------
+   3. BLOCCHI (CARDS MINIMAL + SCROLL REVEAL)
+------------------------------------------ */
+
+.chi-block {
+    position: relative;
+    background: transparent;
+    border: none;
+    padding: 0 0 4rem 0;
+    margin-bottom: 2rem;
+    box-shadow: none;
+    transition: transform 0.4s ease; /* Transizione fluida */
+}
+
+/* AGGIUNTA FONDAMENTALE: Movimento del blocco su Hover O Active */
+.chi-block:hover,
+.chi-block.active {
+    transform: translateY(-5px); /* Il blocco si solleva leggermente */
+}
+
+/* Effetto Hover/Active: Linea laterale che si accende */
+.chi-block::after {
+    content: '';
+    position: absolute;
+    left: -4.1rem;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    background: transparent;
+    transition: 0.4s ease;
+}
+
+.chi-block:hover::after,
+.chi-block.active::after {
+    background: var(--gold-mid);
+    box-shadow: 0 0 15px var(--gold-mid);
+}
+
+/* Pallino Timeline per ogni blocco */
+.chi-block::before {
+    content: '';
+    position: absolute;
+    left: -4.35rem; 
+    top: 0.5rem;
+    width: 11px;
+    height: 11px;
+    background: var(--bg-dark);
+    border: 1px solid rgba(197, 160, 89, 0.4);
+    border-radius: 50%;
+    transition: 0.3s;
+    z-index: 2;
+}
+
+.chi-block:hover::before,
+.chi-block.active::before {
+    background: var(--gold-mid);
+    border-color: var(--gold-mid);
+    box-shadow: 0 0 20px var(--gold-mid);
+}
+
+/* NUMERO BACKGROUND */
+.chi-number {
+    font-family: var(--font-title);
+    font-size: 3.5rem;
+    font-weight: 700;
+    position: absolute;
+    top: -1.8rem;
+    left: 0;
+    color: rgba(197, 160, 89, 0.08); /* Oro tenue */
+    z-index: -1;
+}
+
+.chi-heading {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+.chi-heading span {
+    color: var(--gold-mid);
+    font-style: italic;
+    text-shadow: 0 0 12px rgba(197, 160, 89, 0.3);
+}
+
+.chi-block p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 95%;
+}
+
+/* =========================================
+   IMMAGINI INTERNE "CORNICE LUXURY 3D"
+   ========================================= */
+
+.chi-img {
+    width: 100%;
+    max-width: 380px;
+    margin-top: 2.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    filter: sepia(15%) contrast(1.15) brightness(0.95);
+    
+    /* Ombra Iniziale */
+    box-shadow:
+        0 20px 50px -10px rgba(0, 0, 0, 0.8),
+        0 5px 25px -5px rgba(197, 160, 89, 0.15);
+
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    z-index: 2;
+}
+
+/* HOVER SULL'IMMAGINE O QUANDO IL BLOCCO E' ACTIVE */
+.chi-block:hover .chi-img,
+.chi-block.active .chi-img,
+.chi-img:hover {
+    filter: sepia(0%) contrast(1.1) brightness(1.05);
+    border-color: var(--gold-mid);
+    transform: translateY(-5px) scale(1.01);
+    
+    /* Ombra "Sollevata" e Glow Intenso */
+    box-shadow:
+        0 35px 70px -15px rgba(0, 0, 0, 0.9),
+        0 10px 40px -5px rgba(197, 160, 89, 0.35);
+}
+
+/* =========================================
+   TESTO BRIOSO (Gold Accent)
+   ========================================= */
+.gold-accent {
+    color: var(--gold-mid);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+/* Si accende anche quando il blocco è attivo */
+.chi-block p:hover .gold-accent,
+.chi-block.active p .gold-accent {
+    color: var(--gold-light);
+    text-shadow: 0 0 8px rgba(197, 160, 89, 0.5);
+}
+
+/* =========================================
+   CTA FINALE (Call to Action)
+   ========================================= */
+.chi-cta-wrapper {
+    margin-top: 6rem;
+    padding-bottom: 2rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.timeline-end-dot {
+    position: absolute;
+    left: -4.35rem;
+    top: 8px;
+    width: 11px;
+    height: 11px;
+    background: var(--bg-dark);
+    border: 1px solid var(--gold-mid);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--gold-mid);
+}
+
+.cta-text {
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 2.5rem;
+}
+
+.btn-luxury {
+    display: inline-block;
+    padding: 16px 40px;
+    border: 1px solid var(--gold-mid);
+    color: var(--gold-mid);
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(4px);
+    border-radius: 4px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-luxury:hover {
+    background: rgba(197, 160, 89, 0.15);
+    color: #fff;
+    border-color: var(--gold-light);
+    box-shadow: 
+        0 0 20px rgba(197, 160, 89, 0.4), 
+        inset 0 0 10px rgba(197, 160, 89, 0.1);
+    transform: translateY(-3px);
+    letter-spacing: 4px;
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+   ========================================= */
+@media (max-width: 900px) {
+    .chi-sono-section {
+        flex-direction: column;
+        padding: 4rem 1.5rem;
+        gap: 3rem;
+    }
+
+    .chi-photo-wrapper {
+        width: 100%;
+        position: relative;
+        top: 0;
+        margin-bottom: 2rem;
+    }
+    
+    .chi-photo-wrapper img {
+        -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    }
+
+    .chi-content-wrapper {
+        padding-left: 2rem;
+    }
+
+    /* Aggiustamento posizioni timeline su mobile */
+    .chi-header::before,
+    .chi-block::before,
+    .timeline-end-dot {
+        left: -2.35rem;
+    }
+    .chi-block::after {
+        left: -2.1rem;
+    }
+    
+    .chi-title { font-size: 3rem; }
+    .cta-text { font-size: 1.5rem; }
+}

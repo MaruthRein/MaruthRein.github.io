@@ -1,0 +1,1757 @@
+/* =============================================================
+   LUXURY.CSS — Versione Finale Super Ottimizzata
+   ============================================================= */
+
+/* -----------------------------------------------------------
+   1. VARIABILI GLOBALI
+------------------------------------------------------------ */
+:root {
+    --bg-dark: #061113;
+    --bg-gradient-start: #0c1f23;
+    --bg-gradient-end: #030708;
+
+    --gold-dark: #7a6230;
+    --gold-mid: #c9a86a;
+    --gold-light: #ecd9a3;
+    --gold-bright: #fff3c1;
+
+    --gold-gradient: linear-gradient(
+        135deg,
+        var(--gold-dark) 0%,
+        var(--gold-mid) 25%,
+        var(--gold-bright) 50%,
+        var(--gold-mid) 75%,
+        var(--gold-dark) 100%
+    );
+
+    --font-title: 'Cinzel', serif;
+    --font-body: 'Lato', sans-serif;
+
+    /* Nuove variabili regolabili */
+    --header-height-desktop: 80px;
+    --header-height-mobile: 65px;
+}
+
+/* -----------------------------------------------------------
+   2. RESET & BASE
+------------------------------------------------------------ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+a { text-decoration: none; transition: .3s ease; }
+img { display: block; max-width: 100%; }
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-dark);
+    background-image:
+        radial-gradient(ellipse 100% 60% at 50% 0%, rgba(197,160,89,0.35), transparent 80%),
+        linear-gradient(to bottom, transparent 40%, rgba(2,5,6,0.9)),
+        url('assets/images/sfondo-petrolio.webp');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-blend-mode: screen, normal, normal;
+    color: #d0d0d0;
+    line-height: 1.6;
+}
+
+/* -----------------------------------------------------------
+   3. UTILITY ORO
+------------------------------------------------------------ */
+.gold-gradient-text {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* -----------------------------------------------------------
+   4. HEADER — Sticky perfetto Desktop + Mobile
+------------------------------------------------------------ */
+.main-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: var(--header-height-desktop);
+    z-index: 1000;
+
+    background: rgba(2,5,6,0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    border-bottom: 1px solid rgba(197,160,89,0.5);
+    box-shadow:
+        0 1px 10px rgba(197,160,89,0.4),
+        0 5px 20px rgba(197,160,89,0.15);
+
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* LOGO */
+.logo {
+    font-family: var(--font-title);
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* MENU DESKTOP */
+.main-nav ul {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none; 
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav a {
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold-mid);
+    opacity: .8;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    opacity: 1;
+    color: var(--gold-bright);
+}
+
+/* HAMBURGER */
+.nav-toggle {
+    display: none;
+    font-size: 2rem;
+    color: var(--gold-bright);
+    cursor: pointer;
+    z-index: 3000;
+}
+
+.nav-toggle i {
+    transition: .4s ease;
+}
+
+.nav-toggle i.fa-xmark {
+    transform: rotate(90deg);
+}
+
+/* -----------------------------------------------------------
+   5. HERO — Fix Spaziatura Desktop
+------------------------------------------------------------ */
+.hero {
+    /* MODIFICA 1: Togli min-height o mettilo su auto. 
+       Cosi il contenitore finisce dove finisce il contenuto. */
+    min-height: auto;
+
+    /* MODIFICA 2: Padding Top (quello che abbiamo settato prima per distanziare dall'header) */
+    padding-top: calc(var(--header-height-desktop) + 2rem);
+    
+    /* MODIFICA 3: Padding Bottom.
+       Questo numero decide ESATTAMENTE quanto la linea dorata sta sotto l'immagine/testo.
+       Vuoi la linea più vicina? Riduci a 4rem. Più lontana? Aumenta a 8rem. */
+    padding-bottom: 5rem;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative; /* Necessario per la linea */
+}
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.7px; /* Spessore della linea: 1px è molto sottile ed elegante */
+
+    /* Usa il tuo gradiente dorato esistente */
+    background: var(--gold-gradient);
+
+    /* Aggiunge un bagliore dorato soffuso sotto la linea */
+    box-shadow:
+        0 1px 4px rgba(197, 160, 89, 0.6), /* Bagliore stretto e luminoso */
+        0 2px 10px rgba(122, 98, 48, 0.3);  /* Alone più diffuso */
+
+    z-index: 10; /* Si assicura che stia sopra lo sfondo */
+}
+
+.hero-container {
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Questo allinea verticalmente testo e immagine tra loro */
+    gap: 5%;
+}
+
+.hero-content { max-width: 600px; }
+
+.hero h1 {
+    font-family: var(--font-title);
+    font-size: 4.2rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.hero-desc {
+    color: #aaa;
+    font-size: 1.1rem;
+    max-width: 460px;
+    margin-bottom: 3rem;
+}
+
+/* -----------------------------------------------------------
+   Pulsante Luxury Oro + Vetro Satinato
+------------------------------------------------------------ */
+.btn-luxury {
+    display: inline-block;
+    padding: 14px 35px;
+    border: 1px solid var(--gold-mid);
+    color: var(--gold-mid);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(6px);
+
+    border-radius: 4px;
+    transition: .4s ease;
+}
+
+.btn-luxury:hover {
+    border-color: var(--gold-bright);
+    color: var(--gold-bright);
+    background: rgba(255,255,255,0.10);
+    box-shadow: 0 0 25px rgba(197,160,89,0.25);
+}
+
+/* -----------------------------------------------------------
+   IMMAGINE
+------------------------------------------------------------ */
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.image-ring {
+    width: 450px;
+    height: 450px;
+    padding: 10px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+
+    background:
+        radial-gradient(circle at center, #1e3c42 0%, #020506 75%) padding-box,
+        var(--gold-gradient) border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0 10px 60px rgba(0,0,0,0.6);
+}
+
+.portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* -----------------------------------------------------------
+   SOCIAL HERO
+------------------------------------------------------------ */
+.hero-socials-top {
+    margin: 1rem 0;
+    display: flex;
+    gap: 1.8rem;
+}
+
+.hero-socials-top a {
+    font-size: 1.9rem;
+    color: var(--gold-mid);
+    transition: .3s ease;
+}
+
+.hero-socials-top a:hover {
+    color: var(--gold-bright);
+    transform: translateY(-3px) scale(1.08);
+}
+
+/* -----------------------------------------------------------
+   6. PORTFOLIO
+------------------------------------------------------------ */
+.portfolio {
+    padding: 3rem 0;
+}
+
+/* -----------------------------------------------------------
+   7. MOBILE RESPONSIVE
+------------------------------------------------------------ */
+@media (max-width: 900px) {
+
+    .main-header {
+        height: var(--header-height-mobile);
+    }
+
+    .hero {
+        padding-top: var(--header-height-mobile);
+        text-align: center;
+        
+        /* RIPRISTINO PER MOBILE:
+           Qui vogliamo che torni al centro perché lo schermo è piccolo */
+        justify-content: center; 
+        min-height: 100vh; 
+    }
+    .hero-container {
+        flex-direction: column-reverse;
+        gap: 2rem;
+    }
+
+    .hero-socials-top {
+    justify-content: center !important;
+    width: 100%;
+    text-align: center;
+}
+
+    /* HAMBURGER VISIBLE */
+    .nav-toggle {
+        display: block;
+    }
+
+    @media (max-width: 900px) {
+
+    .main-nav ul {
+        text-align: center;      /* Centra il testo */
+        align-items: lefy;     /* Centra gli elementi flex */
+        width: 100%;
+    }
+
+}
+
+    /* DESKTOP MENU HIDDEN */
+    .main-nav ul {
+        display: none;
+    }
+
+    /* MENU MOBILE A TENDINA */
+    .main-nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+
+        background: rgba(6,17,19,0.92);
+        backdrop-filter: blur(12px);
+        overflow: hidden;
+
+        max-height: 0;
+        transition: max-height 1.2s cubic-bezier(.22,1,.36,1);
+    }
+
+    .main-nav.active {
+        max-height: 500px;
+    }
+
+    /* MOBILE MENU ITEMS */
+    .main-nav ul {
+        display: flex !important;
+        flex-direction: column;
+        gap: 1.6rem;
+        padding: 2rem 0;
+        margin: 0;
+    }
+
+    .main-nav a {
+        font-size: 1rem;
+        color: rgba(255,243,193,0.95);
+        font-weight: 600;
+    }
+
+    /* HERO MOBILE */
+    .hero-container {
+        flex-direction: column-reverse;
+        gap: 2rem;
+    }
+
+    .image-ring {
+        width: 260px;
+        height: 260px;
+    }
+}
+
+/* -----------------------------------------------------------
+   8. FOOTER
+------------------------------------------------------------ */
+
+
+/* ============================= */
+/*  FOOTER - BORDO LUMINOSO     */
+/* ============================= */
+
+.luxury-footer {
+    position: relative;
+    background: rgba(15, 27, 25, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 4rem 0 2rem;
+    border-top: 1px solid rgba(197, 160, 89, 0.5);
+    box-shadow:
+        0 1px 10px rgba(197,160,89,0.4),
+        0 5px 20px rgba(197,160,89,0.15);
+    overflow: visible;
+}
+
+/* Glow verso l’alto */
+.luxury-footer::before {
+    content: "";
+    position: absolute;
+    top: -18px;
+    left: 0;
+    width: 100%;
+    height: 18px;
+    background: linear-gradient(
+        to top,
+        rgba(240, 194, 86, 0.05),
+        rgba(246, 200, 92, 0)
+    );
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* ============================= */
+/*  CONTENUTO                    */
+/* ============================= */
+
+.footer-container {
+    max-width: 1300px;
+    margin: auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 20;
+}
+
+.footer-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.footer-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--gold-mid);
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.footer-email:hover {
+    color: var(--gold-light);
+    transform: translateX(4px);
+}
+
+.footer-socials a {
+    margin-right: 0.7rem;
+    font-size: 1.3rem;
+    color: var(--gold-mid);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-socials a:hover {
+    color: var(--gold-light);
+    transform: scale(1.15);
+}
+
+/* Linea inferiore */
+.footer-bottom {
+    text-align: center;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 215, 160, 0.3);
+    color: rgba(255,255,255,0.55);
+    font-size: 0.9rem;
+    font-family: 'Lato';
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================= */
+/*  MOBILE FIXES                */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 2.5rem;
+    }
+
+    .footer-email {
+        justify-content: center;
+    }
+
+    .footer-socials a {
+        margin: 0 0.5rem;
+    }
+
+    /* Glow più piccolo */
+    .luxury-footer::before {
+        top: -10px;
+        height: 12px;
+        background: linear-gradient(
+            to top,
+            rgba(255, 224, 150, 0.3),
+            rgba(255, 224, 150, 0)
+        );
+    }
+
+    /* Spazio sistemato */
+    .luxury-footer {
+        margin-top: 2rem;
+        padding-top: 2.5rem;
+        padding-bottom: 1.8rem;
+    }
+
+    /* FIX SEZIONE GURU (il vero problema del riquadro) */
+    #guru {
+        background: none !important;
+        box-shadow: none !important;
+    }
+
+    .guru-container {
+        padding-bottom: 1.5rem !important;
+    }
+
+    .guru-card,
+    .guru-img-box {
+        box-shadow: none !important;
+        background: transparent !important;
+    }
+
+    .guru-card {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+
+
+/* ============================= */
+/*   CONTACT POPUP – LUXURY      */
+/* ============================= */
+
+.contact-popup {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 9999;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(5px);
+    transition: width 0.4s ease;
+}
+
+/* Quando attivo */
+.contact-popup.active {
+    width: 100%;
+}
+
+/* Pannello scorrevole */
+.contact-popup-inner {
+    position: absolute;
+    top: 0;
+    right: -350px;
+    width: 350px;
+    height: 100%;
+    background: rgba(20, 35, 32, 0.35);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border-left: 1px solid rgba(197,160,89,0.4);
+    box-shadow: -4px 0 25px rgba(197,160,89,0.25);
+    padding: 2rem;
+    transition: right 0.4s ease;
+}
+
+/* Quando il popup è attivo */
+.contact-popup.active .contact-popup-inner {
+    right: 0;
+}
+
+/* Close button */
+.contact-close {
+    background: none;
+    border: none;
+    color: var(--gold-light);
+    font-size: 2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    opacity: 0.8;
+    transition: 0.2s;
+}
+.contact-close:hover {
+    opacity: 1;
+}
+
+/* Testi */
+.contact-title {
+    margin-top: 2.5rem;
+    text-align: left;
+    font-size: 1.8rem;
+}
+
+.contact-sub {
+    font-family: 'Lato';
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 1.5rem;
+}
+
+/* Email */
+.contact-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--gold-mid);
+    font-family: 'Lato';
+    text-decoration: none;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    transition: 0.3s ease;
+}
+.contact-email:hover {
+    color: var(--gold-light);
+    transform: translateX(4px);
+}
+
+/* Social */
+.contact-socials a {
+    margin-right: 0.7rem;
+    font-size: 1.3rem;
+    color: var(--gold-mid);
+    transition: 0.3s ease, transform 0.3s ease;
+}
+.contact-socials a:hover {
+    color: var(--gold-light);
+    transform: scale(1.15);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .contact-popup-inner {
+        width: 100%;
+        right: -100%;
+    }
+    .contact-popup.active .contact-popup-inner {
+        right: 0;
+    }
+}
+.contact-aforisma {
+    font-family: "Cinzel", serif;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    color: rgba(255, 240, 210, 0.85);
+    text-align: left;
+    margin: 1.5rem 0 2rem;
+    padding: 0 1rem;
+}
+
+.contact-sub {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+
+/* =========================================
+   SLIDING DOOR (Pannello Laterale)
+   ========================================= */
+
+.book-slider-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 800px; /* Larghezza massima di lettura */
+    height: 100vh;
+    background: #080f10; /* Sfondo scurissimo */
+    z-index: 5000;
+    
+    /* PARTENZA: Nascosto a destra */
+    transform: translateX(100%);
+    
+    /* ANIMAZIONE FLUIDA E PESANTE (Luxury Feel) */
+    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    
+    /* Ombra laterale per stacco */
+    box-shadow: -20px 0 50px rgba(0,0,0,0.8);
+    border-left: 1px solid rgba(197, 160, 89, 0.3);
+    
+    overflow-y: auto; /* Permette di scorrere il testo */
+    padding: 4rem 2rem;
+}
+
+/* CLASSE ATTIVA (Quando la porta è aperta) */
+.book-slider-panel.active {
+    transform: translateX(0);
+}
+
+/* OVERLAY DI SFONDO (Oscura il sito) */
+.slider-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(5px); /* Effetto vetro sfocato */
+    z-index: 4999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.slider-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* CONTENUTO INTERNO */
+.slider-inner {
+    max-width: 650px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s ease 0.3s; /* Ritardo per far arrivare prima il pannello */
+}
+
+.book-slider-panel.active .slider-inner {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* STILI TESTO */
+.slider-title {
+    font-family: var(--font-title);
+    font-size: 3rem;
+    color: var(--gold-mid);
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+    padding-bottom: 1rem;
+}
+
+.slider-meta {
+    font-family: var(--font-body);
+    color: #888;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+}
+
+.slider-text p {
+    font-family: 'Georgia', serif; /* Font serif per lettura lunga */
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #d0d0d0;
+    margin-bottom: 1.5rem;
+}
+
+/* Capolettera (Prima lettera grande) */
+.drop-cap {
+    float: left;
+    font-family: var(--font-title);
+    font-size: 4.5rem;
+    line-height: 0.8;
+    padding-right: 10px;
+    padding-top: 5px;
+    color: var(--gold-mid);
+}
+
+/* =========================================
+   BOTTONE CHIUDI (STICKY FIX)
+   ========================================= */
+
+.slider-close {
+    /* 1. LA MAGIA: "Sticky" lo incolla al soffitto mentre scorri */
+    position: -webkit-sticky; /* Per Safari */
+    position: sticky;
+    top: 1.5rem;  /* Distanza dal bordo alto */
+    
+    /* 2. POSIZIONAMENTO A DESTRA */
+    /* Essendo sticky, non usa 'right' assoluto, ma i margini */
+    margin-left: auto;   /* Lo spinge tutto a destra */
+    margin-right: 2rem;  /* Distanza dal bordo destro */
+    margin-bottom: 1rem; /* Spazio sotto prima che inizi il testo */
+    
+    /* 3. DIMENSIONI E FORMA */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    
+    /* 4. STILE "FLOTTANTE" */
+    /* Aggiungiamo uno sfondo per quando il testo scorre sotto */
+    background: rgba(0, 0, 0, 0.6); 
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    color: #fff;
+    
+    z-index: 6000; /* Deve stare sopra a tutto */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* HOVER */
+.slider-close:hover {
+    border-color: var(--gold-mid);
+    color: var(--gold-mid);
+    transform: rotate(90deg); /* Rotazione divertente */
+    background: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
+}
+
+/* Badge Calvino nel Pannello Scorrevole */
+.slider-badge-container {
+    text-align: center;
+    margin: 3rem 0 2rem 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(197, 160, 89, 0.1); /* Linea separatrice sottile */
+}
+
+.slider-badge-img {
+    max-width: 380px; /* Non troppo grande */
+    height: auto;
+    opacity: 0.9;
+    filter: brightness(0.9); /* Leggermente attenuato per eleganza */
+    transition: 0.3s;
+    margin: 0 auto;
+}
+
+.slider-badge-img:hover {
+    opacity: 1;
+    filter: brightness(1);
+    transform: scale(1.05);
+}
+
+.quote-final {
+    font-size: 1.4rem !important; /* La frase finale un po' più grande */
+    text-align: center;
+    margin-top: 2rem;
+    font-style: italic;
+}
+
+/* =========================================
+   SEZIONE STRUMENTI - LUXURY GRID
+   ========================================= */
+
+.luxury-tools-section {
+   background: rgba(2,5,6,0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    border-bottom: 1px solid rgba(197,160,89,0.5);
+    box-shadow:
+        0 1px 10px rgba(197,160,89,0.4),
+        0 5px 20px rgba(197,160,89,0.15);
+    padding: 6rem 5%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* HEADER DELLA SEZIONE */
+.section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.section-header h2 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    color: rgba(255,255,255,0.6);
+    font-size: 1.1rem;
+}
+
+/* LA GRIGLIA (Il pezzo che mancava) */
+.tools-grid {
+    display: grid;
+    /* Crea colonne automatiche che non scendono sotto i 140px */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+    gap: 4rem 2rem; /* Spazio verticale e orizzontale */
+    max-width: 1300px;
+    margin: 0 auto;
+    justify-items: center; /* Centra gli elementi nella loro cella */
+}
+
+/* LA CARD DEL SINGOLO STRUMENTO */
+.tool-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.3s ease;
+    width: 100%; /* Occupa lo spazio della griglia */
+}
+
+.tool-card:hover {
+    transform: translateY(-10px); /* Si alza al passaggio del mouse */
+}
+
+/* IL CONTENITORE DEL CERCHIO */
+.tool-circle-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1.5rem;
+    border-radius: 50%;
+    /* Sfondo leggerissimo dietro al cerchio */
+    background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5); /* Ombra scura per stacco */
+}
+
+/* SVG CERCHIO */
+.progress-ring {
+    transform: rotate(-90deg); /* Ruota per far partire l'animazione dall'alto */
+    transform-origin: 50% 50%;
+}
+
+.progress-ring__track {
+    stroke: rgba(255, 255, 255, 0.05); /* Cerchio grigio di fondo */
+}
+
+.progress-ring__circle {
+    stroke: var(--gold-mid); /* Il colore ORO */
+    stroke-linecap: round;   /* Estremità arrotondate */
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+    filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.7)); /* Glow dorato */
+}
+
+/* L'ICONA CENTRALE (Posizionamento Assoluto) */
+.tool-icon-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centratura perfetta */
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.tool-icon-box img, 
+.tool-icon-box i {
+    width: 100%;
+    height: auto;
+    max-width: 45px;
+    opacity: 0.8;
+    transition: 0.3s ease;
+   
+}
+
+/* HOVER SULLA CARD */
+.tool-card:hover .tool-icon-box img {
+    opacity: 1;
+    /* Ingrandimento "Pop" */
+    transform: scale(1.25); 
+    /* Bagliore dietro l'icona */
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
+}
+
+/* Hover anche sul cerchio esterno */
+.tool-card:hover .tool-circle-wrapper {
+    box-shadow: 0 0 25px rgba(197, 160, 89, 0.2); /* Glow dorato sul cerchio */
+    border-color: var(--gold-mid);
+}
+
+/* TESTI */
+.tool-info {
+    text-align: center;
+}
+
+.tool-name {
+    display: block;
+    font-family: var(--font-body);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    letter-spacing: 1px;
+}
+
+.tool-percentage-text {
+    font-family: var(--font-title); /* Usa Cinzel per i numeri */
+    color: var(--gold-mid);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+    .tools-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonne su mobile */
+        gap: 3rem 1rem;
+    }
+    
+    .tool-circle-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+    
+    /* Scaliamo l'SVG per mobile se necessario */
+    .progress-ring {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .progress-ring__circle, .progress-ring__track {
+        r: 42; /* Raggio più piccolo su mobile */
+        cx: 50;
+        cy: 50;
+    }
+}
+
+/* =========================================
+   CAROUSEL 3D SECTION
+   ========================================= */
+
+/* =========================================
+   CAROUSEL 3D - LUXURY LIGHTING
+   ========================================= */
+
+.carousel-section {
+    position: relative;
+    padding: 4rem 0; /* Un po' più compatto */
+    overflow: hidden;
+    background-color: #020405;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* SFONDO (Resta uguale) */
+.carousel-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(23, 68, 65, 0.5) 0%, rgba(2, 4, 5, 1) 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.relative-z { position: relative; z-index: 2; }
+
+/* SWIPER CONTAINER */
+.swiper {
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+
+/* SLIDE GENERICA (La base) */
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 340px; /* Larghezza aumentata come suggerito */
+    height: 550px;
+    
+    /* Riflesso sotto */
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent 80%, rgba(0,0,0,0.3));
+    
+    /* Transizione fluidissima */
+    transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
+}
+
+/* CARD GENERICA */
+.carousel-card {
+    width: 100%;
+    height: 100%;
+    background: #0a0f10;
+    border: 1px solid rgba(197, 160, 89, 0.1); /* Bordo spento di default */
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ------------------------------------------
+   1. CARD ATTIVA (IL GLOW)
+   ------------------------------------------ */
+.swiper-slide-active {
+    z-index: 10; /* Sta sopra a tutto */
+}
+
+.swiper-slide-active .carousel-card {
+    /* Bordo Oro Luminoso */
+    border-color: var(--gold-mid); 
+    
+    /* IL SUPER GLOW */
+    box-shadow: 
+        0 0 20px rgba(197, 160, 89, 0.4),  /* Alone interno */
+        0 0 60px rgba(197, 160, 89, 0.3),  /* Alone medio */
+        0 0 100px rgba(197, 160, 89, 0.1); /* Alone disperso */
+}
+
+.swiper-slide-active .card-visual img {
+    /* Colori vivi e luminosi */
+    filter: saturate(1.1) contrast(1.1) brightness(1.1);
+    transform: scale(1.05);
+}
+
+.swiper-slide-active .card-overlay {
+    /* Riduciamo l'ombra nera sull'immagine attiva per farla brillare */
+    opacity: 0.4; 
+}
+
+.swiper-slide-active .card-details h3 {
+    color: var(--gold-mid);
+    text-shadow: 0 0 15px rgba(197, 160, 89, 0.6);
+}
+
+/* ------------------------------------------
+   2. CARD INATTIVE (L'OMBRA PROFONDA)
+   ------------------------------------------ */
+/* Seleziona tutte le slide che NON sono attive */
+.swiper-slide:not(.swiper-slide-active) {
+    /* Le rendiamo scure e spente */
+    filter: brightness(0.4) grayscale(80%); 
+    opacity: 0.6; /* Leggermente trasparenti per fonderle col fondo */
+}
+
+.swiper-slide:not(.swiper-slide-active) .carousel-card {
+    border-color: rgba(255, 255, 255, 0.05); /* Bordo quasi invisibile */
+    box-shadow: none; /* Niente luce */
+}
+
+/* ------------------------------------------
+   LAYOUT INTERNO (Immagini e Testi)
+   ------------------------------------------ */
+.card-visual {
+    height: 65%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 100%;
+    /* Gradiente nero per leggere il testo, più forte sulle inattive */
+    background: linear-gradient(to top, #020405 10%, transparent 80%);
+    transition: 0.5s;
+}
+
+.card-details {
+    height: 35%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0,0,0,0.2);
+}
+
+.card-details h3 {
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: #888; /* Colore spento di default */
+    margin-bottom: 0.5rem;
+    transition: 0.3s;
+}
+
+.card-details p {
+    font-family: var(--font-body);
+    color: rgba(255,255,255,0.4);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+/* PAGINAZIONE */
+.swiper-pagination-bullet { background: rgba(255,255,255,0.2); opacity: 1; }
+.swiper-pagination-bullet-active { background: var(--gold-mid); box-shadow: 0 0 10px var(--gold-mid); }
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .swiper-slide {
+        width: 280px;
+        height: 450px;
+    }
+}
+
+/* Classe aggiunta dal JS per i servizi */
+.book-slider-panel.wide-mode {
+    max-width: 1400px; /* O la larghezza che preferisci */
+}
+
+/* Mobile: resta sempre al 100% */
+@media (max-width: 768px) {
+    .book-slider-panel.wide-mode {
+        max-width: 100%;
+    }
+}
+/* =========================================
+   LISTA SERVIZI LUXURY (Icone e Titoli Oro)
+   ========================================= */
+
+/* 1. LE ICONE (Il simbolo a sinistra) */
+.service-list li i {
+    color: var(--gold-mid) !important; /* Colore Oro */
+    font-size: 1.4rem;                 /* Più grandi */
+    min-width: 30px;                   /* Allineamento stabile */
+    
+    /* EFFETTO LUCE */
+    text-shadow: 0 0 15px rgba(197, 160, 89, 0.6); 
+    
+    transition: transform 0.3s ease;
+}
+
+/* Effetto quando passi sopra la riga */
+.service-list li:hover i {
+    transform: scale(1.2); /* L'icona si ingrandisce leggermente */
+    color: #fff !important; /* Diventa bianca brillante */
+    text-shadow: 0 0 20px var(--gold-mid); /* Glow ancora più forte */
+}
+
+/* 2. I TITOLI DEI SERVIZI (Ghostwriting, ecc.) */
+.service-list li strong {
+    display: block;                    /* Va a capo rispetto al testo sotto */
+    color: var(--gold-mid) !important; /* Colore Oro */
+    font-family: 'Cinzel', serif;      /* Font elegante dei titoli */
+    font-size: 1.3rem;                 /* Grandezza leggibile */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.4rem;             /* Spazio prima della descrizione */
+    
+    /* EFFETTO LUCE */
+    text-shadow: 0 0 10px rgba(197, 160, 89, 0.3); 
+}
+
+/* 3. LA DESCRIZIONE (Il testo sotto) */
+.service-list li p {
+    color: rgba(255, 255, 255, 0.7) !important; /* Grigio chiaro pulito */
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Spaziatura generale della lista */
+.service-list li {
+    margin-bottom: 2rem; /* Più aria tra un servizio e l'altro */
+    border-bottom: 1px solid rgba(197, 160, 89, 0.1); /* Linea separatrice sottilissima */
+    padding-bottom: 1.5rem;
+}
+.service-list li:last-child {
+    border-bottom: none;
+}
+
+/* =========================================
+   BOX AMAZON "VETRINA SCINTILLANTE" (Bright)
+   ========================================= */
+
+.amazon-showcase-box {
+    position: relative;
+    margin-top: 3rem;
+    padding: 2.5rem;
+    border-radius: 8px;
+    text-align: center;
+    
+    /* 1. SFONDO LUMINOSO (Radial Light) */
+    /* Simula una luce forte al centro che sfuma */
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 225, 160, 0.15) 0%,  /* Centro oro chiaro luminoso */
+        rgba(197, 160, 89, 0.05) 60%,  /* Alone oro */
+        rgba(255, 255, 255, 0.01) 100% /* Trasparente ai bordi */
+    );
+
+    /* 2. VETRO SCINTILLANTE */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    /* 3. BORDI "GIOIELLO" */
+    /* Bordo sottile ma molto chiaro, quasi bianco/oro */
+    border: 1px solid rgba(236, 217, 163, 0.4); 
+    border-top: 1px solid rgba(255, 255, 255, 0.8); /* Luce che colpisce da sopra */
+    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+
+    /* 4. GLOW ESTERNO ED INTERNO (Lo scintillio) */
+    box-shadow: 
+        0 0 40px rgba(197, 160, 89, 0.15),       /* Alone dorato esterno */
+        inset 0 0 20px rgba(255, 215, 160, 0.1); /* Luce intrappolata dentro */
+
+    transition: all 0.4s ease;
+}
+
+/* HOVER: Si accende ancora di più */
+.amazon-showcase-box:hover {
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 225, 160, 0.25) 0%, 
+        rgba(197, 160, 89, 0.1) 100%
+    );
+    border-color: rgba(255, 215, 160, 0.8); /* Bordi quasi bianchi */
+    box-shadow: 
+        0 0 60px rgba(197, 160, 89, 0.3),
+        inset 0 0 30px rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+/* Testo introduttivo (più luminoso per contrasto) */
+.amazon-intro-text {
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+    color: rgba(255, 240, 200, 0.9); /* Bianco caldo, non grigio */
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5); /* Ombra leggera per leggibilità */
+}
+
+/* PULSANTE (Pieno e Scintillante) */
+.amazon-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 30px;
+    
+    /* Sfondo Oro Solido (o gradiente oro) */
+    background: linear-gradient(135deg, #c5a059 0%, #e6c885 50%, #c5a059 100%);
+    background-size: 200% auto;
+    
+    color: #000; /* Testo nero per massimo contrasto sull'oro */
+    border: 1px solid #fff;
+    
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    border-radius: 4px;
+    
+    box-shadow: 0 5px 20px rgba(197, 160, 89, 0.4);
+    transition: all 0.4s ease;
+}
+
+.amazon-link-btn:hover {
+    background-position: right center; /* Muove il gradiente */
+    box-shadow: 0 0 30px rgba(255, 215, 160, 0.8); /* Super Glow */
+    transform: scale(1.03);
+    color: #000;
+}
+
+/* =========================================
+   PORTFOLIO GRID (Dentro lo Slider)
+   ========================================= */
+
+.luxury-portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.portfolio-item {
+    position: relative;
+    display: block;
+    border-radius: 6px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1; /* Quadrati perfetti */
+    border: 1px solid rgba(197, 160, 89, 0.1);
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    filter: grayscale(30%);
+}
+
+/* Overlay scuro che appare all'hover */
+.portfolio-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.portfolio-overlay span {
+    color: var(--gold-mid);
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--gold-mid);
+    padding-bottom: 5px;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold-mid);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.1); /* Zoom immagine */
+    filter: grayscale(0%); /* Colori vivi */
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-item:hover .portfolio-overlay span {
+    transform: translateY(0);
+}
+
+/* =========================================
+   PORTFOLIO CATEGORY CARDS
+   ========================================= */
+
+.portfolio-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.portfolio-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    border-radius: 8px;
+    padding: 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effetto Hover */
+.portfolio-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold-mid);
+    background: rgba(197, 160, 89, 0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.p-card-icon {
+    font-size: 2.5rem;
+    color: var(--gold-mid);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s;
+}
+
+.portfolio-card:hover .p-card-icon {
+    transform: scale(1.2);
+    color: #fff;
+    text-shadow: 0 0 15px var(--gold-mid);
+}
+
+.portfolio-card h4 {
+    font-family: 'Cinzel', serif;
+    color: #fff;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.portfolio-card p {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 2rem;
+}
+
+.p-card-btn {
+    display: inline-block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold-mid);
+    font-weight: 700;
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.portfolio-card:hover .p-card-btn {
+    color: #fff;
+    border-bottom-color: #fff;
+}
+/* =========================================
+   PAGINAZIONE SWIPER (Puntini in alto)
+   ========================================= */
+
+/* Sposta il contenitore dei puntini in alto */
+.swiper-pagination {
+    top: 1rem !important;    /* Posiziona in alto (regola a piacere) */
+    bottom: auto !important; /* Annulla il posizionamento in basso */
+    z-index: 20;             /* Assicura che stiano sopra le slide */
+}
+
+/* Stile personalizzato per i puntini (opzionale, ma consigliato per il tema Luxury) */
+.swiper-pagination-bullet {
+    width: 30px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.3); /* Puntino inattivo */
+    opacity: 1;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--gold-mid); /* Puntino attivo (oro) */
+    border-color: var(--gold-mid);
+    transform: scale(1.2);       /* Leggermente più grande */
+    box-shadow: 0 0 10px rgba(197, 160, 89, 0.5); /* Bagliore */
+}
+
+/* =========================================
+   FIX LIGHTGALLERY (Z-INDEX)
+   ========================================= */
+
+/* Porta il contenitore della galleria sopra il pannello scorrevole (che è 5000) */
+.lg-outer {
+    z-index: 99999 !important; 
+}
+
+/* Porta lo sfondo scuro della galleria sopra a tutto */
+.lg-backdrop {
+    z-index: 99998 !important;
+}
+
+/* =========================================
+   LIGHTGALLERY LUXURY SKIN
+   ========================================= */
+
+/* 1. SFONDO (BACKDROP) */
+/* Sostituiamo il nero standard con il Petrolio scuro + Blur */
+.lg-backdrop {
+    background-color: rgba(5, 12, 15, 0.96) !important; /* Petrolio scurissimo */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 2147483646 !important; /* Livello estremo */
+}
+
+/* Contenitore principale */
+.lg-outer {
+    z-index: 2147483647 !important; /* Livello supremo */
+}
+
+/* 2. BARRA DEGLI STRUMENTI (Toolbar) */
+.lg-toolbar {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent) !important;
+}
+
+/* 3. ICONE (Close, Zoom, Download, Frecce) */
+.lg-icon, 
+.lg-actions .lg-next, 
+.lg-actions .lg-prev {
+    color: var(--gold-mid) !important; /* Colore ORO */
+    background-color: transparent !important;
+    transition: all 0.3s ease;
+}
+
+/* Effetto Hover sulle icone */
+.lg-icon:hover, 
+.lg-actions .lg-next:hover, 
+.lg-actions .lg-prev:hover {
+    color: #fff !important; /* Diventa bianco */
+    text-shadow: 0 0 15px var(--gold-mid); /* Bagliore Oro */
+    transform: scale(1.1);
+}
+
+/* 4. DIDASCALIE (Captions) */
+.lg-sub-html {
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%) !important;
+    padding-bottom: 20px;
+}
+
+.lg-sub-html h4 {
+    font-family: 'Cinzel', serif !important; /* Font Luxury */
+    font-size: 1.5rem !important;
+    color: var(--gold-mid) !important;
+    margin: 0 0 5px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.lg-sub-html p {
+    font-family: 'Lato', sans-serif !important;
+    font-size: 0.9rem !important;
+    color: rgba(255,255,255,0.7) !important;
+    font-style: italic;
+}
+
+/* 5. THUMBNAILS (Miniature in basso) */
+.lg-outer .lg-thumb-outer {
+    background-color: #020405 !important; /* Fondo nero per le thumb */
+    border-top: 1px solid rgba(197, 160, 89, 0.1);
+}
+
+.lg-outer .lg-thumb-item {
+    border-radius: 4px;
+    border: 2px solid transparent;
+    transition: 0.3s;
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+
+/* Miniatura Attiva o Hover */
+.lg-outer .lg-thumb-item.active, 
+.lg-outer .lg-thumb-item:hover {
+    border-color: var(--gold-mid) !important; /* Bordo ORO */
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: translateY(-3px);
+}
+
+/* 6. BARRA DI CARICAMENTO (Progress Bar) */
+.lg-progress-bar .lg-progress {
+    background-color: var(--gold-mid) !important;
+    box-shadow: 0 0 10px var(--gold-mid);
+}
+
+/* =========================================
+   LIGHTGALLERY: FIX MINIATURE (THUMBNAILS)
+   ========================================= */
+
+.lg-outer .lg-thumb-outer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100px; /* Altezza fissa per la barra */
+    padding: 10px 0;
+    
+    /* Forza allineamento orizzontale */
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    
+    /* Sfondo scuro per stacco */
+    background-color: rgba(2, 4, 5, 0.95) !important;
+    border-top: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.lg-outer .lg-thumb {
+    /* Forza la riga */
+    display: flex !important;
+    flex-direction: row !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    height: 100%;
+    align-items: center;
+}
+
+.lg-outer .lg-thumb-item {
+    /* Dimensioni fisse per le miniature */
+    width: 80px !important;
+    height: 60px !important;
+    margin: 0 5px !important;
+    
+    border-radius: 4px;
+    border: 2px solid transparent;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    
+    /* Assicura che l'immagine riempia il box */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.lg-outer .lg-thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Taglia per riempire */
+}
+
+/* Miniatura attiva */
+.lg-outer .lg-thumb-item.active, 
+.lg-outer .lg-thumb-item:hover {
+    border-color: var(--gold-mid) !important;
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+}
+
+/* =========================================
+   LIGHTGALLERY: BOX LUMINESCENTE (GLOW)
+   ========================================= */
+
+/* Applica lo stile all'immagine principale visualizzata */
+.lg-outer .lg-img-wrap .lg-object {
+    /* 1. La Cornice Sottile */
+    border: 1px solid rgba(197, 160, 89, 0.6) !important;
+    border-radius: 4px;
+    
+    /* 2. Il Bagliore (Glow) */
+    /* Doppio livello: uno stretto forte, uno largo soffuso */
+    box-shadow: 
+        0 0 20px rgba(197, 160, 89, 0.2),  /* Glow interno */
+        0 0 50px rgba(197, 160, 89, 0.15); /* Glow diffuso */
+        
+    /* Stacco dallo sfondo */
+    background-color: rgba(0,0,0,0.5); 
+    
+    transition: box-shadow 0.3s ease;
+}
+
+/* Opzionale: Sfondo della galleria ancora più scuro per far risaltare la luce */
+.lg-backdrop {
+    background-color: rgba(5, 10, 12, 0.98) !important;
+}
