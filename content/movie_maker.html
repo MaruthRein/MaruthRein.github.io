@@ -1,23 +1,39 @@
-<div class="slider-inner">
-    <h2 class="slider-title">Scrittore & Storyteller</h2>
-    <p class="slider-meta">Parole che creano mondi</p>
+<div class="slider-inner layout-visual" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 80vh; text-align: center;">
     
-    <div class="slider-text">
-        <img src="assets/images/services/scrittore.png" class="slider-hero-img" alt="Scrittura">
-        
-        <p><span class="drop-cap">L</span>e parole non servono solo a descrivere la realtà, ma a crearla. Come scrittore e copywriter, non mi limito a riempire spazi vuoti. Costruisco <span class="gold-accent">architetture narrative</span>.</p>
-        
-        <p>Che si tratti di un romanzo, di uno script per un video o del tono di voce di un brand, il mio approccio è sempre lo stesso: cercare l'anima della storia.</p>
-        
-        <h3>Cosa offro:</h3>
-        <ul class="service-list">
-            <li><i class="fa-solid fa-check"></i> <strong>Ghostwriting:</strong> Romanzi, biografie, manuali.</li>
-            <li><i class="fa-solid fa-check"></i> <strong>Copywriting Persuasivo:</strong> Landing page, email marketing.</li>
-            <li><i class="fa-solid fa-check"></i> <strong>Storytelling d'Impresa:</strong> Definizione del Brand Manifesto.</li>
-        </ul>
+    <div class="wip-icon-wrapper" style="margin-bottom: 2rem;">
+        <i class="fa-solid fa-compass-drafting" style="font-size: 5rem; color: var(--gold-mid); filter: drop-shadow(0 0 20px rgba(197,160,89,0.4)); animation: pulseGold 3s infinite;"></i>
     </div>
+
+    <h2 class="slider-title" style="font-size: 3rem; margin-bottom: 0.5rem;">Vision in Progress</h2>
+    <p class="slider-meta" style="margin-bottom: 3rem;">Stiamo plasmando l'eccellenza</p>
     
-    <div class="slider-footer">
-        <a href="#contact" class="btn-luxury open-contact-from-slider">RICHIESTA PREVENTIVO</a>
+    <div class="slider-text" style="max-width: 600px; margin: 0 auto;">
+        <p class="drop-cap-wrapper" style="font-size: 1.1rem; line-height: 1.8; color: #d0d0d0;">
+            Ogni dettaglio conta. Sto costruendo questa sezione con la stessa cura sartoriale che dedico ai miei progetti.
+            <br><br>
+            I contenuti saranno disponibili a breve.
+        </p>
+
+        <div style="margin: 3rem auto; width: 100px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);"></div>
+
+        <blockquote class="luxury-quote" style="border:none; padding:0; font-size: 1.2rem;">
+            "La perfezione non ha fretta."
+        </blockquote>
     </div>
+
+    <div class="slider-footer" style="margin-top: 4rem;">
+        <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #888; text-transform: uppercase; letter-spacing: 2px;">Nel frattempo</p>
+        <a href="#" class="btn-luxury open-contact-from-slider" data-url="components/contact-slider.html">
+            PARLAMI DELLA TUA IDEA
+        </a>
+    </div>
+
 </div>
+
+<style>
+    @keyframes pulseGold {
+        0% { opacity: 0.8; transform: scale(1); text-shadow: 0 0 20px rgba(197,160,89,0.4); }
+        50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 40px rgba(197,160,89,0.8); }
+        100% { opacity: 0.8; transform: scale(1); text-shadow: 0 0 20px rgba(197,160,89,0.4); }
+    }
+</style>

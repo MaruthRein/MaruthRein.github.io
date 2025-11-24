@@ -316,3 +316,92 @@
     margin-bottom: 0.6rem; /* evita l'effetto appiccicato in fondo */
 }
 
+#guru-image {
+    transition: opacity 0.3s ease-in-out;
+}
+.guru-img-box {
+    padding: 50px 0; /* padding sopra e sotto */
+}
+/* ===========================================================
+   MOBILE GURU OPTIMIZATION
+   =========================================================== */
+@media (max-width: 768px) {
+
+    /* Riduce spazio generale della sezione */
+    #guru {
+        padding: 2rem 0 1rem;
+    }
+
+    /* Titolo più piccolo */
+    .guru-title {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Gabbia in una colonna */
+    .guru-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.8rem;
+    }
+
+    /* BOX immagine più contenuto */
+    .guru-img-box {
+        max-width: 300px;
+        padding: 12px 10px; /* meno padding per non farla gigante */
+        border-width: 1px;  /* cornice più sottile */
+        box-shadow: 
+            0 5px 18px rgba(0,0,0,0.5),
+            0 0 16px rgba(197,160,89,0.15);
+    }
+
+    /* Immagine adattata */
+    .guru-img-box img {
+        width: 100%;
+        max-width: 270px;
+    }
+
+    /* Frecce dello slider */
+    .guru-arrow {
+        font-size: 1.4rem;      /* più piccole */
+        padding: 0.25em 0.45em; /* cerchio ridotto */
+        background: rgba(0,0,0,0.35);
+    }
+
+    .guru-arrow-left {
+        left: -10px; /* meno invadenti */
+    }
+    .guru-arrow-right {
+        right: -10px;
+    }
+
+    /* Card delle informazioni */
+    .guru-card {
+        width: 100%;
+        padding: 1.4rem 1rem;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    }
+
+    /* Accordion */
+    .accordion-btn {
+        font-size: 1.2rem;
+        padding: 1rem 0;
+    }
+    .accordion-panel p {
+        font-size: 0.92rem;
+    }
+
+    /* Facebook box */
+    .guru-social-box {
+        padding: 1.5rem 0.8rem;
+    }
+    .guru-facebook-btn {
+        font-size: 0.8rem;
+        padding: 10px 18px;
+    }
+}
+#guru-image {
+    opacity: 1;
+    transition: opacity 0.5s cubic-bezier(0.33, 0, 0.2, 1); /* easy in/out molto morbido */
+}

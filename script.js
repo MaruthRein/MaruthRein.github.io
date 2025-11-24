@@ -387,4 +387,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+/* ============================
+   GURU SLIDER
+   ============================ */
+
+const guruImages = [
+    "assets/images/Guru/analisi.jpg",
+    "assets/images/Guru/The Guru.png",
+    "assets/images/Guru/Stanchezza.png",
+    "assets/images/Guru/Guru_mente.jpg",
+     "assets/images/Guru/guru_universo.png"
+];
+
+let guruIndex = 0;
+const guruImg = document.getElementById("guru-image");
+
+function updateGuruImage() {
+    guruImg.style.opacity = 0;
+
+    setTimeout(() => {
+        guruImg.src = guruImages[guruIndex];
+        guruImg.style.opacity = 1;
+    }, 200);
+}
+
+function nextGuru() {
+    guruIndex = (guruIndex + 1) % guruImages.length;
+    updateGuruImage();
+}
+
+function prevGuru() {
+    guruIndex = (guruIndex - 1 + guruImages.length) % guruImages.length;
+    updateGuruImage();
+}
 
