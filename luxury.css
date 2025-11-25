@@ -1756,3 +1756,174 @@ body {
     background-color: rgba(5, 10, 12, 0.98) !important;
 }
 
+/* =============================================================
+   9. OTTIMIZZAZIONE LAPTOP / NOTEBOOK (Schermi Medi)
+   Range: da 901px a 1400px (comprende MacBook, Laptop Windows standard)
+   ============================================================= */
+
+@media screen and (min-width: 901px) and (max-width: 1440px) {
+
+    /* --- 1. GENERALE: Usiamo meglio lo spazio laterale --- */
+    .hero-container, 
+    .header-container, 
+    .footer-container, 
+    .tools-grid {
+        width: 94%;       /* Allarghiamo leggermente i margini laterali */
+        max-width: 100%;  /* Rimuoviamo il limite rigido di 1300px */
+    }
+
+    /* --- 2. HERO SECTION: Testi e Immagine più compatti --- */
+    /* Spesso i portatili sono "bassi", quindi riduciamo le altezze */
+    
+    .hero {
+        padding-top: calc(var(--header-height-desktop) + 1rem); /* Meno aria sopra */
+        padding-bottom: 3rem; /* Meno aria sotto */
+    }
+
+    .hero h1 {
+        font-size: 3rem; /* Ridotto da 4.2rem (era enorme su un 13 pollici) */
+    }
+
+    .hero-desc {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        max-width: 100%; /* Lasciamo che il testo occupi lo spazio necessario */
+    }
+
+    /* Il cerchio dell'immagine: da 450px a 340px */
+    .image-ring {
+        width: 340px;
+        height: 340px;
+    }
+    
+    .btn-luxury {
+        padding: 12px 25px; /* Pulsante leggermente più piccolo */
+        font-size: 0.8rem;
+    }
+
+    /* --- 3. CAROUSEL 3D: Evitiamo che venga tagliato sotto --- */
+    .swiper-slide {
+        width: 280px;  /* Più stretto */
+        height: 420px; /* Più basso (da 550px che è tantissimo su un laptop) */
+    }
+
+    .card-details h3 {
+        font-size: 1.4rem;
+    }
+    
+    .card-details p {
+        font-size: 0.85rem;
+    }
+
+    /* --- 4. SEZIONE STRUMENTI (Tools) --- */
+    .luxury-tools-section {
+        padding: 4rem 5%; /* Riduciamo il padding verticale da 6rem */
+    }
+    
+    .section-header h2 {
+        font-size: 2.4rem; /* Titolo sezione un po' più piccolo */
+    }
+
+    /* --- 5. PANNELLO LATERALE (Sliding Door) --- */
+    .book-slider-panel {
+        max-width: 600px; /* Il pannello di lettura occupa meno spazio */
+        padding: 3rem 1.5rem;
+    }
+    
+    .slider-title {
+        font-size: 2.2rem;
+    }
+    
+    .drop-cap {
+        font-size: 3.5rem;
+    }
+}
+
+/* =============================================================
+   FIX SPECIFICO PER SCHERMI MOLTO BASSI 
+   (Esempio: Laptop 1366x768 o schermi con zoom 125%)
+   ============================================================= */
+@media screen and (max-height: 800px) and (min-width: 900px) {
+    .hero {
+        min-height: auto;
+        padding-top: 100px; /* Assicura che l'header non copra tutto */
+    }
+    
+    .hero-container {
+        align-items: center; /* Centra bene verticalmente */
+    }
+}
+/* =============================================================
+   10. FIX MOBILE SPECIFICO (Anti-Spostamento & Ridimensionamento)
+   ============================================================= */
+
+/* 1. BLOCCO SPOSTAMENTO LATERALE (Il fix più importante) */
+html, body {
+    overflow-x: hidden; /* Taglia via tutto ciò che esce dai bordi laterali */
+    width: 100%;        /* Forza la larghezza al 100% dello schermo */
+    position: relative; /* Stabilizza il contenitore */
+}
+
+/* 2. RIDIMENSIONAMENTO TESTI E SPAZI PER MOBILE */
+@media (max-width: 768px) {
+    
+    /* Titolo Principale: Lo rendiamo più gestibile */
+    .hero h1 {
+        font-size: 2.6rem; /* Da 4.2rem a 2.6rem: molto più elegante su mobile */
+        line-height: 1.2;  /* Migliora la leggibilità su due righe */
+        margin-bottom: 1rem;
+        word-wrap: break-word; /* Evita che parole lunghe rompano il layout */
+    }
+
+    /* Sottotitolo */
+    .hero-desc {
+        font-size: 1rem;
+        padding: 0 1rem; /* Aggiunge un po' di aria ai lati del testo */
+        margin-bottom: 2rem;
+    }
+
+    /* Cerchio Immagine: Leggermente più piccolo per il P20 */
+    .image-ring {
+        width: 240px;
+        height: 240px;
+        margin: 0 auto; /* Assicura che sia perfettamente centrato */
+    }
+
+    /* Spaziatura Hero */
+    .hero {
+        padding-top: calc(var(--header-height-mobile) + 1.5rem);
+        padding-bottom: 3rem;
+        min-height: auto; /* Lascia che l'altezza si adatti al contenuto */
+    }
+    
+    .hero-container {
+        gap: 1.5rem; /* Riduce lo spazio tra foto e testo */
+    }
+
+    /* Icone Social: Le avviciniamo un po' */
+    .hero-socials-top {
+        gap: 1.5rem;
+        margin-top: 0.5rem;
+    }
+
+    /* --- FIX EXTRA PER GLI STRUMENTI (GRID) --- */
+    /* Spesso la griglia a 2 colonne su schermi stretti causa overflow */
+    .tools-grid {
+        gap: 2rem 10px; /* Riduciamo lo spazio orizzontale tra le card */
+        width: 100%;
+        padding: 0 10px;
+    }
+}
+
+/* 3. FIX SPECIFICO PER SCHERMI STRETTI (Sotto i 380px come P20 in alcune modalità) */
+@media (max-width: 380px) {
+    .hero h1 {
+        font-size: 2.2rem; /* Ancora più piccolo per schermi molto stretti */
+    }
+    .btn-luxury {
+        padding: 12px 25px;
+        font-size: 0.8rem;
+        width: 100%; /* Su schermi piccolissimi il bottone a tutta larghezza sta bene */
+        text-align: center;
+    }
+}
