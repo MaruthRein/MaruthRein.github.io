@@ -534,7 +534,9 @@
     </div>
 
     <div class="footer-bottom">
-        <p>© 2025 Maruth Rein — Tutti i diritti riservati.</p>
+        <p>© 2025 Maruth Rein — Tutti i diritti riservati.</p><p id="visit-counter" style="display:none; color:#777; font-size:12px;">
+    Visite: <span id="visits">...</span>
+</p>
     </div>
 </footer>
 
@@ -743,6 +745,32 @@ fetch("components/contact-popup.html")
 
 <!-- Script della pagina Grafico & Illustratore -->
 <script src="assets/js/grafico.js"></script>
+<script>
+// Inserisci qui il tuo IP pubblico (es: "93.44.xx.xx")
+const myIP = "84.33.171.210";
+
+// Recupera l'IP del visitatore
+fetch("https://api.ipify.org?format=json")
+  .then(res => res.json())
+  .then(data => {
+
+    // Se l'IP è il tuo → mostra il contatore
+    if (data.ip === myIP) {
+      document.getElementById("visit-counter").style.display = "block";
+
+      // Callback del servizio countapi
+      function cb(response) {
+        document.getElementById('visits').innerText = response.value;
+      }
+
+      // Carica il contatore
+      const s = document.createElement("script");
+      s.src = "https://api.countapi.xyz/hit/maruthrein.github.io/visite?callback=cb";
+      document.body.appendChild(s);
+    }
+
+  });
+</script>
 
 
 

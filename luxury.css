@@ -2026,3 +2026,144 @@ html, body {
         transform: none !important;
     }
 }
+
+/* =========================================
+   NEW LAYOUT: VERTICAL LUXURY POSTERS
+   ========================================= */
+
+.immersive-section {
+    position: relative;
+    width: 100%;
+    /* CAMBIO CRUCIALE 1: Rende l'immagine un rettangolo verticale alto */
+    aspect-ratio: 2/3; 
+    /* Rimuoviamo l'altezza fissa precedente */
+    /* height: 450px; */ 
+    
+    margin-bottom: 3rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    
+    /* Flexbox per posizionare il contenuto */
+    display: flex;
+    /* CAMBIO CRUCIALE 2: Allinea il box in fondo invece che al centro */
+    align-items: flex-end; 
+    justify-content: center;
+    
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.immersive-section:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold-mid);
+    box-shadow: 0 15px 40px rgba(197, 160, 89, 0.2);
+}
+
+/* Immagine di Sfondo */
+.immersive-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; /* Assicura che l'immagine riempia il rettangolo verticale */
+    z-index: 0;
+    transition: transform 0.6s ease;
+}
+
+.immersive-section:hover .immersive-bg {
+    transform: scale(1.05);
+}
+
+/* Overlay Scuro (Manteniamo un velo leggero globale) */
+.immersive-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.2); 
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* =========================================
+   FIX BOX COMPATTO E BOTTONE ORO
+   ========================================= */
+
+.immersive-box {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    
+    /* 1. GRADIENTE PIÙ BASSO E PULITO */
+    /* Il nero solido parte solo dal fondo (0%) e sfuma a trasparente molto prima */
+    background: linear-gradient(to top, #020405 30%, rgba(2, 4, 5, 0.8) 70%, transparent 100%);
+    
+    /* 2. PADDING RIDOTTO */
+    /* Meno aria sopra e sotto, così il box occupa meno spazio */
+    padding: 3rem 1.5rem 1.5rem 1.5rem; /* Alto, Dx, Basso, Sx */
+    
+    text-align: center;
+    border: none; 
+    /* Rimuoviamo il bordo superiore che creava quella linea a metà foto */
+    /* border-top: 1px solid rgba(255,255,255,0.1); */
+}
+
+/* Stili Testo più compatti */
+.immersive-icon {
+    font-size: 1.8rem;
+    color: var(--gold-mid);
+    margin-bottom: 0.2rem;
+    text-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+.immersive-box h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 5px rgba(0,0,0,1);
+}
+
+.immersive-box p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 1.2rem; /* Meno spazio prima del bottone */
+    line-height: 1.4;
+    text-shadow: 0 2px 5px rgba(0,0,0,1);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* =========================================
+   FIX BOTTONE (FORCE GOLD)
+   ========================================= */
+
+.btn-luxury-small {
+    /* Forziamo la visualizzazione come blocco inline */
+    display: inline-block !important;
+    
+    /* Dimensioni e Spazi */
+    padding: 10px 25px !important;
+    margin-top: 0.5rem;
+    
+    /* STILE ORO FORZATO */
+    border: 1px solid #c9a86a !important; /* Colore gold-mid esplicito */
+    color: #c9a86a !important;            /* Testo oro */
+    background: rgba(0,0,0,0.6) !important; /* Sfondo scuro per contrasto */
+    
+    font-family: 'Cinzel', serif; /* Font elegante */
+    font-size: 0.75rem !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none !important;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Effetto Hover (Luce) */
+.btn-luxury-small:hover {
+    background: #c9a86a !important; /* Fondo Oro */
+    color: #000 !important;         /* Testo Nero */
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.6) !important; /* Glow */
+    transform: translateY(-2px);
+}
