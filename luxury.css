@@ -1927,3 +1927,102 @@ html, body {
         text-align: center;
     }
 }
+/* =============================================================
+   11. FIX ALLINEAMENTO CENTRALE E SEZIONI (Books & Guru)
+   ============================================================= */
+
+@media (max-width: 768px) {
+
+    /* 1. RESET DEI CONTENITORI PRINCIPALI
+       Forza tutti i contenitori a stare nel 100% dello schermo 
+       e usa il padding per creare lo spazio ai lati, invece della larghezza ridotta. */
+    .section-header, 
+    .tools-grid, 
+    .portfolio, 
+    .amazon-showcase-box,
+    .guru-container { /* Aggiungi qui la classe del container del Guru se diversa */
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 15px !important;  /* Spazio di sicurezza a sinistra */
+        padding-right: 15px !important; /* Spazio di sicurezza a destra */
+        box-sizing: border-box; /* Assicura che il padding non allarghi il box */
+    }
+
+    /* 2. FIX PER IL CAROSELLO LIBRI E CARD
+       Assicura che nessuna card sia più larga dello schermo del cellulare */
+    .swiper-slide, 
+    .guru-card-wrapper, /* Ipotizzo il nome, copre le card generiche */
+    .portfolio-item {
+        max-width: 100%; /* Non può mai superare la larghezza del telefono */
+        margin: 0 auto !important; /* Forza la centratura automatica */
+    }
+
+    /* 3. FIX SPECIFICO PER LE FRECCE DEL GURU
+       Dallo screenshot vedo le frecce < > laterali. 
+       Spesso queste "escono" dallo schermo e spingono tutto a destra. */
+    .swiper-button-next, 
+    .swiper-button-prev,
+    .nav-arrow {
+        display: none !important; /* Su mobile spesso è meglio nascondere le frecce esterne e usare lo swipe */
+    }
+    
+    /* 4. CENTRATURA TESTI SEZIONI */
+    .section-header h2, 
+    .section-header p,
+    .amazon-intro-text {
+        text-align: center !important;
+        width: 100%;
+    }
+
+    /* 5. FIX PIÈ DI PAGINA (Footer) */
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0 1rem;
+    }
+}
+/* =============================================================
+   12. OTTIMIZZAZIONE PRESTAZIONI MOBILE (Anti-Lag)
+   ============================================================= */
+
+@media (max-width: 768px) {
+    
+    /* 1. RIMUOVIAMO IL RIFLESSO (Il colpevole n.1 degli scatti) */
+    .swiper-slide {
+        -webkit-box-reflect: unset !important;
+        
+        /* Suggerisce alla scheda video di prepararsi al movimento */
+        will-change: transform; 
+    }
+
+    /* 2. SEMPLIFICHIAMO LE CARD (Via il blur pesante) */
+    .carousel-card {
+        /* Invece di calcolare la sfocatura, diamo un colore solido quasi opaco.
+           L'occhio non nota la differenza, ma il processore ringrazia. */
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(10, 15, 16, 0.95) !important; /* Sfondo scuro coprente */
+        
+        /* Riduciamo le ombre complesse durante il movimento */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
+    }
+
+    /* 3. CARD ATTIVA SU MOBILE */
+    .swiper-slide-active .carousel-card {
+        /* Manteniamo solo un bordo dorato semplice per indicare la selezione */
+        border: 1px solid var(--gold-mid) !important;
+        
+        /* Togliamo il "super glow" diffuso che rallenta */
+        box-shadow: 0 0 15px rgba(197, 160, 89, 0.3) !important; 
+    }
+
+    /* 4. OTTIMIZZAZIONE IMMAGINI NEL CAROSELLO */
+    .card-visual img {
+        /* Evita filtri complessi durante lo scroll */
+        filter: none !important; 
+        transform: none !important;
+    }
+}
