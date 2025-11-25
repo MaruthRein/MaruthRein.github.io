@@ -421,3 +421,35 @@ function prevGuru() {
     updateGuruImage();
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+
+    /* =================================================================
+       QUI INCOLLI IL MIO "CONTROLLER UNIVERSALE SLIDER" 
+       (Quello del messaggio precedente con il FIX ANIMAZIONE)
+       ================================================================= */
+    // ... codice del messaggio precedente ...
+
+
+    /* =========================================
+       4. SCROLL REVEAL (Questo tienilo, va bene!)
+       ========================================= */
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -20% 0px',
+        threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            } else {
+                entry.target.classList.remove('active');
+            }
+        });
+    }, observerOptions);
+
+    const revealElements = document.querySelectorAll('.chi-block, .reveal-on-scroll');
+    revealElements.forEach(el => observer.observe(el));
+
+});
