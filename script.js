@@ -393,7 +393,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const guruImages = [
     "assets/images/Guru/The Guru.png",
-    "assets/images/Guru/pensare.png",
     "assets/images/Guru/Guru_mente.jpg",
      "assets/images/Guru/guru_universo.png"
 ];
