@@ -10,7 +10,6 @@ body {
         url('assets/images/sfondo-petrolio.webp');
     background-size: cover;
     background-position: center top;
-    background-attachment: fixed;
     background-repeat: no-repeat;
     background-blend-mode: screen, normal, normal;
     color: #d0d0d0;
@@ -32,30 +31,52 @@ body {
 }
 
 /* ------------------------------------------
-   1. FOTO A SINISTRA (Sfumata e Sticky)
+   FOTO STICKY — PREMIUM EDITORIAL VERSION
 ------------------------------------------ */
+
 .chi-photo-wrapper {
-    flex: 0 0 32%; 
-    position: -webkit-sticky;
     position: sticky;
     top: 120px;
-    height: auto; 
+    flex: 0 0 32%;
+    align-self: flex-start;
     display: block;
-    background: transparent;
-    border: none;
-    box-shadow: none;
+    position: sticky;
+    z-index: 2;
+    transform: translateZ(0);
+    perspective: 1000px;
 }
 
+/* Contenitore interno per parallax + fade */
+.chi-photo-wrapper .photo-inner {
+    position: relative;
+    overflow: visible;
+}
+
+/* IMMAGINE */
 .chi-photo-wrapper img {
     width: 100%;
     height: auto;
-    object-fit: cover;
-    /* Sfumatura verso il basso per fondersi col nero */
-    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-    filter: saturate(0) contrast(1.15) brightness(0.95);
-    opacity: 0.9; 
+    display: block;
+    border-radius: 10px;
+
+
+    /* Parallax “soft” */
+    transform: translateY(var(--photo-shift, 0px));
+    transition: transform 0.15s linear;
 }
+
+/* FADE SUPERIORE + INFERIORE */
+.chi-photo-wrapper::before,
+.chi-photo-wrapper::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+
 
 /* ------------------------------------------
    2. CONTENUTO A DESTRA (Timeline)
@@ -346,4 +367,40 @@ body {
     
     .chi-title { font-size: 3rem; }
     .cta-text { font-size: 1.5rem; }
+}
+
+.bg-fixed-layer {
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(ellipse 100% 60% at 50% 0%, rgba(197,160,89,0.35), transparent 80%),
+        linear-gradient(to bottom, transparent 40%, rgba(2,5,6,0.9)),
+        url('assets/images/sfondo-petrolio.webp');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-blend-mode: screen, normal, normal;
+    z-index: -1; /* dietro tutto */
+}
+
+.main-header {
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+html, body {
+    overflow: visible !important;
+}
+
+.page-wrapper,
+main,
+#app,
+.container-pagina {
+    overflow: visible !important;
+    transform: none !important;
+    filter: none !important;
+    perspective: none !important;
+    backdrop-filter: none !important;
 }
