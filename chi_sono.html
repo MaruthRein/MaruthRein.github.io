@@ -17,6 +17,7 @@
 
 </head>
 <body>
+    <div class="bg-fixed-layer"></div>
 
 <!-- HEADER -->
 <header class="main-header">
@@ -43,8 +44,10 @@
 <section class="chi-sono-section" id="chi-sono">
 
     <div class="chi-photo-wrapper">
+    <div class="photo-inner">
         <img src="assets/images/chisono.png" alt="Maruth Rein Portrait">
     </div>
+</div>
 
     <div class="chi-content-wrapper">
         
@@ -161,9 +164,7 @@
             </a>
         </div>
 
-    </div> </section>
-
-        </div>
+    </div>
 </section>
 
 <!-- FOOTER -->
@@ -277,6 +278,7 @@
     const blocks = document.querySelectorAll('.chi-block');
     blocks.forEach(el => observer.observe(el));
 </script>
+
 
 
 </body>

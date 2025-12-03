@@ -2167,3 +2167,16 @@ html, body {
     box-shadow: 0 0 20px rgba(197, 160, 89, 0.6) !important; /* Glow */
     transform: translateY(-2px);
 }
+
+.bg-fixed-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+        radial-gradient(ellipse 100% 60% at 50% 0%, rgba(197,160,89,0.35), transparent 80%),
+        linear-gradient(to bottom, transparent 40%, rgba(2,5,6,0.9)),
+        url('assets/images/sfondo-petrolio.webp');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
