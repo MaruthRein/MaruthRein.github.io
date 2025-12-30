@@ -452,62 +452,43 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-/* --- GESTIONE PLAYER SHOWREEL --- */
+/* --- NUOVO PLAYER UNIVERSALE (Gestisce più video) --- */
 
-// 1. Rendiamo la funzione accessibile globalmente (window.)
-window.playReel = function() {
-    var video = document.getElementById("mainShowreel");
-    var overlay = document.querySelector(".play-overlay");
+// Sostituisci la vecchia funzione playReel con questa:
+window.playUniversal = function(clickedOverlay) {
+    // 1. Trova il contenitore genitore dell'overlay cliccato
+    const wrapper = clickedOverlay.closest('.video-container');
     
-    if (!video) {
-        console.error("ERRORE: Video non trovato. Assicurati che lo slider sia caricato.");
+    if (!wrapper) {
+        console.error("Errore: Contenitore video non trovato.");
         return;
     }
 
-    // Avvia il video
+    // 2. Trova il tag <video> DENTRO quel contenitore specifico
+    const video = wrapper.querySelector('video');
+
+    if (!video) {
+        console.error("Errore: Tag video non trovato nel contenitore.");
+        return;
+    }
+    
+    // 3. Avvia quel video specifico
     var playPromise = video.play();
 
     if (playPromise !== undefined) {
         playPromise.then(_ => {
-            // Successo
-            console.log("Showreel avviato");
-            if(overlay) {
-                overlay.style.opacity = "0";
-                setTimeout(() => { overlay.style.display = "none"; }, 500);
-            }
-        })
-        .catch(error => {
+            // Nascondi SOLO l'overlay cliccato
+            clickedOverlay.style.opacity = "0";
+            setTimeout(() => { clickedOverlay.style.display = "none"; }, 500);
+            
+            // Opzionale: Ferma gli altri video se stanno andando
+            document.querySelectorAll('video').forEach(otherVideo => {
+                if (otherVideo !== video) otherVideo.pause();
+            });
+            
+        }).catch(error => {
             console.error("Errore Play:", error);
-            // Se fallisce, probabilmente il percorso è ancora sbagliato
-            alert("Impossibile avviare. Controlla che il file 'src/assets/video/showreel-maruth.mp4' esista rispetto alla ROOT del sito.");
+            alert("Impossibile avviare il video. Controlla il percorso del file.");
         });
     }
 };
-
-// 2. IMPORTANTE: Ferma il video quando si chiude lo slider
-// (Sostituisci '.close-slider' con la classe reale del tuo bottone X di chiusura)
-document.addEventListener('click', function(e) {
-    // Se clicchi sul tasto chiudi O fuori dallo slider (overlay di chiusura)
-    if (e.target.closest('.close-slider') || e.target.classList.contains('slider-overlay-close')) {
-        var video = document.getElementById("mainShowreel");
-        if (video) {
-            video.pause();
-            video.currentTime = 0; // Resetta il video all'inizio
-            // Riporta l'overlay Play visibile per la prossima volta
-            var overlay = document.querySelector(".play-overlay");
-            if(overlay) {
-                overlay.style.display = "flex";
-                overlay.style.opacity = "1";
-            }
-        }
-    }
-});
-
-// EXTRA: Ferma il video quando chiudi lo slider
-// (Aggiungi questo se hai un pulsante di chiusura slider)
-document.addEventListener('click', function(e) {
-    if (e.target.closest('.close-slider-btn')) { // Sostituisci con la classe del tuo tasto chiudi
-        var video = document.getElementById("mainShowreel");
-        if (video) video.pause();
-    }
-});
