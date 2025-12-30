@@ -451,3 +451,63 @@ document.addEventListener("DOMContentLoaded", function() {
     revealElements.forEach(el => observer.observe(el));
 
 });
+
+/* --- GESTIONE PLAYER SHOWREEL --- */
+
+// 1. Rendiamo la funzione accessibile globalmente (window.)
+window.playReel = function() {
+    var video = document.getElementById("mainShowreel");
+    var overlay = document.querySelector(".play-overlay");
+    
+    if (!video) {
+        console.error("ERRORE: Video non trovato. Assicurati che lo slider sia caricato.");
+        return;
+    }
+
+    // Avvia il video
+    var playPromise = video.play();
+
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            // Successo
+            console.log("Showreel avviato");
+            if(overlay) {
+                overlay.style.opacity = "0";
+                setTimeout(() => { overlay.style.display = "none"; }, 500);
+            }
+        })
+        .catch(error => {
+            console.error("Errore Play:", error);
+            // Se fallisce, probabilmente il percorso è ancora sbagliato
+            alert("Impossibile avviare. Controlla che il file 'src/assets/video/showreel-maruth.mp4' esista rispetto alla ROOT del sito.");
+        });
+    }
+};
+
+// 2. IMPORTANTE: Ferma il video quando si chiude lo slider
+// (Sostituisci '.close-slider' con la classe reale del tuo bottone X di chiusura)
+document.addEventListener('click', function(e) {
+    // Se clicchi sul tasto chiudi O fuori dallo slider (overlay di chiusura)
+    if (e.target.closest('.close-slider') || e.target.classList.contains('slider-overlay-close')) {
+        var video = document.getElementById("mainShowreel");
+        if (video) {
+            video.pause();
+            video.currentTime = 0; // Resetta il video all'inizio
+            // Riporta l'overlay Play visibile per la prossima volta
+            var overlay = document.querySelector(".play-overlay");
+            if(overlay) {
+                overlay.style.display = "flex";
+                overlay.style.opacity = "1";
+            }
+        }
+    }
+});
+
+// EXTRA: Ferma il video quando chiudi lo slider
+// (Aggiungi questo se hai un pulsante di chiusura slider)
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.close-slider-btn')) { // Sostituisci con la classe del tuo tasto chiudi
+        var video = document.getElementById("mainShowreel");
+        if (video) video.pause();
+    }
+});
