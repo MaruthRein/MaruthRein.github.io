@@ -1,110 +1,55 @@
-
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        
-        const sliderPanel = document.querySelector('.book-slider-panel');
-        const sliderInner = document.querySelector('.slider-inner');
-        const overlay = document.querySelector('.slider-overlay');
-
-        // --- QUESTA È LA PARTE MAGICA ---
-        // Ascolta i click su TUTTA la pagina. Se clicchi un pulsante "open-contact...", agisce.
-        document.body.addEventListener('click', function(e) {
-            
-            // Cerca se hai cliccato il pulsante o un'icona dentro il pulsante
-            const btn = e.target.closest('.open-contact-from-slider');
-
-            if (btn) {
-                e.preventDefault(); 
-                
-                // Url di destinazione (se non c'è nel pulsante, usa il default)
-                // Assicurati che il file 'components/contact-slider.html' esista!
-                const urlToLoad = btn.getAttribute('data-url') || 'components/contact-slider.html';
-                
-                loadSliderContent(urlToLoad);
-            }
-        });
-
-        // Funzione per caricare il contenuto
-        function loadSliderContent(url) {
-            sliderInner.style.opacity = '0'; // Dissolvenza
-
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) throw new Error("File non trovato: " + url);
-                    return response.text();
-                })
-                .then(html => {
-                    setTimeout(() => {
-                        sliderInner.innerHTML = html; // Inietta il form contatti
-                        sliderPanel.scrollTop = 0;    // Torna in cima
-                        sliderInner.style.opacity = '1';
-                        
-                        // Riattiva il tasto chiudi del nuovo contenuto
-                        const closeBtn = sliderPanel.querySelector('.slider-close');
-                        if (closeBtn) closeBtn.addEventListener('click', closeSlider);
-                    }, 300);
-                })
-                .catch(error => console.error('Errore:', error));
-        }
-
-        // Funzione Chiudi
-        function closeSlider() {
-            sliderPanel.classList.remove('active');
-            if(overlay) overlay.classList.remove('active');
-        }
-
-        // Chiudi cliccando fuori
-        if(overlay) overlay.addEventListener('click', closeSlider);
-        
-        // Chiudi col tasto X (quello principale che è sempre lì)
-        const mainCloseBtn = document.querySelector('.slider-close');
-        if(mainCloseBtn) mainCloseBtn.addEventListener('click', closeSlider);
-    });
-</script>
-
 <div class="slider-inner layout-visual">
     
-    <h2 class="slider-title">Web Design UI/UX</h2>
-    <p class="slider-meta">Architettura Digitale & User Experience</p>
+    <h2 class="slider-title">Architettura Digitale Strategica</h2>
+    <p class="slider-meta">Struttura, Identità & Coerenza per Ecosistemi Web</p>
     
     <div style="display: flex; flex-wrap: wrap; gap: 4rem; margin-top: 3rem;">
         <div style="flex: 1; min-width: 300px;">
             <img src="assets/images/services/Web_Design.png" 
                  class="slider-hero-img" 
-                 alt="Web Design Luxury"
+                 alt="Architettura Digitale"
                  style="width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover;">
             
             <blockquote class="luxury-quote" style="margin-top: 2rem;">
-                "Un sito web non è un biglietto da visita. È un ambiente digitale. Deve respirare, accogliere e guidare l'utente senza sforzo."
+                "Un sito web non è una presenza digitale. È una struttura strategica che organizza percezione, relazione e valore."
             </blockquote>
         </div>
 
         <div style="flex: 1; min-width: 300px;">
             <p>
-                <span class="drop-cap">I</span>l web è saturo di template senz'anima. Il mio approccio è quello dell'<span class="gold-accent">Alta Sartoria Digitale</span>.
+                <span class="drop-cap">I</span>n un contesto digitale saturo, la differenza non la fa l’estetica, ma la struttura.
             </p>
             <p>
-                Non scrivo solo codice, progetto esperienze. Unisco l'estetica del design editoriale alla precisione tecnica della UX (User Experience).
+                Il mio intervento parte dall’analisi dell’identità e del posizionamento per tradurli in 
+                un’architettura digitale coerente. Ogni elemento — interfaccia, tono, ritmo visivo e 
+                percorso utente — viene progettato come parte di un sistema integrato.
+            </p>
+            <p>
+                Non realizzo semplicemente siti: definisco ambienti digitali capaci di sostenere 
+                visione, autorevolezza e obiettivi di business nel tempo.
             </p>
 
             <h3 style="margin-top: 3rem; margin-bottom: 1.5rem; color: #fff; font-family: 'Cinzel', serif; border-bottom: 1px solid var(--gold-dark); padding-bottom: 10px; display: inline-block;">
-                Competenze Tecniche
+                Framework Operativo
             </h3>
 
             <ul class="service-list">
                 <li style="align-items: flex-start;">
                     <i class="fa-solid fa-layer-group" style="margin-top: 6px;"></i>
                     <div>
-                        <strong>UI Design & Prototyping</strong>
-                        <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-top: 0.3rem;">Figma, Wireframing, User Flow.</p>
+                        <strong>Architettura dell’Informazione & UI</strong>
+                        <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-top: 0.3rem;">
+                            Struttura dei contenuti, gerarchie strategiche e user flow orientati alla coerenza e alla conversione.
+                        </p>
                     </div>
                 </li>
                 <li style="align-items: flex-start;">
                     <i class="fa-brands fa-wordpress-simple" style="margin-top: 6px;"></i>
                     <div>
-                        <strong>Sviluppo Custom</strong>
-                        <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-top: 0.3rem;">WordPress, HTML5/CSS3, SEO Technical.</p>
+                        <strong>Sviluppo & Implementazione</strong>
+                        <p style="font-size: 0.95rem; color: rgba(255,255,255,0.6); margin-top: 0.3rem;">
+                            WordPress custom, HTML5/CSS3, ottimizzazione SEO tecnica e integrazione di workflow AI.
+                        </p>
                     </div>
                 </li>
             </ul>
@@ -112,73 +57,84 @@
     </div>
 
     <div style="margin-top: 6rem;">
-        <h3 class="gold-gradient-text" style="text-align: center; font-size: 2.2rem; margin-bottom: 3rem;">Cosa Posso Realizzare</h3>
+        <h3 class="gold-gradient-text" style="text-align: center; font-size: 2.2rem; margin-bottom: 3rem;">
+            Applicazioni Strategiche
+        </h3>
 
         <div class="immersive-section">
-            <img src="assets/images/webdesign/corporate/corporate.png" alt="Sito Corporate" class="immersive-bg">
+            <img src="assets/images/webdesign/corporate/corporate.png" alt="Presenza Istituzionale Strategica" class="immersive-bg">
             <div class="immersive-overlay"></div>
             
             <div class="immersive-box">
                 <div class="immersive-icon"><i class="fa-solid fa-building"></i></div>
-                <h4>Corporate</h4>
-                <p>Siti istituzionali che trasmettono autorità e fiducia. Ideale per aziende che vogliono posizionarsi come leader.</p>
-              <a href="#" class="btn-luxury-small open-slider" data-url="components/contact-slider.html">
-    VOGLIO UN SITO COSÌ
-</a>
+                <h4>Presenza Istituzionale Strategica</h4>
+                <p>
+                    Architetture digitali progettate per costruire credibilità, autorevolezza e chiarezza identitaria.
+                </p>
+                <a href="#" class="btn-luxury-small open-slider" data-url="components/contact-slider.html">
+                    VOGLIO STRUTTURARE LA MIA PRESENZA
+                </a>
             </div>
         </div>
 
         <div class="immersive-section">
-            <img src="assets/images/webdesign/e-commerce/e-commerce.png" alt="E-Commerce" class="immersive-bg">
+            <img src="assets/images/webdesign/e-commerce/e-commerce.png" alt="Architettura E-Commerce" class="immersive-bg">
             <div class="immersive-overlay"></div>
             
             <div class="immersive-box">
                 <div class="immersive-icon"><i class="fa-solid fa-cart-shopping"></i></div>
-                <h4>E-Commerce</h4>
-                <p>Non solo un negozio, ma un percorso d'acquisto fluido. Design ottimizzato per massimizzare le vendite.</p>
-              <a href="#" class="btn-luxury-small open-slider" data-url="components/contact-slider.html">
-    VOGLIO UN SITO COSÌ
-</a>
+                <h4>Architettura E-Commerce</h4>
+                <p>
+                    Sistemi orientati alla performance, dove identità, esperienza utente e conversione operano in modo integrato.
+                </p>
+                <a href="#" class="btn-luxury-small open-slider" data-url="components/contact-slider.html">
+                    ANALIZZIAMO IL MIO SISTEMA
+                </a>
             </div>
         </div>
 
         <div class="immersive-section">
-            <img src="assets/images/webdesign/landing_page/landing.png" alt="Landing Page" class="immersive-bg">
+            <img src="assets/images/webdesign/landing_page/landing.png" alt="Landing & Funnel Strategici" class="immersive-bg">
             <div class="immersive-overlay"></div>
             
             <div class="immersive-box">
                 <div class="immersive-icon"><i class="fa-solid fa-rocket"></i></div>
-                <h4>Landing Page</h4>
-                <p>Pagine ad alta conversione progettate per un unico scopo: trasformare i visitatori in clienti.</p>
-               <a href="#" class="btn-luxury-small open-slider" data-url="components/contact-slider.html">
-    VOGLIO UN SITO COSÌ
-</a>
+                <h4>Landing & Funnel Strategici</h4>
+                <p>
+                    Strutture focalizzate su obiettivi misurabili, progettate per guidare l’utente verso decisioni consapevoli.
+                </p>
+                <a href="#" class="btn-luxury-small open-slider" data-url="components/contact-slider.html">
+                    OTTIMIZZIAMO IL PERCORSO
+                </a>
             </div>
         </div>
 
         <div class="immersive-section">
-            <img src="assets/images/webdesign/creative/portfolio.png" alt="Portfolio Creativo" class="immersive-bg">
+            <img src="assets/images/webdesign/creative/portfolio.png" alt="Spazi Digitali Identitari" class="immersive-bg">
             <div class="immersive-overlay"></div>
             
             <div class="immersive-box">
                 <div class="immersive-icon"><i class="fa-solid fa-camera-retro"></i></div>
-                <h4>Creative & Portfolio</h4>
-                <p>Design non convenzionale per artisti e creativi. Uno spazio digitale che rispecchia la tua arte.</p>
-              <a href="#" class="btn-luxury-small open-slider" data-url="components/contact-slider.html">
-    VOGLIO UN SITO COSÌ
-</a>
+                <h4>Spazi Digitali Identitari</h4>
+                <p>
+                    Ambienti digitali che traducono visione personale e posizionamento in un sistema riconoscibile e distintivo.
+                </p>
+                <a href="#" class="btn-luxury-small open-slider" data-url="components/contact-slider.html">
+                    DEFINIAMO LA MIA IDENTITÀ
+                </a>
             </div>
         </div>
 
     </div>
 
     <div class="slider-footer" style="margin-top: 4rem; text-align: center; border-top: 1px solid rgba(197,160,89,0.2); padding-top: 2rem;">
-    <p style="margin-bottom: 1.5rem; color: #888;">Hai un progetto diverso in mente?</p>
-    
-    <a href="#" class="btn-luxury open-slider" data-url="components/contact-slider.html">
-        PARLAMI DEL TUO PROGETTO
-    </a>
-</div>
+        <p style="margin-bottom: 1.5rem; color: #888;">
+            Ogni progetto digitale dovrebbe iniziare dalla chiarezza strategica.
+        </p>
+        
+        <a href="#" class="btn-luxury open-slider" data-url="components/contact-slider.html">
+            RICHIEDI UNA SESSIONE STRATEGICA
+        </a>
+    </div>
 
 </div>
-
