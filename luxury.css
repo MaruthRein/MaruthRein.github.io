@@ -2180,3 +2180,57 @@ html, body {
     background-position: center top;
     background-repeat: no-repeat;
 }
+.progress-ring__circle {
+    stroke-dasharray: 326.7;
+    stroke-dashoffset: 326.7;
+    transform: rotate(-0deg);
+    transform-origin: 50% 50%;
+}
+
+/* Arrow Wrapper */
+.tools-arrow-wrapper {
+    text-align: center;
+    margin: 2rem 0 3.5rem;
+}
+
+/* Link */
+.tools-arrow {
+    text-decoration: none;
+    color: var(--gold-mid);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.tools-arrow:hover {
+    opacity: 0.85;
+}
+
+/* Linea corta e più spessa */
+.arrow-line {
+    width: 3px;             /* più spessa */
+    height: 22px;           /* più corta */
+    background: var(--gold-mid);
+    margin: 0.8rem auto 0.6rem;
+    border-radius: 3px;
+    animation: pulseLine 1.8s infinite;
+}
+
+/* Punta più grossa */
+.arrow-head {
+    width: 16px;
+    height: 16px;
+    border-right: 3px solid var(--gold-mid);
+    border-bottom: 3px solid var(--gold-mid);
+    transform: rotate(45deg);
+    margin: 0 auto;
+}
+
+/* Animazione più discreta */
+@keyframes pulseLine {
+    0%   { transform: translateY(0); opacity: 0.6; }
+    50%  { transform: translateY(4px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 0.6; }
+}
