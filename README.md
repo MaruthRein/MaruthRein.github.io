@@ -1,5 +1,16 @@
 # 🌐 Maruth Rein — Digital Architecture & Narrative Project
 
+## 💼 Use Case
+
+This project demonstrates my ability to build structured multi-page websites using HTML, CSS and JavaScript.
+
+It includes:
+- modular layout structure
+- multiple interconnected pages
+- organized content architecture
+- reusable components
+
+
 ## 🔗 Live Website
 https://maruthrein.github.io/
 
