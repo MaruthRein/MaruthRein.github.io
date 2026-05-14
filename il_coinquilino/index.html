@@ -582,9 +582,11 @@ a { color: inherit; }
 @media (max-width: 980px) {
   .scenes-grid { grid-template-columns: 1fr 1fr; }
   .scene.size-l, .scene.size-m, .scene.size-s, .scene.size-w { grid-column: span 1; }
+  .scene.size-full { grid-column: span 2; }
 }
 @media (max-width: 580px) {
   .scenes-grid { grid-template-columns: 1fr; }
+  .scene.size-full { grid-column: span 1; }
 }
 
 /* ----------- ESTRATTI - quote cards / dossiers ----------- */
