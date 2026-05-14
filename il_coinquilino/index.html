@@ -1719,15 +1719,14 @@ function App() {
   function handleSubmit(email) {
     setSuccessEmail(email);
     try { localStorage.setItem('il-coinquilino-list', email); } catch(e) {}
-    fetch(
-      'https://docs.google.com/forms/d/e/1FAIpQLSeyPjNC2ei9VCP52EZ2DyIxbXE_-WN-ujLNhqUecoWS-rKk9g/formResponse',
-      {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'entry.316277458=' + encodeURIComponent(email)
-      }
-    );
+    try {
+      var data = new FormData();
+      data.append('entry.316277458', email);
+      navigator.sendBeacon(
+        'https://docs.google.com/forms/d/e/1FAIpQLSeyPjNC2ei9VCP52EZ2DyIxbXE_-WN-ujLNhqUecoWS-rKk9g/formResponse',
+        data
+      );
+    } catch(e) {}
   }
 
   var headline = HEADLINES[t.headlineIndex] || HEADLINES[0];
