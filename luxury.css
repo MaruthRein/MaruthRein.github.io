@@ -27,7 +27,6 @@
     --font-title: 'Cinzel', serif;
     --font-body: 'Lato', sans-serif;
 
-    /* Nuove variabili regolabili */
     --header-height-desktop: 80px;
     --header-height-mobile: 65px;
 }
@@ -67,7 +66,7 @@ body {
 }
 
 /* -----------------------------------------------------------
-   4. HEADER — Sticky perfetto Desktop + Mobile
+   4. HEADER
 ------------------------------------------------------------ */
 .main-header {
     position: sticky;
@@ -77,8 +76,9 @@ body {
     z-index: 1000;
 
     background: rgba(2,5,6,0.35);
-    backdrop-filter: blur(8px);
+    /* FIX: webkit prima, poi standard */
     -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
 
     border-bottom: 1px solid rgba(197,160,89,0.5);
     box-shadow:
@@ -150,25 +150,19 @@ body {
 }
 
 /* -----------------------------------------------------------
-   5. HERO — Fix Spaziatura Desktop
+   5. HERO
 ------------------------------------------------------------ */
 .hero {
-    /* MODIFICA 1: Togli min-height o mettilo su auto. 
-       Cosi il contenitore finisce dove finisce il contenuto. */
-    min-height: auto;
+    /* FIX: min-height: 0 invece di auto (compatibile Firefox) */
+    min-height: 0;
 
-    /* MODIFICA 2: Padding Top (quello che abbiamo settato prima per distanziare dall'header) */
     padding-top: calc(var(--header-height-desktop) + 2rem);
-    
-    /* MODIFICA 3: Padding Bottom.
-       Questo numero decide ESATTAMENTE quanto la linea dorata sta sotto l'immagine/testo.
-       Vuoi la linea più vicina? Riduci a 4rem. Più lontana? Aumenta a 8rem. */
     padding-bottom: 5rem;
     
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    position: relative; /* Necessario per la linea */
+    position: relative;
 }
 .hero::after {
     content: '';
@@ -176,27 +170,21 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 0.7px; /* Spessore della linea: 1px è molto sottile ed elegante */
-
-    /* Usa il tuo gradiente dorato esistente */
+    height: 0.7px;
     background: var(--gold-gradient);
-
-    /* Aggiunge un bagliore dorato soffuso sotto la linea */
     box-shadow:
-        0 1px 4px rgba(197, 160, 89, 0.6), /* Bagliore stretto e luminoso */
-        0 2px 10px rgba(122, 98, 48, 0.3);  /* Alone più diffuso */
-
-    z-index: 10; /* Si assicura che stia sopra lo sfondo */
+        0 1px 4px rgba(197, 160, 89, 0.6),
+        0 2px 10px rgba(122, 98, 48, 0.3);
+    z-index: 10;
 }
 
 .hero-container {
     width: 90%;
     max-width: 1300px;
     margin: 0 auto;
-
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Questo allinea verticalmente testo e immagine tra loro */
+    align-items: center;
     gap: 5%;
 }
 
@@ -217,7 +205,7 @@ body {
 }
 
 /* -----------------------------------------------------------
-   Pulsante Luxury Oro + Vetro Satinato
+   Pulsante Luxury
 ------------------------------------------------------------ */
 .btn-luxury {
     display: inline-block;
@@ -229,6 +217,8 @@ body {
     font-size: 0.85rem;
 
     background: rgba(255,255,255,0.04);
+    /* FIX: webkit prima, poi standard */
+    -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
 
     border-radius: 4px;
@@ -315,9 +305,6 @@ body {
     .hero {
         padding-top: var(--header-height-mobile);
         text-align: center;
-        
-        /* RIPRISTINO PER MOBILE:
-           Qui vogliamo che torni al centro perché lo schermo è piccolo */
         justify-content: center; 
         min-height: 100vh; 
     }
@@ -327,32 +314,25 @@ body {
     }
 
     .hero-socials-top {
-    justify-content: center !important;
-    width: 100%;
-    text-align: center;
-}
+        justify-content: center !important;
+        width: 100%;
+        text-align: center;
+    }
 
-    /* HAMBURGER VISIBLE */
     .nav-toggle {
         display: block;
     }
 
-    @media (max-width: 900px) {
-
     .main-nav ul {
-        text-align: center;      /* Centra il testo */
-        align-items: lefy;     /* Centra gli elementi flex */
+        text-align: center;
+        align-items: center;
         width: 100%;
     }
 
-}
-
-    /* DESKTOP MENU HIDDEN */
     .main-nav ul {
         display: none;
     }
 
-    /* MENU MOBILE A TENDINA */
     .main-nav {
         position: absolute;
         top: 100%;
@@ -360,6 +340,8 @@ body {
         width: 100%;
 
         background: rgba(6,17,19,0.92);
+        /* FIX: webkit prima, poi standard */
+        -webkit-backdrop-filter: blur(12px);
         backdrop-filter: blur(12px);
         overflow: hidden;
 
@@ -371,7 +353,6 @@ body {
         max-height: 500px;
     }
 
-    /* MOBILE MENU ITEMS */
     .main-nav ul {
         display: flex !important;
         flex-direction: column;
@@ -386,7 +367,6 @@ body {
         font-weight: 600;
     }
 
-    /* HERO MOBILE */
     .hero-container {
         flex-direction: column-reverse;
         gap: 2rem;
@@ -401,17 +381,12 @@ body {
 /* -----------------------------------------------------------
    8. FOOTER
 ------------------------------------------------------------ */
-
-
-/* ============================= */
-/*  FOOTER - BORDO LUMINOSO     */
-/* ============================= */
-
 .luxury-footer {
     position: relative;
     background: rgba(15, 27, 25, 0.25);
-    backdrop-filter: blur(8px);
+    /* FIX: webkit prima, poi standard */
     -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     padding: 4rem 0 2rem;
     border-top: 1px solid rgba(197, 160, 89, 0.5);
     box-shadow:
@@ -420,7 +395,6 @@ body {
     overflow: visible;
 }
 
-/* Glow verso l’alto */
 .luxury-footer::before {
     content: "";
     position: absolute;
@@ -436,10 +410,6 @@ body {
     pointer-events: none;
     z-index: 10;
 }
-
-/* ============================= */
-/*  CONTENUTO                    */
-/* ============================= */
 
 .footer-container {
     max-width: 1300px;
@@ -459,7 +429,8 @@ body {
     font-weight: 700;
     background: var(--gold-gradient);
     -webkit-background-clip: text;
-    color: transparent;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .footer-email {
@@ -488,7 +459,6 @@ body {
     transform: scale(1.15);
 }
 
-/* Linea inferiore */
 .footer-bottom {
     text-align: center;
     margin-top: 2.5rem;
@@ -500,10 +470,6 @@ body {
     position: relative;
     z-index: 2;
 }
-
-/* ============================= */
-/*  MOBILE FIXES                */
-/* ============================= */
 
 @media (max-width: 768px) {
 
@@ -521,7 +487,6 @@ body {
         margin: 0 0.5rem;
     }
 
-    /* Glow più piccolo */
     .luxury-footer::before {
         top: -10px;
         height: 12px;
@@ -532,14 +497,12 @@ body {
         );
     }
 
-    /* Spazio sistemato */
     .luxury-footer {
         margin-top: 2rem;
         padding-top: 2.5rem;
         padding-bottom: 1.8rem;
     }
 
-    /* FIX SEZIONE GURU (il vero problema del riquadro) */
     #guru {
         background: none !important;
         box-shadow: none !important;
@@ -561,12 +524,9 @@ body {
     }
 }
 
-
-
-/* ============================= */
-/*   CONTACT POPUP – LUXURY      */
-/* ============================= */
-
+/* -----------------------------------------------------------
+   CONTACT POPUP
+------------------------------------------------------------ */
 .contact-popup {
     position: fixed;
     top: 0;
@@ -576,16 +536,16 @@ body {
     overflow: hidden;
     z-index: 9999;
     background: rgba(0,0,0,0.35);
+    /* FIX: webkit prima, poi standard */
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     transition: width 0.4s ease;
 }
 
-/* Quando attivo */
 .contact-popup.active {
     width: 100%;
 }
 
-/* Pannello scorrevole */
 .contact-popup-inner {
     position: absolute;
     top: 0;
@@ -593,20 +553,19 @@ body {
     width: 350px;
     height: 100%;
     background: rgba(20, 35, 32, 0.35);
-    backdrop-filter: blur(20px) saturate(160%);
+    /* FIX: webkit prima, poi standard */
     -webkit-backdrop-filter: blur(20px) saturate(160%);
+    backdrop-filter: blur(20px) saturate(160%);
     border-left: 1px solid rgba(197,160,89,0.4);
     box-shadow: -4px 0 25px rgba(197,160,89,0.25);
     padding: 2rem;
     transition: right 0.4s ease;
 }
 
-/* Quando il popup è attivo */
 .contact-popup.active .contact-popup-inner {
     right: 0;
 }
 
-/* Close button */
 .contact-close {
     background: none;
     border: none;
@@ -623,7 +582,6 @@ body {
     opacity: 1;
 }
 
-/* Testi */
 .contact-title {
     margin-top: 2.5rem;
     text-align: left;
@@ -636,7 +594,6 @@ body {
     margin-bottom: 1.5rem;
 }
 
-/* Email */
 .contact-email {
     display: inline-flex;
     align-items: center;
@@ -653,7 +610,6 @@ body {
     transform: translateX(4px);
 }
 
-/* Social */
 .contact-socials a {
     margin-right: 0.7rem;
     font-size: 1.3rem;
@@ -665,7 +621,6 @@ body {
     transform: scale(1.15);
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
     .contact-popup-inner {
         width: 100%;
@@ -675,6 +630,7 @@ body {
         right: 0;
     }
 }
+
 .contact-aforisma {
     font-family: "Cinzel", serif;
     font-size: 1.15rem;
@@ -693,41 +649,30 @@ body {
     text-align: center;
 }
 
-
-/* =========================================
-   SLIDING DOOR (Pannello Laterale)
-   ========================================= */
-
+/* -----------------------------------------------------------
+   SLIDING DOOR
+------------------------------------------------------------ */
 .book-slider-panel {
     position: fixed;
     top: 0;
     right: 0;
     width: 100%;
-    max-width: 800px; /* Larghezza massima di lettura */
+    max-width: 800px;
     height: 100vh;
-    background: #080f10; /* Sfondo scurissimo */
+    background: #080f10;
     z-index: 5000;
-    
-    /* PARTENZA: Nascosto a destra */
     transform: translateX(100%);
-    
-    /* ANIMAZIONE FLUIDA E PESANTE (Luxury Feel) */
     transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
-    
-    /* Ombra laterale per stacco */
     box-shadow: -20px 0 50px rgba(0,0,0,0.8);
     border-left: 1px solid rgba(197, 160, 89, 0.3);
-    
-    overflow-y: auto; /* Permette di scorrere il testo */
+    overflow-y: auto;
     padding: 4rem 2rem;
 }
 
-/* CLASSE ATTIVA (Quando la porta è aperta) */
 .book-slider-panel.active {
     transform: translateX(0);
 }
 
-/* OVERLAY DI SFONDO (Oscura il sito) */
 .slider-overlay {
     position: fixed;
     top: 0;
@@ -735,7 +680,9 @@ body {
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(5px); /* Effetto vetro sfocato */
+    /* FIX: webkit prima, poi standard */
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
     z-index: 4999;
     opacity: 0;
     pointer-events: none;
@@ -747,13 +694,12 @@ body {
     pointer-events: auto;
 }
 
-/* CONTENUTO INTERNO */
 .slider-inner {
     max-width: 650px;
     margin: 0 auto;
     opacity: 0;
     transform: translateY(20px);
-    transition: 0.5s ease 0.3s; /* Ritardo per far arrivare prima il pannello */
+    transition: 0.5s ease 0.3s;
 }
 
 .book-slider-panel.active .slider-inner {
@@ -761,7 +707,6 @@ body {
     transform: translateY(0);
 }
 
-/* STILI TESTO */
 .slider-title {
     font-family: var(--font-title);
     font-size: 3rem;
@@ -781,14 +726,13 @@ body {
 }
 
 .slider-text p {
-    font-family: 'Georgia', serif; /* Font serif per lettura lunga */
+    font-family: 'Georgia', serif;
     font-size: 1.15rem;
     line-height: 1.8;
     color: #d0d0d0;
     margin-bottom: 1.5rem;
 }
 
-/* Capolettera (Prima lettera grande) */
 .drop-cap {
     float: left;
     font-family: var(--font-title);
@@ -799,64 +743,53 @@ body {
     color: var(--gold-mid);
 }
 
-/* =========================================
-   BOTTONE CHIUDI (STICKY FIX)
-   ========================================= */
-
+/* -----------------------------------------------------------
+   SLIDER CLOSE BUTTON
+------------------------------------------------------------ */
 .slider-close {
-    /* 1. LA MAGIA: "Sticky" lo incolla al soffitto mentre scorri */
-    position: -webkit-sticky; /* Per Safari */
+    position: -webkit-sticky;
     position: sticky;
-    top: 1.5rem;  /* Distanza dal bordo alto */
-    
-    /* 2. POSIZIONAMENTO A DESTRA */
-    /* Essendo sticky, non usa 'right' assoluto, ma i margini */
-    margin-left: auto;   /* Lo spinge tutto a destra */
-    margin-right: 2rem;  /* Distanza dal bordo destro */
-    margin-bottom: 1rem; /* Spazio sotto prima che inizi il testo */
-    
-    /* 3. DIMENSIONI E FORMA */
+    top: 1.5rem;
+    margin-left: auto;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    
-    /* 4. STILE "FLOTTANTE" */
-    /* Aggiungiamo uno sfondo per quando il testo scorre sotto */
     background: rgba(0, 0, 0, 0.6); 
+    /* FIX: webkit prima, poi standard */
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     border: 1px solid rgba(197, 160, 89, 0.3);
     color: #fff;
-    
-    z-index: 6000; /* Deve stare sopra a tutto */
+    z-index: 6000;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-/* HOVER */
 .slider-close:hover {
     border-color: var(--gold-mid);
     color: var(--gold-mid);
-    transform: rotate(90deg); /* Rotazione divertente */
+    transform: rotate(90deg);
     background: rgba(0, 0, 0, 0.9);
     box-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
 }
 
-/* Badge Calvino nel Pannello Scorrevole */
 .slider-badge-container {
     text-align: center;
     margin: 3rem 0 2rem 0;
     padding-top: 2rem;
-    border-top: 1px solid rgba(197, 160, 89, 0.1); /* Linea separatrice sottile */
+    border-top: 1px solid rgba(197, 160, 89, 0.1);
 }
 
 .slider-badge-img {
-    max-width: 380px; /* Non troppo grande */
+    max-width: 380px;
     height: auto;
     opacity: 0.9;
-    filter: brightness(0.9); /* Leggermente attenuato per eleganza */
+    filter: brightness(0.9);
     transition: 0.3s;
     margin: 0 auto;
 }
@@ -868,21 +801,20 @@ body {
 }
 
 .quote-final {
-    font-size: 1.4rem !important; /* La frase finale un po' più grande */
+    font-size: 1.4rem !important;
     text-align: center;
     margin-top: 2rem;
     font-style: italic;
 }
 
-/* =========================================
-   SEZIONE STRUMENTI - LUXURY GRID
-   ========================================= */
-
+/* -----------------------------------------------------------
+   SEZIONE STRUMENTI
+------------------------------------------------------------ */
 .luxury-tools-section {
-   background: rgba(2,5,6,0.35);
-    backdrop-filter: blur(8px);
+    background: rgba(2,5,6,0.35);
+    /* FIX: webkit prima, poi standard */
     -webkit-backdrop-filter: blur(8px);
-
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(197,160,89,0.5);
     box-shadow:
         0 1px 10px rgba(197,160,89,0.4),
@@ -892,7 +824,6 @@ body {
     overflow: hidden;
 }
 
-/* HEADER DELLA SEZIONE */
 .section-header {
     text-align: center;
     margin-bottom: 5rem;
@@ -908,18 +839,15 @@ body {
     font-size: 1.1rem;
 }
 
-/* LA GRIGLIA (Il pezzo che mancava) */
 .tools-grid {
     display: grid;
-    /* Crea colonne automatiche che non scendono sotto i 140px */
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
-    gap: 4rem 2rem; /* Spazio verticale e orizzontale */
+    gap: 4rem 2rem;
     max-width: 1300px;
     margin: 0 auto;
-    justify-items: center; /* Centra gli elementi nella loro cella */
+    justify-items: center;
 }
 
-/* LA CARD DEL SINGOLO STRUMENTO */
 .tool-card {
     display: flex;
     flex-direction: column;
@@ -927,48 +855,44 @@ body {
     justify-content: center;
     position: relative;
     transition: transform 0.3s ease;
-    width: 100%; /* Occupa lo spazio della griglia */
+    width: 100%;
 }
 
 .tool-card:hover {
-    transform: translateY(-10px); /* Si alza al passaggio del mouse */
+    transform: translateY(-10px);
 }
 
-/* IL CONTENITORE DEL CERCHIO */
 .tool-circle-wrapper {
     position: relative;
     width: 120px;
     height: 120px;
     margin-bottom: 1.5rem;
     border-radius: 50%;
-    /* Sfondo leggerissimo dietro al cerchio */
     background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 70%);
-    box-shadow: 0 0 20px rgba(0,0,0,0.5); /* Ombra scura per stacco */
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-/* SVG CERCHIO */
 .progress-ring {
-    transform: rotate(-90deg); /* Ruota per far partire l'animazione dall'alto */
+    transform: rotate(-90deg);
     transform-origin: 50% 50%;
 }
 
 .progress-ring__track {
-    stroke: rgba(255, 255, 255, 0.05); /* Cerchio grigio di fondo */
+    stroke: rgba(255, 255, 255, 0.05);
 }
 
 .progress-ring__circle {
-    stroke: var(--gold-mid); /* Il colore ORO */
-    stroke-linecap: round;   /* Estremità arrotondate */
+    stroke: var(--gold-mid);
+    stroke-linecap: round;
     transition: stroke-dashoffset 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-    filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.7)); /* Glow dorato */
+    filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.7));
 }
 
-/* L'ICONA CENTRALE (Posizionamento Assoluto) */
 .tool-icon-box {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centratura perfetta */
+    transform: translate(-50%, -50%);
     width: 50px;
     height: 50px;
     display: flex;
@@ -984,25 +908,19 @@ body {
     max-width: 45px;
     opacity: 0.8;
     transition: 0.3s ease;
-   
 }
 
-/* HOVER SULLA CARD */
 .tool-card:hover .tool-icon-box img {
     opacity: 1;
-    /* Ingrandimento "Pop" */
     transform: scale(1.25); 
-    /* Bagliore dietro l'icona */
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
 }
 
-/* Hover anche sul cerchio esterno */
 .tool-card:hover .tool-circle-wrapper {
-    box-shadow: 0 0 25px rgba(197, 160, 89, 0.2); /* Glow dorato sul cerchio */
+    box-shadow: 0 0 25px rgba(197, 160, 89, 0.2);
     border-color: var(--gold-mid);
 }
 
-/* TESTI */
 .tool-info {
     text-align: center;
 }
@@ -1018,16 +936,15 @@ body {
 }
 
 .tool-percentage-text {
-    font-family: var(--font-title); /* Usa Cinzel per i numeri */
+    font-family: var(--font-title);
     color: var(--gold-mid);
     font-size: 0.9rem;
     font-weight: 700;
 }
 
-/* MOBILE FIX */
 @media (max-width: 768px) {
     .tools-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 colonne su mobile */
+        grid-template-columns: repeat(2, 1fr);
         gap: 3rem 1rem;
     }
     
@@ -1036,30 +953,24 @@ body {
         height: 100px;
     }
     
-    /* Scaliamo l'SVG per mobile se necessario */
     .progress-ring {
         width: 100px;
         height: 100px;
     }
     
     .progress-ring__circle, .progress-ring__track {
-        r: 42; /* Raggio più piccolo su mobile */
+        r: 42;
         cx: 50;
         cy: 50;
     }
 }
 
-/* =========================================
-   CAROUSEL 3D SECTION
-   ========================================= */
-
-/* =========================================
-   CAROUSEL 3D - LUXURY LIGHTING
-   ========================================= */
-
+/* -----------------------------------------------------------
+   CAROUSEL 3D
+------------------------------------------------------------ */
 .carousel-section {
     position: relative;
-    padding: 4rem 0; /* Un po' più compatto */
+    padding: 4rem 0;
     overflow: hidden;
     background-color: #020405;
     min-height: 100vh;
@@ -1068,7 +979,6 @@ body {
     justify-content: center;
 }
 
-/* SFONDO (Resta uguale) */
 .carousel-bg {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -1079,33 +989,34 @@ body {
 
 .relative-z { position: relative; z-index: 2; }
 
-/* SWIPER CONTAINER */
 .swiper {
     width: 100%;
     padding-top: 60px;
     padding-bottom: 100px;
 }
 
-/* SLIDE GENERICA (La base) */
 .swiper-slide {
     background-position: center;
     background-size: cover;
-    width: 340px; /* Larghezza aumentata come suggerito */
+    width: 340px;
     height: 550px;
     
-    /* Riflesso sotto */
-    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent 80%, rgba(0,0,0,0.3));
-    
-    /* Transizione fluidissima */
+    /* FIX: box-reflect avvolto in @supports per Firefox */
     transition: transform 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
 }
 
-/* CARD GENERICA */
+/* FIX: box-reflect solo dove supportato */
+@supports (-webkit-box-reflect: below) {
+    .swiper-slide {
+        -webkit-box-reflect: below 1px linear-gradient(transparent, transparent 80%, rgba(0,0,0,0.3));
+    }
+}
+
 .carousel-card {
     width: 100%;
     height: 100%;
     background: #0a0f10;
-    border: 1px solid rgba(197, 160, 89, 0.1); /* Bordo spento di default */
+    border: 1px solid rgba(197, 160, 89, 0.1);
     border-radius: 8px;
     overflow: hidden;
     position: relative;
@@ -1113,32 +1024,24 @@ body {
     flex-direction: column;
 }
 
-/* ------------------------------------------
-   1. CARD ATTIVA (IL GLOW)
-   ------------------------------------------ */
 .swiper-slide-active {
-    z-index: 10; /* Sta sopra a tutto */
+    z-index: 10;
 }
 
 .swiper-slide-active .carousel-card {
-    /* Bordo Oro Luminoso */
     border-color: var(--gold-mid); 
-    
-    /* IL SUPER GLOW */
     box-shadow: 
-        0 0 20px rgba(197, 160, 89, 0.4),  /* Alone interno */
-        0 0 60px rgba(197, 160, 89, 0.3),  /* Alone medio */
-        0 0 100px rgba(197, 160, 89, 0.1); /* Alone disperso */
+        0 0 20px rgba(197, 160, 89, 0.4),
+        0 0 60px rgba(197, 160, 89, 0.3),
+        0 0 100px rgba(197, 160, 89, 0.1);
 }
 
 .swiper-slide-active .card-visual img {
-    /* Colori vivi e luminosi */
     filter: saturate(1.1) contrast(1.1) brightness(1.1);
     transform: scale(1.05);
 }
 
 .swiper-slide-active .card-overlay {
-    /* Riduciamo l'ombra nera sull'immagine attiva per farla brillare */
     opacity: 0.4; 
 }
 
@@ -1147,24 +1050,16 @@ body {
     text-shadow: 0 0 15px rgba(197, 160, 89, 0.6);
 }
 
-/* ------------------------------------------
-   2. CARD INATTIVE (L'OMBRA PROFONDA)
-   ------------------------------------------ */
-/* Seleziona tutte le slide che NON sono attive */
 .swiper-slide:not(.swiper-slide-active) {
-    /* Le rendiamo scure e spente */
     filter: brightness(0.4) grayscale(80%); 
-    opacity: 0.6; /* Leggermente trasparenti per fonderle col fondo */
+    opacity: 0.6;
 }
 
 .swiper-slide:not(.swiper-slide-active) .carousel-card {
-    border-color: rgba(255, 255, 255, 0.05); /* Bordo quasi invisibile */
-    box-shadow: none; /* Niente luce */
+    border-color: rgba(255, 255, 255, 0.05);
+    box-shadow: none;
 }
 
-/* ------------------------------------------
-   LAYOUT INTERNO (Immagini e Testi)
-   ------------------------------------------ */
 .card-visual {
     height: 65%;
     width: 100%;
@@ -1182,7 +1077,6 @@ body {
 .card-overlay {
     position: absolute;
     bottom: 0; left: 0; width: 100%; height: 100%;
-    /* Gradiente nero per leggere il testo, più forte sulle inattive */
     background: linear-gradient(to top, #020405 10%, transparent 80%);
     transition: 0.5s;
 }
@@ -1200,7 +1094,7 @@ body {
 .card-details h3 {
     font-family: var(--font-title);
     font-size: 1.8rem;
-    color: #888; /* Colore spento di default */
+    color: #888;
     margin-bottom: 0.5rem;
     transition: 0.3s;
 }
@@ -1214,11 +1108,9 @@ body {
     margin-bottom: 1.5rem;
 }
 
-/* PAGINAZIONE */
 .swiper-pagination-bullet { background: rgba(255,255,255,0.2); opacity: 1; }
 .swiper-pagination-bullet-active { background: var(--gold-mid); box-shadow: 0 0 10px var(--gold-mid); }
 
-/* MOBILE */
 @media (max-width: 768px) {
     .swiper-slide {
         width: 280px;
@@ -1226,75 +1118,62 @@ body {
     }
 }
 
-/* Classe aggiunta dal JS per i servizi */
 .book-slider-panel.wide-mode {
-    max-width: 1400px; /* O la larghezza che preferisci */
+    max-width: 1400px;
 }
 
-/* Mobile: resta sempre al 100% */
 @media (max-width: 768px) {
     .book-slider-panel.wide-mode {
         max-width: 100%;
     }
 }
-/* =========================================
-   LISTA SERVIZI LUXURY (Icone e Titoli Oro)
-   ========================================= */
 
-/* 1. LE ICONE (Il simbolo a sinistra) */
+/* -----------------------------------------------------------
+   LISTA SERVIZI
+------------------------------------------------------------ */
 .service-list li i {
-    color: var(--gold-mid) !important; /* Colore Oro */
-    font-size: 1.4rem;                 /* Più grandi */
-    min-width: 30px;                   /* Allineamento stabile */
-    
-    /* EFFETTO LUCE */
+    color: var(--gold-mid) !important;
+    font-size: 1.4rem;
+    min-width: 30px;
     text-shadow: 0 0 15px rgba(197, 160, 89, 0.6); 
-    
     transition: transform 0.3s ease;
 }
 
-/* Effetto quando passi sopra la riga */
 .service-list li:hover i {
-    transform: scale(1.2); /* L'icona si ingrandisce leggermente */
-    color: #fff !important; /* Diventa bianca brillante */
-    text-shadow: 0 0 20px var(--gold-mid); /* Glow ancora più forte */
+    transform: scale(1.2);
+    color: #fff !important;
+    text-shadow: 0 0 20px var(--gold-mid);
 }
 
-/* 2. I TITOLI DEI SERVIZI (Ghostwriting, ecc.) */
 .service-list li strong {
-    display: block;                    /* Va a capo rispetto al testo sotto */
-    color: var(--gold-mid) !important; /* Colore Oro */
-    font-family: 'Cinzel', serif;      /* Font elegante dei titoli */
-    font-size: 1.3rem;                 /* Grandezza leggibile */
+    display: block;
+    color: var(--gold-mid) !important;
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
     font-weight: 600;
     letter-spacing: 0.5px;
-    margin-bottom: 0.4rem;             /* Spazio prima della descrizione */
-    
-    /* EFFETTO LUCE */
+    margin-bottom: 0.4rem;
     text-shadow: 0 0 10px rgba(197, 160, 89, 0.3); 
 }
 
-/* 3. LA DESCRIZIONE (Il testo sotto) */
 .service-list li p {
-    color: rgba(255, 255, 255, 0.7) !important; /* Grigio chiaro pulito */
+    color: rgba(255, 255, 255, 0.7) !important;
     font-size: 0.95rem;
     line-height: 1.6;
 }
 
-/* Spaziatura generale della lista */
 .service-list li {
-    margin-bottom: 2rem; /* Più aria tra un servizio e l'altro */
-    border-bottom: 1px solid rgba(197, 160, 89, 0.1); /* Linea separatrice sottilissima */
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(197, 160, 89, 0.1);
     padding-bottom: 1.5rem;
 }
 .service-list li:last-child {
     border-bottom: none;
 }
 
-/* =========================================
-   BOX AMAZON "VETRINA SCINTILLANTE" (Bright)
-   ========================================= */
-
+/* -----------------------------------------------------------
+   AMAZON BOX
+------------------------------------------------------------ */
 .amazon-showcase-box {
     position: relative;
     margin-top: 3rem;
@@ -1302,72 +1181,60 @@ body {
     border-radius: 8px;
     text-align: center;
     
-    /* 1. SFONDO LUMINOSO (Radial Light) */
-    /* Simula una luce forte al centro che sfuma */
     background: radial-gradient(
         circle at center,
-        rgba(255, 225, 160, 0.15) 0%,  /* Centro oro chiaro luminoso */
-        rgba(197, 160, 89, 0.05) 60%,  /* Alone oro */
-        rgba(255, 255, 255, 0.01) 100% /* Trasparente ai bordi */
+        rgba(255, 225, 160, 0.15) 0%,
+        rgba(197, 160, 89, 0.05) 60%,
+        rgba(255, 255, 255, 0.01) 100%
     );
 
-    /* 2. VETRO SCINTILLANTE */
-    backdrop-filter: blur(10px);
+    /* FIX: webkit prima, poi standard */
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 
-    /* 3. BORDI "GIOIELLO" */
-    /* Bordo sottile ma molto chiaro, quasi bianco/oro */
     border: 1px solid rgba(236, 217, 163, 0.4); 
-    border-top: 1px solid rgba(255, 255, 255, 0.8); /* Luce che colpisce da sopra */
+    border-top: 1px solid rgba(255, 255, 255, 0.8);
     border-bottom: 1px solid rgba(197, 160, 89, 0.2);
 
-    /* 4. GLOW ESTERNO ED INTERNO (Lo scintillio) */
     box-shadow: 
-        0 0 40px rgba(197, 160, 89, 0.15),       /* Alone dorato esterno */
-        inset 0 0 20px rgba(255, 215, 160, 0.1); /* Luce intrappolata dentro */
+        0 0 40px rgba(197, 160, 89, 0.15),
+        inset 0 0 20px rgba(255, 215, 160, 0.1);
 
     transition: all 0.4s ease;
 }
 
-/* HOVER: Si accende ancora di più */
 .amazon-showcase-box:hover {
     background: radial-gradient(
         circle at center,
         rgba(255, 225, 160, 0.25) 0%, 
         rgba(197, 160, 89, 0.1) 100%
     );
-    border-color: rgba(255, 215, 160, 0.8); /* Bordi quasi bianchi */
+    border-color: rgba(255, 215, 160, 0.8);
     box-shadow: 
         0 0 60px rgba(197, 160, 89, 0.3),
         inset 0 0 30px rgba(255, 255, 255, 0.2);
     transform: translateY(-3px);
 }
 
-/* Testo introduttivo (più luminoso per contrasto) */
 .amazon-intro-text {
     font-family: 'Lato', sans-serif;
     font-style: italic;
-    color: rgba(255, 240, 200, 0.9); /* Bianco caldo, non grigio */
+    color: rgba(255, 240, 200, 0.9);
     font-size: 1rem;
     margin-bottom: 1.5rem;
-    text-shadow: 0 0 10px rgba(0,0,0,0.5); /* Ombra leggera per leggibilità */
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-/* PULSANTE (Pieno e Scintillante) */
 .amazon-link-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     padding: 14px 30px;
-    
-    /* Sfondo Oro Solido (o gradiente oro) */
     background: linear-gradient(135deg, #c5a059 0%, #e6c885 50%, #c5a059 100%);
     background-size: 200% auto;
-    
-    color: #000; /* Testo nero per massimo contrasto sull'oro */
+    color: #000;
     border: 1px solid #fff;
-    
     font-family: 'Cinzel', serif;
     font-weight: 700;
     font-size: 0.95rem;
@@ -1375,22 +1242,20 @@ body {
     letter-spacing: 2px;
     text-decoration: none;
     border-radius: 4px;
-    
     box-shadow: 0 5px 20px rgba(197, 160, 89, 0.4);
     transition: all 0.4s ease;
 }
 
 .amazon-link-btn:hover {
-    background-position: right center; /* Muove il gradiente */
-    box-shadow: 0 0 30px rgba(255, 215, 160, 0.8); /* Super Glow */
+    background-position: right center;
+    box-shadow: 0 0 30px rgba(255, 215, 160, 0.8);
     transform: scale(1.03);
     color: #000;
 }
 
-/* =========================================
-   PORTFOLIO GRID (Dentro lo Slider)
-   ========================================= */
-
+/* -----------------------------------------------------------
+   PORTFOLIO GRID
+------------------------------------------------------------ */
 .luxury-portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -1402,7 +1267,7 @@ body {
     display: block;
     border-radius: 6px;
     overflow: hidden;
-    aspect-ratio: 1 / 1; /* Quadrati perfetti */
+    aspect-ratio: 1 / 1;
     border: 1px solid rgba(197, 160, 89, 0.1);
     transition: transform 0.3s ease;
     cursor: zoom-in;
@@ -1416,7 +1281,6 @@ body {
     filter: grayscale(30%);
 }
 
-/* Overlay scuro che appare all'hover */
 .portfolio-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -1440,7 +1304,6 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* HOVER EFFECT */
 .portfolio-item:hover {
     transform: translateY(-5px);
     border-color: var(--gold-mid);
@@ -1448,8 +1311,8 @@ body {
 }
 
 .portfolio-item:hover img {
-    transform: scale(1.1); /* Zoom immagine */
-    filter: grayscale(0%); /* Colori vivi */
+    transform: scale(1.1);
+    filter: grayscale(0%);
 }
 
 .portfolio-item:hover .portfolio-overlay {
@@ -1460,10 +1323,9 @@ body {
     transform: translateY(0);
 }
 
-/* =========================================
+/* -----------------------------------------------------------
    PORTFOLIO CATEGORY CARDS
-   ========================================= */
-
+------------------------------------------------------------ */
 .portfolio-categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1482,7 +1344,6 @@ body {
     overflow: hidden;
 }
 
-/* Effetto Hover */
 .portfolio-card:hover {
     transform: translateY(-5px);
     border-color: var(--gold-mid);
@@ -1531,97 +1392,85 @@ body {
     color: #fff;
     border-bottom-color: #fff;
 }
-/* =========================================
-   PAGINAZIONE SWIPER (Puntini in alto)
-   ========================================= */
 
-/* Sposta il contenitore dei puntini in alto */
+/* -----------------------------------------------------------
+   PAGINAZIONE SWIPER
+------------------------------------------------------------ */
 .swiper-pagination {
-    top: 1rem !important;    /* Posiziona in alto (regola a piacere) */
-    bottom: auto !important; /* Annulla il posizionamento in basso */
-    z-index: 20;             /* Assicura che stiano sopra le slide */
+    top: 1rem !important;
+    bottom: auto !important;
+    z-index: 20;
 }
 
-/* Stile personalizzato per i puntini (opzionale, ma consigliato per il tema Luxury) */
 .swiper-pagination-bullet {
     width: 30px;
     height: 10px;
-    background: rgba(255, 255, 255, 0.3); /* Puntino inattivo */
+    background: rgba(255, 255, 255, 0.3);
     opacity: 1;
     border: 1px solid transparent;
     transition: all 0.3s ease;
 }
 
 .swiper-pagination-bullet-active {
-    background: var(--gold-mid); /* Puntino attivo (oro) */
+    background: var(--gold-mid);
     border-color: var(--gold-mid);
-    transform: scale(1.2);       /* Leggermente più grande */
-    box-shadow: 0 0 10px rgba(197, 160, 89, 0.5); /* Bagliore */
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(197, 160, 89, 0.5);
 }
 
-/* =========================================
-   FIX LIGHTGALLERY (Z-INDEX)
-   ========================================= */
-
-/* Porta il contenitore della galleria sopra il pannello scorrevole (che è 5000) */
+/* -----------------------------------------------------------
+   LIGHTGALLERY Z-INDEX
+------------------------------------------------------------ */
 .lg-outer {
     z-index: 99999 !important; 
 }
 
-/* Porta lo sfondo scuro della galleria sopra a tutto */
 .lg-backdrop {
     z-index: 99998 !important;
 }
 
-/* =========================================
+/* -----------------------------------------------------------
    LIGHTGALLERY LUXURY SKIN
-   ========================================= */
-
-/* 1. SFONDO (BACKDROP) */
-/* Sostituiamo il nero standard con il Petrolio scuro + Blur */
+------------------------------------------------------------ */
 .lg-backdrop {
-    background-color: rgba(5, 12, 15, 0.96) !important; /* Petrolio scurissimo */
-    backdrop-filter: blur(10px);
+    background-color: rgba(5, 12, 15, 0.96) !important;
+    /* FIX: webkit prima, poi standard */
     -webkit-backdrop-filter: blur(10px);
-    z-index: 2147483646 !important; /* Livello estremo */
+    backdrop-filter: blur(10px);
+    z-index: 2147483646 !important;
 }
 
-/* Contenitore principale */
 .lg-outer {
-    z-index: 2147483647 !important; /* Livello supremo */
+    z-index: 2147483647 !important;
 }
 
-/* 2. BARRA DEGLI STRUMENTI (Toolbar) */
 .lg-toolbar {
     background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent) !important;
 }
 
-/* 3. ICONE (Close, Zoom, Download, Frecce) */
 .lg-icon, 
 .lg-actions .lg-next, 
 .lg-actions .lg-prev {
-    color: var(--gold-mid) !important; /* Colore ORO */
+    color: var(--gold-mid) !important;
     background-color: transparent !important;
     transition: all 0.3s ease;
 }
 
-/* Effetto Hover sulle icone */
 .lg-icon:hover, 
 .lg-actions .lg-next:hover, 
 .lg-actions .lg-prev:hover {
-    color: #fff !important; /* Diventa bianco */
-    text-shadow: 0 0 15px var(--gold-mid); /* Bagliore Oro */
+    color: #fff !important;
+    text-shadow: 0 0 15px var(--gold-mid);
     transform: scale(1.1);
 }
 
-/* 4. DIDASCALIE (Captions) */
 .lg-sub-html {
     background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%) !important;
     padding-bottom: 20px;
 }
 
 .lg-sub-html h4 {
-    font-family: 'Cinzel', serif !important; /* Font Luxury */
+    font-family: 'Cinzel', serif !important;
     font-size: 1.5rem !important;
     color: var(--gold-mid) !important;
     margin: 0 0 5px 0;
@@ -1636,9 +1485,8 @@ body {
     font-style: italic;
 }
 
-/* 5. THUMBNAILS (Miniature in basso) */
 .lg-outer .lg-thumb-outer {
-    background-color: #020405 !important; /* Fondo nero per le thumb */
+    background-color: #020405 !important;
     border-top: 1px solid rgba(197, 160, 89, 0.1);
 }
 
@@ -1650,44 +1498,33 @@ body {
     filter: grayscale(100%);
 }
 
-/* Miniatura Attiva o Hover */
 .lg-outer .lg-thumb-item.active, 
 .lg-outer .lg-thumb-item:hover {
-    border-color: var(--gold-mid) !important; /* Bordo ORO */
+    border-color: var(--gold-mid) !important;
     opacity: 1;
     filter: grayscale(0%);
     transform: translateY(-3px);
 }
 
-/* 6. BARRA DI CARICAMENTO (Progress Bar) */
 .lg-progress-bar .lg-progress {
     background-color: var(--gold-mid) !important;
     box-shadow: 0 0 10px var(--gold-mid);
 }
 
-/* =========================================
-   LIGHTGALLERY: FIX MINIATURE (THUMBNAILS)
-   ========================================= */
-
 .lg-outer .lg-thumb-outer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 100px; /* Altezza fissa per la barra */
+    height: 100px;
     padding: 10px 0;
-    
-    /* Forza allineamento orizzontale */
     display: flex !important;
     justify-content: center;
     align-items: center;
-    
-    /* Sfondo scuro per stacco */
     background-color: rgba(2, 4, 5, 0.95) !important;
     border-top: 1px solid rgba(197, 160, 89, 0.2);
 }
 
 .lg-outer .lg-thumb {
-    /* Forza la riga */
     display: flex !important;
     flex-direction: row !important;
     margin: 0 auto !important;
@@ -1697,17 +1534,13 @@ body {
 }
 
 .lg-outer .lg-thumb-item {
-    /* Dimensioni fisse per le miniature */
     width: 80px !important;
     height: 60px !important;
     margin: 0 5px !important;
-    
     border-radius: 4px;
     border: 2px solid transparent;
     opacity: 0.5;
     transition: all 0.3s ease;
-    
-    /* Assicura che l'immagine riempia il box */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1717,10 +1550,9 @@ body {
 .lg-outer .lg-thumb-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Taglia per riempire */
+    object-fit: cover;
 }
 
-/* Miniatura attiva */
 .lg-outer .lg-thumb-item.active, 
 .lg-outer .lg-thumb-item:hover {
     border-color: var(--gold-mid) !important;
@@ -1729,82 +1561,61 @@ body {
     box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
 }
 
-/* =========================================
-   LIGHTGALLERY: BOX LUMINESCENTE (GLOW)
-   ========================================= */
-
-/* Applica lo stile all'immagine principale visualizzata */
 .lg-outer .lg-img-wrap .lg-object {
-    /* 1. La Cornice Sottile */
     border: 1px solid rgba(197, 160, 89, 0.6) !important;
     border-radius: 4px;
-    
-    /* 2. Il Bagliore (Glow) */
-    /* Doppio livello: uno stretto forte, uno largo soffuso */
     box-shadow: 
-        0 0 20px rgba(197, 160, 89, 0.2),  /* Glow interno */
-        0 0 50px rgba(197, 160, 89, 0.15); /* Glow diffuso */
-        
-    /* Stacco dallo sfondo */
+        0 0 20px rgba(197, 160, 89, 0.2),
+        0 0 50px rgba(197, 160, 89, 0.15);
     background-color: rgba(0,0,0,0.5); 
-    
     transition: box-shadow 0.3s ease;
 }
 
-/* Opzionale: Sfondo della galleria ancora più scuro per far risaltare la luce */
 .lg-backdrop {
     background-color: rgba(5, 10, 12, 0.98) !important;
 }
 
-/* =============================================================
-   9. OTTIMIZZAZIONE LAPTOP / NOTEBOOK (Schermi Medi)
-   Range: da 901px a 1400px (comprende MacBook, Laptop Windows standard)
-   ============================================================= */
-
+/* -----------------------------------------------------------
+   9. OTTIMIZZAZIONE LAPTOP
+------------------------------------------------------------ */
 @media screen and (min-width: 901px) and (max-width: 1440px) {
 
-    /* --- 1. GENERALE: Usiamo meglio lo spazio laterale --- */
     .hero-container, 
     .header-container, 
     .footer-container, 
     .tools-grid {
-        width: 94%;       /* Allarghiamo leggermente i margini laterali */
-        max-width: 100%;  /* Rimuoviamo il limite rigido di 1300px */
+        width: 94%;
+        max-width: 100%;
     }
 
-    /* --- 2. HERO SECTION: Testi e Immagine più compatti --- */
-    /* Spesso i portatili sono "bassi", quindi riduciamo le altezze */
-    
     .hero {
-        padding-top: calc(var(--header-height-desktop) + 1rem); /* Meno aria sopra */
-        padding-bottom: 3rem; /* Meno aria sotto */
+        padding-top: calc(var(--header-height-desktop) + 1rem);
+        padding-bottom: 3rem;
     }
 
     .hero h1 {
-        font-size: 3rem; /* Ridotto da 4.2rem (era enorme su un 13 pollici) */
+        font-size: 3rem;
     }
 
     .hero-desc {
         font-size: 1rem;
         margin-bottom: 2rem;
-        max-width: 100%; /* Lasciamo che il testo occupi lo spazio necessario */
+        max-width: 100%;
     }
 
-    /* Il cerchio dell'immagine: da 450px a 340px */
     .image-ring {
         width: 340px;
         height: 340px;
     }
     
     .btn-luxury {
-        padding: 12px 25px; /* Pulsante leggermente più piccolo */
+        padding: 12px 25px;
         font-size: 0.8rem;
     }
 
-    /* --- 3. CAROUSEL 3D: Evitiamo che venga tagliato sotto --- */
     .swiper-slide {
-        width: 280px;  /* Più stretto */
-        height: 420px; /* Più basso (da 550px che è tantissimo su un laptop) */
+        width: 280px;
+        height: 420px;
     }
 
     .card-details h3 {
@@ -1815,18 +1626,16 @@ body {
         font-size: 0.85rem;
     }
 
-    /* --- 4. SEZIONE STRUMENTI (Tools) --- */
     .luxury-tools-section {
-        padding: 4rem 5%; /* Riduciamo il padding verticale da 6rem */
+        padding: 4rem 5%;
     }
     
     .section-header h2 {
-        font-size: 2.4rem; /* Titolo sezione un po' più piccolo */
+        font-size: 2.4rem;
     }
 
-    /* --- 5. PANNELLO LATERALE (Sliding Door) --- */
     .book-slider-panel {
-        max-width: 600px; /* Il pannello di lettura occupa meno spazio */
+        max-width: 600px;
         padding: 3rem 1.5rem;
     }
     
@@ -1839,136 +1648,114 @@ body {
     }
 }
 
-/* =============================================================
-   FIX SPECIFICO PER SCHERMI MOLTO BASSI 
-   (Esempio: Laptop 1366x768 o schermi con zoom 125%)
-   ============================================================= */
 @media screen and (max-height: 800px) and (min-width: 900px) {
     .hero {
-        min-height: auto;
-        padding-top: 100px; /* Assicura che l'header non copra tutto */
+        min-height: 0;
+        padding-top: 100px;
     }
     
     .hero-container {
-        align-items: center; /* Centra bene verticalmente */
+        align-items: center;
     }
 }
-/* =============================================================
-   10. FIX MOBILE SPECIFICO (Anti-Spostamento & Ridimensionamento)
-   ============================================================= */
 
-/* 1. BLOCCO SPOSTAMENTO LATERALE (Il fix più importante) */
+/* -----------------------------------------------------------
+   10. FIX MOBILE
+------------------------------------------------------------ */
 html, body {
-    overflow-x: hidden; /* Taglia via tutto ciò che esce dai bordi laterali */
-    width: 100%;        /* Forza la larghezza al 100% dello schermo */
-    position: relative; /* Stabilizza il contenitore */
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
 }
 
-/* 2. RIDIMENSIONAMENTO TESTI E SPAZI PER MOBILE */
 @media (max-width: 768px) {
     
-    /* Titolo Principale: Lo rendiamo più gestibile */
     .hero h1 {
-        font-size: 2.6rem; /* Da 4.2rem a 2.6rem: molto più elegante su mobile */
-        line-height: 1.2;  /* Migliora la leggibilità su due righe */
+        font-size: 2.6rem;
+        line-height: 1.2;
         margin-bottom: 1rem;
-        word-wrap: break-word; /* Evita che parole lunghe rompano il layout */
+        word-wrap: break-word;
     }
 
-    /* Sottotitolo */
     .hero-desc {
         font-size: 1rem;
-        padding: 0 1rem; /* Aggiunge un po' di aria ai lati del testo */
+        padding: 0 1rem;
         margin-bottom: 2rem;
     }
 
-    /* Cerchio Immagine: Leggermente più piccolo per il P20 */
     .image-ring {
         width: 240px;
         height: 240px;
-        margin: 0 auto; /* Assicura che sia perfettamente centrato */
+        margin: 0 auto;
     }
 
-    /* Spaziatura Hero */
     .hero {
         padding-top: calc(var(--header-height-mobile) + 1.5rem);
         padding-bottom: 3rem;
-        min-height: auto; /* Lascia che l'altezza si adatti al contenuto */
+        /* FIX: min-height: 0 invece di auto per Firefox */
+        min-height: 0;
     }
     
     .hero-container {
-        gap: 1.5rem; /* Riduce lo spazio tra foto e testo */
+        gap: 1.5rem;
     }
 
-    /* Icone Social: Le avviciniamo un po' */
     .hero-socials-top {
         gap: 1.5rem;
         margin-top: 0.5rem;
     }
 
-    /* --- FIX EXTRA PER GLI STRUMENTI (GRID) --- */
-    /* Spesso la griglia a 2 colonne su schermi stretti causa overflow */
     .tools-grid {
-        gap: 2rem 10px; /* Riduciamo lo spazio orizzontale tra le card */
+        gap: 2rem 10px;
         width: 100%;
         padding: 0 10px;
     }
 }
 
-/* 3. FIX SPECIFICO PER SCHERMI STRETTI (Sotto i 380px come P20 in alcune modalità) */
 @media (max-width: 380px) {
     .hero h1 {
-        font-size: 2.2rem; /* Ancora più piccolo per schermi molto stretti */
+        font-size: 2.2rem;
     }
     .btn-luxury {
         padding: 12px 25px;
         font-size: 0.8rem;
-        width: 100%; /* Su schermi piccolissimi il bottone a tutta larghezza sta bene */
+        width: 100%;
         text-align: center;
     }
 }
-/* =============================================================
-   11. FIX ALLINEAMENTO CENTRALE E SEZIONI (Books & Guru)
-   ============================================================= */
 
+/* -----------------------------------------------------------
+   11. FIX ALLINEAMENTO MOBILE
+------------------------------------------------------------ */
 @media (max-width: 768px) {
 
-    /* 1. RESET DEI CONTENITORI PRINCIPALI
-       Forza tutti i contenitori a stare nel 100% dello schermo 
-       e usa il padding per creare lo spazio ai lati, invece della larghezza ridotta. */
     .section-header, 
     .tools-grid, 
     .portfolio, 
     .amazon-showcase-box,
-    .guru-container { /* Aggiungi qui la classe del container del Guru se diversa */
+    .guru-container {
         width: 100% !important;
         max-width: 100% !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
-        padding-left: 15px !important;  /* Spazio di sicurezza a sinistra */
-        padding-right: 15px !important; /* Spazio di sicurezza a destra */
-        box-sizing: border-box; /* Assicura che il padding non allarghi il box */
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        box-sizing: border-box;
     }
 
-    /* 2. FIX PER IL CAROSELLO LIBRI E CARD
-       Assicura che nessuna card sia più larga dello schermo del cellulare */
     .swiper-slide, 
-    .guru-card-wrapper, /* Ipotizzo il nome, copre le card generiche */
+    .guru-card-wrapper,
     .portfolio-item {
-        max-width: 100%; /* Non può mai superare la larghezza del telefono */
-        margin: 0 auto !important; /* Forza la centratura automatica */
+        max-width: 100%;
+        margin: 0 auto !important;
     }
 
-    /* 3. FIX SPECIFICO PER LE FRECCE DEL GURU
-       Dallo screenshot vedo le frecce < > laterali. 
-       Spesso queste "escono" dallo schermo e spingono tutto a destra. */
     .swiper-button-next, 
     .swiper-button-prev,
     .nav-arrow {
-        display: none !important; /* Su mobile spesso è meglio nascondere le frecce esterne e usare lo swipe */
+        display: none !important;
     }
     
-    /* 4. CENTRATURA TESTI SEZIONI */
     .section-header h2, 
     .section-header p,
     .amazon-intro-text {
@@ -1976,7 +1763,6 @@ html, body {
         width: 100%;
     }
 
-    /* 5. FIX PIÈ DI PAGINA (Footer) */
     .footer-container {
         flex-direction: column;
         align-items: center;
@@ -1984,72 +1770,54 @@ html, body {
         padding: 0 1rem;
     }
 }
-/* =============================================================
-   12. OTTIMIZZAZIONE PRESTAZIONI MOBILE (Anti-Lag)
-   ============================================================= */
 
+/* -----------------------------------------------------------
+   12. OTTIMIZZAZIONE PERFORMANCE MOBILE
+------------------------------------------------------------ */
 @media (max-width: 768px) {
     
-    /* 1. RIMUOVIAMO IL RIFLESSO (Il colpevole n.1 degli scatti) */
+    @supports (-webkit-box-reflect: below) {
+        .swiper-slide {
+            -webkit-box-reflect: unset !important;
+        }
+    }
+
     .swiper-slide {
-        -webkit-box-reflect: unset !important;
-        
-        /* Suggerisce alla scheda video di prepararsi al movimento */
         will-change: transform; 
     }
 
-    /* 2. SEMPLIFICHIAMO LE CARD (Via il blur pesante) */
     .carousel-card {
-        /* Invece di calcolare la sfocatura, diamo un colore solido quasi opaco.
-           L'occhio non nota la differenza, ma il processore ringrazia. */
-        backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        background: rgba(10, 15, 16, 0.95) !important; /* Sfondo scuro coprente */
-        
-        /* Riduciamo le ombre complesse durante il movimento */
+        backdrop-filter: none !important;
+        background: rgba(10, 15, 16, 0.95) !important;
         box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
     }
 
-    /* 3. CARD ATTIVA SU MOBILE */
     .swiper-slide-active .carousel-card {
-        /* Manteniamo solo un bordo dorato semplice per indicare la selezione */
         border: 1px solid var(--gold-mid) !important;
-        
-        /* Togliamo il "super glow" diffuso che rallenta */
         box-shadow: 0 0 15px rgba(197, 160, 89, 0.3) !important; 
     }
 
-    /* 4. OTTIMIZZAZIONE IMMAGINI NEL CAROSELLO */
     .card-visual img {
-        /* Evita filtri complessi durante lo scroll */
         filter: none !important; 
         transform: none !important;
     }
 }
 
-/* =========================================
-   NEW LAYOUT: VERTICAL LUXURY POSTERS
-   ========================================= */
-
+/* -----------------------------------------------------------
+   VERTICAL LUXURY POSTERS
+------------------------------------------------------------ */
 .immersive-section {
     position: relative;
     width: 100%;
-    /* CAMBIO CRUCIALE 1: Rende l'immagine un rettangolo verticale alto */
     aspect-ratio: 2/3; 
-    /* Rimuoviamo l'altezza fissa precedente */
-    /* height: 450px; */ 
-    
     margin-bottom: 3rem;
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid rgba(197, 160, 89, 0.2);
-    
-    /* Flexbox per posizionare il contenuto */
     display: flex;
-    /* CAMBIO CRUCIALE 2: Allinea il box in fondo invece che al centro */
     align-items: flex-end; 
     justify-content: center;
-    
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
@@ -2060,12 +1828,11 @@ html, body {
     box-shadow: 0 15px 40px rgba(197, 160, 89, 0.2);
 }
 
-/* Immagine di Sfondo */
 .immersive-bg {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    object-fit: cover; /* Assicura che l'immagine riempia il rettangolo verticale */
+    object-fit: cover;
     z-index: 0;
     transition: transform 0.6s ease;
 }
@@ -2074,7 +1841,6 @@ html, body {
     transform: scale(1.05);
 }
 
-/* Overlay Scuro (Manteniamo un velo leggero globale) */
 .immersive-overlay {
     position: absolute;
     top: 0; left: 0;
@@ -2084,30 +1850,16 @@ html, body {
     pointer-events: none;
 }
 
-/* =========================================
-   FIX BOX COMPATTO E BOTTONE ORO
-   ========================================= */
-
 .immersive-box {
     position: relative;
     z-index: 2;
     width: 100%;
-    
-    /* 1. GRADIENTE PIÙ BASSO E PULITO */
-    /* Il nero solido parte solo dal fondo (0%) e sfuma a trasparente molto prima */
     background: linear-gradient(to top, #020405 30%, rgba(2, 4, 5, 0.8) 70%, transparent 100%);
-    
-    /* 2. PADDING RIDOTTO */
-    /* Meno aria sopra e sotto, così il box occupa meno spazio */
-    padding: 3rem 1.5rem 1.5rem 1.5rem; /* Alto, Dx, Basso, Sx */
-    
+    padding: 3rem 1.5rem 1.5rem 1.5rem;
     text-align: center;
     border: none; 
-    /* Rimuoviamo il bordo superiore che creava quella linea a metà foto */
-    /* border-top: 1px solid rgba(255,255,255,0.1); */
 }
 
-/* Stili Testo più compatti */
 .immersive-icon {
     font-size: 1.8rem;
     color: var(--gold-mid);
@@ -2126,7 +1878,7 @@ html, body {
 .immersive-box p {
     font-size: 0.9rem;
     color: rgba(255,255,255,0.8);
-    margin-bottom: 1.2rem; /* Meno spazio prima del bottone */
+    margin-bottom: 1.2rem;
     line-height: 1.4;
     text-shadow: 0 2px 5px rgba(0,0,0,1);
     max-width: 500px;
@@ -2134,24 +1886,14 @@ html, body {
     margin-right: auto;
 }
 
-/* =========================================
-   FIX BOTTONE (FORCE GOLD)
-   ========================================= */
-
 .btn-luxury-small {
-    /* Forziamo la visualizzazione come blocco inline */
     display: inline-block !important;
-    
-    /* Dimensioni e Spazi */
     padding: 10px 25px !important;
     margin-top: 0.5rem;
-    
-    /* STILE ORO FORZATO */
-    border: 1px solid #c9a86a !important; /* Colore gold-mid esplicito */
-    color: #c9a86a !important;            /* Testo oro */
-    background: rgba(0,0,0,0.6) !important; /* Sfondo scuro per contrasto */
-    
-    font-family: 'Cinzel', serif; /* Font elegante */
+    border: 1px solid #c9a86a !important;
+    color: #c9a86a !important;
+    background: rgba(0,0,0,0.6) !important;
+    font-family: 'Cinzel', serif;
     font-size: 0.75rem !important;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -2160,14 +1902,16 @@ html, body {
     transition: all 0.3s ease;
 }
 
-/* Effetto Hover (Luce) */
 .btn-luxury-small:hover {
-    background: #c9a86a !important; /* Fondo Oro */
-    color: #000 !important;         /* Testo Nero */
-    box-shadow: 0 0 20px rgba(197, 160, 89, 0.6) !important; /* Glow */
+    background: #c9a86a !important;
+    color: #000 !important;
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.6) !important;
     transform: translateY(-2px);
 }
 
+/* -----------------------------------------------------------
+   MISC
+------------------------------------------------------------ */
 .bg-fixed-layer {
     position: fixed;
     inset: 0;
@@ -2180,6 +1924,7 @@ html, body {
     background-position: center top;
     background-repeat: no-repeat;
 }
+
 .progress-ring__circle {
     stroke-dasharray: 326.7;
     stroke-dashoffset: 326.7;
@@ -2187,13 +1932,12 @@ html, body {
     transform-origin: 50% 50%;
 }
 
-/* Arrow Wrapper */
+/* Arrow */
 .tools-arrow-wrapper {
     text-align: center;
     margin: 2rem 0 3.5rem;
 }
 
-/* Link */
 .tools-arrow {
     text-decoration: none;
     color: var(--gold-mid);
@@ -2208,17 +1952,15 @@ html, body {
     opacity: 0.85;
 }
 
-/* Linea corta e più spessa */
 .arrow-line {
-    width: 3px;             /* più spessa */
-    height: 22px;           /* più corta */
+    width: 3px;
+    height: 22px;
     background: var(--gold-mid);
     margin: 0.8rem auto 0.6rem;
     border-radius: 3px;
     animation: pulseLine 1.8s infinite;
 }
 
-/* Punta più grossa */
 .arrow-head {
     width: 16px;
     height: 16px;
@@ -2228,69 +1970,87 @@ html, body {
     margin: 0 auto;
 }
 
-/* Animazione più discreta */
 @keyframes pulseLine {
     0%   { transform: translateY(0); opacity: 0.6; }
     50%  { transform: translateY(4px); opacity: 1; }
     100% { transform: translateY(0); opacity: 0.6; }
 }
 
-.motion-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:40px;
-margin-top:3rem;
+/* Motion Grid */
+.motion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 3rem;
 }
 
-.motion-card img{
-width:100%;
-height:240px;
-object-fit:cover;
-border-radius:6px;
-margin-bottom:1rem;
-transition:all .5s ease;
+.motion-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    transition: all .5s ease;
 }
 
-.motion-card img:hover{
-transform:scale(1.04);
-box-shadow:
-0 20px 40px rgba(0,0,0,0.6),
-0 0 25px rgba(197,160,89,0.3);
+.motion-card img:hover {
+    transform: scale(1.04);
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.6),
+        0 0 25px rgba(197,160,89,0.3);
 }
 
-.motion-card h3{
-color:#fff;
-font-family:'Cinzel',serif;
-margin-bottom:0.5rem;
+.motion-card h3 {
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    margin-bottom: 0.5rem;
 }
 
-.motion-card p{
-font-size:0.95rem;
-color:rgba(255,255,255,0.6);
-line-height:1.6;
+.motion-card p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
 }
 
-@media (max-width:900px){
-.motion-grid{
-grid-template-columns:repeat(2,1fr);
-}
-}
-
-@media (max-width:600px){
-.motion-grid{
-grid-template-columns:1fr;
-}
+@media (max-width: 900px) {
+    .motion-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.video-container{
-    max-width:900px;
-    margin:40px auto;
-    border-radius:8px;
-    overflow:hidden;
+@media (max-width: 600px) {
+    .motion-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-.showreel-video{
-    width:100%;
-    display:block;
-    background:black;
+.video-container {
+    max-width: 900px;
+    margin: 40px auto;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.showreel-video {
+    width: 100%;
+    display: block;
+    background: black;
+}
+
+/* --- ID-specific overrides (index.html) --- */
+#ai-section {
+    margin-top: 5rem;
+}
+
+#visit-counter {
+    display: none;
+    color: #777;
+    font-size: 12px;
+}
+
+#slider-loader {
+    display: none;
+    text-align: center;
+    padding-top: 50px;
+    color: var(--gold-mid);
 }

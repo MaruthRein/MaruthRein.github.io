@@ -7,26 +7,16 @@
     <title>L'Alchimia della Parola: Come un Racconto può Guarire l'Anima</title>
     <meta name="description" content="Scopri il potere terapeutico della narrativa. Come il romanzo 'L'Ombra' di Maruth Rein trasforma il vissuto in alchimia interiore attraverso il racconto.">
     
+    <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+
     <link rel="stylesheet" href="../../luxury.css">
     <link rel="stylesheet" href="../../books.css">
+    <link rel="stylesheet" href="../../article.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        .article-body { max-width: 900px; margin: 5rem auto; padding: 0 2rem; font-family: 'Lato', sans-serif; color: #e0e0e0; line-height: 1.8; }
-        .article-body h1, .article-body h2 { font-family: 'Cinzel', serif; margin-top: 3rem; }
-        .highlight-gold { color: var(--gold-mid); font-weight: 600; }
-        .alchemy-box { 
-            border: 1px solid var(--gold-dark); 
-            padding: 3rem; 
-            background: rgba(0,0,0,0.6); 
-            border-radius: 4px; 
-            margin: 3rem 0;
-            box-shadow: inset 0 0 20px rgba(212, 175, 55, 0.1);
-        }
-    </style>
 </head>
 
 <body class="single-book-page">
@@ -41,6 +31,7 @@
                     <li><a href="../../fuoco_fresco.html">Il Fuoco Fresco</a></li>
                 </ul>
             </nav>
+            <div class="nav-toggle"><i class="fa-solid fa-bars"></i></div>
         </div>
         <div class="header-line"></div>
     </header>
@@ -55,7 +46,7 @@
         </section>
 
         <div class="alchemy-box">
-            <h3 class="gold-gradient-text" style="margin-top: 0;">Il Potere del Rispecchiamento</h3>
+            <h3 class="gold-gradient-text">Il Potere del Rispecchiamento</h3>
             <p>Quando seguiamo Elia sotto i portici di Bologna o dietro il bancone di un bar, non stiamo solo osservando la sua vita. Stiamo attivando i nostri "neuroni specchio". La sua lotta per l'autenticità diventa la nostra; il suo incontro con l'Ombra diventa il nostro invito a non distogliere lo sguardo dal buio.</p>
         </div>
 
@@ -72,12 +63,11 @@
             "Le storie sono bussole che non indicano il Nord, ma il Centro del proprio essere."
         </blockquote>
 
-        <section style="margin-top: 5rem; padding: 3rem; border: 1px solid var(--gold-dark); background: rgba(212, 175, 55, 0.05); text-align: center; border-radius: 8px;">
-            <h3 class="gold-gradient-text" style="font-size: 2rem;">Lasciati Trasformare</h3>
+        <div class="article-cta">
+            <h3 class="gold-gradient-text">Lasciati Trasformare</h3>
             <p>Non leggere questo libro con la mente, ma con il cuore. "L'Ombra" ti aspetta per svelarti che ciò che temi di più è proprio la chiave della tua libertà.</p>
-            <br>
-            <a href="../../Ombra.html" class="btn-luxury big-btn">Scopri il Viaggio di Elia</a>
-        </section>
+            <a href="../../Ombra.html" class="btn-luxury">Scopri il Viaggio di Elia</a>
+        </div>
     </main>
 
     <footer class="luxury-footer">
@@ -85,6 +75,16 @@
             <p>© 2026 Maruth Rein — Tutti i diritti riservati.</p>
         </div>
     </footer>
+
+    <script>
+        document.querySelector('.nav-toggle').addEventListener('click', function() {
+            const nav = document.querySelector('.main-nav');
+            const icon = this.querySelector('i');
+            nav.classList.toggle('active');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        });
+    </script>
 
 </body>
 </html>

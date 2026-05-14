@@ -1,0 +1,1779 @@
+﻿<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Il Coinquilino — Maruth Rein</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+:root {
+  --yellow: #FFD60A;
+  --yellow-deep: #F2C400;
+  --black: #0B0B0B;
+  --ink: #1A1614;
+  --red: #B81818;
+  --red-deep: #8C0F0F;
+  --paper: #F3E7C2;
+  --paper-deep: #E6D6A3;
+  --rule: rgba(11,11,11,0.18);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--yellow);
+  color: var(--black);
+  font-family: "Space Grotesk", -apple-system, system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+button { font: inherit; cursor: pointer; }
+a { color: inherit; }
+
+.display, h1, h2, .h-display {
+  font-family: "Anton", "Archivo Black", Impact, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 0.86;
+  text-transform: uppercase;
+}
+.mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+/* ----------- shared layout ----------- */
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 720px) { .wrap { padding: 0 20px; } }
+
+.section { padding: 96px 0; position: relative; }
+@media (max-width: 720px) { .section { padding: 64px 0; } }
+
+.section.black { background: var(--black); color: var(--yellow); }
+.section.paper { background: var(--paper); color: var(--black); }
+.section.red { background: var(--red); color: var(--yellow); }
+
+.kicker {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.kicker::before {
+  content: "";
+  display: inline-block;
+  width: 28px; height: 1.5px;
+  background: currentColor;
+}
+.kicker.no-rule::before { display: none; }
+
+/* ----------- top bar ----------- */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--yellow);
+  border-bottom: 1.5px solid var(--black);
+}
+.topbar.scrolled { box-shadow: 0 1px 0 var(--black); }
+.topbar-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 32px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.topbar-mark { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.topbar-mark .dot { width: 10px; height: 10px; background: var(--red); border-radius: 50%; }
+.topbar-cta {
+  background: var(--black); color: var(--yellow);
+  border: none; padding: 10px 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
+  transition: transform .15s ease;
+}
+.topbar-cta:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--red); }
+.topbar-meta { display: flex; gap: 24px; opacity: 0.8; }
+@media (max-width: 720px) {
+  .topbar-meta { display: none; }
+  .topbar-inner { padding: 12px 20px; }
+}
+
+/* ----------- HERO ----------- */
+.hero { padding: 56px 0 96px; position: relative; overflow: hidden; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 56px;
+  align-items: center;
+}
+@media (max-width: 980px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .cover-stage { margin-top: 24px; }
+}
+@media (max-width: 720px) {
+  .hero { padding: 32px 0 48px; }
+  .hero-copy { overflow-wrap: break-word; word-break: break-word; min-width: 0; }
+  .hero h1 { font-size: clamp(28px, 9.5vw, 52px); line-height: 0.9; }
+  .hero-sub { font-size: 16px; }
+  .hero-eyebrow { gap: 10px; }
+  .cover-stage { display: none; }
+  .hero-form { margin-top: 28px; }
+  .hero-form .form-with-note { flex-direction: column; align-items: stretch; gap: 14px; }
+  .hero-form .form-row { display: flex !important; flex-direction: column !important; width: 100%; border: 2px solid var(--black); }
+  .hero-form input { width: 100% !important; padding: 16px 14px; box-sizing: border-box; border-bottom: 1px solid rgba(0,0,0,0.15); }
+  .hero-form button { width: 100% !important; border-left: none !important; border-top: 2px solid var(--black) !important; padding: 16px 14px !important; text-align: center; }
+  .hero-form .form-side-note { max-width: 100%; font-size: 14px; }
+}
+
+.hero-eyebrow {
+  display: flex; gap: 18px; flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 6px 10px;
+  border: 1.5px solid var(--black);
+  background: transparent;
+}
+.tag.solid { background: var(--black); color: var(--yellow); border-color: var(--black); }
+.tag.red { background: var(--red); color: var(--yellow); border-color: var(--red); }
+
+.hero h1 {
+  font-size: clamp(72px, 13.5vw, 220px);
+  margin: 0;
+}
+.hero h1 .accent { color: var(--red); }
+.hero h1 .underline { text-decoration: underline; text-decoration-thickness: 0.06em; text-underline-offset: -0.02em; }
+
+.hero-sub {
+  font-size: clamp(20px, 2.1vw, 26px);
+  line-height: 1.3;
+  margin: 28px 0 0;
+  font-weight: 500;
+}
+.hero-sub b { font-weight: 700; }
+
+.hero-form {
+  margin-top: 36px;
+}
+.hero-form .form-with-note {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.hero-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0;
+  border: 2px solid var(--black);
+  background: #fff;
+  flex-shrink: 0;
+}
+.hero-form input {
+  border: none; background: transparent;
+  padding: 18px 18px;
+  font: inherit; font-size: 17px;
+  outline: none;
+  color: var(--black);
+  min-width: 0;
+  width: 260px;
+}
+.hero-form input::placeholder { color: rgba(11,11,11,0.55); }
+.hero-form button {
+  border: none; border-left: 2px solid var(--black);
+  background: var(--red); color: var(--yellow);
+  padding: 0 22px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.hero-form button:hover { background: var(--black); color: var(--yellow); }
+.hero-form .reassure { display: none; }
+.hero-form .form-side-note {
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 500;
+  max-width: 280px;
+}
+.hero-form .form-side-note .accent { color: var(--red); font-weight: 700; }
+.hero-form .pricetag {
+  margin-top: 20px;
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  background: var(--black); color: var(--yellow);
+  padding: 10px 14px;
+}
+.hero-form .pricetag b { color: #fff; font-weight: 700; }
+.hero-form .err {
+  margin-top: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* book cover composition */
+.cover-stage {
+  position: relative;
+  padding-bottom: 12px;
+  margin-top: -340px;
+}
+.cover-card {
+  position: relative;
+  display: inline-block;
+  transform: rotate(-2.5deg);
+  box-shadow:
+    8px 8px 0 var(--black),
+    16px 16px 0 var(--red);
+  border: 2px solid var(--black);
+  transition: transform .4s cubic-bezier(.2,.7,.2,1);
+}
+.cover-card:hover { transform: rotate(-1deg) translate(-2px,-4px); }
+.cover-card img { width: 100%; max-width: 460px; display: block; }
+.cover-stamp {
+  position: absolute;
+  top: 0; right: 0;
+  background: var(--red);
+  color: var(--yellow);
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 14px 16px;
+  border: 2px solid var(--yellow);
+  outline: 2px solid var(--red);
+  transform: translate(50%, calc(-50% - 20px)) rotate(18deg);
+  text-align: center;
+  line-height: 1.1;
+}
+.cover-stamp .big { display: block; font-size: 22px; letter-spacing: 0.04em; margin-bottom: 2px; }
+.cover-meta {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 18px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cover-meta dt { font-weight: 700; opacity: 0.6; }
+.cover-meta dd { margin: 0; }
+
+/* sticker scroll cue */
+.scroll-cue {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 48px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  opacity: 0.75;
+}
+.scroll-cue::before {
+  content: "â†“";
+  display: inline-block;
+  font-size: 14px;
+  animation: bob 1.6s ease-in-out infinite;
+}
+@keyframes bob { 0%,100%{transform: translateY(0)} 50%{transform: translateY(4px)} }
+
+/* ----------- generic section header ----------- */
+.section-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 32px; margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+.section-head h2 {
+  margin: 0;
+  font-size: clamp(54px, 8vw, 132px);
+  max-width: 18ch;
+}
+.section-head .case-id {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  text-align: right;
+  white-space: nowrap;
+}
+.section-head .case-id b { display: block; font-size: 18px; letter-spacing: 0.04em; margin-top: 4px; }
+.section-intro {
+  font-size: clamp(20px, 2vw, 26px);
+  max-width: 760px;
+  margin-bottom: 56px;
+  line-height: 1.35;
+}
+.section-intro em { color: var(--red); font-style: normal; }
+.section.black .section-intro em { color: var(--yellow); text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; }
+
+/* ----------- PROBLEMA list ----------- */
+.problema-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1.5px solid var(--rule);
+}
+@media (max-width: 720px) { .problema-grid { grid-template-columns: 1fr; } }
+.problema-row {
+  display: flex; align-items: baseline; gap: 24px;
+  padding: 22px 4px 22px 0;
+  border-bottom: 1.5px solid var(--rule);
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.problema-row .num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  opacity: 0.5;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+.problema-row .check {
+  margin-left: auto;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--black); color: var(--yellow);
+  padding: 4px 8px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.problema-row:hover .check { opacity: 1; }
+.problema-row.final {
+  grid-column: 1 / -1;
+  justify-content: center;
+  text-align: center;
+  font-weight: 700;
+  border-bottom: none;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  border-top: 1.5px solid var(--rule);
+}
+.problema-row.final .num { display: none; }
+.problema-row.final .check { margin-left: 0; }
+
+.problema-final {
+  margin-top: 56px;
+  text-align: center;
+  font-family: "Anton", sans-serif;
+  font-size: clamp(48px, 8vw, 120px);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.problema-final span { color: var(--red); }
+
+.libro-aperto {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.libro-aperto .libro-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+.libro-aperto .libro-frame {
+  display: inline-block;
+  transform: rotate(-1.5deg);
+  border: 2px solid var(--yellow);
+  box-shadow: 8px 8px 0 var(--red), 16px 16px 0 rgba(255,214,10,0.25);
+  transition: transform .4s cubic-bezier(.2,.7,.2,1);
+  max-width: 860px;
+  width: 100%;
+}
+.libro-aperto .libro-frame:hover {
+  transform: rotate(-0.5deg) translate(-2px,-4px);
+}
+.libro-aperto img {
+  max-width: 100%;
+  width: 860px;
+  display: block;
+}
+.libro-aperto .libro-frame { cursor: zoom-in; }
+
+.lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.92);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  animation: fade .2s ease;
+}
+.lightbox img {
+  max-width: 100%; max-height: 100%;
+  width: auto; height: auto;
+  display: block;
+  touch-action: pinch-zoom;
+}
+.lightbox-close {
+  position: fixed; top: 16px; right: 16px;
+  background: var(--red); color: var(--yellow);
+  border: none; font-family: "JetBrains Mono", monospace;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.12em;
+  padding: 10px 16px; cursor: pointer; z-index: 201;
+  text-transform: uppercase;
+}
+
+/* ----------- CONCEPT - the Coinquilino ----------- */
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+  align-items: flex-start;
+}
+@media (max-width: 980px) { .concept-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+.concept-id-card {
+  background: var(--yellow);
+  color: var(--black);
+  border: 2px solid var(--yellow);
+  padding: 28px;
+  font-family: "JetBrains Mono", monospace;
+  position: relative;
+}
+.concept-id-card::before {
+  content: "";
+  position: absolute; inset: -2px;
+  background: repeating-linear-gradient(45deg, transparent 0 8px, var(--red) 8px 16px);
+  z-index: -1;
+}
+.concept-id-card h3 {
+  margin: 0 0 18px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.concept-id-card .name {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 0.9;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.concept-id-card .name .red { color: var(--red); }
+.concept-id-card dl { display: grid; grid-template-columns: auto 1fr; gap: 10px 16px; margin: 16px 0 0; font-size: 12px; letter-spacing: 0.06em; }
+.concept-id-card dt { font-weight: 700; opacity: 0.6; text-transform: uppercase; }
+.concept-id-card dd { margin: 0; text-transform: uppercase; }
+.concept-id-card .photo {
+  width: 100%; aspect-ratio: 4/5;
+  background: var(--paper);
+  border: 1.5px dashed rgba(255,214,10,0.4);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.concept-id-card .photo .silhouette {
+  width: 60%; height: 80%;
+  background: var(--black);
+  clip-path: polygon(28% 0, 72% 0, 78% 26%, 92% 30%, 100% 100%, 0 100%, 8% 30%, 22% 26%);
+  margin-top: 16%;
+}
+.concept-id-card .photo .eyes {
+  position: absolute; top: 28%; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 10px;
+}
+.concept-id-card .photo .eyes span {
+  width: 12px; height: 12px; background: var(--yellow); border-radius: 50%;
+  animation: blink 4s infinite;
+}
+.concept-id-card .photo .eyes span:nth-child(2) { animation-delay: 0.2s; }
+@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+.concept-id-card .photo .stamp {
+  position: absolute; bottom: 12px; right: 12px;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red); border: 1.5px solid var(--red); padding: 4px 8px;
+  transform: rotate(-6deg);
+  font-weight: 700;
+}
+
+.concept-actions { display: flex; flex-direction: column; gap: 18px; }
+.concept-action {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1.5px solid rgba(255,214,10,0.18);
+  align-items: baseline;
+}
+.concept-action:last-child { border-bottom: none; }
+.concept-action .time {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; letter-spacing: 0.1em;
+  color: var(--red);
+  padding-top: 4px;
+}
+.concept-action .what {
+  font-size: clamp(20px, 2.1vw, 26px);
+  line-height: 1.3;
+  font-weight: 500;
+}
+.concept-action .what b { font-weight: 700; }
+.concept-action .what s { text-decoration-color: var(--red); text-decoration-thickness: 2px; }
+
+/* ----------- COSA TROVERAI (scenes) ----------- */
+.scenes-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+.scene {
+  background: var(--paper-deep);
+  border: 2px solid var(--black);
+  padding: 28px;
+  position: relative;
+  min-height: 240px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  transition: transform .25s ease;
+  overflow: hidden;
+}
+.scene:hover { transform: translate(-3px,-3px); box-shadow: 6px 6px 0 var(--black); }
+.scene .ep {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  opacity: 0.55;
+  display: flex; justify-content: space-between;
+}
+.scene h3 {
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(36px, 4.6vw, 58px);
+  margin: 16px 0 12px;
+  line-height: 0.9;
+}
+.scene p { margin: 0; font-size: 16px; line-height: 1.4; }
+.scene.size-l { grid-column: span 6; }
+.scene.size-m { grid-column: span 4; }
+.scene.size-s { grid-column: span 3; }
+.scene.size-w { grid-column: span 8; }
+.scene.size-full { grid-column: span 12; }
+.scene.dark { background: var(--black); color: var(--yellow); border-color: var(--black); }
+.scene.red-bg { background: var(--red); color: var(--yellow); border-color: var(--red); }
+.scene.red-bg h3 { color: var(--yellow); }
+@media (max-width: 980px) {
+  .scenes-grid { grid-template-columns: 1fr 1fr; }
+  .scene.size-l, .scene.size-m, .scene.size-s, .scene.size-w { grid-column: span 1; }
+}
+@media (max-width: 580px) {
+  .scenes-grid { grid-template-columns: 1fr; }
+}
+
+/* ----------- ESTRATTI - quote cards / dossiers ----------- */
+.estratti-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+@media (max-width: 980px) { .estratti-grid { grid-template-columns: 1fr 1fr; gap: 20px; } }
+@media (max-width: 580px) { .estratti-grid { grid-template-columns: 1fr; } }
+.postit {
+  padding: 28px 26px;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 500;
+  line-height: 1.32;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
+  position: relative;
+}
+.postit .quote-mark {
+  font-family: "Anton", sans-serif;
+  font-size: 64px;
+  line-height: 0.6;
+  color: var(--red);
+  margin-bottom: 6px;
+  display: block;
+}
+.postit .src {
+  margin-top: 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.postit.yellow { background: var(--yellow); color: var(--black); transform: rotate(-1.2deg); grid-column: span 6; }
+.postit.paper { background: var(--paper); color: var(--black); transform: rotate(1.6deg); grid-column: span 4; }
+.postit.black-pop { background: var(--black); color: var(--yellow); transform: rotate(-0.6deg); grid-column: span 5; }
+.postit.black-pop .quote-mark { color: var(--red); }
+.postit.red-pop { background: var(--red); color: var(--yellow); transform: rotate(1.1deg); grid-column: span 3; font-size: clamp(20px, 1.8vw, 26px); }
+.postit.red-pop .quote-mark { color: var(--yellow); }
+.postit.long { grid-column: span 7; transform: rotate(0.4deg); background: #fff; color: var(--black); }
+.postit.long .quote-mark { color: var(--red); }
+
+.dossier {
+  grid-column: span 5;
+  background: var(--paper);
+  color: var(--black);
+  border: 1.5px solid var(--black);
+  padding: 22px 24px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  position: relative;
+  transform: rotate(-0.6deg);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
+}
+.dossier .head { display: flex; justify-content: space-between; border-bottom: 1.5px solid var(--black); padding-bottom: 8px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.1em; }
+.dossier .row { display: flex; justify-content: space-between; margin: 6px 0; }
+.dossier .row b { font-weight: 700; }
+.dossier .verdict { margin-top: 14px; padding: 10px; border: 2px dashed var(--red); color: var(--red); text-transform: uppercase; text-align: center; letter-spacing: 0.16em; font-weight: 700; }
+.dossier-note { margin-top: 10px; font-size: 11px; opacity: 0.6; letter-spacing: 0.06em; }
+
+.field-note {
+  margin-top: 8px;
+  padding: 16px;
+  border: 1.5px solid rgba(255,214,10,0.25);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+.micro-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 8px;
+}
+
+.manifesto-line {
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 500;
+  line-height: 1.3;
+  max-width: 760px;
+  margin-bottom: 56px;
+  padding-left: 24px;
+  border-left: 4px solid var(--red);
+}
+
+@media (max-width: 980px) {
+  .postit.yellow, .postit.paper, .postit.black-pop, .postit.red-pop, .postit.long, .dossier { grid-column: span 1; }
+}
+
+/* ----------- PER CHI / NON E ----------- */
+.audience-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+  border: 2px solid var(--black);
+}
+@media (max-width: 980px) { .audience-grid { grid-template-columns: 1fr; } }
+.audience-col { padding: 40px; }
+.audience-col + .audience-col { border-left: 2px solid var(--black); }
+@media (max-width: 880px) {
+  .audience-col + .audience-col { border-left: none; border-top: 2px solid var(--black); }
+}
+.audience-col.no { background: var(--black); color: var(--yellow); }
+.audience-col.lui { background: var(--red); color: var(--yellow); }
+.audience-col h3 {
+  font-family: "Anton", sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(36px, 4.6vw, 56px);
+  margin: 0 0 8px;
+  line-height: 0.95;
+}
+.audience-col h3 .accent { color: var(--red); }
+.audience-col .lead {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0.75;
+}
+.audience-col ul { list-style: none; padding: 0; margin: 0; }
+.audience-col li {
+  padding: 14px 0;
+  border-bottom: 1.5px solid currentColor;
+  font-size: 17px;
+  line-height: 1.4;
+  display: flex; gap: 14px; align-items: flex-start;
+  border-color: rgba(11,11,11,0.18);
+}
+.audience-col.no li { border-color: rgba(255,214,10,0.2); }
+.audience-col.lui li { border-color: rgba(255,214,10,0.25); }
+.audience-col.lui li::before { color: var(--yellow); }
+.audience-col li::before {
+  content: “\2713”;
+  font-family: “JetBrains Mono”, monospace;
+  font-weight: 700;
+  color: var(--red);
+  flex-shrink: 0;
+  width: 18px;
+}
+.audience-col.no li::before { content: “\2715”; color: var(--red); }
+.audience-col.lui li::before { content: “\2014”; color: var(--red); }
+.audience-col li:last-child { border-bottom: none; }
+
+/* ----------- DISCLAIMER ----------- */
+#per-chi { padding-bottom: 0; }
+.section.disclaimer { padding-top: 64px; padding-bottom: 64px; }
+.disclaimer-box {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+.disclaimer-box h2 { font-size: clamp(48px, 7vw, 96px); margin: 16px 0 24px; }
+.disclaimer-box p { font-size: 19px; line-height: 1.5; }
+
+/* ----------- OFFERTA PRELANCIO ----------- */
+.offer-block {
+  background: var(--red); color: var(--yellow);
+  padding: 64px 56px;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--black);
+}
+@media (max-width: 720px) { .offer-block { padding: 40px 28px; } }
+.offer-block::before {
+  content: "GRATIS \00B7 GRATIS \00B7 GRATIS \00B7 GRATIS \00B7 GRATIS \00B7 GRATIS \00B7 GRATIS \00B7 GRATIS \00B7 GRATIS \00B7 GRATIS \00B7 GRATIS";
+  position: absolute;
+  top: 16px; left: -10%;
+  width: 130%;
+  font-family: "Anton", sans-serif;
+  font-size: 60px;
+  letter-spacing: 0.12em;
+  opacity: 0.08;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.offer-block::after {
+  content: "5 GIORNI \00B7 5 GIORNI \00B7 5 GIORNI \00B7 5 GIORNI \00B7 5 GIORNI \00B7 5 GIORNI";
+  position: absolute;
+  bottom: 8px; left: -5%;
+  width: 120%;
+  font-family: "Anton", sans-serif;
+  font-size: 60px;
+  letter-spacing: 0.12em;
+  opacity: 0.08;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.offer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  position: relative; z-index: 1;
+}
+@media (max-width: 880px) { .offer-grid { grid-template-columns: 1fr; gap: 36px; } }
+.offer-grid h2 {
+  font-size: clamp(48px, 7vw, 96px);
+  margin: 0 0 16px;
+}
+.offer-kicker { margin-bottom: 12px; display: block; }
+.offer-copy { font-size: 19px; line-height: 1.5; margin: 0 0 28px; }
+.offer-copy b { font-weight: 700; }
+.price-panel { text-align: center; }
+.offer-grid .price {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(120px, 18vw, 220px);
+  line-height: 0.8;
+  color: var(--yellow);
+}
+.offer-grid .price-cap {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+  margin-top: 12px;
+}
+.offer-grid .price-note {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  margin-top: 8px;
+  opacity: 0.7;
+}
+.offer-form .form-row {
+  background: var(--yellow); color: var(--black);
+  border: 2px solid var(--yellow);
+  display: grid; grid-template-columns: 1fr auto; gap: 0;
+}
+.offer-form input {
+  background: transparent; border: none; padding: 18px;
+  font: inherit; font-size: 17px; outline: none; color: var(--black); min-width: 0;
+}
+.offer-form input::placeholder { color: rgba(11,11,11,0.55); }
+.offer-form button {
+  background: var(--black); color: var(--yellow);
+  border: none; padding: 0 22px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.offer-form button:hover { background: var(--yellow); color: var(--black); border-left: 2px solid var(--black); }
+.offer-form .reassure { margin-top: 12px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; }
+
+/* lui form — bottone sopra, input sotto */
+.lui-form .form-row {
+  display: flex;
+  flex-direction: column-reverse;
+  border: 2px solid var(--yellow);
+  background: transparent;
+  width: 100%;
+}
+.lui-form input {
+  background: transparent; border: none;
+  border-top: 1px solid rgba(255,214,10,0.35);
+  padding: 14px 16px;
+  color: var(--yellow);
+  font: inherit; font-size: 16px; outline: none; width: 100%;
+  box-sizing: border-box;
+}
+.lui-form input::placeholder { color: rgba(255,214,10,0.45); }
+.lui-form button {
+  background: var(--yellow); color: var(--black);
+  border: none; padding: 15px 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  cursor: pointer; text-align: center;
+  transition: background .15s, color .15s;
+}
+.lui-form button:hover { background: var(--black); color: var(--yellow); }
+.lui-form .reassure { display: none; }
+
+/* ----------- AUTORE ----------- */
+.author-grid {
+  display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 56px; align-items: center;
+}
+@media (max-width: 880px) { .author-grid { grid-template-columns: 1fr; } }
+.author-card {
+  background: var(--paper);
+  border: 2px solid var(--black);
+  padding: 24px;
+  box-shadow: 8px 8px 0 var(--red);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.author-card .head { font-weight: 700; border-bottom: 1.5px solid var(--black); padding-bottom: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; }
+.author-card .silhouette-frame {
+  width: 100%; aspect-ratio: 1;
+  background: var(--yellow);
+  border: 1.5px solid var(--black);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.author-card .silhouette-frame::after {
+  content: "AUTORE / RITRATTO NON DISPONIBILE";
+  position: absolute; bottom: 8px; left: 8px; right: 8px;
+  font-size: 9px; letter-spacing: 0.1em;
+  background: var(--black); color: var(--yellow);
+  padding: 4px;
+  text-align: center;
+}
+.author-card .silhouette-frame .head-shape {
+  position: absolute;
+  left: 50%; top: 18%;
+  transform: translateX(-50%);
+  width: 55%;
+  aspect-ratio: 4/5;
+  background: var(--black);
+  border-radius: 50% 50% 30% 30% / 65% 65% 35% 35%;
+}
+.author-card .silhouette-frame .body-shape {
+  position: absolute;
+  left: 50%; bottom: -10%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 50%;
+  background: var(--black);
+  border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+}
+.author-card .row { display: flex; justify-content: space-between; padding: 4px 0; }
+.author-card .row b { font-weight: 700; opacity: 0.6; }
+
+.author-text h2 { font-size: clamp(48px, 6vw, 92px); margin: 0 0 24px; }
+.author-text p { font-size: 19px; line-height: 1.5; max-width: 60ch; margin: 0 0 18px; }
+.author-text .quote { font-family: "Anton", sans-serif; font-size: clamp(28px, 3.6vw, 44px); line-height: 1; text-transform: uppercase; margin-top: 30px; }
+.author-text .quote .red { color: var(--red); }
+
+/* ----------- FINAL CTA ----------- */
+.final-cta {
+  text-align: center;
+  position: relative;
+}
+.final-cta .ribbon {
+  display: inline-flex;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  background: var(--red); color: var(--yellow);
+  padding: 8px 14px;
+  margin-bottom: 36px;
+}
+.final-cta h2 {
+  font-size: clamp(64px, 11vw, 180px);
+  line-height: 0.85;
+  margin: 0 0 32px;
+}
+.final-cta h2 .red { color: var(--red); }
+.final-cta .sub { font-size: clamp(18px, 2vw, 24px); max-width: 700px; margin: 0 auto 36px; line-height: 1.4; }
+.sub-dark { color: var(--yellow); }
+.final-cta .form-wrap { max-width: 540px; margin: 0 auto; }
+.final-cta .cover-bottom { display: flex; justify-content: center; margin-bottom: 40px; }
+.final-cta .cover-bottom img { width: 260px; border: 2px solid var(--yellow); box-shadow: 10px 10px 0 var(--red); transform: rotate(-1.5deg); }
+.final-note {
+  margin-top: 20px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  opacity: 0.6;
+  color: var(--yellow);
+}
+
+/* ----------- FOOTER ----------- */
+.foot {
+  padding: 36px 0;
+  background: var(--black); color: var(--yellow);
+  border-top: 2px solid var(--red);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.foot-inner { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.foot-links { display: flex; gap: 24px; }
+.foot a { color: inherit; text-decoration: none; opacity: 0.7; }
+.foot a:hover { opacity: 1; color: var(--red); }
+
+/* ----------- success modal ----------- */
+.success {
+  position: fixed; inset: 0;
+  background: rgba(11,11,11,0.85);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+  padding: 24px;
+  animation: fade .25s ease;
+}
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.success-card {
+  background: var(--yellow); color: var(--black);
+  border: 2px solid var(--black);
+  max-width: 540px; width: 100%;
+  padding: 48px 40px;
+  position: relative;
+  box-shadow: 14px 14px 0 var(--red);
+  transform: rotate(-1deg);
+  animation: pop .4s cubic-bezier(.2,.7,.2,1);
+}
+@keyframes pop { from { transform: rotate(-1deg) scale(0.85); opacity: 0; } to { transform: rotate(-1deg) scale(1); opacity: 1; } }
+.success-card h3 { font-family: "Anton", sans-serif; font-size: clamp(40px, 6vw, 64px); margin: 0 0 16px; text-transform: uppercase; line-height: 0.9; }
+.success-card h3 .red { color: var(--red); }
+.success-card p { font-size: 17px; line-height: 1.45; margin: 0 0 12px; }
+.success-card .meta { font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.7; margin-top: 24px; }
+.modal-kicker { margin-bottom: 12px; }
+.email-code { font-family: "JetBrains Mono", monospace; font-size: 14px; background: rgba(0,0,0,0.08); padding: 2px 6px; border-radius: 3px; }
+.success-card button {
+  margin-top: 24px; background: var(--black); color: var(--yellow); border: none;
+  padding: 14px 22px; font-family: "JetBrains Mono", monospace; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; font-size: 12px;
+}
+.success-card button:hover { background: var(--red); }
+.success-card .stamp {
+  position: absolute; top: -20px; right: -20px;
+  background: var(--red); color: var(--yellow);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  font-weight: 700;
+  padding: 10px 14px;
+  transform: rotate(8deg);
+  border: 2px solid var(--yellow);
+  outline: 2px solid var(--red);
+}
+
+/* small utility */
+.divider {
+  height: 1.5px; background: var(--black); width: 100%;
+  margin: 0;
+}
+.section.black .divider { background: var(--yellow); }
+.red { color: var(--red); }
+.status-red { color: var(--red); font-weight: 700; }
+.title-dark { color: var(--yellow); }
+.intro-dark { color: var(--yellow); }
+
+/* marquee under hero */
+.marquee {
+  background: var(--black); color: var(--yellow);
+  padding: 18px 0;
+  overflow: hidden;
+  border-top: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+}
+.marquee-track {
+  display: flex;
+  gap: 48px;
+  animation: scroll-x 32s linear infinite;
+  white-space: nowrap;
+  font-family: "Anton", sans-serif;
+  font-size: 36px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.marquee-track span.red { color: var(--red); }
+.marquee-track span.star { color: var(--red); }
+@keyframes scroll-x { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+window.onerror = function(msg, src, line, col, err) {
+  document.getElementById('root').innerHTML =
+    '<pre style="padding:24px;color:red;font-size:14px">ERRORE JS: ' + msg + '\n' + src + ':' + line + '</pre>';
+};
+</script>
+
+<script type="text/babel">
+// ── TWEAKS PANEL ────────────────────────────────────────────
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;max-height:calc(100vh - 32px);display:flex;flex-direction:column;transform:scale(var(--dc-inv-zoom,1));transform-origin:bottom right;background:rgba(250,249,247,.78);color:#29261b;-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);border:.5px solid rgba(255,255,255,.6);border-radius:14px;box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;overflow-x:hidden;min-height:0;scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+  .twk-field{appearance:none;box-sizing:border-box;width:100%;min-width:0;height:26px;padding:0 8px;border:.5px solid rgba(0,0,0,.1);border-radius:7px;background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  select.twk-field{padding-right:22px}
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg.dragging .twk-seg-thumb{transition:none}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2;overflow-wrap:anywhere}
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+  .twk-btn{appearance:none;height:26px;padding:0 12px;border:0;border-radius:7px;background:rgba(0,0,0,.78);color:#fff;font:inherit;font-weight:500;cursor:default}
+  .twk-btn:hover{background:rgba(0,0,0,.88)}
+  .twk-btn.secondary{background:rgba(0,0,0,.06);color:inherit}
+`;
+
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null ? keyOrEdits : { [keyOrEdits]: val };
+    setValues(function(prev) { return Object.assign({}, prev, edits); });
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
+    window.dispatchEvent(new CustomEvent('tweakchange', { detail: edits }));
+  }, []);
+  return [values, setTweak];
+}
+
+function TweaksPanel({ title, children }) {
+  title = title || 'Tweaks';
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+  const clamp = React.useCallback(function() {
+    var panel = dragRef.current;
+    if (!panel) return;
+    var maxRight = Math.max(PAD, window.innerWidth - panel.offsetWidth - PAD);
+    var maxBottom = Math.max(PAD, window.innerHeight - panel.offsetHeight - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+  React.useEffect(function() {
+    if (!open) return;
+    clamp();
+    window.addEventListener('resize', clamp);
+    return function() { window.removeEventListener('resize', clamp); };
+  }, [open, clamp]);
+  React.useEffect(function() {
+    function onMsg(e) {
+      var t = e && e.data && e.data.type;
+      if (t === '__activate_edit_mode') setOpen(true);
+      else if (t === '__deactivate_edit_mode') setOpen(false);
+    }
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return function() { window.removeEventListener('message', onMsg); };
+  }, []);
+  function dismiss() {
+    setOpen(false);
+    window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*');
+  }
+  function onDragStart(e) {
+    var panel = dragRef.current;
+    if (!panel) return;
+    var r = panel.getBoundingClientRect();
+    var sx = e.clientX, startRight = window.innerWidth - r.right, startBottom = window.innerHeight - r.bottom;
+    function move(ev) { offsetRef.current = { x: startRight - (ev.clientX - sx), y: startBottom - (ev.clientY - e.clientY) }; clamp(); }
+    function up() { window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up); }
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  }
+  if (!open) return null;
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel" style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" onMouseDown={function(e){e.stopPropagation();}} onClick={dismiss}>✕</button>
+        </div>
+        <div className="twk-body">{children}</div>
+      </div>
+    </>
+  );
+}
+
+function TweakSection({ label, children }) {
+  return <><div className="twk-sect">{label}</div>{children}</>;
+}
+
+function TweakRow({ label, value, children, inline }) {
+  return (
+    <div className={inline ? 'twk-row twk-row-h' : 'twk-row'}>
+      <div className="twk-lbl">
+        <span>{label}</span>
+        {value != null && <span className="twk-val">{value}</span>}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function TweakSelect({ label, value, options, onChange }) {
+  return (
+    <TweakRow label={label}>
+      <select className="twk-field" value={value} onChange={function(e){onChange(e.target.value);}}>
+        {options.map(function(o) {
+          var v = typeof o === 'object' ? o.value : o;
+          var l = typeof o === 'object' ? o.label : o;
+          return <option key={v} value={v}>{l}</option>;
+        })}
+      </select>
+    </TweakRow>
+  );
+}
+
+function TweakRadio({ label, value, options, onChange }) {
+  var opts = options.map(function(o){ return typeof o === 'object' ? o : { value: o, label: o }; });
+  var idx = Math.max(0, opts.findIndex(function(o){ return o.value === value; }));
+  var n = opts.length;
+  return (
+    <TweakRow label={label}>
+      <div role="radiogroup" style={{position:'relative',display:'flex',padding:'2px',borderRadius:'8px',background:'rgba(0,0,0,.06)'}}>
+        <div style={{position:'absolute',top:'2px',bottom:'2px',borderRadius:'6px',background:'rgba(255,255,255,.9)',boxShadow:'0 1px 2px rgba(0,0,0,.12)',transition:'left .15s,width .15s',left:`calc(2px + ${idx} * (100% - 4px) / ${n})`,width:`calc((100% - 4px) / ${n})`}} />
+        {opts.map(function(o){
+          return <button key={o.value} type="button" role="radio" aria-checked={o.value===value} onClick={function(){onChange(o.value);}} style={{appearance:'none',position:'relative',zIndex:1,flex:1,border:0,background:'transparent',font:'inherit',fontWeight:500,minHeight:'22px',borderRadius:'6px',cursor:'default',padding:'4px 6px',lineHeight:1.2}}>{o.label}</button>;
+        })}
+      </div>
+    </TweakRow>
+  );
+}
+
+function TweakToggle({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <button type="button" className="twk-toggle" data-on={value ? '1' : '0'} role="switch" aria-checked={!!value} onClick={function(){onChange(!value);}}><i /></button>
+    </div>
+  );
+}
+
+// ── SECTIONS ────────────────────────────────────────────────
+const PROBLEMA_ITEMS = [
+  'Il cameriere ti dice "Buon appetito", tu rispondi "Altrettanto", e passi il resto della cena a elaborare il lutto per la tua dignità.',
+  'Ti arriva un messaggio WhatsApp del capo con scritto "hai un minuto?" e tu stai già aggiornando il curriculum.',
+  'Dici "oggi mi riposo" e lui risponde: "Ottimo, allora abbiamo tempo per pensare."',
+  'Ricevi un "Va bene." col punto fermo, e tu passi l\'ora successiva a fare le valigie mentali.',
+  'Ripassi il copione per dieci minuti. Provi tre intonazioni diverse. Poi chiami il dentista per spostare l\'appuntamento.',
+  'Rileggi per l\'ottava volta l\'email che hai appena inviato, in cerca di prove della tua idiozia.',
+  'Sai benissimo che è tutto nella tua testa. Il problema è che anche lui lo sa.',
+];
+
+const MARQUEE_ITEMS = [
+  'PENSI TROPPO','★','RILEGGI MESSAGGI ALLE 02:47','★',
+  'RISPONDI BENE, MA NON COSÌ','★','RIPENSI A QUELLA COSA DEL 2017','★',
+  'CONTROLLI IL TELEFONO APPENA SVEGLIO','★','DICI "OK" CON SETTE SIGNIFICATI','★',
+  'FAI FINTA DI STARE BENE','★',
+];
+
+const CONCEPT_LOG = [
+  { time:'03:17', text:<span>Apre <b>un fascicolo</b> a caso. "Ti ricordi quella cosa del 2014?" La ricordavi. Ora non te la togli più.</span> },
+  { time:'08:42', text:<span>Trasforma un <b>"ok."</b> ricevuto via messaggio in <b>una sentenza definitiva</b>. Punto incluso.</span> },
+  { time:'11:03', text:<span>Trasforma un <b>like</b> rimosso in <b>un procedimento penale</b>. Te incluso.</span> },
+  { time:'14:30', text:<span>Riapre <s>una cosa già chiusa</s> e la chiama "essere onesti con sé stessi".</span> },
+  { time:'19:55', text:<span>Rovina la palestra prima ancora che tu sia salito sul tappetino.</span> },
+  { time:'22:18', text:<span>La domenica sera porta le prove. <b>Non sono ammissibili</b>. Le accetta lo stesso.</span> },
+];
+
+const SCENES = [
+  { ep:'EP. 01', label:'LA NOTTE', size:'size-l', desc:'La caduta delle difese.' },
+  { ep:'EP. 02', label:"L'IDENTITÀ", size:'size-l', dark:true, desc:'La trappola del giudice interno.' },
+  { ep:'EP. 03', label:'LE PROIEZIONI', size:'size-m', red:true, desc:'Come smettere di relazionarsi con un fantasma.' },
+  { ep:'EP. 04', label:'IL CORPO', size:'size-m', desc:"Il bersaglio fisico dell'ansia che non riesci a dire." },
+  { ep:'EP. 05', label:'IL PERFEZIONISMO', size:'size-m', desc:'La paralisi mascherata da standard elevati.' },
+  { ep:'EP. 06', label:"L'ANSIA ANTICIPATORIA", size:'size-full', dark:true, desc:'Il furto del presente.' },
+  { ep:'EP. 07', label:'LA DISIDENTIFICAZIONE', size:'size-w', red:true, desc:'Tu hai dei pensieri. Non sei i tuoi pensieri.' },
+  { ep:'BONUS', label:'IL PROTOCOLLO DI SFRATTO', size:'size-m', desc:'Esercizi di consapevolezza attiva mascherati da satira.' },
+];
+
+const AUDIENCE_YES = [
+  'Sei pronto a ridere delle tue nevrosi invece di costruirci sopra un altare.',
+  'Hai capito che prendere la mente troppo sul serio è la radice del 90% dei tuoi problemi.',
+  'Vuoi smontare l\'Ombra e i tuoi lati oscuri, ma senza dover per forza accendere l\'incenso.',
+  'Sei disposto ad ammettere che il tuo peggior nemico ha le tue stesse chiavi di casa.',
+];
+
+const AUDIENCE_NO = [
+  'Cerchi un manuale motivazionale.',
+  'Vuoi dieci tecniche per manifestare la vita dei tuoi sogni.',
+  'Vuoi frasi zuccherose da mettere nelle storie.',
+  'Cerchi una guarigione spirituale in 21 giorni.',
+];
+
+const AUDIENCE_LUI = [
+  '"Sei stanco, pensaci domani mattina."',
+  '"Tanto tu sei fatto così, è inutile."',
+  '"Lascia stare, è solo l\'ennesimo libro che non finirai."',
+  '"Non dare la tua email, chissà cosa ti mandano."',
+];
+
+const FORM_DEFAULT_CTA = 'Voglio gli atti del processo';
+
+function SectionHead({ kicker, title, caseLabel, dark }) {
+  return (
+    <div className="section-head">
+      <div>
+        <span className="kicker">{kicker}</span>
+        <h2 className={dark ? 'title-dark' : undefined} dangerouslySetInnerHTML={{ __html: title }} />
+      </div>
+      {caseLabel && (
+        <div className={dark ? 'case-id case-id-dark' : 'case-id'}>
+          {caseLabel[0]}<br /><b>{caseLabel[1]}</b>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function EmailForm({ id, ctaLabel, placeholder, onSubmit, variant, sideNote }) {
+  ctaLabel = ctaLabel || FORM_DEFAULT_CTA;
+  const [email, setEmail] = React.useState('');
+  const [err, setErr] = React.useState('');
+  const [sent, setSent] = React.useState(false);
+  function handle(e) {
+    e.preventDefault();
+    var clean = email.trim();
+    if (!clean) { setErr("Hai dimenticato l'email. È già a verbale."); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean)) { setErr('Questa email non sembra valida. Richiesta perizia.'); return; }
+    setErr(''); setSent(true); onSubmit(clean);
+  }
+  return (
+    <form id={id} className={variant === 'offer' ? 'offer-form' : variant === 'lui' ? 'lui-form' : 'hero-form'} onSubmit={handle} noValidate>
+      <div className={sideNote ? 'form-with-note' : undefined}>
+        <div className="form-row">
+          <input type="email" placeholder={placeholder || 'la-tua-email@dominio.it'} value={email}
+            onChange={function(e){ setEmail(e.target.value); setErr(''); setSent(false); }}
+            aria-label="Inserisci la tua email" />
+          <button type="submit">{ctaLabel} →</button>
+        </div>
+        {sideNote && <div className="form-side-note">{sideNote}</div>}
+      </div>
+      {!sideNote && (
+        <div className="reassure">
+          <span>↳ Ti scrivo solo quando il libro sarà gratis su Kindle.</span>
+          <span>1 sola email. Poi sparisco.</span>
+        </div>
+      )}
+      {err && <div className="err" role="alert">⚠ {err}</div>}
+      {sent && <div className="ok" role="status">✓ Email registrata. Pratica aperta.</div>}
+    </form>
+  );
+}
+
+function Hero({ headline, ctaLabel, onSubmit }) {
+  return (
+    <section className="section hero" id="hero">
+      <div className="wrap">
+        <div className="hero-grid">
+          <div className="hero-copy">
+            <div className="hero-eyebrow">
+              <span className="tag solid">NUOVO EBOOK</span>
+              <span className="tag red">GRATIS SU KINDLE PER 5 GIORNI</span>
+              <span className="tag">PRELANCIO 2026</span>
+            </div>
+            <h1 dangerouslySetInnerHTML={{ __html: headline || 'Il tuo peggior nemico vive gratis nella tua testa.' }} />
+            <p className="hero-sub">
+              Quella voce che ti sveglia alle 03:00 di notte per ricordarti quel litigio
+              con tua madre del 2014. Che commenta tutto, giudica tutti, prevede disastri
+              e che quando ricevi un complimento ti sussurra: "Prima o poi si accorgeranno
+              che non sai quello che fai."
+              <br /><br />
+              Una commedia psicologica esilarante su chi vive nella tua testa da sempre
+              e non ha mai pagato l'affitto.
+            </p>
+            <EmailForm
+              id="hero-form"
+              ctaLabel={ctaLabel || FORM_DEFAULT_CTA}
+              placeholder="la-tua-email@dominio.it"
+              onSubmit={onSubmit}
+              sideNote={<>Nessuna newsletter. Una sola email per avvisarti dell'uscita del libro, che sarà <span className="accent">gratuito nei primi 5 giorni dal lancio.</span></>}
+            />
+            <div className="scroll-cue">scendi · il fascicolo è già aperto</div>
+          </div>
+          <div className="cover-stage">
+            <div className="cover-card">
+              <img src="assets/copertina.png" alt="Copertina de Il Coinquilino di Maruth Rein" />
+              <div className="cover-stamp"><span className="big">5</span>GIORNI<br />GRATIS</div>
+            </div>
+            <dl className="cover-meta">
+              <dt>Titolo</dt><dd>Il Coinquilino</dd>
+              <dt>Autore</dt><dd>Maruth Rein</dd>
+              <dt>Genere</dt><dd>Commedia psicologica</dd>
+              <dt>Formato</dt><dd>Ebook Kindle</dd>
+              <dt>Stato</dt><dd className="status-red">● PRELANCIO APERTO</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Marquee() {
+  var loop = MARQUEE_ITEMS.concat(MARQUEE_ITEMS);
+  return (
+    <div className="marquee" aria-hidden="true">
+      <div className="marquee-track">
+        {loop.map(function(t,i){ return <span key={t+i} className={t==='★'?'star':''}>{t}</span>; })}
+      </div>
+    </div>
+  );
+}
+
+function Problema() {
+  return (
+    <section className="section paper" id="problema">
+      <div className="wrap">
+        <SectionHead kicker="ATTO 01 · I sintomi" title={'Se ti riconosci,<br /><span class="red">è</span> gi<span class="red">à</span> tardi.'} caseLabel={['FASCICOLO','01 / SINTOMI']} />
+        <p className="section-intro">Niente diagnosi. Solo un elenco. <em>Spunta mentalmente quelle che ti riguardano</em>. Non lo dirai a nessuno. E nessuno ti sta guardando. Tranne uno. Lo sai chi.</p>
+        <div className="problema-grid">
+          {PROBLEMA_ITEMS.map(function(text,i){
+            var isLast = i === PROBLEMA_ITEMS.length - 1;
+            return (
+              <div className={isLast ? 'problema-row final' : 'problema-row'} key={i}>
+                {!isLast && <span className="num">{String(i+1).padStart(2,'0')}</span>}
+                <span>{text}</span>
+                <span className="check">✓ sono io</span>
+              </div>
+            );
+          })}
+        </div>
+        <div className="problema-final">Se hai detto <span>"sono io"</span> pi<span>ù</span> di tre volte<span>,</span><br />questo libro <span>è</span> il tuo verbale.</div>
+      </div>
+    </section>
+  );
+}
+
+function LibroAperto() {
+  var [open, setOpen] = React.useState(false);
+  return (
+    <>
+      <div className="libro-aperto">
+        <div className="libro-label">↳ Estratto · Pagine interne</div>
+        <div className="libro-frame" onClick={function(){ setOpen(true); }}>
+          <img src="assets/libro_aperto.png" alt="Il Coinquilino — libro aperto" />
+        </div>
+      </div>
+      {open && (
+        <div className="lightbox" onClick={function(){ setOpen(false); }}>
+          <button className="lightbox-close" onClick={function(){ setOpen(false); }}>✕ Chiudi</button>
+          <img src="assets/libro_aperto.png" alt="Il Coinquilino — libro aperto" onClick={function(e){ e.stopPropagation(); }} />
+        </div>
+      )}
+    </>
+  );
+}
+
+function Concept() {
+  return (
+    <section className="section black" id="concept">
+      <div className="wrap">
+        <SectionHead kicker="ATTO 02 · L'imputato" title={'Chi <span class="red">è</span><br />il coinquilino?'} caseLabel={['REGISTRO','02 / SOGGETTO']} dark />
+        <p className="section-intro intro-dark">
+          È quella parte di te che non archivia niente.<br />
+          Riapre conversazioni finite.<br />
+          Interpreta silenzi.<br />
+          Prevede catastrofi.<br />
+          Fa perizie emotive su frasi innocenti.<br />
+          Trasforma ogni dettaglio in materiale probatorio.<br />
+          Dice di volerti proteggere.<br />
+          In realtà funziona come un antifurto rotto:<br />
+          suona a sirene spiegate<br />
+          anche quando il ladro non c'è,<br />
+          la porta è chiusa<br />
+          e tu volevi solo dormire.
+        </p>
+        <div className="manifesto-line">Il Coinquilino non è un demone. È un vecchio meccanismo di difesa che non ha mai ricevuto l'ordine di spegnersi. Per questo gli credi.</div>
+        <LibroAperto />
+      </div>
+    </section>
+  );
+}
+
+function CosaTroverai() {
+  return (
+    <section className="section" id="dentro">
+      <div className="wrap">
+        <SectionHead kicker="ATTO 03 · Il meccanismo" title={"L'anatomia<br />del sabotaggio"} caseLabel={['INDICE','03 / SCENE']} />
+        <p className="section-intro">
+          Questo non è un manuale di auto-aiuto che ti dice di pensare positivo.<br />
+          Il pensiero positivo è la merenda del Coinquilino.<br /><br />
+          È un viaggio clinico nei meccanismi dell'Ombra: quella parte di te che agisce nell'ombra,
+          prende decisioni al posto tuo e poi ti manda il conto.<br /><br />
+          L'obiettivo non è sconfiggere la voce. Non puoi.<br />
+          L'obiettivo è toglierle il microfono.
+        </p>
+        <div className="scenes-grid">
+          {SCENES.map(function(s){
+            return (
+              <div key={s.ep} className={'scene '+s.size+(s.dark?' dark':'')+(s.red?' red-bg':'')}>
+                <div className="ep"><span>{s.ep}</span><span>↗</span></div>
+                <div><h3>{s.label}</h3><p>{s.desc}</p></div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Estratti() {
+  return (
+    <section className="section paper" id="estratti">
+      <div className="wrap">
+        <SectionHead kicker="ATTO 04 · In aula" title="Le prove<br />raccolte" caseLabel={['ALLEGATI','04 / ESTRATTI']} />
+        <p className="section-intro">Prima di smontare il Coinquilino, devi sentirlo parlare. Funziona così: tu provi a vivere, lui apre un procedimento.</p>
+        <div className="estratti-grid">
+          <div className="dialogue-excerpt" style={{gridColumn:'span 6',background:'#fff',border:'1.5px solid var(--black)',padding:'24px',fontFamily:'JetBrains Mono,monospace',fontSize:'14px',lineHeight:'1.6'}}>
+            <div style={{display:'flex',justifyContent:'space-between',borderBottom:'1px solid rgba(0,0,0,.15)',paddingBottom:'8px',marginBottom:'12px',fontSize:'11px',letterSpacing:'0.12em',textTransform:'uppercase',opacity:.6}}><span>ESTRATTO · MESSAGGIO NON RISPOSTO</span><span>22:41</span></div>
+            <p><b>TU</b> "Magari è solo impegnata."</p>
+            <p><b>COINQUILINO</b> "Certo. Anche gli imputati hanno impegni."</p>
+            <p><b>TU</b> "Non siamo in tribunale."</p>
+            <p><b>COINQUILINO</b> "Non ancora."</p>
+          </div>
+          <div className="postit yellow">
+            <span className="quote-mark">"</span>
+            Non sei tu che ti fai le pippe mentali.<br /><b>È lui.</b><br />Tu sei quello che gli ha dato le chiavi.
+            <div className="src">↳ Estratto · Pag. 11</div>
+          </div>
+          <div className="dossier">
+            <div className="head"><span>VERBALE N° 027</span><span>03:17</span></div>
+            <div className="row"><span>Imputato:</span><b>Tu, nel 2014</b></div>
+            <div className="row"><span>Accusa:</span><b>Aver detto quella cosa imbarazzante</b></div>
+            <div className="row"><span>Testimone:</span><b>Solo tu, al buio</b></div>
+            <div className="row"><span>Orario prove:</span><b>Post mezzanotte</b></div>
+            <div className="verdict">★ NON AMMISSIBILE ★</div>
+            <div className="dossier-note">Le prove raccolte dopo mezzanotte non sono mai ammissibili.</div>
+          </div>
+          <div className="postit black-pop">
+            <span className="quote-mark">"</span>
+            Quando ridi del Coinquilino,<br /><b>per mezzo secondo</b><br />smetti di essere lui.
+            <div className="src">↳ Estratto · Pag. 84</div>
+          </div>
+          <div className="postit paper">
+            <span className="quote-mark">"</span>
+            Il problema non è avere questa voce in testa.<br />Il problema è <b>scambiarla per la realtà</b>.
+            <div className="src">↳ Estratto · Pag. 23</div>
+          </div>
+          <div className="postit red-pop">
+            <span className="quote-mark">"</span>
+            Un "ok."<br />non è una sentenza d'esilio.<br />Eppure.
+            <div className="src">↳ Pag. 47</div>
+          </div>
+          <div className="postit long">
+            <span className="quote-mark">"</span>
+            Ho passato dieci anni a chiamare "essere onesti con sé stessi" una cosa che, vista da fuori, somigliava molto di più a <b>un nemico che mi insultava ogni mattina al risveglio</b>. La differenza è che l'avevo fatto entrare io.
+            <div className="src">↳ Estratto · Capitolo 3 · "Il corpo allo specchio"</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Audience({ onSubmit }) {
+  return (
+    <section className="section" id="per-chi">
+      <div className="wrap">
+        <SectionHead kicker="ATTO 05 · Condizioni" title="Le condizioni<br />di sfratto" caseLabel={['REGISTRO','05 / DESTINATARI']} />
+        <div className="audience-grid">
+          <div className="audience-col">
+            <div className="lead">↳ Entra se:</div>
+            <h3>Sì.<br /><span className="accent">Entra.</span></h3>
+            <ul>{AUDIENCE_YES.map(function(t){ return <li key={t}>{t}</li>; })}</ul>
+          </div>
+          <div className="audience-col no">
+            <div className="lead">↳ Evitalo se:</div>
+            <h3>No.<br /><span className="accent">Chiudi qui.</span></h3>
+            <ul>{AUDIENCE_NO.map(function(t){ return <li key={t}>{t}</li>; })}</ul>
+          </div>
+          <div className="audience-col lui">
+            <div className="lead">↳ Cosa ti sta dicendo lui ora:</div>
+            <h3>Lui.<br /><span className="accent">Adesso.</span></h3>
+            <ul>{AUDIENCE_LUI.map(function(t){ return <li key={t}>{t}</li>; })}</ul>
+            <div style={{marginTop:'32px'}}>
+              <EmailForm
+                id="lui-form"
+                ctaLabel="La do lo stesso"
+                placeholder="la-tua-email@dominio.it"
+                onSubmit={onSubmit}
+                variant="lui"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Disclaimer() {
+  return (
+    <section className="section disclaimer" id="disclaimer">
+      <div className="wrap">
+        <div className="disclaimer-box">
+          <span className="kicker no-rule">↳ Nota necessaria</span>
+          <h2>Niente terapia.<br />niente diagnosi.</h2>
+          <p><b>Il Coinquilino</b> è una narrazione comica e clinica sull'overthinking. Non sostituisce un terapeuta, non ti "guarisce" e non vende miracoli quantici. Fa una cosa più onesta: dà un volto e un nome a quella voce logorante che sei abituato a chiamare "me".</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Offerta({ ctaLabel, onSubmit }) {
+  return (
+    <section className="section" id="offerta">
+      <div className="wrap">
+        <div className="offer-block">
+          <div className="offer-grid">
+            <div>
+              <span className="kicker no-rule offer-kicker">↳ Offerta di lancio</span>
+              <h2 className="h-display">Per 5 giorni<br />a zero euro</h2>
+              <p className="offer-copy">Al lancio, <b>Il Coinquilino</b> sarà <b>gratis su Amazon Kindle per 5 giorni</b>. Niente trucchi, niente funnel infiniti. Solo il file pulito, gratis, finché la finestra resta aperta.<br /><br />Chi entra in lista riceve <b>un solo avviso</b>: al momento giusto.</p>
+              <EmailForm id="offer-form" ctaLabel="Mettimi in lista" placeholder="la-tua-email@dominio.it" onSubmit={onSubmit} variant="offer" />
+            </div>
+            <div className="price-panel">
+              <div className="price">€0</div>
+              <div className="price-cap">× cinque giorni · poi torna a prezzo pieno</div>
+              <div className="price-note">● l'email serve solo ad avvisarti all'apertura</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Autore() {
+  return (
+    <section className="section paper" id="autore">
+      <div className="wrap">
+        <div className="author-grid">
+          <div className="author-card">
+            <div className="head"><span>Scheda Autore</span><span>M.R. / 01</span></div>
+            <div className="silhouette-frame"><div className="head-shape" /><div className="body-shape" /></div>
+            <div className="row"><b>Nome</b><span>Maruth Rein</span></div>
+            <div className="row"><b>Materia</b><span>Voci interiori e sabotaggi</span></div>
+            <div className="row"><b>Strumento</b><span>Tastiera</span></div>
+            <div className="row"><b>Stato</b><span className="red">● Attivo</span></div>
+          </div>
+          <div className="author-text">
+            <span className="kicker">↳ Chi scrive</span>
+            <h2>L'autore</h2>
+            <p>Ha un Coinquilino anche lui. Lo conosce da trent'anni.<br />
+            A un certo punto ha smesso di temerlo e ha iniziato a prendere appunti.<br />
+            È nato così questo verbale. <b>L'autopsia spietata di una voce che ci rovina la vita da troppo tempo.</b></p>
+            <div className="quote">"Non scrivo per farti guarire.<br /><span className="red">Scrivo per fartelo vedere.</span>"</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalCTA({ ctaLabel, onSubmit }) {
+  return (
+    <section className="section black final-cta" id="iscriviti">
+      <div className="wrap">
+        <span className="ribbon">↳ Ultima chiamata · Aula 5</span>
+        <div className="cover-bottom"><img src="assets/copertina.png" alt="Il Coinquilino" /></div>
+        <h2>Sfratta<br /><span className="red">il coinquilino</span></h2>
+        <p className="sub sub-dark">Lascia la tua email qui sotto. Quando scatta l'ora, riceverai un solo messaggio per scaricare il verbale gratis.<br /><br />Poi torni a vivere.<br />Probabilmente lui parlerà ancora. Ma tu smetterai di ascoltarlo.</p>
+        <div className="form-wrap">
+          <EmailForm id="final-form" ctaLabel="Apri la pratica" placeholder="la-tua-email@dominio.it" onSubmit={onSubmit} />
+        </div>
+        <div className="final-note">↓ NIENTE SPAM · 1 SOLA EMAIL · LUI INVECE RESTA</div>
+      </div>
+    </section>
+  );
+}
+
+function Foot() {
+  return (
+    <footer className="foot">
+      <div className="wrap foot-inner">
+        <div>© 2026 · Maruth Rein · Il Coinquilino</div>
+        <div className="foot-links"><a href="#hero">↑ Torna su</a><a href="#">Privacy</a><a href="#">Contatti</a></div>
+        <div>↳ Costruito alle 03:17. Ovviamente.</div>
+      </div>
+    </footer>
+  );
+}
+
+function SuccessModal({ email, onClose }) {
+  var num = React.useRef(Math.floor(Math.random()*9000+1000));
+  return (
+    <div className="success" role="dialog" aria-modal="true" onClick={onClose}>
+      <div className="success-card" onClick={function(e){e.stopPropagation();}}>
+        <div className="stamp">CONFERMATO</div>
+        <div className="kicker modal-kicker">↳ Pratica aperta</div>
+        <h3>Sei in lista.<br /><span className="red">Lui no.</span></h3>
+        <p>Il verbale è pronto. Ti scriviamo <b>una sola volta</b>: quando <b>Il Coinquilino</b> sarà disponibile <b>gratis su Amazon Kindle</b>. Niente stress prima. Niente up-sell dopo.</p>
+        <p>Email a referto: <code className="email-code">{email}</code></p>
+        <div className="meta">PRATICA N° {num.current} · APERTA · ATTESA LANCIO</div>
+        <button onClick={onClose}>Chiudi il fascicolo</button>
+      </div>
+    </div>
+  );
+}
+
+// ── APP ─────────────────────────────────────────────────────
+const HEADLINES = [
+  'Non sei tu.<br/><span class="accent">È il Coinquilino.</span>',
+  'Vive nella <span class="underline">tua testa</span>,<br/>commenta tutto e<br/><span class="accent">non paga l\'affitto.</span>',
+  'Hai presente quella<br/><span class="underline">voce</span> che rovina tutto?<br/><span class="accent">Ha un nome.</span>',
+  'Pensa lui.<br/>Decide lui.<br/><span class="accent">Tu lo subaffitti.</span>',
+  'Lo ascolti da<br/>vent\'anni.<br/><span class="accent">Senza prove.</span>',
+];
+
+const CTA_OPTIONS = [
+  "Avvisami quando esce gratis",
+  "Voglio sfrattare il Coinquilino",
+  "Mandami l'avviso del lancio",
+  "Mettimi in lista",
+  "Iscrivimi al fascicolo",
+];
+
+const TWEAK_DEFAULTS = { headlineIndex: 0, ctaIndex: 0 };
+
+function App() {
+  const [t, setT] = useTweaks(TWEAK_DEFAULTS);
+  const [successEmail, setSuccessEmail] = React.useState(null);
+  const [scrolled, setScrolled] = React.useState(false);
+
+  React.useEffect(function() {
+    function h() { setScrolled(window.scrollY > 8); }
+    h();
+    window.addEventListener('scroll', h, { passive: true });
+    return function() { window.removeEventListener('scroll', h); };
+  }, []);
+
+  function handleSubmit(email) {
+    setSuccessEmail(email);
+    try { localStorage.setItem('il-coinquilino-list', email); } catch(e) {}
+    fetch(
+      'https://docs.google.com/forms/d/e/1FAIpQLSeyPjNC2ei9VCP52EZ2DyIxbXE_-WN-ujLNhqUecoWS-rKk9g/formResponse',
+      {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'entry.316277458=' + encodeURIComponent(email)
+      }
+    );
+  }
+
+  var headline = HEADLINES[t.headlineIndex] || HEADLINES[0];
+  var ctaLabel = CTA_OPTIONS[t.ctaIndex] || CTA_OPTIONS[0];
+
+  function goToHero() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    var input = document.querySelector('#hero-form input');
+    if (input) setTimeout(function(){ input.focus(); }, 400);
+  }
+
+  return (
+    <>
+      <div className={'topbar' + (scrolled ? ' scrolled' : '')}>
+        <div className="topbar-inner">
+          <div className="topbar-mark"><span className="dot"></span><span>Il Coinquilino · Maruth Rein</span></div>
+          <div className="topbar-meta">
+            <span>Prelancio</span><span>·</span>
+            <span style={{color:'var(--red)'}}>● 5 giorni gratis al lancio</span>
+          </div>
+          <button className="topbar-cta" onClick={goToHero}>{ctaLabel} →</button>
+        </div>
+      </div>
+
+      <Hero headline={headline} ctaLabel={ctaLabel} onSubmit={handleSubmit} />
+      <Marquee />
+      <Problema />
+      <Concept />
+      <Offerta ctaLabel={ctaLabel} onSubmit={handleSubmit} />
+      <CosaTroverai />
+      <Audience onSubmit={handleSubmit} />
+      <Disclaimer />
+      <Autore />
+      <FinalCTA ctaLabel={ctaLabel} onSubmit={handleSubmit} />
+      <Foot />
+
+      {successEmail && <SuccessModal email={successEmail} onClose={function(){ setSuccessEmail(null); }} />}
+
+      <TweaksPanel title="Tweaks">
+        <TweakSection label="Hero headline">
+          <TweakSelect label="Variante" value={t.headlineIndex}
+            onChange={function(v){ setT('headlineIndex', parseInt(v,10)); }}
+            options={HEADLINES.map(function(h,i){ return { value:i, label:'Opzione '+(i+1)+' — '+h.replace(/<[^>]+>/g,' ').trim().slice(0,38)+'…' }; })} />
+        </TweakSection>
+        <TweakSection label="Pulsante CTA">
+          <TweakRadio label="Etichetta" value={t.ctaIndex}
+            onChange={function(v){ setT('ctaIndex', parseInt(v,10)); }}
+            options={[{value:0,label:'Avvisami'},{value:1,label:'Sfratta'},{value:2,label:'Avviso'}]} />
+        </TweakSection>
+      </TweaksPanel>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
+

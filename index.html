@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="guru.css">
     <link rel="stylesheet" href="cosa_faccio.css">
     <link rel="stylesheet" href="grafico.css">
+    <link rel="stylesheet" href="content.css">
     
 
 </head>
@@ -425,7 +426,7 @@
 
 <!-- SCROLL ARROW TO AI SECTION -->
 <div class="tools-arrow-wrapper">
-    <a href="#ai-section" class="tools-arrow">
+    <a href="#ai-section" class="tools-arrow" aria-label="Scorri alla sezione AI">
         <div class="arrow-line"></div>
         <div class="arrow-head"></div>
     </a>
@@ -433,7 +434,7 @@
 
  <!-- AI SECTION -->
 
-        <div class="section-header" id="ai-section" style="margin-top:5rem;">
+        <div class="section-header" id="ai-section">
             <h2 class="gold-gradient-text">AI Integration</h2>
             <p class="subtitle-luxury">
                 Sistemi intelligenti integrati nel processo creativo e strategico.
@@ -595,11 +596,12 @@
         <!-- COLONNA 3: SOCIAL -->
         <div class="footer-col">
             <h4 class="footer-subtitle">Social</h4>
-            <div class="footer-socials">
-                <a href="https://t.me/MaruthRein" target="_blank"><i class="fa-brands fa-telegram"></i></a>
-                <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="https://maruthrein.github.io/" target="_blank"><i class="fa-brands fa-github"></i></a>
-                <a href="https://www.behance.net/maruthrein" target="_blank" rel="noopener noreferrer" aria-label="Behance di Maruth Rein">
+        <div class="footer-socials">
+    <a href="https://t.me/MaruthRein" target="_blank" rel="noopener noreferrer" aria-label="Telegram di Maruth Rein"><i class="fa-brands fa-telegram"></i></a>
+    <a href="https://www.linkedin.com/in/maruth-rein-29402b268/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn di Maruth Rein"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://github.com/MaruthRein" target="_blank" rel="noopener noreferrer" aria-label="GitHub di Maruth Rein"><i class="fa-brands fa-github"></i></a>
+    <a href="https://www.behance.net/maruthrein" target="_blank" rel="noopener noreferrer" aria-label="Behance di Maruth Rein"><i class="fa-brands fa-behance"></i></a>
+</div>
   <i class="fa-brands fa-behance" aria-hidden="true"></i>
 </a>
 
@@ -609,7 +611,7 @@
     </div>
 
     <div class="footer-bottom">
-        <p>© 2025 Maruth Rein — Tutti i diritti riservati.</p><p id="visit-counter" style="display:none; color:#777; font-size:12px;">
+        <p>© 2025 Maruth Rein — Tutti i diritti riservati.</p><p id="visit-counter">
     Visite: <span id="visits">...</span>
 </p>
     </div>
@@ -626,7 +628,7 @@
         <div id="dynamic-content-area">
             </div>
 
-        <div id="slider-loader" style="display: none; text-align: center; padding-top: 50px; color: var(--gold-mid);">
+        <div id="slider-loader">
             <i class="fa-solid fa-circle-notch fa-spin fa-3x"></i>
         </div>
 
@@ -635,9 +637,6 @@
 <!-- LUXURY CONTACT POPUP -->
 
 <div id="popup-container"></div>
-
-
-
 
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
@@ -811,12 +810,6 @@ fetch("components/contact-popup.html")
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script src="script.js" defer></script>
-
-<!-- LightGallery -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery.min.css">
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
 
 <!-- Script della pagina Grafico & Illustratore -->
 <script src="assets/js/grafico.js"></script>

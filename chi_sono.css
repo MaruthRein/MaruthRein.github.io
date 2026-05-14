@@ -261,6 +261,10 @@ body {
     transition: all 0.3s ease;
 }
 
+a.gold-accent {
+    text-decoration: underline;
+}
+
 /* Si accende anche quando il blocco è attivo */
 .chi-block p:hover .gold-accent,
 .chi-block.active p .gold-accent {
@@ -310,6 +314,7 @@ body {
     font-weight: 600;
     text-decoration: none;
     background: rgba(255, 255, 255, 0.02);
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     border-radius: 4px;
     transition: all 0.4s ease;
@@ -402,5 +407,6 @@ main,
     transform: none !important;
     filter: none !important;
     perspective: none !important;
+    -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
 }
