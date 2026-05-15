@@ -185,6 +185,7 @@
         0 0 40px rgba(240, 197, 117, 0.25); /* glow oro morbido */
     border-radius: 10px;
     padding: 2rem;
+    -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 }
 /* Cornice oro ultraleggera + vignetta */
@@ -209,7 +210,6 @@
     display: block;
     margin: 0 auto;
 }
-@guru-section.css
 
 @media (max-width: 768px) {
 

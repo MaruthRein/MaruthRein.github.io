@@ -831,6 +831,28 @@ a { color: inherit; }
 .offer-form button:hover { background: var(--yellow); color: var(--black); border-left: 2px solid var(--black); }
 .offer-form .reassure { margin-top: 12px; font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; }
 
+@media (max-width: 720px) {
+  .offer-form .form-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 2px solid var(--yellow);
+  }
+  .offer-form input {
+    width: 100%;
+    padding: 16px 14px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(11,11,11,0.2);
+  }
+  .offer-form button {
+    width: 100%;
+    padding: 16px 14px;
+    text-align: center;
+    border-left: none;
+    border-top: 2px solid var(--black);
+  }
+}
+
 /* lui form — bottone sopra, input sotto */
 .lui-form .form-row {
   display: flex;
@@ -1216,12 +1238,12 @@ function TweakToggle({ label, value, onChange }) {
 
 // ── SECTIONS ────────────────────────────────────────────────
 const PROBLEMA_ITEMS = [
-  'Il cameriere ti dice "Buon appetito", tu rispondi "Altrettanto", e passi il resto della cena a elaborare il lutto per la tua dignità.',
-  'Ti arriva un messaggio WhatsApp del capo con scritto "hai un minuto?" e tu stai già aggiornando il curriculum.',
+  'Il cameriere ti dice "Buon appetito", tu rispondi "Altrettanto", e lui passa il resto della cena a elaborare il lutto per la tua dignità.',
+  'Ti arriva un messaggio WhatsApp del capo con scritto "hai un minuto?" e lui inizia ad aggiornare il tuo curriculum.',
   'Dici "oggi mi riposo" e lui risponde: "Ottimo, allora abbiamo tempo per pensare."',
-  'Ricevi un "Va bene." col punto fermo, e tu passi l\'ora successiva a fare le valigie mentali.',
-  'Ripassi il copione per dieci minuti. Provi tre intonazioni diverse. Poi chiami il dentista per spostare l\'appuntamento.',
-  'Rileggi per l\'ottava volta l\'email che hai appena inviato, in cerca di prove della tua idiozia.',
+  'Ricevi un "Va bene." col punto fermo, e lui passi l\'ora successiva a fare le valigie mentali.',
+  'Lui ripassa il copione per dieci minuti. Prova tre intonazioni diverse. Poi tu chiami il dentista per spostare l\'appuntamento.',
+  'Tu invii un\'email, e lui la rilegge otto volte in cerca di prove della tua idiozia.',
   'Sai benissimo che è tutto nella tua testa. Il problema è che anche lui lo sa.',
 ];
 
@@ -1253,22 +1275,22 @@ const SCENES = [
 ];
 
 const AUDIENCE_YES = [
-  'Sei pronto a ridere delle tue nevrosi invece di costruirci sopra un altare.',
-  'Hai capito che prendere la mente troppo sul serio è la radice del 90% dei tuoi problemi.',
+  'Non cerchi assoluzione. Sai che la tua mente è un circo e sei stanco di essere il domatore stanco.',
+  'Ti sei reso conto che il tuo "miglior pensiero" è spesso un atto preventivo contro te stesso.',
   'Vuoi smontare l\'Ombra e i tuoi lati oscuri, ma senza dover per forza accendere l\'incenso.',
   'Sei disposto ad ammettere che il tuo peggior nemico ha le tue stesse chiavi di casa.',
 ];
 
 const AUDIENCE_NO = [
-  'Cerchi un manuale motivazionale.',
-  'Vuoi dieci tecniche per manifestare la vita dei tuoi sogni.',
-  'Vuoi frasi zuccherose da mettere nelle storie.',
-  'Cerchi una guarigione spirituale in 21 giorni.',
+  'Cerchi un guru che ti dica quanto sei "speciale" mentre ti svuota il portafoglio.',
+  'Vuoi imparare a "manifestare" la felicità con la forza del pensiero (spoiler: con te non funziona).',
+  'Hai bisogno di frasi zuccherose da incollare sulle foto per fingere di "stare bene".',
+  'Speri ancora in una guarigione spirituale rapida e indolore. Qui si scende in cantina con una torcia, non si accendono lampade di sale.',
 ];
 
 const AUDIENCE_LUI = [
-  '"Sei stanco, pensaci domani mattina."',
-  '"Tanto tu sei fatto così, è inutile."',
+  '"Ora sei stanco, lascia stare. Pensaci domani mattina.(forse)"',
+  'Non fare clic. Se poi funziona davvero, tu con chi parli, tutto il giorno da solo?',
   '"Lascia stare, è solo l\'ennesimo libro che non finirai."',
   '"Non dare la tua email, chissà cosa ti mandano."',
 ];
@@ -1581,7 +1603,7 @@ function Disclaimer() {
         <div className="disclaimer-box">
           <span className="kicker no-rule">↳ Nota necessaria</span>
           <h2>Niente terapia.<br />niente diagnosi.</h2>
-          <p><b>Il Coinquilino</b> è una narrazione comica e clinica sull'overthinking. Non sostituisce un terapeuta, non ti "guarisce" e non vende miracoli quantici. Fa una cosa più onesta: dà un volto e un nome a quella voce logorante che sei abituato a chiamare "me".</p>
+          <p><b>Il Coinquilino</b> è una narrazione tragicomica e clinica sull'overthinking. Non sostituisce un terapeuta, non ti "guarisce" e non vende miracoli quantici. Fa una cosa più onesta: dà un volto e un nome a quella voce logorante che sei abituato a chiamare "me".</p>
         </div>
       </div>
     </section>
@@ -1628,9 +1650,9 @@ function Autore() {
           <div className="author-text">
             <span className="kicker">↳ Chi scrive</span>
             <h2>L'autore</h2>
-            <p>Ha un Coinquilino anche lui. Lo conosce da trent'anni.<br />
-            A un certo punto ha smesso di temerlo e ha iniziato a prendere appunti.<br />
-            È nato così questo verbale. <b>L'autopsia spietata di una voce che ci rovina la vita da troppo tempo.</b></p>
+            <p>Maruth Rein indaga le voci interiori da oltre trent'anni. Ricercatore indipendente, ha studiato teologia, filosofia e psicologia per cercare il punto esatto in cui la mente smette di tenerci in ostaggio.<br /><br />
+            Ha affrontato il problema da ogni angolazione: come studente, come praticante, come insegnante di meditazione e come osservatore. Fino a quando, faccia a faccia con il suo Coinquilino, ha smesso di combatterlo e ha iniziato a prendere appunti.<br /><br />
+            È nato così questo verbale. Niente teorie accademiche, niente dottrine confortanti. Solo la mappa cruda e reale dei nostri sabotaggi, scritta per chi è stanco delle solite frasi motivazionali e ha capito che l'arma migliore contro i propri condizionamenti è riconoscerli e ridergli in faccia.</p>
             <div className="quote">"Non scrivo per farti guarire.<br /><span className="red">Scrivo per fartelo vedere.</span>"</div>
           </div>
         </div>
