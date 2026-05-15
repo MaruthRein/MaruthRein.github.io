@@ -1339,7 +1339,7 @@ function EmailForm({ id, ctaLabel, placeholder, onSubmit, variant, sideNote }) {
       {!sideNote && (
         <div className="reassure">
           <span>↳ Ti scrivo solo quando il libro sarà gratis su Kindle.</span>
-          <span>1 sola email. Poi sparisco.</span>
+          <span>1 sola email. Poi sparisco. <a href="/il_coinquilino/privacy.html" target="_blank" rel="noopener" style={{opacity:0.6, fontSize:'11px'}}>Privacy Policy</a></span>
         </div>
       )}
       {err && <div className="err" role="alert">⚠ {err}</div>}
