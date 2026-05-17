@@ -202,7 +202,7 @@ a { color: inherit; }
     width: 220px;
     left: 40%;
     top: 40%;
-    transform: translateY(calc(-50% + 55px));
+    transform: translateY(calc(-50% + 25px));
   }
 }
 /* iPad landscape / notebook piccolo – colonna sinistra stretta */
@@ -211,7 +211,13 @@ a { color: inherit; }
     width: 175px;
     left: 38%;
     top: 42%;
-    transform: translateY(calc(-50% + 65px));
+    transform: translateY(calc(-50% + 35px));
+  }
+}
+/* 1280x720 notebook */
+@media (min-width: 1201px) and (max-width: 1400px) {
+  .hero-character {
+    transform: translateY(calc(-50% + 40px));
   }
 }
 @media (min-width: 721px) and (max-width: 1400px) {
