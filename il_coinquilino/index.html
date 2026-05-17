@@ -125,15 +125,15 @@ a { color: inherit; }
 }
 @media (max-width: 980px) {
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-  .cover-stage { margin-top: 24px; }
+  .cover-stage { display: none !important; }
 }
 @media (max-width: 720px) {
   .hero { padding: 32px 0 48px; }
   .hero-copy { overflow-wrap: break-word; word-break: break-word; min-width: 0; }
-  .hero h1 { font-size: clamp(28px, 9.5vw, 52px); line-height: 0.9; }
+  .hero h1 { font-size: clamp(28px, 8.2vw, 52px); line-height: 0.9; word-break: normal; overflow-wrap: normal; }
   .hero-sub { font-size: 16px; }
   .hero-eyebrow { gap: 10px; }
-  .cover-stage { display: none; }
+  .cover-stage { display: none !important; }
   .hero-form { margin-top: 28px; }
   .hero-form .form-with-note { flex-direction: column; align-items: stretch; gap: 14px; }
   .hero-form .form-row { display: flex !important; flex-direction: column !important; width: 100%; border: 2px solid var(--black); }
@@ -163,6 +163,83 @@ a { color: inherit; }
 }
 .hero h1 .accent { color: var(--red); }
 .hero h1 .underline { text-decoration: underline; text-decoration-thickness: 0.06em; text-underline-offset: -0.02em; }
+
+.hero-title-wrap {
+  position: relative;
+  display: block;
+}
+.hero-character {
+  position: absolute;
+  left: 38%;
+  top: 42%;
+  transform: translateY(calc(-50% + 70px));
+  width: clamp(180px, 32%, 380px);
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-character-right {
+  position: absolute;
+  bottom: 10px;
+  right: calc(50% - 550px);
+  width: 300px;
+  max-width: none;
+}
+@media (max-width: 600px) {
+  .hero-character { display: none; }
+}
+/* iPad mini/Air portrait (768-820px) – titolo su 2 righe */
+@media (min-width: 721px) and (max-width: 860px) {
+  .hero-character {
+    width: 200px;
+    left: calc(40% + 130px);
+    top: 52%;
+    transform: translateY(calc(-50% - 50px));
+  }
+}
+/* iPad Pro portrait / landscape (861-980px) – titolo su 3 righe */
+@media (min-width: 861px) and (max-width: 980px) {
+  .hero-character {
+    width: 220px;
+    left: 40%;
+    top: 40%;
+    transform: translateY(calc(-50% + 55px));
+  }
+}
+/* iPad landscape / notebook piccolo – colonna sinistra stretta */
+@media (min-width: 981px) and (max-width: 1200px) {
+  .hero-character {
+    width: 175px;
+    left: 38%;
+    top: 42%;
+    transform: translateY(calc(-50% + 65px));
+  }
+}
+@media (min-width: 721px) and (max-width: 1400px) {
+  .hero-character-right { display: none; }
+}
+@media (max-width: 720px) {
+  .hero {
+    padding-bottom: 28px;
+  }
+  .hero-character {
+    display: block;
+    width: 145px;
+    left: 42%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .hero-character-right {
+    position: relative;
+    display: block;
+    width: 200px;
+    margin: 4px auto 0;
+    bottom: auto;
+    right: auto;
+    left: auto;
+    transform: none;
+    max-width: none;
+  }
+}
 
 .hero-sub {
   font-size: clamp(20px, 2.1vw, 26px);
@@ -319,6 +396,28 @@ a { color: inherit; }
   white-space: nowrap;
 }
 .section-head .case-id b { display: block; font-size: 18px; letter-spacing: 0.04em; margin-top: 4px; }
+.problema-character {
+  position: absolute;
+  top: 260px;
+  right: max(32px, calc((100% - 1240px) / 2 + 32px));
+  width: clamp(180px, 25vw, 400px);
+  max-width: none;
+}
+@media (min-width: 721px) and (max-width: 1200px) {
+  #problema .section-intro {
+    max-width: calc(100% - 300px);
+  }
+}
+@media (max-width: 720px) {
+  .problema-character {
+    position: relative;
+    top: auto;
+    right: auto;
+    display: block;
+    width: 200px;
+    margin: -60px auto -20px;
+  }
+}
 .section-intro {
   font-size: clamp(20px, 2vw, 26px);
   max-width: 760px;
@@ -375,8 +474,11 @@ a { color: inherit; }
 .problema-row.final .num { display: none; }
 .problema-row.final .check { margin-left: 0; }
 
-.problema-final {
+.problema-final-wrap {
+  position: relative;
   margin-top: 56px;
+}
+.problema-final {
   text-align: center;
   font-family: "Anton", sans-serif;
   font-size: clamp(48px, 8vw, 120px);
@@ -384,6 +486,51 @@ a { color: inherit; }
   text-transform: uppercase;
 }
 .problema-final span { color: var(--red); }
+.spiaccicato-character {
+  position: absolute;
+  left: max(20px, calc((100% - 1240px) / 2 + 52px));
+  bottom: 40px;
+  width: clamp(160px, 22vw, 340px);
+  max-width: none;
+}
+.chie-character {
+  position: absolute;
+  right: max(32px, calc((100% - 1240px) / 2 - 18px));
+  top: 50%;
+  transform: translateY(calc(-50% - 250px));
+  width: clamp(300px, 45vw, 680px);
+  max-width: none;
+}
+@media (min-width: 721px) and (max-width: 1366px) {
+  .chie-character {
+    transform: translateY(calc(-50% - 290px));
+  }
+}
+@media (max-width: 720px) {
+  .chie-character {
+    position: relative;
+    display: block;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: 200px;
+    margin: 24px auto 0;
+  }
+}
+#problema {
+  padding-bottom: 200px;
+}
+@media (max-width: 720px) {
+  #problema { padding-bottom: 0; }
+  .spiaccicato-character {
+    position: relative;
+    display: block;
+    left: auto;
+    bottom: auto;
+    width: 220px;
+    margin: -30px auto -20px;
+  }
+}
 
 .libro-aperto {
   margin-top: 56px;
@@ -746,6 +893,89 @@ a { color: inherit; }
 .disclaimer-box h2 { font-size: clamp(48px, 7vw, 96px); margin: 16px 0 24px; }
 .disclaimer-box p { font-size: 19px; line-height: 1.5; }
 
+.zero-character {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(calc(-50% + 80px), calc(-50% - 20px));
+  width: clamp(190px, 27vw, 410px);
+  max-width: none;
+  z-index: 2;
+  pointer-events: none;
+}
+@media (max-width: 880px) {
+  .zero-character { display: none; }
+}
+
+.microfono-character {
+  position: absolute;
+  right: max(32px, calc((100% - 1240px) / 2 - 48px));
+  top: 50%;
+  transform: translateY(calc(-60% - 330px));
+  width: clamp(310px, 45vw, 680px);
+  max-width: none;
+  z-index: 2;
+  pointer-events: none;
+}
+@media (min-width: 721px) and (max-width: 860px) {
+  .microfono-character {
+    width: 320px;
+    right: calc(max(32px, calc((100% - 1240px) / 2 - 48px)) + 30px);
+    transform: translateY(calc(-60% - 430px));
+  }
+  #dentro .section-intro { max-width: 400px; }
+}
+@media (min-width: 861px) and (max-width: 1400px) {
+  .microfono-character {
+    width: 360px;
+    right: calc(max(32px, calc((100% - 1240px) / 2 - 48px)) + 100px);
+    transform: translateY(calc(-60% - 350px));
+  }
+  #dentro .section-intro { max-width: 520px; }
+}
+@media (max-width: 720px) {
+  .microfono-character {
+    position: relative;
+    display: block;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: 220px;
+    margin: -54px auto 0;
+  }
+}
+
+.audience-head {
+  position: relative;
+}
+.key-character {
+  position: absolute;
+  right: -20px;
+  bottom: -30px;
+  width: clamp(260px, 38vw, 560px);
+  max-width: none;
+  z-index: 2;
+  pointer-events: none;
+}
+@media (min-width: 721px) and (max-width: 860px) {
+  .key-character {
+    width: 250px;
+    right: 170px;
+    bottom: -20px;
+  }
+}
+@media (max-width: 720px) {
+  .key-character {
+    position: relative;
+    display: block;
+    bottom: auto;
+    right: auto;
+    transform: none;
+    width: 200px;
+    margin: 0 auto 16px;
+  }
+}
+
 /* ----------- OFFERTA PRELANCIO ----------- */
 .offer-block {
   background: var(--red); color: var(--yellow);
@@ -787,6 +1017,27 @@ a { color: inherit; }
   position: relative; z-index: 1;
 }
 @media (max-width: 880px) { .offer-grid { grid-template-columns: 1fr; gap: 36px; } }
+@media (max-width: 880px) { .price-panel { padding-left: 0 !important; text-align: center !important; } }
+@media (min-width: 721px) and (max-width: 860px) {
+  .offer-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "main main" "char price";
+    gap: 24px;
+  }
+  .offer-main { grid-area: main; }
+  .zero-character {
+    grid-area: char;
+    position: relative !important;
+    display: block !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    align-self: center;
+  }
+  .price-panel { grid-area: price; align-self: center; }
+}
 .offer-grid h2 {
   font-size: clamp(48px, 7vw, 96px);
   margin: 0 0 16px;
@@ -794,22 +1045,24 @@ a { color: inherit; }
 .offer-kicker { margin-bottom: 12px; display: block; }
 .offer-copy { font-size: 19px; line-height: 1.5; margin: 0 0 28px; }
 .offer-copy b { font-weight: 700; }
-.price-panel { text-align: center; }
+.price-panel { text-align: center; padding-left: 100px; }
 .offer-grid .price {
   font-family: "Anton", sans-serif;
-  font-size: clamp(120px, 18vw, 220px);
+  font-size: clamp(150px, 22vw, 280px);
   line-height: 0.8;
   color: var(--yellow);
 }
 .offer-grid .price-cap {
   font-family: "JetBrains Mono", monospace;
-  font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase;
+  font-size: 18px; letter-spacing: 0.18em; text-transform: uppercase;
   margin-top: 12px;
+  line-height: 1.6;
 }
 .offer-grid .price-note {
   font-family: "JetBrains Mono", monospace;
-  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase;
   margin-top: 8px;
+  line-height: 1.6;
   opacity: 0.7;
 }
 .offer-form .form-row {
@@ -907,12 +1160,18 @@ a { color: inherit; }
   margin-bottom: 14px;
 }
 .author-card .silhouette-frame::after {
-  content: "AUTORE / RITRATTO NON DISPONIBILE";
+  content: "RITRATTO / HACKERATO DALL'OMBRA";
   position: absolute; bottom: 8px; left: 8px; right: 8px;
-  font-size: 9px; letter-spacing: 0.1em;
+  font-size: 13px; letter-spacing: 0.1em;
   background: var(--black); color: var(--yellow);
   padding: 4px;
   text-align: center;
+}
+.author-card .author-character {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 .author-card .silhouette-frame .head-shape {
   position: absolute;
@@ -959,9 +1218,28 @@ a { color: inherit; }
   margin: 0 0 32px;
 }
 .final-cta h2 .red { color: var(--red); }
-.final-cta .sub { font-size: clamp(18px, 2vw, 24px); max-width: 700px; margin: 0 auto 36px; line-height: 1.4; }
+.final-cta .sub { font-size: clamp(18px, 2vw, 24px); max-width: 700px; margin: 0 0 36px; line-height: 1.4; text-align: left; }
 .sub-dark { color: var(--yellow); }
-.final-cta .form-wrap { max-width: 540px; margin: 0 auto; }
+.final-cta .form-wrap { max-width: 540px; margin: 0; }
+.final-body {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+.final-left { flex: 1; min-width: 0; padding-left: 200px; }
+.final-character {
+  width: clamp(200px, 32%, 420px);
+  max-width: none;
+  flex-shrink: 0;
+}
+@media (min-width: 721px) and (max-width: 860px) {
+  .final-character { transform: translate(-20px, -50px); }
+}
+@media (max-width: 720px) {
+  .final-body { flex-direction: column; align-items: center; }
+  .final-cta .sub { text-align: center; }
+  .final-character { width: 200px; order: -1; }
+}
 .final-cta .cover-bottom { display: flex; justify-content: center; margin-bottom: 40px; }
 .final-cta .cover-bottom img { width: 260px; border: 2px solid var(--yellow); box-shadow: 10px 10px 0 var(--red); transform: rotate(-1.5deg); }
 .final-note {
@@ -1241,7 +1519,7 @@ const PROBLEMA_ITEMS = [
   'Il cameriere ti dice "Buon appetito", tu rispondi "Altrettanto", e lui passa il resto della cena a elaborare il lutto per la tua dignità.',
   'Ti arriva un messaggio WhatsApp del capo con scritto "hai un minuto?" e lui inizia ad aggiornare il tuo curriculum.',
   'Dici "oggi mi riposo" e lui risponde: "Ottimo, allora abbiamo tempo per pensare."',
-  'Ricevi un "Va bene." col punto fermo, e lui passi l\'ora successiva a fare le valigie mentali.',
+  'Ricevi un "Va bene." col punto fermo, e lui passa l\'ora successiva a fare le valigie mentali.',
   'Lui ripassa il copione per dieci minuti. Prova tre intonazioni diverse. Poi tu chiami il dentista per spostare l\'appuntamento.',
   'Tu invii un\'email, e lui la rilegge otto volte in cerca di prove della tua idiozia.',
   'Sai benissimo che è tutto nella tua testa. Il problema è che anche lui lo sa.',
@@ -1359,7 +1637,10 @@ function Hero({ headline, ctaLabel, onSubmit }) {
               <span className="tag red">GRATIS SU KINDLE PER 5 GIORNI</span>
               <span className="tag">PRELANCIO 2026</span>
             </div>
-            <h1 dangerouslySetInnerHTML={{ __html: headline || 'Il tuo peggior nemico vive gratis nella tua testa.' }} />
+            <div className="hero-title-wrap">
+              <h1 dangerouslySetInnerHTML={{ __html: headline || 'Il tuo peggior nemico vive gratis nella tua testa.' }} />
+              <img className="hero-character" src="../assets/images/coinquilino_hero.png" alt="" aria-hidden="true" />
+            </div>
             <p className="hero-sub">
               Quella voce che ti sveglia alle 03:00 di notte per ricordarti quel litigio
               con tua madre del 2014. Che commenta tutto, giudica tutti, prevede disastri
@@ -1393,6 +1674,7 @@ function Hero({ headline, ctaLabel, onSubmit }) {
           </div>
         </div>
       </div>
+      <img className="hero-character-right" src="assets/landing_orizzontale.png" alt="" aria-hidden="true" />
     </section>
   );
 }
@@ -1413,6 +1695,7 @@ function Problema() {
     <section className="section paper" id="problema">
       <div className="wrap">
         <SectionHead kicker="ATTO 01 · I sintomi" title={'Se ti riconosci,<br /><span class="red">è</span> gi<span class="red">à</span> tardi.'} caseLabel={['FASCICOLO','01 / SINTOMI']} />
+        <img className="problema-character" src="assets/sintomi.png" alt="" aria-hidden="true" />
         <p className="section-intro">Niente diagnosi. Solo un elenco. <em>Spunta mentalmente quelle che ti riguardano</em>. Non lo dirai a nessuno. E nessuno ti sta guardando. Tranne uno. Lo sai chi.</p>
         <div className="problema-grid">
           {PROBLEMA_ITEMS.map(function(text,i){
@@ -1428,6 +1711,7 @@ function Problema() {
         </div>
         <div className="problema-final">Se hai detto <span>"sono io"</span> pi<span>ù</span> di tre volte<span>,</span><br />questo libro <span>è</span> il tuo verbale.</div>
       </div>
+      <img className="spiaccicato-character" src="assets/spiaccicato.png" alt="" aria-hidden="true" />
     </section>
   );
 }
@@ -1474,6 +1758,7 @@ function Concept() {
         <div className="manifesto-line">Il Coinquilino non è un demone. È un vecchio meccanismo di difesa che non ha mai ricevuto l'ordine di spegnersi. Per questo gli credi.</div>
         <LibroAperto />
       </div>
+      <img className="chie-character" src="assets/chie.png" alt="" aria-hidden="true" />
     </section>
   );
 }
@@ -1490,6 +1775,7 @@ function CosaTroverai() {
           L'obiettivo non è sconfiggere la voce. Non puoi.<br />
           L'obiettivo è toglierle il microfono.
         </p>
+        <img className="microfono-character" src="assets/microfono.png" alt="" aria-hidden="true" />
         <div className="scenes-grid">
           {SCENES.map(function(s){
             return (
@@ -1563,7 +1849,14 @@ function Audience({ onSubmit }) {
   return (
     <section className="section" id="per-chi">
       <div className="wrap">
-        <SectionHead kicker="ATTO 04 · Condizioni" title="Le condizioni<br />di sfratto" caseLabel={['REGISTRO','04 / DESTINATARI']} />
+        <div className="section-head audience-head">
+          <div>
+            <span className="kicker">ATTO 04 · Condizioni</span>
+            <h2 dangerouslySetInnerHTML={{ __html: "Le condizioni<br />di sfratto" }} />
+          </div>
+          <div className="case-id">REGISTRO<br /><b>04 / DESTINATARI</b></div>
+          <img className="key-character" src="assets/key.png" alt="" aria-hidden="true" />
+        </div>
         <div className="audience-grid">
           <div className="audience-col">
             <div className="lead">↳ Entra se:</div>
@@ -1615,16 +1908,17 @@ function Offerta({ ctaLabel, onSubmit }) {
       <div className="wrap">
         <div className="offer-block">
           <div className="offer-grid">
-            <div>
+            <div className="offer-main">
               <span className="kicker no-rule offer-kicker">↳ Offerta di lancio</span>
               <h2 className="h-display">Per 5 giorni<br />a zero euro</h2>
               <p className="offer-copy">Al lancio, <b>Il Coinquilino</b> sarà <b>gratis su Amazon Kindle per 5 giorni</b>. Niente trucchi, niente funnel infiniti. Solo il file pulito, gratis, finché la finestra resta aperta.<br /><br />Chi entra in lista riceve <b>un solo avviso</b>: al momento giusto.</p>
               <EmailForm id="offer-form" ctaLabel="Mettimi in lista" placeholder="la-tua-email@dominio.it" onSubmit={onSubmit} variant="offer" />
             </div>
+            <img className="zero-character" src="assets/zero.png" alt="" aria-hidden="true" />
             <div className="price-panel">
               <div className="price">€0</div>
-              <div className="price-cap">× cinque giorni · poi torna a prezzo pieno</div>
-              <div className="price-note">● l'email serve solo ad avvisarti all'apertura</div>
+              <div className="price-cap">× cinque giorni<br />poi torna a<br />prezzo pieno</div>
+              <div className="price-note">● l'email serve solo<br />ad avvisarti<br />all'apertura</div>
             </div>
           </div>
         </div>
@@ -1640,7 +1934,7 @@ function Autore() {
         <div className="author-grid">
           <div className="author-card">
             <div className="head"><span>Scheda Autore</span><span>M.R. / 01</span></div>
-            <div className="silhouette-frame"><div className="head-shape" /><div className="body-shape" /></div>
+            <div className="silhouette-frame"><img src="assets/linguaccia.png" alt="Il Coinquilino" className="author-character" /></div>
             <div className="row"><b>Nome</b><span>Maruth Rein</span></div>
             <div className="row"><b>Materia</b><span>Voci interiori e sabotaggi</span></div>
             <div className="row"><b>Strumento</b><span>Tastiera</span></div>
@@ -1667,11 +1961,16 @@ function FinalCTA({ ctaLabel, onSubmit }) {
         <span className="ribbon">↳ Ultima chiamata · Aula 5</span>
         <div className="cover-bottom"><img src="assets/copertina.png" alt="Il Coinquilino" /></div>
         <h2>Sfratta<br /><span className="red">il coinquilino</span></h2>
-        <p className="sub sub-dark">Lascia la tua email qui sotto. Quando scatta l'ora, riceverai un solo messaggio per scaricare il verbale gratis.<br /><br />Poi torni a vivere.<br />Probabilmente lui parlerà ancora. Ma tu smetterai di ascoltarlo.</p>
-        <div className="form-wrap">
-          <EmailForm id="final-form" ctaLabel="Apri la pratica" placeholder="la-tua-email@dominio.it" onSubmit={onSubmit} />
+        <div className="final-body">
+          <div className="final-left">
+            <p className="sub sub-dark">Lascia la tua email qui sotto. Quando scatta l'ora, riceverai un solo messaggio per scaricare il verbale gratis.<br /><br />Poi torni a vivere.<br />Probabilmente lui parlerà ancora. Ma tu smetterai di ascoltarlo.</p>
+            <div className="form-wrap">
+              <EmailForm id="final-form" ctaLabel="Apri la pratica" placeholder="la-tua-email@dominio.it" onSubmit={onSubmit} />
+            </div>
+            <div className="final-note">↓ NIENTE SPAM · 1 SOLA EMAIL · LUI INVECE RESTA</div>
+          </div>
+          <img className="final-character" src="assets/final.png" alt="" aria-hidden="true" />
         </div>
-        <div className="final-note">↓ NIENTE SPAM · 1 SOLA EMAIL · LUI INVECE RESTA</div>
       </div>
     </section>
   );
