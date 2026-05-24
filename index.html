@@ -840,7 +840,42 @@ fetch("https://api.ipify.org?format=json")
   });
 </script>
 
+<!-- POPUP IL COINQUILINO -->
+<div id="coinquilino-popup" class="cq-popup-overlay" role="dialog" aria-modal="true" aria-label="Nuovo libro in uscita">
+    <div class="cq-popup-card">
+        <button type="button" class="cq-popup-close" aria-label="Chiudi">&times;</button>
+        <span class="cq-popup-badge">IN USCITA</span>
+        <p class="cq-popup-pre">Il nuovo libro di Maruth Rein</p>
+        <h2 class="cq-popup-title">IL<br>COINQUILINO</h2>
+        <p class="cq-popup-desc">Quella voce nella tua testa che commenta tutto, giudica tutti e non smette mai di parlare? Qualcuno ha finalmente preso appunti.</p>
+        <a href="il_coinquilino/" class="cq-popup-cta">SCOPRI IL LIBRO &rarr;</a>
+        <button type="button" class="cq-popup-dismiss">Non ora</button>
+    </div>
+</div>
 
+<script>
+(function() {
+    if (sessionStorage.getItem('cq-popup-seen')) return;
+    setTimeout(function() {
+        var popup = document.getElementById('coinquilino-popup');
+        if (!popup) return;
+        popup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        function close() {
+            popup.classList.remove('active');
+            document.body.style.overflow = '';
+            sessionStorage.setItem('cq-popup-seen', '1');
+        }
+
+        popup.querySelector('.cq-popup-close').addEventListener('click', close);
+        popup.querySelector('.cq-popup-dismiss').addEventListener('click', close);
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) close();
+        });
+    }, 1500);
+})();
+</script>
 
 </body>
 </html>
