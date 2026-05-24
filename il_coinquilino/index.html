@@ -433,65 +433,57 @@ a { color: inherit; }
 .section-intro em { color: var(--red); font-style: normal; }
 .section.black .section-intro em { color: var(--yellow); text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; }
 
-/* ----------- PROBLEMA list ----------- */
-.problema-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0;
-  border-top: 1.5px solid var(--rule);
+/* ----------- DIALOGO ----------- */
+.dialogo-wrapper {
+  max-width: 960px;
 }
-@media (max-width: 720px) { .problema-grid { grid-template-columns: 1fr; } }
-.problema-row {
-  display: flex; align-items: baseline; gap: 24px;
-  padding: 22px 4px 22px 0;
+.dialogo-tagline {
+  font-size: clamp(17px, 1.8vw, 21px);
+  font-style: italic;
+  color: var(--red);
+  text-align: center;
   border-bottom: 1.5px solid var(--rule);
-  font-size: clamp(20px, 2.2vw, 28px);
-  font-weight: 500;
-  line-height: 1.2;
+  padding-bottom: 36px;
+  margin-bottom: 48px;
 }
-.problema-row .num {
+.dialogo-item {
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--rule);
+}
+.dialogo-item:last-child { border-bottom: none; }
+.dialogo-speaker {
   font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
-  opacity: 0.5;
-  letter-spacing: 0.06em;
-  flex-shrink: 0;
-}
-.problema-row .check {
-  margin-left: auto;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  background: var(--black); color: var(--yellow);
-  padding: 4px 8px;
-  flex-shrink: 0;
-  opacity: 0;
-  transition: opacity .3s ease;
-}
-.problema-row:hover .check { opacity: 1; }
-.problema-row.final {
-  grid-column: 1 / -1;
-  justify-content: center;
-  text-align: center;
+  font-size: 22px;
   font-weight: 700;
-  border-bottom: none;
-  padding-top: 32px;
-  padding-bottom: 32px;
-  border-top: 1.5px solid var(--rule);
-}
-.problema-row.final .num { display: none; }
-.problema-row.final .check { margin-left: 0; }
-
-.problema-final-wrap {
-  position: relative;
-  margin-top: 56px;
-}
-.problema-final {
-  text-align: center;
-  font-family: "Anton", sans-serif;
-  font-size: clamp(48px, 8vw, 120px);
-  line-height: 0.9;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
+  margin-bottom: 10px;
 }
-.problema-final span { color: var(--red); }
+.dialogo-speaker.tu   { color: var(--black); }
+.dialogo-speaker.cq   { color: var(--red); }
+.dialogo-testo {
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.75;
+  padding-left: 1.2rem;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+.dialogo-testo:last-child { margin-bottom: 0; }
+.dialogo-silenzio { font-style: italic; opacity: 0.55; }
+.dialogo-item:has(.dialogo-speaker.cq) .dialogo-testo { color: var(--red); }
+.cellsdraiato-wrap {
+  overflow: hidden;
+  height: clamp(131px, 24.2vw, 282px);
+  margin-top: 16px;
+}
+.cellsdraiato-character {
+  display: block;
+  width: clamp(260px, 48vw, 560px);
+  margin: clamp(-13px, -1.1vw, -6px) auto 0;
+}
+#problema { padding-bottom: 0; padding-top: 64px; }
+.dialogo-item:last-child { margin-bottom: 0; padding-bottom: 0; }
 .spiaccicato-character {
   position: absolute;
   left: max(20px, calc((100% - 1240px) / 2 + 52px));
@@ -524,7 +516,7 @@ a { color: inherit; }
   }
 }
 #problema {
-  padding-bottom: 200px;
+  padding-bottom: 0;
 }
 @media (max-width: 720px) {
   #problema { padding-bottom: 0; }
@@ -1700,24 +1692,66 @@ function Problema() {
   return (
     <section className="section paper" id="problema">
       <div className="wrap">
-        <SectionHead kicker="ATTO 01 · I sintomi" title={'Se ti riconosci,<br /><span class="red">è</span> gi<span class="red">à</span> tardi.'} caseLabel={['FASCICOLO','01 / SINTOMI']} />
-        <img className="problema-character" src="assets/sintomi.png" alt="" aria-hidden="true" />
-        <p className="section-intro">Niente diagnosi. Solo un elenco. <em>Spunta mentalmente quelle che ti riguardano</em>. Non lo dirai a nessuno. E nessuno ti sta guardando. Tranne uno. Lo sai chi.</p>
-        <div className="problema-grid">
-          {PROBLEMA_ITEMS.map(function(text,i){
-            var isLast = i === PROBLEMA_ITEMS.length - 1;
-            return (
-              <div className={isLast ? 'problema-row final' : 'problema-row'} key={i}>
-                {!isLast && <span className="num">{String(i+1).padStart(2,'0')}</span>}
-                <span>{text}</span>
-                <span className="check">✓ sono io</span>
-              </div>
-            );
-          })}
+        <SectionHead kicker="ATTO 01 · Il Coinquilino" title={'Tutti hanno una voce<br />nella testa. Tu hai il <span class="red">COINQUILINO</span>.'} caseLabel={['FASCICOLO','01 / DIALOGO']} />
+        <div className="dialogo-wrapper">
+          <div className="dialogo-item">
+            <div className="dialogo-speaker tu">TU</div>
+            <p className="dialogo-testo">"Scommetto che sai già tutto sull'ansia. Hai comprato i libri giusti. Forse li hai anche letti. E ora sono tutti lì, impilati sul comodino accanto alle goccine. Sappiamo entrambi com'è finita: li hai comprati per sentirti una persona risolta, e poi stanotte alle 03:17 eri di nuovo a fissare il buio, ascoltando il tuo battito cardiaco mentre LUI faceva l'elenco di tutte le malattie che avrebbero potuto ucciderti nel sonno…"</p>
+          </div>
+
+          <div className="dialogo-item">
+            <div className="dialogo-speaker cq">COINQUILINO</div>
+            <p className="dialogo-testo">"Guarda che dovresti parlare del libro, non fare l'anamnesi medica a chi sta leggendo."</p>
+          </div>
+
+          <div className="dialogo-item">
+            <div className="dialogo-speaker tu">TU</div>
+            <p className="dialogo-testo">"È quello che sto cercando di fare, se magari la smetti di interrompere."</p>
+          </div>
+
+          <div className="dialogo-item">
+            <div className="dialogo-speaker cq">COINQUILINO</div>
+            <p className="dialogo-testo">"Sì, ma sei noioso. 'Le goccine', 'il battito cardiaco'… È roba da dilettanti. Se vogliono la poesia consolatoria, vanno nel reparto self-help. Se sono atterrati su questa pagina, è perché vogliono la verità. E la verità è che tu non sei padrone della tua mente. Io vivo lì dentro, non pago l'affitto, e uso il mio tempo libero per farti a pezzi."</p>
+          </div>
+
+          <div className="dialogo-item">
+            <div className="dialogo-speaker tu">TU</div>
+            <p className="dialogo-testo">"Lascia stare. Stai bravo. Questo è un diario tragicomico, un manuale per…"</p>
+          </div>
+
+          <div className="dialogo-item">
+            <div className="dialogo-speaker cq">COINQUILINO</div>
+            <p className="dialogo-testo">"Noo genio. Questa è la cronaca di un sequestro di persona! Io sono quello che ti costringe a rileggere un'email aziendale ottanta volte finché non sei certo di aver compromesso la tua carriera. Sono io che trasformo un banale messaggio visualizzato e non risposto in un complotto internazionale contro di te. E sono sempre io che organizzo il tuo funerale ogni volta che senti un dolorino intercostale. Ti conosco da prima che tu sapessi parlare."</p>
+          </div>
+
+          <div className="dialogo-item">
+            <div className="dialogo-speaker tu">TU</div>
+            <p className="dialogo-testo">"Se gli parli così, chiudono la pagina e se ne vanno."</p>
+          </div>
+
+          <div className="dialogo-item">
+            <div className="dialogo-speaker cq">COINQUILINO</div>
+            <p className="dialogo-testo">"Sbagliato. Rideranno fino alle lacrime, perché si accorgeranno che si comportano in modo ridicolo esattamente quanto te. E capiranno che l'unico modo per disinnescarmi è iniziare a ridermi in faccia."</p>
+          </div>
+
+          <div className="dialogo-item">
+            <div className="dialogo-speaker tu">TU</div>
+            <p className="dialogo-testo dialogo-silenzio">[Silenzio.]</p>
+          </div>
+
+          <div className="dialogo-item">
+            <div className="dialogo-speaker cq">COINQUILINO</div>
+            <p className="dialogo-testo">"Spostati. Lascia fare a me. Sentimi bene, lettore. Questo libro non ti promette pace interiore. Non ti regala i sette passi per sorridere ai problemi chiamandoli 'opportunità di crescita' mentre ti viene la gastrite. Non ti insegna a respirare come un monaco tibetano con l'abbonamento premium a Spotify.</p>
+            <p className="dialogo-testo">Questo libro fa una cosa molto più pericolosa. Mostra chi sono io. E quando uno come me viene visto, perde potere. Quando inizi a ridermi in faccia, ne perdo ancora di più.</p>
+            <p className="dialogo-testo">Quindi hai due possibilità. Puoi chiudere questa pagina e fingere che non sia successo niente. Oppure puoi cliccare su quel maledetto 'Acquista ora' e portarmi a casa ufficialmente.</p>
+            <p className="dialogo-testo">Fai la tua scelta. Io tanto non vado da nessuna parte. Maruth Rein mi ha appena stampato su carta, ma io abito da sempre, anche nella tua testa.</p>
+            <p className="dialogo-testo">Ti aspetto stanotte alle 03:17 in punto. Abbiamo un estratto conto emotivo da revisionare."</p>
+          </div>
         </div>
-        <div className="problema-final">Se hai detto <span>"sono io"</span> pi<span>ù</span> di tre volte<span>,</span><br />questo libro <span>è</span> il tuo verbale.</div>
+        <div className="cellsdraiato-wrap">
+          <img className="cellsdraiato-character" src="assets/cellsdraiato.png" alt="" aria-hidden="true" />
+        </div>
       </div>
-      <img className="spiaccicato-character" src="assets/spiaccicato.png" alt="" aria-hidden="true" />
     </section>
   );
 }
