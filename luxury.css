@@ -2176,26 +2176,8 @@ html, body {
     gap: 4rem;
     align-items: center;
 }
-.rb-brand-row {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.2rem;
-}
-.rb-logo-badge {
-    display: inline-flex;
-    background: #fff;
-    border-radius: 8px;
-    padding: 8px;
-    box-shadow: 0 12px 30px -14px rgba(0,0,0,0.8);
-}
-.rb-logo-badge img {
-    display: block;
-    width: 88px;
-    height: auto;
-}
 .rb-eyebrow {
+    display: block;
     font-family: var(--font-title);
     font-size: 1.1rem;
     font-weight: 700;
@@ -2242,6 +2224,18 @@ html, body {
 }
 .rb-cta:hover { transform: translateX(4px); }
 
+.rb-side {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+.rb-logo-mark {
+    display: block;
+    width: 170px;
+    max-width: 50%;
+    height: auto;
+    align-self: flex-start;
+}
 .rb-position {
     background: #04090a;
     border: 1px solid rgba(201,168,106,0.25);
@@ -2312,5 +2306,5 @@ html, body {
         border-right: none;
         border-bottom: 1px solid rgba(201,168,106,0.12);
     }
-    .rb-logo-badge img { width: 72px; }
+    .rb-logo-mark { width: 180px; }
 }
