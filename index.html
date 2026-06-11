@@ -50,6 +50,7 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#reverse-brief">Reverse Brief</a></li>
                     <li><a href="#libri">Libri</a></li>
                     <li><a href="chi_sono.html">Chi Sono</a></li>
                     <li><a href="#cosa-faccio">Cosa Faccio</a></li>
@@ -97,6 +98,55 @@
             <div class="section-divider"></div>
         </section>
 
+       <section id="reverse-brief" class="rb">
+    <div class="rb-grid">
+
+        <div class="rb-pitch">
+            <div class="rb-brand-row">
+                <div class="rb-logo-badge">
+                    <img src="assets/images/logoreverse.png" alt="Reverse Brief">
+                </div>
+                <span class="rb-eyebrow">Strumento proprietario · Live</span>
+            </div>
+
+            <h2 class="rb-title gold-gradient-text">Reverse<br>Brief</h2>
+
+            <p class="rb-tagline">"Prima di andare avanti, torna indietro."</p>
+
+            <p class="rb-lede">Gli consegni un brief. Te lo restituisce a pezzi.</p>
+
+            <p class="rb-body">
+                Dieci turni di interrogatorio. Il motore stress-testa la tua idea, il tuo progetto
+                o il tuo brief finché non crolla — o non dimostra di reggere davvero.
+                Pensato per founder, freelance e team che stanno per dire sì a qualcosa:
+                meglio scoprire ora dove si rompe, prima che lo scoprano i tuoi clienti.
+            </p>
+
+            <a href="https://reversebrief.com" target="_blank" rel="noopener noreferrer" class="rb-cta">
+                Mettiti alla prova <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="rb-audit">
+            <div class="rb-audit-head">
+                <span class="rb-dot"></span>
+                <span>AUDIT IN CORSO</span>
+                <span class="rb-turn">04 / 10</span>
+            </div>
+
+            <div class="rb-log">
+                <p class="rb-log-entry"><span class="rb-log-num">03 ›</span> "Il tuo target è 'chiunque sia stanco del proprio lavoro'. È un mercato o uno stato d'animo?"</p>
+            </div>
+
+            <p class="rb-q-label">Il motore chiede</p>
+            <p class="rb-q">Hai chiesto il prezzo prima ancora di dirmi cosa vendi. Da cosa stai scappando?</p>
+            <div class="rb-progress"><span></span></div>
+        </div>
+
+    </div>
+</section>
+
+
        <section id="libri" class="books-section">
     <div class="books-container">
         
@@ -105,11 +155,27 @@
             <p class="section-subtitle">Storie che sfidano la realtà</p>
         </div>
 
-        <div class="books-grid">
-            
+        <div class="books-grid-wrapper">
+            <button type="button" class="books-arrow books-arrow-prev" aria-label="Libro precedente">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div class="books-grid">
+
             <article class="book-card">
                 <div class="book-image-wrapper">
-                    <img src="assets/images/ombra.png" alt="Titolo Libro 1">
+                    <img src="il_coinquilino/assets/copertina.png" alt="Copertina del libro Il Coinquilino di Maruth Rein">
+                </div>
+                <div class="book-content">
+                    <h3>Il Coinquilino</h3>
+                    <p>Quella voce nella tua testa che commenta tutto, giudica tutti e non smette mai di parlare? Qualcuno ha finalmente preso appunti.</p>
+                    <a href="il_coinquilino.html" class="btn-text-gold">Scopri di più <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article class="book-card">
+                <div class="book-image-wrapper">
+                    <img src="assets/images/ombra.png" alt="Copertina del libro L'Ombra di Maruth Rein">
                 </div>
                 <div class="book-content">
                     <h3>L'Ombra</h3>
@@ -120,7 +186,7 @@
 
             <article class="book-card">
                 <div class="book-image-wrapper">
-                    <img src="assets/images/fuoco_fresco_inde.png" alt="Titolo Libro 2">
+                    <img src="assets/images/fuoco_fresco_inde.png" alt="Copertina del libro Il Fuoco Fresco di Maruth Rein">
                 </div>
                 <div class="book-content">
                     <h3>Il Fuoco Fresco</h3>
@@ -131,7 +197,7 @@
 
             <article class="book-card">
                 <div class="book-image-wrapper">
-                    <img src="assets/images/silenzio.png" alt="Titolo Libro 3">
+                    <img src="assets/images/silenzio.png" alt="Copertina del libro Il Silenzio che Guarisce di Maruth Rein">
                 </div>
                 <div class="book-content">
                     <h3>Il Silenzio che Guarisce</h3>
@@ -142,7 +208,7 @@
 
             <article class="book-card">
                 <div class="book-image-wrapper">
-                    <img src="assets/images/Sonno.png" alt="Titolo Libro 3">
+                    <img src="assets/images/Sonno.png" alt="Copertina del libro Dal Sonno alla Presenza di Maruth Rein">
                 </div>
                 <div class="book-content">
                     <h3>Dal Sonno alla Presenza</h3>
@@ -151,6 +217,11 @@
                 </div>
             </article>
 
+            </div>
+
+            <button type="button" class="books-arrow books-arrow-next" aria-label="Libro successivo">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
         </div>
     </div>
 </section>
@@ -602,8 +673,6 @@
     <a href="https://github.com/MaruthRein" target="_blank" rel="noopener noreferrer" aria-label="GitHub di Maruth Rein"><i class="fa-brands fa-github"></i></a>
     <a href="https://www.behance.net/maruthrein" target="_blank" rel="noopener noreferrer" aria-label="Behance di Maruth Rein"><i class="fa-brands fa-behance"></i></a>
 </div>
-  <i class="fa-brands fa-behance" aria-hidden="true"></i>
-</a>
 
             </div>
         </div>
@@ -611,9 +680,7 @@
     </div>
 
     <div class="footer-bottom">
-        <p>© 2025 Maruth Rein — Tutti i diritti riservati.</p><p id="visit-counter">
-    Visite: <span id="visits">...</span>
-</p>
+        <p>© 2026 Maruth Rein — Tutti i diritti riservati.</p>
     </div>
 </footer>
 
@@ -636,9 +703,7 @@
 
 <!-- LUXURY CONTACT POPUP -->
 
-<div id="popup-container"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js"></script>
 
@@ -813,32 +878,6 @@ fetch("components/contact-popup.html")
 
 <!-- Script della pagina Grafico & Illustratore -->
 <script src="assets/js/grafico.js"></script>
-<script>
-// Inserisci qui il tuo IP pubblico (es: "93.44.xx.xx")
-const myIP = "84.33.171.210";
-
-// Recupera l'IP del visitatore
-fetch("https://api.ipify.org?format=json")
-  .then(res => res.json())
-  .then(data => {
-
-    // Se l'IP è il tuo → mostra il contatore
-    if (data.ip === myIP) {
-      document.getElementById("visit-counter").style.display = "block";
-
-      // Callback del servizio countapi
-      function cb(response) {
-        document.getElementById('visits').innerText = response.value;
-      }
-
-      // Carica il contatore
-      const s = document.createElement("script");
-      s.src = "https://api.countapi.xyz/hit/maruthrein.github.io/visite?callback=cb";
-      document.body.appendChild(s);
-    }
-
-  });
-</script>
 
 <!-- POPUP IL COINQUILINO -->
 <div id="coinquilino-popup" class="cq-popup-overlay" role="dialog" aria-modal="true" aria-label="Nuovo libro in uscita">
@@ -856,7 +895,12 @@ fetch("https://api.ipify.org?format=json")
 <script>
 (function() {
     if (sessionStorage.getItem('cq-popup-seen')) return;
-    setTimeout(function() {
+
+    var shown = false;
+
+    function showPopup() {
+        if (shown) return;
+        shown = true;
         var popup = document.getElementById('coinquilino-popup');
         if (!popup) return;
         popup.classList.add('active');
@@ -873,7 +917,20 @@ fetch("https://api.ipify.org?format=json")
         popup.addEventListener('click', function(e) {
             if (e.target === popup) close();
         });
-    }, 1500);
+    }
+
+    // Mostra dopo 30 secondi OPPURE quando l'utente ha scrollato il 60% della pagina
+    var timer = setTimeout(showPopup, 30000);
+
+    window.addEventListener('scroll', function onScroll() {
+        var scrolled = window.scrollY + window.innerHeight;
+        var total = document.documentElement.scrollHeight;
+        if (scrolled / total >= 0.6) {
+            clearTimeout(timer);
+            window.removeEventListener('scroll', onScroll);
+            showPopup();
+        }
+    });
 })();
 </script>
 

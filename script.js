@@ -340,6 +340,26 @@ document.addEventListener('DOMContentLoaded', () => {
         speed: 800,
     });
 
+    /* ============================================================
+       8. CAROSELLO LIBRI (Frecce di scorrimento)
+       ============================================================ */
+    const booksGrid = document.querySelector(".books-grid");
+    const booksPrev = document.querySelector(".books-arrow-prev");
+    const booksNext = document.querySelector(".books-arrow-next");
+
+    if (booksGrid && booksPrev && booksNext) {
+        const scrollBooks = (direction) => {
+            const card = booksGrid.querySelector(".book-card");
+            if (!card) return;
+            const gap = parseFloat(getComputedStyle(booksGrid).columnGap) || 0;
+            const distance = (card.getBoundingClientRect().width + gap) * direction;
+            booksGrid.scrollBy({ left: distance, behavior: "smooth" });
+        };
+
+        booksPrev.addEventListener("click", () => scrollBooks(-1));
+        booksNext.addEventListener("click", () => scrollBooks(1));
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
 
     // seleziona tutte le card che aprono una gallery

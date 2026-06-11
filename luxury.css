@@ -2166,3 +2166,149 @@ html, body {
     padding-top: 50px;
     color: var(--gold-mid);
 }
+.rb { padding: 7rem 0; border-top: 1px solid rgba(201,168,106,0.12); }
+.rb-grid {
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 4rem;
+    align-items: center;
+}
+.rb-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+}
+.rb-logo-badge {
+    display: inline-flex;
+    background: #fff;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 12px 30px -14px rgba(0,0,0,0.8);
+}
+.rb-logo-badge img {
+    display: block;
+    width: 88px;
+    height: auto;
+}
+.rb-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-mid);
+}
+.rb-title {
+    font-family: var(--font-title);
+    font-size: clamp(3rem, 7vw, 5.2rem);
+    line-height: 0.92;
+    margin: 1.2rem 0;
+}
+.rb-tagline {
+    font-family: var(--font-title);
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(236,217,163,0.5);
+    margin-bottom: 0.8rem;
+}
+.rb-lede {
+    font-family: var(--font-title);
+    font-size: 1.45rem;
+    color: var(--gold-light);
+    line-height: 1.3;
+    margin-bottom: 1.2rem;
+}
+.rb-body {
+    font-family: var(--font-body);
+    color: rgba(236,217,163,0.7);
+    line-height: 1.7;
+    margin-bottom: 2.4rem;
+}
+.rb-cta {
+    font-family: var(--font-body);
+    letter-spacing: 0.04em;
+    color: var(--bg-dark);
+    background: var(--gold-gradient);
+    padding: 0.9rem 1.8rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+    display: inline-block;
+}
+.rb-cta:hover { transform: translateX(4px); }
+
+.rb-audit {
+    background: #04090a;
+    border: 1px solid rgba(201,168,106,0.25);
+    border-radius: 4px;
+    padding: 2rem;
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.8);
+}
+.rb-audit-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--gold-mid);
+}
+.rb-turn { margin-left: auto; color: rgba(236,217,163,0.5); }
+.rb-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gold-bright);
+    animation: rb-pulse 1.6s ease-in-out infinite;
+}
+.rb-log {
+    border-left: 2px solid rgba(201,168,106,0.18);
+    padding-left: 1rem;
+    margin-top: 1.4rem;
+}
+.rb-log-entry {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: rgba(236,217,163,0.32);
+}
+.rb-log-num {
+    color: rgba(201,168,106,0.45);
+    margin-right: 0.2rem;
+}
+.rb-q-label {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(236,217,163,0.4);
+    margin: 2rem 0 0.8rem;
+}
+.rb-q {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--gold-light);
+}
+.rb-q::before { content: "› "; color: var(--gold-mid); }
+.rb-progress {
+    margin-top: 2rem;
+    height: 2px;
+    background: rgba(201,168,106,0.15);
+}
+.rb-progress span {
+    display: block;
+    height: 100%;
+    width: 40%;
+    background: var(--gold-gradient);
+}
+@keyframes rb-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+@media (prefers-reduced-motion: reduce) { .rb-dot { animation: none; } }
+@media (max-width: 768px) {
+    .rb { padding: 4.5rem 0; }
+    .rb-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .rb-q { font-size: 1.02rem; }
+    .rb-logo-badge img { width: 72px; }
+}

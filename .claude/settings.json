@@ -8,7 +8,10 @@
       "Bash(node -e \"require\\('sharp'\\)\")",
       "Bash(rm -f cellsdraiato_info.png)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(Select-String \"v2\")",
+      "Bash(python -m http.server 8765)",
+      "Bash(curl -s http://localhost:8765/v2/index.html)"
     ]
   }
 }
