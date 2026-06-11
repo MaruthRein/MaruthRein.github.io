@@ -2196,11 +2196,12 @@ html, body {
     height: auto;
 }
 .rb-eyebrow {
-    font-family: var(--font-body);
-    font-size: 0.72rem;
-    letter-spacing: 0.28em;
+    font-family: var(--font-title);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--gold-mid);
+    color: var(--gold-bright);
 }
 .rb-title {
     font-family: var(--font-title);
@@ -2241,74 +2242,75 @@ html, body {
 }
 .rb-cta:hover { transform: translateX(4px); }
 
-.rb-audit {
+.rb-position {
     background: #04090a;
     border: 1px solid rgba(201,168,106,0.25);
     border-radius: 4px;
-    padding: 2rem;
+    padding: 2.4rem;
     box-shadow: 0 30px 60px -30px rgba(0,0,0,0.8);
 }
-.rb-audit-head {
+.rb-position-head {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-mid);
+    margin-bottom: 1.8rem;
+}
+.rb-position-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4rem;
+}
+.rb-position-no {
+    padding-right: 2.4rem;
+    border-right: 1px solid rgba(201,168,106,0.12);
+}
+.rb-position-label {
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    color: var(--gold-mid);
+    font-family: var(--font-title);
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(201,168,106,0.18);
 }
-.rb-turn { margin-left: auto; color: rgba(236,217,163,0.5); }
-.rb-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--gold-bright);
-    animation: rb-pulse 1.6s ease-in-out infinite;
-}
-.rb-log {
-    border-left: 2px solid rgba(201,168,106,0.18);
-    padding-left: 1rem;
-    margin-top: 1.4rem;
-}
-.rb-log-entry {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 0.82rem;
-    line-height: 1.6;
-    color: rgba(236,217,163,0.32);
-}
-.rb-log-num {
-    color: rgba(201,168,106,0.45);
-    margin-right: 0.2rem;
-}
-.rb-q-label {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+.rb-position-no .rb-position-label {
     color: rgba(236,217,163,0.4);
-    margin: 2rem 0 0.8rem;
 }
-.rb-q {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 1.15rem;
-    line-height: 1.55;
-    color: var(--gold-light);
+.rb-position-yes .rb-position-label {
+    color: var(--gold-bright);
 }
-.rb-q::before { content: "› "; color: var(--gold-mid); }
-.rb-progress {
-    margin-top: 2rem;
-    height: 2px;
-    background: rgba(201,168,106,0.15);
+.rb-position-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
-.rb-progress span {
-    display: block;
-    height: 100%;
-    width: 40%;
-    background: var(--gold-gradient);
+.rb-position-col li {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
-@keyframes rb-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
-@media (prefers-reduced-motion: reduce) { .rb-dot { animation: none; } }
+.rb-position-no li {
+    color: rgba(236,217,163,0.4);
+    text-decoration: line-through;
+    text-decoration-color: rgba(236,217,163,0.2);
+}
+.rb-position-yes li { color: var(--gold-light); }
 @media (max-width: 768px) {
     .rb { padding: 4.5rem 0; }
     .rb-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .rb-q { font-size: 1.02rem; }
+    .rb-position { padding: 1.8rem; }
+    .rb-position-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .rb-position-no {
+        padding-right: 0;
+        padding-bottom: 1.6rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(201,168,106,0.12);
+    }
     .rb-logo-badge img { width: 72px; }
 }
