@@ -330,32 +330,6 @@ body, html, main {
     transform: scale(1.02); /* Si ingrandisce appena appena */
 }
 
-/* Badge Calvino */
-.calvino-badge-luxury img {
-    max-width: 100%; /* Si adatta al contenitore */
-    width: 280px;    /* Dimensione controllata */
-    opacity: 0.95;   /* Appena appena meno sparato */
-    
-    /* TRASFORMAZIONE IN CARD */
-    border-radius: 8px; /* Angoli morbidi (fondamentale per l'eleganza) */
-    
-    /* Ombra esterna profonda per staccarlo dal fondo scuro */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
-    
-    /* Un sottile bordo dorato per legarlo al resto del sito */
-    border: 1px solid rgba(197, 160, 89, 0.3);
-    
-    transition: all 0.3s ease;
-}
-
-/* Effetto Hover: si solleva ancora di più */
-.calvino-badge-luxury img:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 40px rgba(0, 0, 0, 0.9);
-    border-color: var(--gold-bright);
-    opacity: 1;
-}
-
 /* --- COLONNA DESTRA (Testo che scorre) --- */
 .book-detail-content {
     flex: 1;
@@ -455,10 +429,6 @@ body, html, main {
         margin-bottom: 2rem;
     }
     
-    .calvino-badge-luxury img {
-        max-width: 280px;
-    }
-
     .book-detail-content {
         width: 100%;
         padding: 1.8rem;
